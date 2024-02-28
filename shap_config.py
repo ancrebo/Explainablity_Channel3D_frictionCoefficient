@@ -51,6 +51,8 @@ class shap_conf():
                 print('Existing...')
                 continue
             uv_struc = normdata.read_uvstruc(ii,fileQ=fileQ,padpix=padpix)
+            
+            # Get array of the ground truth velocity fields
             uvmax = np.max(uv_struc.mat_segment)
             self.segmentation = uv_struc.mat_segment-1
             self.segmentation[self.segmentation==-1] = uvmax
@@ -60,6 +62,8 @@ class shap_conf():
                 self.create_background_rms(normdata,uv_struc,padpix=padpix,perc_H=perc_H,Href=Href)
             uu_o,vv_o,ww_o = normdata.read_velocity(ii+1)
             self.output = normdata.norm_velocity(uu_o,vv_o,ww_o)[0,:,:,:,:]
+            
+            # Calculate SHAP values 
             nmax2 = len(uv_struc.event)+1
             zshap = np.ones((1,nmax2))
             explainer = shap.KernelExplainer(self.model_function,\
@@ -159,9 +163,37 @@ class shap_conf():
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
-        mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
-                                -pred)**2))
+        
+        # Replace the following with MSE of wall shear stress or difference in 
+        # wall friction coefficient
+        '''mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
+                                -pred)**2))'''
+        mse = np.mean(np.sqrt((
+                      self.friction_coefficient(
+                          self.output.reshape(-1,len_y,len_z,len_x,3))\
+                     -self.friction_coefficient(pred))**2))
         return mse
+    
+    def friction_coefficient(self, input_field):
+        '''
+        Calculate the friction coefficient for a certain snapshot.
+
+        '''
+        # average normalized fluctuating u at both walls
+        avg_u_norm = np.mean(
+                     np.vstack(
+                               [input_field[0,:,:,0,0], 
+                                input_field[0,:,:,-1,0]]
+                               )
+                            )
+        avg_U_wall = self.UUmean[0] + self.uumin + \
+                     avg_u_norm*(self.uumax-self.uumin)
+        grad_U_wall = avg_U_wall / self.dy[0]
+        U_bulk = np.mean(self.UUmean)
+        ny = self.vtau*self.delta_y/self.rey
+        c_f = 2*ny/(U_bulk**2)*grad_U_wall
+        
+        return c_f
     
     def model_function(self,zs):
         ii = 0
