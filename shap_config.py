@@ -182,16 +182,17 @@ class shap_conf():
         # average normalized fluctuating u at both walls
         avg_u_norm = np.mean(
                      np.vstack(
-                               [input_field[0,:,:,0,0], 
-                                input_field[0,:,:,-1,0]]
+                               [input_field[0,1,:,:,0], 
+                                input_field[0,-2,:,:,0]]
                                )
                             )
-        avg_U_wall = self.UUmean[0] + self.uumin + \
+        avg_U_wall = self.UUmean[1] + self.uumin + \
                      avg_u_norm*(self.uumax-self.uumin)
-        grad_U_wall = avg_U_wall / self.dy[0]
-        U_bulk = np.mean(self.UUmean)
-        ny = self.vtau*self.delta_y/self.rey
-        c_f = 2*ny/(U_bulk**2)*grad_U_wall
+        grad_U_wall = np.abs(avg_U_wall / (2*self.dy[0]))
+        U_bulk = np.sum(np.mean(
+                 np.multiply(self.UUmean,self.dy.reshape(-1,1,1)),axis=(1,2))
+                 )/np.sum(self.dy)
+        c_f = 2*grad_U_wall/(U_bulk*self.re_bulk) # *self.delta_y
         
         return c_f
     
