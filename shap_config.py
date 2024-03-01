@@ -174,7 +174,7 @@ class shap_conf():
                      -self.friction_coefficient(pred))**2))
         return mse
     
-    def friction_coefficient(self, input_field):
+    def friction_coefficient(self, input_field, normdata):
         '''
         Calculate the friction coefficient for a certain snapshot.
 
@@ -186,16 +186,75 @@ class shap_conf():
                                 input_field[0,-2,:,:,0]]
                                )
                             )
-        avg_U_wall = self.UUmean[1] + self.uumin + \
-                     avg_u_norm*(self.uumax-self.uumin)
-        grad_U_wall = np.abs(avg_U_wall / (2*self.dy[0]))
+        avg_U_wall = normdata.UUmean[1] + normdata.uumin + \
+                     avg_u_norm*(normdata.uumax-normdata.uumin)
+        grad_U_wall = np.abs(avg_U_wall / (2*normdata.dy[0]))
         U_bulk = np.sum(np.mean(
-                 np.multiply(self.UUmean,self.dy.reshape(-1,1,1)),axis=(1,2))
-                 )/np.sum(self.dy)
-        c_f = 2*grad_U_wall/(U_bulk*self.re_bulk) # *self.delta_y
+                 np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
+                 )/np.sum(normdata.dy)
+        c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
         
         return c_f
     
+    def calc_cf(self, 
+                fileuvw,
+                fileQ,
+                file_output,
+                start, 
+                end, 
+                step=1, 
+                fileUmean="Umean.txt",
+                filenorm="norm.txt",
+                filerms="Urms.txt",
+                padpix=15):
+        '''
+        Calculate the friction coefficient for a portion of the dataset.
+
+        '''
+        import get_data_fun as gd
+        import numpy as np
+        import h5py
+        
+        normdata = gd.get_data_norm(file_read=fileuvw)
+        normdata.geom_param(start,1,1,1)
+        try:
+            normdata.read_Umean(file=fileUmean)
+        except:
+            normdata.calc_Umean(start,end)
+        try:
+            normdata.read_norm(file=filenorm)
+        except:
+            normdata.calc_norm(start,end)
+        try:
+            normdata.read_Urms(file=filerms)
+        except:
+            normdata.calc_rms(start,end)
+            
+        c_f = np.zeros(int(np.floor((end-start)/step)))
+        for ii in range(start,end,step):
+    
+            uv_struc = normdata.read_uvstruc(ii,fileQ=fileQ,padpix=padpix)
+            
+            # Get array of the velocity fields
+            uvmax = np.max(uv_struc.mat_segment)
+            self.segmentation = uv_struc.mat_segment-1
+            self.segmentation[self.segmentation==-1] = uvmax
+            uu_i,vv_i,ww_i = normdata.read_velocity(ii,padpix=padpix)
+            self.input = normdata.norm_velocity(uu_i,vv_i,ww_i,padpix=padpix)[0,:,:,:,:]
+            self.input_reshaped = self.input.reshape(-1,
+                                                     self.input.shape[0],
+                                                     self.input.shape[1],
+                                                     self.input.shape[2],
+                                                     3)
+            c_f[ii-start] = self.friction_coefficient(self.input_reshaped, normdata)
+            
+        
+        # Write to file           
+        
+        hf = h5py.File(file_output +'.h5.cf', 'w')
+        hf.create_dataset('c_f', data=c_f)
+            
+            
     def model_function(self,zs):
         ii = 0
         lm = zs.shape[0]
