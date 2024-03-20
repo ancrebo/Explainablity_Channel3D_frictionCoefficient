@@ -384,6 +384,7 @@ class get_data_norm():
         content = str(self.uw.tolist())+'\n'
         file_save.write(content)
         
+        
     def read_Urms(self,file="Urms.txt"):
         """
         Function for reading the rms velocity
@@ -560,8 +561,22 @@ class get_data_norm():
                               replace(']','').split(','),dtype='float')
         self.uwmin = np.array(file_read.readline().replace('[','').\
                               replace(']','').split(','),dtype='float')
+            
                 
-    
+    def read_cfd_matrices(self, file='y_201.h5'):
+        
+        file_read = h5py.File(file, 'r+')
+        
+        self.A = np.array(file_read['Ax']).transpose()
+        self.B = np.array(file_read['Bx']).transpose()
+        
+        
+    def read_fd_coeffs(self, file='fd_coeff.h5'):
+        
+        file_read = h5py.File(file, 'r+')
+        
+        self.fd_coeffs = np.array(file_read['coeff'])
+
                 
     def trainvali_data(self,index,ts=0.2,umeanfile="Umean.txt",\
                        normfile="norm.txt",delta_pred=1,padpix=0):
@@ -672,6 +687,7 @@ class get_data_norm():
         uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
         uv_str.segmentation(self.mx,self.my,self.mz)
         return uv_str
+    
         
     def calc_uvstruc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
                      Hperc=1.75,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',\
@@ -704,6 +720,68 @@ class get_data_norm():
             hf.create_dataset('cdg_z', data=uv_str.cdg_z)
             hf.create_dataset('event', data=uv_str.event)
             hf.close()
+            
+    
+    def hunt_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                      Hperc=1.75): 
+        """
+        Function for defining the Q structures in the domain
+        """  
+        try:
+            self.UUmean 
+        except:
+            self.read_Umean(umeanfile)
+        uu,vv,ww = self.read_velocity(ii) 
+        uv = abs(np.multiply(uu,vv))
+        try:
+            uvi = np.multiply(self.uurms,self.vvrms) 
+        except:
+            self.read_Urms(urmsfile)
+            uvi = np.multiply(self.uurms,self.vvrms)
+        # Calculate where is the structure
+        mat_struc = np.heaviside(uv-Hperc*uvi.reshape(-1,1,1),0)
+        # Calculate the structure properties
+        uv_str = uvstruc(mat_struc)
+        '''uv_str.get_cluster_3D6P(uu=uu,vv=vv,flagdiv=1)
+        uv_str.get_volume_cluster_box(self.y_h,self.dx,self.dz,\
+                                      self.mx,self.mz,self.vol)
+        uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
+        uv_str.segmentation(self.mx,self.my,self.mz)'''
+        return uv_str
+    
+    
+    def calc_hunt_struc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                     Hperc=1.75,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',\
+                     fold='../P125_21pi_vu_Q'):
+        """
+        Function for calculating the uv structures
+        """       
+        for ii in range(start,end):
+            uv_str = self.hunt_struc_solve(ii)
+            try:
+                from os import mkdir
+                mkdir(fold)
+            except:
+                pass
+            hf = h5py.File(fileQ+'.'+str(ii)+'.h5.Q', 'w')
+            hf.create_dataset('Qs', data=uv_str.mat_struc)
+            '''hf.create_dataset('Qs_event', data=uv_str.mat_event)
+            hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
+            hf.create_dataset('dx', data=uv_str.dx)
+            hf.create_dataset('dz', data=uv_str.dz)
+            hf.create_dataset('ymin', data=uv_str.ymin)
+            hf.create_dataset('ymax', data=uv_str.ymax)
+            hf.create_dataset('vol', data=uv_str.vol)
+            hf.create_dataset('volbox', data=uv_str.boxvol)
+            hf.create_dataset('cdg_xbox', data=uv_str.cdg_xbox)
+            hf.create_dataset('cdg_ybox', data=uv_str.cdg_ybox)
+            hf.create_dataset('cdg_zbox', data=uv_str.cdg_zbox)
+            hf.create_dataset('cdg_x', data=uv_str.cdg_x)
+            hf.create_dataset('cdg_y', data=uv_str.cdg_y)
+            hf.create_dataset('cdg_z', data=uv_str.cdg_z)
+            hf.create_dataset('event', data=uv_str.event)'''
+            hf.close()
+        
         
     def read_uvstruc(self,ii,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',padpix=0):
         """

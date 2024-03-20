@@ -190,9 +190,15 @@ class shap_conf():
         grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
         grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
         
-        U_bulk = np.sum(np.mean(
+        UUmean_shift = np.zeros(len(normdata.UUmean)+1)
+        UUmean_shift[1:] = normdata.UUmean
+        UUmean_shift = UUmean_shift[:-1]
+        
+        '''U_bulk = np.sum(np.mean(
                  np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-                 )/np.sum(normdata.dy)
+                 )/np.sum(normdata.dy) # the integral doesn't work that way'''
+        U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
+                            0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
         c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
         
         return c_f
@@ -226,10 +232,18 @@ class shap_conf():
         avg_U = 0.5*normdata.UUmean[1:4]+0.5*np.flip(normdata.UUmean[-4:-1])\
             + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
         avg_U = avg_U.reshape([1,3])
-        grad_U_wall = np.dot(avg_U, normdata.c)
-        U_bulk = np.sum(np.mean(
+        grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
+        
+        
+        UUmean_shift = np.zeros(len(normdata.UUmean)+1)
+        UUmean_shift[1:] = normdata.UUmean
+        UUmean_shift = UUmean_shift[:-1]
+        
+        '''U_bulk = np.sum(np.mean(
                  np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-                 )/np.sum(normdata.dy)
+                 )/np.sum(normdata.dy)'''
+        U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
+                            0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
         c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
         
         return c_f
