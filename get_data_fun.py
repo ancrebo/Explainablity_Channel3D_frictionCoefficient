@@ -32,7 +32,7 @@ class get_data_norm():
         self.delta_x = delta_x
         self.delta_z = delta_z
         file_ii = self.file+'.'+str(start)+'.h5.uvw'
-        file = h5py.File(file_ii,'r+')   
+        file = h5py.File(file_ii,'r')   
         self.re_bulk = int(np.array(file['Re'])[0])
         self.my  = int((np.array(file['my'])[0]+delta_y-1)/delta_y)
         self.mx  = int((np.array(file['mx'])[0]+delta_x-1)/delta_x)
