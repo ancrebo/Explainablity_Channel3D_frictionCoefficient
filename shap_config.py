@@ -309,13 +309,11 @@ class shap_conf():
                 c_f[ii-start] = self.friction_coefficient_high_precision(
                                             self.input_reshaped, normdata)
                 time2 = time()
-                print(time2-time1)
             else:
                 time1 = time()
                 c_f[ii-start] = self.friction_coefficient(
                                             self.input_reshaped, normdata)
                 time2 = time()
-                print(time2-time1)
             
         
         # Write to file    
