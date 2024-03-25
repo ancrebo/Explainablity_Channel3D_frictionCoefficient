@@ -13,7 +13,8 @@ of every snapshot'''
 import get_data_fun as gd
 import numpy as np
 import h5py
-from time import time
+import pandas as pd
+import re
 
 def friction_coefficient_high_precision(input_field, normdata):
     '''
@@ -29,17 +30,11 @@ def friction_coefficient_high_precision(input_field, normdata):
                  avg_u_norm*(normdata.uumax-normdata.uumin)
     grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
     grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
+    ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
+    U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
+                                                           normdata.y_h)
+    c_f = 2*ny*grad_U_wall/(U_bulk**2) 
     
-    UUmean_shift = np.zeros(len(normdata.UUmean)+1)
-    UUmean_shift[1:] = normdata.UUmean
-    UUmean_shift = UUmean_shift[:-1]
-    
-    '''U_bulk = np.sum(np.mean(
-             np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-             )/np.sum(normdata.dy) # the integral doesn't work that way'''
-    U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
-                        0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
-    c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
     
     return c_f
 
@@ -72,19 +67,11 @@ def friction_coefficient(input_field, normdata):
     avg_U = 0.5*normdata.UUmean[1:4]+0.5*np.flip(normdata.UUmean[-4:-1])\
         + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
     avg_U = avg_U.reshape([1,3])
+    ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
     grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
-    
-    
-    UUmean_shift = np.zeros(len(normdata.UUmean)+1)
-    UUmean_shift[1:] = normdata.UUmean
-    UUmean_shift = UUmean_shift[:-1]
-    
-    '''U_bulk = np.sum(np.mean(
-             np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-             )/np.sum(normdata.dy)'''
-    U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
-                        0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
-    c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
+    U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
+                                                           normdata.y_h)
+    c_f = 2*ny*grad_U_wall/(U_bulk**2)  
     
     return c_f
 
@@ -154,3 +141,46 @@ def calc_cf(fileuvw,
     else:
         hf = h5py.File(file_output+'_'+str(start)+'_'+str(end)+'.h5.cf', 'w')
     hf.create_dataset('c_f', data=c_f)
+    
+    
+def friction_coefficient_torroja_db(path, Re_tau):
+    '''Calculate the friction coeffiction for the data in 
+    https://torroja.dmt.upm.es/channels/data/statistics/'''
+    
+    df_data = read_torroja_file(path, Re_tau)
+    y = np.array(df_data['y+'])
+    U = np.array(df_data['U+'])
+    
+    # calculate non-dimensional bulk velocity 
+    U_bulk_plus = 1/(y[-1]-y[0])*np.trapz(U, y)
+    
+    cf = 2/(U_bulk_plus**2)
+    
+    return cf
+
+
+def read_torroja_file(path, Re_tau):
+    
+    '''Bring txt files from Torroja database into pandas readable form.'''
+    
+    file = path+f'Re{Re_tau}.prof.txt'
+    with open(file, 'r') as f:
+        lines = f.readlines()
+        lines_new = []
+        for line in lines:
+            line = re.sub('% +y', 'y', line)
+            if line[0] == '%':
+                continue
+            while line[0] == ' ':
+                line = line[1:]
+            line = re.sub(' +', ',', line)
+            lines_new.append(line)
+            
+    with open(file, 'w') as fi:
+        fi.writelines(lines_new)
+        
+    df_data = pd.read_csv(file)
+    
+    return df_data
+            
+            
