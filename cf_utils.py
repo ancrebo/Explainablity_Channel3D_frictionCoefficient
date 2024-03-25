@@ -30,10 +30,9 @@ def friction_coefficient_high_precision(input_field, normdata):
                  avg_u_norm*(normdata.uumax-normdata.uumin)
     grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
     grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
-    ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
     U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
                                                            normdata.y_h)
-    c_f = 2*ny*grad_U_wall/(U_bulk**2) 
+    c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2) 
     
     
     return c_f
@@ -67,11 +66,10 @@ def friction_coefficient(input_field, normdata):
     avg_U = 0.5*normdata.UUmean[1:4]+0.5*np.flip(normdata.UUmean[-4:-1])\
         + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
     avg_U = avg_U.reshape([1,3])
-    ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
     grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
     U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
                                                            normdata.y_h)
-    c_f = 2*ny*grad_U_wall/(U_bulk**2)  
+    c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2)
     
     return c_f
 

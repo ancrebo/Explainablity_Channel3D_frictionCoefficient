@@ -189,10 +189,9 @@ class shap_conf():
                      avg_u_norm*(normdata.uumax-normdata.uumin)
         grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
         grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
-        ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
         U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
                                                                normdata.y_h)
-        c_f = 2*ny*grad_U_wall/(U_bulk**2) 
+        c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2) 
         
         return c_f
     
@@ -226,10 +225,9 @@ class shap_conf():
             + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
         avg_U = avg_U.reshape([1,3])
         grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
-        ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
         U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
                                                                normdata.y_h)
-        c_f = 2*ny*grad_U_wall/(U_bulk**2)
+        c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2)
         
         return c_f
     

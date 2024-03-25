@@ -14,7 +14,8 @@ def calc_Q_and_Delta_fields(start,
                             end,
                             step,
                             file_read='./P125_21pi_vu/P125_21pi_vu',
-                            file_grad='./P125_21pi_vu/grad/P125_21pi_vu'):
+                            file_grad='./P125_21pi_vu/grad/P125_21pi_vu',
+                            file_Q_Delta='./P125_21pi_vu/hunt_chong/P125_21pi_vu'):
     
     normdata = gd.get_data_norm(file_read=file_read,
                                 file_grad=file_grad)

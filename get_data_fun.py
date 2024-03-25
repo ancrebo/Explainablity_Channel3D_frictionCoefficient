@@ -18,12 +18,14 @@ class get_data_norm():
     
     def __init__(self,file_read='../P125_21pi_vu/P125_21pi_vu',
                  file_grad='../P125_21pi_vu/grad/P125_21pi_vu',
+                 file_Q_Delta='../P125_21pi_vu/hunt_chong/P125_21pi_vu',
                  rey=125,vtau=0.060523258443963,pond='none'):
         """ 
         Initialize the normalization
         """
         self.file = file_read
         self.file_grad = file_grad
+        self.file_Q_Delta = file_Q_Delta
         self.rey  = rey
         self.vtau = vtau
         self.pond = pond
@@ -35,7 +37,7 @@ class get_data_norm():
         self.delta_z = delta_z
         file_ii = self.file+'.'+str(start)+'.h5.uvw'
         file = h5py.File(file_ii,'r')   
-        self.re_bulk = int(np.array(file['Re'])[0])
+        self.ny = 1/int(np.array(file['Re'])[0])
         self.my  = int((np.array(file['my'])[0]+delta_y-1)/delta_y)
         self.mx  = int((np.array(file['mx'])[0]+delta_x-1)/delta_x)
         self.mz  = int((np.array(file['mz'])[0]+delta_z-1)/delta_z)
@@ -93,6 +95,7 @@ class get_data_norm():
         self.UUmean = np.divide(UU_cum,nn_cum)
         self.VVmean = np.divide(VV_cum,nn_cum)
         self.WWmean = np.divide(WW_cum,nn_cum)
+        
         
     def plot_Umean(self,reference='../Re180.prof.txt'):
         """
@@ -752,7 +755,7 @@ class get_data_norm():
     
     
     def write_Q_Delta(self, ii, Q, Delta):
-        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file_ii = self.file_Q_Delta+'.'+str(ii)+'.QD'
         file = h5py.File(file_ii,'w')
         file.create_dataset('Q', data=Q)
         file.create_dataset('Delta', data=Delta)
@@ -760,7 +763,7 @@ class get_data_norm():
         
     
     def read_hunt_Q_matrix(self, ii):
-        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file_ii = self.file_Q_Delta+'.'+str(ii)+'.QD'
         file = h5py.File(file_ii,'r+')
         Q_matrix = np.array(file['Q'])
         
@@ -818,7 +821,7 @@ class get_data_norm():
             
     
     def read_chong_Delta_matrix(self, ii):
-        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file_ii = self.file_Q_Delta+'.'+str(ii)+'.QD'
         file = h5py.File(file_ii,'r+')
         Delta_matrix = np.array(file['Delta'])
         
