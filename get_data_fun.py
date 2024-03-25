@@ -16,12 +16,14 @@ class get_data_norm():
     Class for getting the normalization
     """
     
-    def __init__(self,file_read='../P125_21pi_vu/P125_21pi_vu',\
+    def __init__(self,file_read='../P125_21pi_vu/P125_21pi_vu',
+                 file_grad='../P125_21pi_vu/grad/P125_21pi_vu',
                  rey=125,vtau=0.060523258443963,pond='none'):
         """ 
         Initialize the normalization
         """
         self.file = file_read
+        self.file_grad = file_grad
         self.rey  = rey
         self.vtau = vtau
         self.pond = pond
@@ -721,38 +723,70 @@ class get_data_norm():
             hf.create_dataset('event', data=uv_str.event)
             hf.close()
             
+    def read_gradients(self, ii):
+        file_ii = self.file_grad+'.'+str(ii)+'.grad'
+        file = h5py.File(file_ii,'r+')
+        dudx = np.array(file['dudx'])
+        dudy = np.array(file['dudy'])
+        dudz = np.array(file['dudz'])
+        dvdx = np.array(file['dvdx'])
+        dvdy = np.array(file['dvdy'])
+        dvdz = np.array(file['dvdz'])
+        dwdx = np.array(file['dwdx'])
+        dwdy = np.array(file['dwdy'])
+        dwdz = np.array(file['dwdz'])
+        
+        G = np.zeros([3,3,201,96,192])
+        
+        G[0,0,:,:,:] = dudx
+        G[1,0,:,:,:] = dudy
+        G[2,0,:,:,:] = dudz
+        G[0,1,:,:,:] = dvdx
+        G[1,1,:,:,:] = dvdy
+        G[2,1,:,:,:] = dvdz
+        G[0,2,:,:,:] = dwdx
+        G[1,2,:,:,:] = dwdy
+        G[2,2,:,:,:] = dwdz
+        
+        return G
+    
+    
+    def write_Q_Delta(self, ii, Q, Delta):
+        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file = h5py.File(file_ii,'w')
+        file.create_dataset('Q', data=Q)
+        file.create_dataset('Delta', data=Delta)
+        file.close()
+        
+    
+    def read_hunt_Q_matrix(self, ii):
+        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file = h5py.File(file_ii,'r+')
+        Q_matrix = np.array(file['Q'])
+        
+        return Q_matrix
     
     def hunt_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
-                      Hperc=1.75): 
+                      Q_thresh=0.137): 
         """
-        Function for defining the Q structures in the domain
+        Function for defining the vortices (Hunt criterion)
         """  
-        try:
-            self.UUmean 
-        except:
-            self.read_Umean(umeanfile)
-        uu,vv,ww = self.read_velocity(ii) 
-        uv = abs(np.multiply(uu,vv))
-        try:
-            uvi = np.multiply(self.uurms,self.vvrms) 
-        except:
-            self.read_Urms(urmsfile)
-            uvi = np.multiply(self.uurms,self.vvrms)
+        Q_matrix = self.read_hunt_Q_matrix(ii)
         # Calculate where is the structure
-        mat_struc = np.heaviside(uv-Hperc*uvi.reshape(-1,1,1),0)
+        mat_struc = np.heaviside(Q_matrix-Q_thresh,0)
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
-        '''uv_str.get_cluster_3D6P(uu=uu,vv=vv,flagdiv=1)
+        uv_str.get_cluster_3D6P()
         uv_str.get_volume_cluster_box(self.y_h,self.dx,self.dz,\
                                       self.mx,self.mz,self.vol)
-        uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
-        uv_str.segmentation(self.mx,self.my,self.mz)'''
+        # uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
+        uv_str.segmentation(self.mx,self.my,self.mz)
         return uv_str
     
     
     def calc_hunt_struc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
-                     Hperc=1.75,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',\
-                     fold='../P125_21pi_vu_Q'):
+                     file_hunt='../P125_21pi_vu_hunt/P125_21pi_vu',\
+                     fold='../P125_21pi_vu_hunt'):
         """
         Function for calculating the uv structures
         """       
@@ -763,9 +797,9 @@ class get_data_norm():
                 mkdir(fold)
             except:
                 pass
-            hf = h5py.File(fileQ+'.'+str(ii)+'.h5.Q', 'w')
+            hf = h5py.File(file_hunt+'.'+str(ii)+'.h5.hunt', 'w')
             hf.create_dataset('Qs', data=uv_str.mat_struc)
-            '''hf.create_dataset('Qs_event', data=uv_str.mat_event)
+            # hf.create_dataset('Qs_event', data=uv_str.mat_event)
             hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
             hf.create_dataset('dx', data=uv_str.dx)
             hf.create_dataset('dz', data=uv_str.dz)
@@ -779,7 +813,66 @@ class get_data_norm():
             hf.create_dataset('cdg_x', data=uv_str.cdg_x)
             hf.create_dataset('cdg_y', data=uv_str.cdg_y)
             hf.create_dataset('cdg_z', data=uv_str.cdg_z)
-            hf.create_dataset('event', data=uv_str.event)'''
+            # hf.create_dataset('event', data=uv_str.event)
+            hf.close()
+            
+    
+    def read_chong_Delta_matrix(self, ii):
+        file_ii = self.file_grad+'.'+str(ii)+'.QD'
+        file = h5py.File(file_ii,'r+')
+        Delta_matrix = np.array(file['Delta'])
+        
+        return Delta_matrix
+    
+    
+    def chong_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                      Delta_thresh=0): 
+        """
+        Function for defining the vortices (Hunt criterion)
+        """  
+        Delta_matrix = self.read_chong_Delta_matrix(ii)
+        # Calculate where is the structure
+        mat_struc = np.heaviside(Delta_matrix-Delta_thresh,0)
+        # Calculate the structure properties
+        uv_str = uvstruc(mat_struc)
+        uv_str.get_cluster_3D6P()
+        uv_str.get_volume_cluster_box(self.y_h,self.dx,self.dz,\
+                                      self.mx,self.mz,self.vol)
+        # uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
+        uv_str.segmentation(self.mx,self.my,self.mz)
+        return uv_str
+    
+    
+    def calc_chong_struc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                     file_chong='../P125_21pi_vu_chong/P125_21pi_vu',\
+                     fold='../P125_21pi_vu_chong'):
+        """
+        Function for calculating the uv structures
+        """       
+        for ii in range(start,end):
+            uv_str = self.chong_struc_solve(ii)
+            try:
+                from os import mkdir
+                mkdir(fold)
+            except:
+                pass
+            hf = h5py.File(file_chong+'.'+str(ii)+'.h5.chong', 'w')
+            hf.create_dataset('Qs', data=uv_str.mat_struc)
+            # hf.create_dataset('Qs_event', data=uv_str.mat_event)
+            hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
+            hf.create_dataset('dx', data=uv_str.dx)
+            hf.create_dataset('dz', data=uv_str.dz)
+            hf.create_dataset('ymin', data=uv_str.ymin)
+            hf.create_dataset('ymax', data=uv_str.ymax)
+            hf.create_dataset('vol', data=uv_str.vol)
+            hf.create_dataset('volbox', data=uv_str.boxvol)
+            hf.create_dataset('cdg_xbox', data=uv_str.cdg_xbox)
+            hf.create_dataset('cdg_ybox', data=uv_str.cdg_ybox)
+            hf.create_dataset('cdg_zbox', data=uv_str.cdg_zbox)
+            hf.create_dataset('cdg_x', data=uv_str.cdg_x)
+            hf.create_dataset('cdg_y', data=uv_str.cdg_y)
+            hf.create_dataset('cdg_z', data=uv_str.cdg_z)
+            # hf.create_dataset('event', data=uv_str.event)
             hf.close()
         
         
