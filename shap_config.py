@@ -189,17 +189,10 @@ class shap_conf():
                      avg_u_norm*(normdata.uumax-normdata.uumin)
         grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
         grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
-        
-        UUmean_shift = np.zeros(len(normdata.UUmean)+1)
-        UUmean_shift[1:] = normdata.UUmean
-        UUmean_shift = UUmean_shift[:-1]
-        
-        '''U_bulk = np.sum(np.mean(
-                 np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-                 )/np.sum(normdata.dy) # the integral doesn't work that way'''
-        U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
-                            0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
-        c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
+        ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
+        U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
+                                                               normdata.y_h)
+        c_f = 2*ny*grad_U_wall/(U_bulk**2) 
         
         return c_f
     
@@ -233,18 +226,10 @@ class shap_conf():
             + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
         avg_U = avg_U.reshape([1,3])
         grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
-        
-        
-        UUmean_shift = np.zeros(len(normdata.UUmean)+1)
-        UUmean_shift[1:] = normdata.UUmean
-        UUmean_shift = UUmean_shift[:-1]
-        
-        '''U_bulk = np.sum(np.mean(
-                 np.multiply(normdata.UUmean,normdata.dy.reshape(-1,1,1)),axis=(1,2))
-                 )/np.sum(normdata.dy)'''
-        U_bulk = 0.5*np.dot(np.gradient(normdata.y_h), 
-                            0.5*(normdata.UUmean+UUmean_shift)) # /self.delta_y
-        c_f = 2*grad_U_wall/(U_bulk*normdata.re_bulk) # *self.delta_y
+        ny = 0.5*(normdata.y_h[-1]-normdata.y_h[0])*normdata.vtau/normdata.rey
+        U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
+                                                               normdata.y_h)
+        c_f = 2*ny*grad_U_wall/(U_bulk**2)
         
         return c_f
     
@@ -268,7 +253,6 @@ class shap_conf():
         import get_data_fun as gd
         import numpy as np
         import h5py
-        from time import time
         
         normdata = gd.get_data_norm(file_read=fileuvw)
         normdata.geom_param(start,1,1,1)
@@ -305,15 +289,11 @@ class shap_conf():
                                                      self.input.shape[2],
                                                      3)
             if high_precision:
-                time1 = time()
                 c_f[ii-start] = self.friction_coefficient_high_precision(
                                             self.input_reshaped, normdata)
-                time2 = time()
             else:
-                time1 = time()
                 c_f[ii-start] = self.friction_coefficient(
                                             self.input_reshaped, normdata)
-                time2 = time()
             
         
         # Write to file    
