@@ -18,7 +18,8 @@ def calc_Q_and_Delta_fields(start,
                             file_Q_Delta='./P125_21pi_vu/hunt_chong/P125_21pi_vu'):
     
     normdata = gd.get_data_norm(file_read=file_read,
-                                file_grad=file_grad)
+                                file_grad=file_grad,
+                                file_Q_Delta=file_Q_Delta)
     normdata.geom_param(start,1,1,1)
     
     for ii in range(start, end, step):
