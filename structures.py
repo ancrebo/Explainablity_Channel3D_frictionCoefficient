@@ -31,8 +31,6 @@ def calc_Q_and_Delta_fields(start,
     
         Q = 0.5*(np.linalg.norm(Omega, axis=(0,1))**2
              -np.linalg.norm(S, axis=(0,1))**2)
-    
-        # Delta = 27/4*np.linalg.det(G.transpose((2,3,4,0,1)))**2+Q**3
         
         # Alternative
         SijSjkSki = np.einsum('ijlmn,jklmn,kilmn->lmn',S,S,S)
