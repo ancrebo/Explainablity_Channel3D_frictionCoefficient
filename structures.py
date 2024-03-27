@@ -64,7 +64,7 @@ def calc_std_Delta_plus(start,
     std_Delta = np.std(np.hstack(Deltas), axis=(1,2))
     std_Delta_plus = std_Delta*(normdata.ny/(normdata.vtau**2))**6
     
-    stdD = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdD')
+    stdD = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdD', 'w')
     stdD.create_dataset('stdD', data=std_Delta_plus)
     
         
