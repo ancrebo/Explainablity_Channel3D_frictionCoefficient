@@ -65,6 +65,30 @@ def calc_std_Delta_plus(start,
     stdD = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdD', 'w')
     stdD.create_dataset('stdD', data=std_Delta_plus)
     
+    
+    
+def calc_std_Q_plus(start,
+                    end,
+                    step,
+                    file_read='./P125_21pi_vu/P125_21pi_vu',
+                    file_grad='./P125_21pi_vu/grad/P125_21pi_vu',
+                    file_Q_Delta='./P125_21pi_vu/hunt_chong/P125_21pi_vu'):
+
+    
+    normdata = gd.get_data_norm(file_read=file_read,
+                                file_grad=file_grad,
+                                file_Q_Delta=file_Q_Delta)
+    normdata.geom_param(start,1,1,1)
+    
+    Qs = [normdata.read_hunt_Q_matrix(ii) 
+              for ii in range(start, end, step)]
+    
+    std_Q = np.std(np.hstack(Qs), axis=(1,2))
+    std_Q_plus = std_Q*(normdata.ny/(normdata.vtau**2))**6
+    
+    stdQ = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdQ', 'w')
+    stdQ.create_dataset('stdQ', data=std_Q_plus)
+    
         
     
     
