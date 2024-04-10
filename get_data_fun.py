@@ -9,6 +9,7 @@ File containing the functions for reading the data
 
 import numpy as np
 import h5py
+import matplotlib.pyplot as plt
 
 #%%
 class get_data_norm():
@@ -726,6 +727,62 @@ class get_data_norm():
             hf.create_dataset('event', data=uv_str.event)
             hf.close()
             
+    def streak_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                           alpha_perc=3.4): 
+        """
+        Function for defining the Q structures in the domain
+        """  
+        try:
+            self.UUmean 
+        except:
+            self.read_Umean(umeanfile)
+        uu, _, ww = self.read_velocity(ii) 
+        
+        # Calculate where is the structure
+        mat_struc = np.heaviside(np.sqrt(uu**2+ww**2)-alpha_perc*self.vtau,0)
+        mat_struc[uu>=0] = 0
+        # Calculate the structure properties
+        uv_str = uvstruc(mat_struc)
+        uv_str.get_cluster_3D6P()
+        uv_str.get_volume_cluster_box(self.y_h,self.dx,self.dz,\
+                                      self.mx,self.mz,self.vol)
+        # uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
+        uv_str.segmentation(self.mx,self.my,self.mz)
+        return uv_str
+    
+        
+    def calc_streak_struc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
+                     alpha_perc=3.4,file_streak='../P125_21pi_vu_streak/P125_21pi_vu',\
+                     fold='../P125_21pi_vu_streak'):
+        """
+        Function for calculating the uv structures
+        """       
+        for ii in range(start,end):
+            uv_str = self.streak_struc_solve(ii)
+            try:
+                from os import mkdir
+                mkdir(fold)
+            except:
+                pass
+            hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak', 'w')
+            hf.create_dataset('Qs', data=uv_str.mat_struc)
+            #hf.create_dataset('Qs_event', data=uv_str.mat_event)
+            hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
+            hf.create_dataset('dx', data=uv_str.dx)
+            hf.create_dataset('dz', data=uv_str.dz)
+            hf.create_dataset('ymin', data=uv_str.ymin)
+            hf.create_dataset('ymax', data=uv_str.ymax)
+            hf.create_dataset('vol', data=uv_str.vol)
+            hf.create_dataset('volbox', data=uv_str.boxvol)
+            hf.create_dataset('cdg_xbox', data=uv_str.cdg_xbox)
+            hf.create_dataset('cdg_ybox', data=uv_str.cdg_ybox)
+            hf.create_dataset('cdg_zbox', data=uv_str.cdg_zbox)
+            hf.create_dataset('cdg_x', data=uv_str.cdg_x)
+            hf.create_dataset('cdg_y', data=uv_str.cdg_y)
+            hf.create_dataset('cdg_z', data=uv_str.cdg_z)
+            #hf.create_dataset('event', data=uv_str.event)
+            hf.close()
+            
     def read_gradients(self, ii):
         file_ii = self.file_grad+'.'+str(ii)+'.grad'
         file = h5py.File(file_ii,'r+')
@@ -769,14 +826,25 @@ class get_data_norm():
         
         return Q_matrix
     
+    
+    def read_Q_threshold(self):
+        file = h5py.File('./P125_21pi_vu.1000_9999_25.h5.stdQ_dim', 'r+')
+        std_Q = np.array(file['stdQ'])
+        # copy vector to all points in x,z
+        self.Q_thresh = np.einsum('i,j,k->ijk', 
+                                      std_Q, 
+                                      np.ones(96), 
+                                      np.ones(192))
+        
+    
     def hunt_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
-                      Q_thresh=0.137): 
+                      alpha_perc=0.02): 
         """
         Function for defining the vortices (Hunt criterion)
         """  
         Q_matrix = self.read_hunt_Q_matrix(ii)
         # Calculate where is the structure
-        mat_struc = np.heaviside(Q_matrix-Q_thresh,0)
+        mat_struc = np.heaviside(Q_matrix-alpha_perc*self.Q_thresh,0)
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
         uv_str.get_cluster_3D6P()
@@ -792,7 +860,8 @@ class get_data_norm():
                      fold='../P125_21pi_vu_hunt'):
         """
         Function for calculating the uv structures
-        """       
+        """
+        self.read_Q_threshold()
         for ii in range(start,end):
             uv_str = self.hunt_struc_solve(ii)
             try:
@@ -828,14 +897,24 @@ class get_data_norm():
         return Delta_matrix
     
     
+    def read_Delta_threshold(self):
+        file = h5py.File('./P125_21pi_vu.1000_9999_25.h5.stdD_dim', 'r+')
+        std_Delta = np.array(file['stdD'])
+        # copy vector to all points in x,z
+        self.Delta_thresh = np.einsum('i,j,k->ijk', 
+                                      std_Delta, 
+                                      np.ones(96), 
+                                      np.ones(192))
+    
+    
     def chong_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
-                      Delta_thresh=0): 
+                          alpha_perc=0.02): 
         """
         Function for defining the vortices (Hunt criterion)
         """  
         Delta_matrix = self.read_chong_Delta_matrix(ii)
         # Calculate where is the structure
-        mat_struc = np.heaviside(Delta_matrix-Delta_thresh,0)
+        mat_struc = np.heaviside(Delta_matrix-alpha_perc*self.Delta_thresh,0)
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
         uv_str.get_cluster_3D6P()
@@ -852,6 +931,7 @@ class get_data_norm():
         """
         Function for calculating the uv structures
         """       
+        self.read_Delta_threshold()
         for ii in range(start,end):
             uv_str = self.chong_struc_solve(ii)
             try:
@@ -886,7 +966,151 @@ class get_data_norm():
         uv_str = uvstruc()
         uv_str.read_struc(ii,fileQ=fileQ,padpix=padpix)
         return uv_str
+    
+
+    def plot_structure(self, 
+                       ii, 
+                       cwd='./', 
+                       structure='streak',
+                       height_view=30,
+                       angle_view=185,
+                       y_cutoff_height=0,
+                       colors=True):
+        if structure == 'streak':
+            path = cwd+f'/P125_21pi_vu_streak/P125_21pi_vu.{ii}.h5.streak'
+        elif structure == 'Q-structure':
+            path = cwd+f'/P125_21pi_vu_Q_divide/P125_21pi_vu.{ii}.h5.Q'
+        elif structure == 'hunt':
+            path = cwd+f'/P125_21pi_vu_hunt/P125_21pi_vu.{ii}.h5.hunt'
+        elif structure == 'chong':
+            path = cwd+f'/P125_21pi_vu_chong/P125_21pi_vu.{ii}.h5.chong'
             
+        file = h5py.File(path, 'r+')
+        
+        if colors:
+            structures_segmented = np.array(file['Qs_segment'])
+            num_strucs = np.max(structures_segmented)
+            fig = plt.figure()
+            ax = fig.add_subplot(111,projection='3d')
+            colors = plt.cm.rainbow(np.linspace(0, 1, int(num_strucs)))
+            for jj in range(1,int(num_strucs)):
+                y, z, x = np.where(structures_segmented==jj)
+                y = self.y_h[y]
+                z = np.pi/structures_segmented.shape[1]*z
+                x = 2*np.pi/structures_segmented.shape[2]*x
+                ax.scatter(x[y<=y_cutoff_height], 
+                           z[y<=y_cutoff_height], 
+                           y[y<=y_cutoff_height],
+                           color=colors[jj])
+            
+            ax.set_xlabel('x')
+            ax.set_ylabel('z')
+            ax.set_zlabel('y')
+            ax.view_init(height_view, angle_view)
+            plt.show()
+        
+        else:
+            structures_binary = np.array(file['Qs'])
+        
+            y, z, x = np.where(structures_binary==1)
+            y = self.y_h[y]
+            z = np.pi/structures_binary.shape[1]*z
+            x = 2*np.pi/structures_binary.shape[2]*x
+        
+            fig = plt.figure()
+            ax = fig.add_subplot(projection='3d')
+            ax.scatter(x[y<=y_cutoff_height], 
+                       z[y<=y_cutoff_height], 
+                       y[y<=y_cutoff_height])
+            ax.view_init(height_view, angle_view)
+            ax.set_xlabel('x')
+            ax.set_ylabel('z')
+            ax.set_zlabel('y')
+            plt.show()
+        
+        
+    def percolation(self, 
+                    start, 
+                    end, 
+                    step,
+                    parameters,
+                    cwd='./', 
+                    structure='streak'):
+        
+        num_struc = np.zeros((int(np.floor((end-start)/step)), len(parameters)))
+        ratio_V = np.zeros((int(np.floor((end-start)/step)), len(parameters)))
+        
+        if structure == 'streak':
+            for ii in range(start, end, step):
+                for jj in range(len(parameters)):
+                    p = parameters[jj]
+                    try:
+                        uv_str = self.streak_struc_solve(ii, alpha_perc=p)
+                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                    except:
+                        num_struc[int((ii-start)/step), jj] = 0
+                        ratio_V[int((ii-start)/step), jj] = 0 
+                        
+        elif structure == 'Q-structure':
+            for ii in range(start, end, step):
+                for jj in range(len(parameters)):
+                    p = parameters[jj]
+                    try:
+                        uv_str = self.uvstruc_solve(ii, Hperc=p)
+                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                    except:
+                        num_struc[int((ii-start)/step), jj] = 0
+                        ratio_V[int((ii-start)/step), jj] = 0
+                        
+        elif structure == 'hunt':
+            for ii in range(start, end, step):
+                for jj in range(len(parameters)):
+                    p = parameters[jj]
+                    try:
+                        uv_str = self.hunt_struc_solve(ii, alpha_perc=p)
+                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                    except:
+                        num_struc[int((ii-start)/step), jj] = 0
+                        ratio_V[int((ii-start)/step), jj] = 0
+                        
+        elif structure == 'chong':
+            for ii in range(start, end, step):
+                for jj in range(len(parameters)):
+                    p = parameters[jj]
+                    try:
+                        uv_str = self.chong_struc_solve(ii, alpha_perc=p)
+                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                    except:
+                        num_struc[int((ii-start)/step), jj] = 0
+                        ratio_V[int((ii-start)/step), jj] = 0
+                        
+        # divide by max along p
+        ratio_N = np.divide(num_struc, np.max(num_struc, axis=1).reshape((-1,1)))
+        
+        # take mean along ii
+        ratio_N = np.mean(ratio_N, axis=0)
+        ratio_V = np.mean(ratio_V, axis=0)
+            
+        if structure == 'streak':
+            path = cwd+'/P125_21pi_vu_streak/P125_21pi_vu'
+        elif structure == 'Q-structure':
+            path = cwd+'/P125_21pi_vu_Q_divide/P125_21pi_vu'
+        elif structure == 'hunt':
+            path = cwd+'/P125_21pi_vu_hunt/P125_21pi_vu'
+        elif structure == 'chong':
+            path = cwd+'/P125_21pi_vu_chong/P125_21pi_vu'
+            
+        file = h5py.File(path+f'_percolation_{start},{end},{step}.h5.perc', 'w')
+        file.create_dataset('ratio_N', data=ratio_N)
+        file.create_dataset('ratio_V', data=ratio_V)
+        file.create_dataset('parameters', data=parameters)
+        
+
+        
     def Q_perc(self,start,end,delta=1,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',\
                umeanfile="Umean.txt",padpix=0):
         """
@@ -1271,7 +1495,7 @@ class uvstruc():
         indy = np.concatenate((np.array([-1]),np.arange(ny),np.array([-1]))) 
         # Create a vector infinitely large to store the nodes inside each 
         # structure
-        pdim = 10**6      
+        pdim = 2*10**6      
         cola = np.zeros((3,5*pdim),dtype='int')
         nodes = np.zeros((3,pdim))
         self.nodes = []
