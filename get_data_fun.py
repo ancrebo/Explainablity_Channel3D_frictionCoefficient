@@ -1046,11 +1046,11 @@ class get_data_norm():
                     p = parameters[jj]
                     try:
                         uv_str = self.streak_struc_solve(ii, alpha_perc=p)
-                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
-                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                        num_struc[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
                     except:
-                        num_struc[int((ii-start)/step), jj] = 0
-                        ratio_V[int((ii-start)/step), jj] = 0 
+                        num_struc[int(np.floor((ii-start)/step)), jj] = 0
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = 0 
                         
         elif structure == 'Q-structure':
             for ii in range(start, end, step):
@@ -1058,11 +1058,11 @@ class get_data_norm():
                     p = parameters[jj]
                     try:
                         uv_str = self.uvstruc_solve(ii, Hperc=p)
-                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
-                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                        num_struc[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
                     except:
-                        num_struc[int((ii-start)/step), jj] = 0
-                        ratio_V[int((ii-start)/step), jj] = 0
+                        num_struc[int(np.floor((ii-start)/step)), jj] = 0
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = 0
                         
         elif structure == 'hunt':
             for ii in range(start, end, step):
@@ -1070,11 +1070,11 @@ class get_data_norm():
                     p = parameters[jj]
                     try:
                         uv_str = self.hunt_struc_solve(ii, alpha_perc=p)
-                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
-                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                        num_struc[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
                     except:
-                        num_struc[int((ii-start)/step), jj] = 0
-                        ratio_V[int((ii-start)/step), jj] = 0
+                        num_struc[int(np.floor((ii-start)/step)), jj] = 0
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = 0
                         
         elif structure == 'chong':
             for ii in range(start, end, step):
@@ -1082,11 +1082,11 @@ class get_data_norm():
                     p = parameters[jj]
                     try:
                         uv_str = self.chong_struc_solve(ii, alpha_perc=p)
-                        num_struc[int((ii-start)/step), jj] = np.max(uv_str.mat_segment)
-                        ratio_V[int((ii-start)/step), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
+                        num_struc[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.mat_segment)
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = np.max(uv_str.vol)/np.sum(uv_str.vol)
                     except:
-                        num_struc[int((ii-start)/step), jj] = 0
-                        ratio_V[int((ii-start)/step), jj] = 0
+                        num_struc[int(np.floor((ii-start)/step)), jj] = 0
+                        ratio_V[int(np.floor((ii-start)/step)), jj] = 0
                         
         # divide by max along p
         ratio_N = np.divide(num_struc, np.max(num_struc, axis=1).reshape((-1,1)))
