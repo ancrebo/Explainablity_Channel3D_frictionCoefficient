@@ -1065,6 +1065,7 @@ class get_data_norm():
                         ratio_V[int(np.floor((ii-start)/step)), jj] = 0
                         
         elif structure == 'hunt':
+            self.read_Q_threshold()
             for ii in range(start, end, step):
                 for jj in range(len(parameters)):
                     p = parameters[jj]
@@ -1077,6 +1078,7 @@ class get_data_norm():
                         ratio_V[int(np.floor((ii-start)/step)), jj] = 0
                         
         elif structure == 'chong':
+            self.read_Delta_threshold()
             for ii in range(start, end, step):
                 for jj in range(len(parameters)):
                     p = parameters[jj]
