@@ -1037,8 +1037,8 @@ class get_data_norm():
                     cwd='./', 
                     structure='streak'):
         
-        num_struc = np.zeros((int(np.floor((end-start)/step)), len(parameters)))
-        ratio_V = np.zeros((int(np.floor((end-start)/step)), len(parameters)))
+        num_struc = np.zeros((int(np.floor((end-start)/step)+1), len(parameters)))
+        ratio_V = np.zeros((int(np.floor((end-start)/step)+1), len(parameters)))
         
         if structure == 'streak':
             for ii in range(start, end, step):
