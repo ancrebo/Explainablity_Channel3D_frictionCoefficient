@@ -416,7 +416,7 @@ class get_data_norm():
         """        
         file_ii = self.file+'.'+str(ii)+'.h5.uvw'
         print('Normalization velocity calculation:' + str(file_ii))
-        file = h5py.File(file_ii,'r+')    
+        file = h5py.File(file_ii,'r')    
         UU = np.array(file['u'])[::self.delta_y,\
                      ::self.delta_z,::self.delta_x]
         uu = UU-self.UUmean.reshape(-1,1,1)
