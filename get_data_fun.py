@@ -687,7 +687,8 @@ class get_data_norm():
         mat_struc = np.heaviside(uv-Hperc*uvi.reshape(-1,1,1),0)
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
-        uv_str.get_cluster_3D6P(uu=uu,vv=vv,flagdiv=1)
+        # uv_str.get_cluster_3D6P(uu=uu,vv=vv,flagdiv=1)
+        uv_str.get_cluster_3D6P()
         uv_str.get_volume_cluster_box(self.y_h,self.dx,self.dz,\
                                       self.mx,self.mz,self.vol)
         uv_str.geo_char(uu,vv,self.vol,self.mx,self.my,self.mz)
