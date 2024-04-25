@@ -1,6 +1,7 @@
 import numpy as np
 import get_data_fun as gd
 import h5py
+from tqdm import tqdm
 
 
 def generate_levi_civita():
@@ -18,6 +19,14 @@ def generate_levi_civita():
     return levi_civita
 
 
+def conditional_avg(field, condition, threshold=0):
+    cond_sum = np.sum(field*condition, axis=(1,2))
+    cond_count = np.sum(np.heaviside(field*condition,0), axis=(1,2))
+    cond_count[cond_count==0] = 1 # shouldn't change result but avoids /0
+    cond_avg = cond_sum/cond_count
+    return cond_avg
+
+
 def calculate_enstrophy(start,
                         end,
                         step,
@@ -29,7 +38,7 @@ def calculate_enstrophy(start,
     normdata.geom_param(start,1,1,1)
     levi_civita = generate_levi_civita()
 
-    for ii in range(start, end, step):
+    for ii in tqdm(range(start, end, step)):
         G = normdata.read_gradients(ii)
         vorticity = np.einsum('ijk,kjyzx->iyzx', levi_civita, G)
         enstrophy = 0.5*np.einsum('iyzx,iyzx->yzx', vorticity, vorticity)
@@ -42,23 +51,27 @@ def calc_enstrophy_shares(start,
                           end,
                           step,
                           dataset='P125_21pi_vu',
-                          root='./'):
+                          root='./',
+                          root_structures='./'):
     
     normdata = gd.get_data_norm(file_read=root+dataset+'/'+dataset,
                                 file_grad=root+dataset+'/grad/'+dataset)
     normdata.geom_param(start,1,1,1)
     volume_total = normdata.voltot
     
-    path_hunt = root+dataset+'_hunt/'+dataset
-    path_chong = root+dataset+'_chong/'+dataset
+    path_hunt = root_structures+dataset+'_hunt/'+dataset
+    path_chong = root_structures+dataset+'_chong/'+dataset
     path_grad = root+dataset+'/grad/'+dataset
-    path_enstrophy = root+dataset+'_enstrophy/'
+    path_enstrophy = root_structures+dataset+'_enstrophy/'
     
     enstrophy_mean = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
     enstrophy_hunt = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
     enstrophy_chong = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
-    volume_ratio_hunt = np.zeros((1, int(np.floor((end-start)/step)+1)))
-    volume_ratio_chong = np.zeros((1, int(np.floor((end-start)/step)+1)))
+    # volume_ratio_hunt = np.zeros((1, int(np.floor((end-start)/step)+1)))
+    # volume_ratio_chong = np.zeros((1, int(np.floor((end-start)/step)+1)))
+    volume_ratio_hunt = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_chong = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    
     
     for ii in range(start, end, step):
         file_hunt = h5py.File(path_hunt+f'.{ii}.h5.hunt', 'r+')
@@ -74,14 +87,21 @@ def calc_enstrophy_shares(start,
         enstrophy_mean[:, int(np.floor((ii-start)/step))] = np.mean(enstrophy, axis=(1,2))
         enstrophy_hunt[:, int(np.floor((ii-start)/step))] = np.mean(enstrophy*binary_hunt, axis=(1,2))
         enstrophy_chong[:, int(np.floor((ii-start)/step))] = np.mean(enstrophy*binary_chong, axis=(1,2))
-        volume_ratio_hunt[0, int(np.floor((ii-start)/step))] = np.sum(vol_hunt)/volume_total # non-dimensional?
-        volume_ratio_chong[0, int(np.floor((ii-start)/step))] = np.sum(vol_chong)/volume_total # non-dimensional?
+        # enstrophy_hunt[:, int(np.floor((ii-start)/step))] = conditional_avg(enstrophy, binary_hunt)
+        # enstrophy_chong[:, int(np.floor((ii-start)/step))] = conditional_avg(enstrophy, binary_chong)
+        # volume_ratio_hunt[0, int(np.floor((ii-start)/step))] = np.sum(vol_hunt)/volume_total
+        # volume_ratio_chong[0, int(np.floor((ii-start)/step))] = np.sum(vol_chong)/volume_total 
+        volume_ratio_hunt[:, int(np.floor((ii-start)/step))] = np.mean(binary_hunt, axis=(1,2))
+        volume_ratio_chong[:, int(np.floor((ii-start)/step))] = np.mean(binary_chong, axis=(1,2))
         
     enstrophy_mean_all_fields = np.mean(enstrophy_mean, axis=1)
     enstrophy_hunt_all_fields = np.mean(enstrophy_hunt, axis=1)
     enstrophy_chong_all_fields = np.mean(enstrophy_chong, axis=1)
-    mean_vol_ratio_hunt = np.mean(volume_ratio_hunt)
-    mean_vol_ratio_chong = np.mean(volume_ratio_chong)
+    # mean_vol_ratio_hunt = np.mean(volume_ratio_hunt)
+    # mean_vol_ratio_chong = np.mean(volume_ratio_chong)
+    mean_vol_ratio_hunt = np.mean(volume_ratio_hunt, axis=1)
+    mean_vol_ratio_chong = np.mean(volume_ratio_chong, axis=1)
+    
     
     file_enstrophy = h5py.File(path_enstrophy+dataset+f'.{start},{end},{step}.h5.ens', 'w')
     file_enstrophy.create_dataset('mean', data=enstrophy_mean_all_fields)
