@@ -52,6 +52,7 @@ def calc_enstrophy_shares(start,
                           step,
                           dataset='P125_21pi_vu',
                           root='./',
+                          root_grad='./',
                           root_structures='./'):
     
     normdata = gd.get_data_norm(file_read=root+dataset+'/'+dataset,
@@ -61,7 +62,7 @@ def calc_enstrophy_shares(start,
     
     path_hunt = root_structures+dataset+'_hunt/'+dataset
     path_chong = root_structures+dataset+'_chong/'+dataset
-    path_grad = root+dataset+'/grad/'+dataset
+    path_grad = root_grad+dataset+'/grad/'+dataset
     path_enstrophy = root_structures+dataset+'_enstrophy/'
     
     enstrophy_mean = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
