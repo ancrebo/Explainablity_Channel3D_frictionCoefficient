@@ -1,7 +1,7 @@
 import numpy as np
 import get_data_fun as gd
 import h5py
-from tqdm import tqdm
+
 
 
 def generate_levi_civita():
@@ -38,7 +38,7 @@ def calculate_enstrophy(start,
     normdata.geom_param(start,1,1,1)
     levi_civita = generate_levi_civita()
 
-    for ii in tqdm(range(start, end, step)):
+    for ii in range(start, end, step):
         G = normdata.read_gradients(ii)
         vorticity = np.einsum('ijk,kjyzx->iyzx', levi_civita, G)
         enstrophy = 0.5*np.einsum('iyzx,iyzx->yzx', vorticity, vorticity)
