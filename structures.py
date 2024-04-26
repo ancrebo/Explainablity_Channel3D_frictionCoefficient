@@ -9,7 +9,7 @@ Created on Tue Mar 12 10:32:50 2024
 import numpy as np
 import get_data_fun as gd
 import h5py
-import tqdm
+from tqdm import tqdm
 
 def calc_Q_and_Delta_fields(start, 
                             end,
