@@ -822,6 +822,10 @@ class get_data_norm():
     def write_Delta_mean_var(self, ii, mean, variance):
         file_ii = self.file_Q_Delta+'.'+str(ii)+'.QD'
         file = h5py.File(file_ii,'r+')
+        if 'Delta_mean' in file:
+            del file['Delta_mean']
+        if 'Delta_var' in file:
+            del file['Delta_var']
         file.create_dataset('Delta_mean', data=mean)
         file.create_dataset('Delta_var', data=variance)
         file.close()
