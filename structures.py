@@ -32,14 +32,11 @@ def calc_Q_and_Delta_fields(start,
         Q = 0.5*(np.linalg.norm(Omega, axis=(0,1))**2
              -np.linalg.norm(S, axis=(0,1))**2)
         
-        Delta = 27/4*np.linalg.det(G.transpose((2,3,4,0,1)))**2+Q**3
-        
-        # Alternative
-        '''SijSjkSki = np.einsum('ijlmn,jklmn,kilmn->lmn',S,S,S)
+        SijSjkSki = np.einsum('ijlmn,jklmn,kilmn->lmn',S,S,S)
         WijWjkSki = np.einsum('ijlmn,jklmn,kilmn->lmn',Omega,Omega,S)
         R = -1/3*(SijSjkSki+3*WijWjkSki)
         
-        Delta = 27/4*R**2+Q**3'''
+        Delta = 27/4*R**2+Q**3
     
         normdata.write_Q_Delta(ii, Q, Delta)
         
@@ -82,12 +79,18 @@ def calc_std_Delta_by_variances(start,
     normdata.geom_param(start,1,1,1)
     
     variances = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    means = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
     
     for ii in tqdm(range(start, end, step)):
         Delta = normdata.read_chong_Delta_matrix(ii)
-        variances[:, int(np.floor((ii-start)/step))] = np.nanvar(Delta, axis=(1,2))
+        mean = np.mean(Delta, axis=(1,2))
+        variance = np.mean(Delta**2, axis=(1,2))
+        normdata.write_Delta_mean_var(ii, mean, variance)
         
-    std_Delta = np.sqrt(np.mean(variances, axis=1))
+        variances[:, int(np.floor((ii-start)/step))] = variance 
+        means[:, int(np.floor((ii-start)/step))] = mean
+        
+    std_Delta = np.sqrt(np.mean(variances, axis=1)-np.mean(means, axis=1)**2)
     std_Delta_plus = std_Delta*(normdata.ny/(normdata.vtau**2))**6
     
     stdD = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdD_var', 'w')

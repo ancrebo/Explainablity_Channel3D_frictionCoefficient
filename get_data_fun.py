@@ -240,7 +240,7 @@ class get_data_norm():
         self.uw    = np.divide(uw_cum,nn_cum)
         
         
-    def plot_Urms(self,reference='../Re180.prof.txt'):
+    def plot_Urms(self,reference='./Re180.prof.txt'):
         """
         Function to plot the rms velocity
             * reference: file from the torroja ddbb
@@ -799,13 +799,13 @@ class get_data_norm():
         G = np.zeros([3,3,201,96,192])
         
         G[0,0,:,:,:] = dudx
-        G[1,0,:,:,:] = dudy
-        G[2,0,:,:,:] = dudz
-        G[0,1,:,:,:] = dvdx
+        G[0,1,:,:,:] = dudy
+        G[0,2,:,:,:] = dudz
+        G[1,0,:,:,:] = dvdx
         G[1,1,:,:,:] = dvdy
-        G[2,1,:,:,:] = dvdz
-        G[0,2,:,:,:] = dwdx
-        G[1,2,:,:,:] = dwdy
+        G[1,2,:,:,:] = dvdz
+        G[2,0,:,:,:] = dwdx
+        G[2,1,:,:,:] = dwdy
         G[2,2,:,:,:] = dwdz
         
         return G
@@ -816,6 +816,14 @@ class get_data_norm():
         file = h5py.File(file_ii,'w')
         file.create_dataset('Q', data=Q)
         file.create_dataset('Delta', data=Delta)
+        file.close()
+        
+    
+    def write_Delta_mean_var(self, ii, mean, variance):
+        file_ii = self.file_Q_Delta+'.'+str(ii)+'.QD'
+        file = h5py.File(file_ii,'r+')
+        file.create_dataset('Delta_mean', data=mean)
+        file.create_dataset('Delta_var', data=variance)
         file.close()
         
     
