@@ -83,8 +83,9 @@ def calc_std_Delta_by_variances(start,
     
     for ii in tqdm(range(start, end, step)):
         Delta = normdata.read_chong_Delta_matrix(ii)
-        mean = np.mean(Delta, axis=(1,2))
-        variance = np.mean(Delta**2, axis=(1,2))
+        Delta_augmented = np.hstack([Delta, np.flip(Delta, axis=0)])
+        mean = np.mean(Delta_augmented, axis=(1,2))
+        variance = np.mean(Delta_augmented**2, axis=(1,2))
         normdata.write_Delta_mean_var(ii, mean, variance)
         
         variances[:, int(np.floor((ii-start)/step))] = variance 
