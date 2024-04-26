@@ -83,7 +83,7 @@ def calc_std_Delta_by_variances(start,
     
     for ii in tqdm(range(start, end, step)):
         Delta = normdata.read_chong_Delta_matrix(ii)
-        variances[:, int(np.floor((ii-start)/step))] = np.var(Delta, axis=(1,2))
+        variances[:, int(np.floor((ii-start)/step))] = np.nanvar(Delta, axis=(1,2))
         
     std_Delta = np.sqrt(np.mean(variances, axis=1))
     std_Delta_plus = std_Delta*(normdata.ny/(normdata.vtau**2))**6
