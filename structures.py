@@ -85,7 +85,7 @@ def calc_std_Delta_by_variances(start,
         Delta = normdata.read_chong_Delta_matrix(ii)
         variances[:, int(np.floor((ii-start)/step))] = np.var(Delta, axis=(1,2))
         
-    std_Delta = np.root(np.mean(variances, axis=1))
+    std_Delta = np.sqrt(np.mean(variances, axis=1))
     std_Delta_plus = std_Delta*(normdata.ny/(normdata.vtau**2))**6
     
     stdD = h5py.File(file_Q_Delta+f'.{start}_{end}_{step}.h5.stdD_var', 'w')
