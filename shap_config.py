@@ -20,15 +20,34 @@ class shap_conf():
         CNN.load_ANN(filename=filecnn)
         self.model = CNN.model
         
-    def calc_shap_kernel(self,start,end,step=1,\
-                         file='../P125_21pi_vu_SHAP/P125_21pi_vu',\
-                         fileuvw='../P125_21pi_vu/P125_21pi_vu',\
-                         fileQ='../P125_21pi_vu_Q/P125_21pi_vu',\
-                         fileUmean="Umean.txt",filenorm="norm.txt",filerms="Urms.txt",padpix=15,\
-                             backgroundrms=False,perc_H=0.95,Href=1.75):
+    def calc_shap_kernel(self,
+                         start,
+                         end,
+                         step=1,
+                         structure='Q-structure',
+                         error='mse',
+                         dataset='P125_21pi_vu',
+                         dir_shap='./',
+                         dir_uvw='./',
+                         dir_structures='./',
+                         fileUmean="Umean.txt",
+                         filenorm="norm.txt",
+                         filerms="Urms.txt",
+                         padpix=15,
+                         backgroundrms=False,
+                         perc_H=0.95,
+                         Href=1.75):
+        
         import get_data_fun as gd
         import shap
         import os
+        
+        if error == 'mse':
+            file=dir_shap+f'{dataset}_{structure}_SHAP_mse/{dataset}'
+        elif error == 'cf':
+            file=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
+            
+        fileuvw=dir_uvw+f'{dataset}/{dataset}'
         normdata = gd.get_data_norm(file_read=fileuvw)
         normdata.geom_param(start,1,1,1)
         try:
@@ -43,6 +62,21 @@ class shap_conf():
             normdata.read_Urms(file=filerms)
         except:
             normdata.calc_rms(start,end)
+            
+        normdata.read_cfd_matrices()
+        normdata.read_fd_coeffs()
+            
+        self.UUmean = normdata.UUmean
+        self.uumin = normdata.uumin
+        self.uumax = normdata.uumax
+        # CFD matrices
+        self.A = normdata.A
+        self.B = normdata.B
+        # FD coefficients
+        self.fd_coeffs = normdata.fd_coeffs
+        
+        self.y_h = normdata.y_h
+        self.ny = normdata.ny
         self.shap_values = []
         if not backgroundrms:
             self.create_background(normdata)
@@ -50,26 +84,36 @@ class shap_conf():
             if os.path.exists(file+'.'+str(ii)+'.h5.shap'):
                 print('Existing...')
                 continue
-            uv_struc = normdata.read_uvstruc(ii,fileQ=fileQ,padpix=padpix)
+            
+            struc = normdata.read_uvstruc(ii,
+                                          cwd=dir_structures,
+                                          padpix=padpix,
+                                          structure=structure)
             
             # Get array of the ground truth velocity fields
-            uvmax = np.max(uv_struc.mat_segment)
-            self.segmentation = uv_struc.mat_segment-1
+            uvmax = np.max(struc.mat_segment)
+            self.segmentation = struc.mat_segment-1
             self.segmentation[self.segmentation==-1] = uvmax
             uu_i,vv_i,ww_i = normdata.read_velocity(ii,padpix=padpix)
             self.input = normdata.norm_velocity(uu_i,vv_i,ww_i,padpix=padpix)[0,:,:,:,:]
             if backgroundrms:
-                self.create_background_rms(normdata,uv_struc,padpix=padpix,perc_H=perc_H,Href=Href)
+                self.create_background_rms(normdata,struc,padpix=padpix,perc_H=perc_H,Href=Href)
             uu_o,vv_o,ww_o = normdata.read_velocity(ii+1)
             self.output = normdata.norm_velocity(uu_o,vv_o,ww_o)[0,:,:,:,:]
             
             # Calculate SHAP values 
-            nmax2 = len(uv_struc.event)+1
+            nmax2 = len(struc.vol)+1
             zshap = np.ones((1,nmax2))
-            explainer = shap.KernelExplainer(self.model_function,\
+            # If clause MSE or CF 
+            if error == 'mse':
+                explainer = shap.KernelExplainer(self.model_function_mse,\
+                                             np.zeros((1,nmax2)))
+            if error == 'cf':
+                explainer = shap.KernelExplainer(self.model_function_cf,\
                                              np.zeros((1,nmax2)))
             shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
             self.write_output(shap_values,ii,file=file)
+            
             
     def write_output(self,shap,ii,file='../P125_21pi_vu_SHAP/P125_21pi_vu'):
         """
@@ -122,6 +166,7 @@ class shap_conf():
             input_field = self.input.copy()
             uu_o,vv_o,ww_o = normdata.read_velocity(ii+1)
             self.output = normdata.norm_velocity(uu_o,vv_o,ww_o)[0,:,:,:,:] 
+            # MSE or CF if clause
             mse_f = self.shap_model_kernel(input_field)
             shap_val = self.read_shap(ii,file=fileshap)
             shap0 = self.model_function(zs)[0][0]
@@ -151,7 +196,7 @@ class shap_conf():
                     mask_out[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]
         return mask_out
     
-    def shap_model_kernel(self,model_input):
+    def shap_model_kernel(self,model_input,error='mse'):
         """
         Model to calculate the shap value
         """
@@ -163,19 +208,21 @@ class shap_conf():
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
+    
+        if error == 'mse':
+            mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
+                                    -pred)**2))
+            return mse
         
-        # Replace the following with MSE of wall shear stress or difference in 
-        # wall friction coefficient
-        '''mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
-                                -pred)**2))'''
-        mse = np.mean(np.sqrt((
+        elif error == 'cf':
+            mse_cf = np.mean(np.sqrt((
                       self.friction_coefficient(
                           self.output.reshape(-1,len_y,len_z,len_x,3))\
                      -self.friction_coefficient(pred))**2))
-        return mse
+            return mse_cf
     
     
-    def friction_coefficient_high_precision(self, input_field, normdata):
+    def friction_coefficient_high_precision(self, input_field):
         '''
         Calculate the friction coefficient for a certain snapshot with 
         compact finite differences.
@@ -185,18 +232,18 @@ class shap_conf():
                      input_field[0,:,:,:,0],
                     axis=(1,2)          
                      )
-        avg_U = normdata.UUmean + normdata.uumin + \
-                     avg_u_norm*(normdata.uumax-normdata.uumin)
-        grad_U_y = np.linalg.solve(normdata.A, np.dot(normdata.B, avg_U))           
+        avg_U = self.UUmean + self.uumin + \
+                     avg_u_norm*(self.uumax-self.uumin)
+        grad_U_y = np.linalg.solve(self.A, np.dot(self.B, avg_U))           
         grad_U_wall = 0.5*(grad_U_y[0]-grad_U_y[-1])
-        U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
-                                                               normdata.y_h)
-        c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2) 
+        U_bulk = 1/(self.y_h[-1]-self.y_h[0])*np.trapz(self.UUmean, 
+                                                               self.y_h)
+        c_f = 2*self.ny*grad_U_wall/(U_bulk**2) 
         
         return c_f
     
     
-    def friction_coefficient(self, input_field, normdata):
+    def friction_coefficient(self, input_field):
         '''
         Calculate the friction coefficient for a certain snapshot.
 
@@ -221,13 +268,13 @@ class shap_conf():
                                 input_field[0,-4,:,:,0]]
                                )
                             )
-        avg_U = 0.5*normdata.UUmean[1:4]+0.5*np.flip(normdata.UUmean[-4:-1])\
-            + normdata.uumin + avg_u_norm*(normdata.uumax-normdata.uumin)
+        avg_U = 0.5*self.UUmean[1:4]+0.5*np.flip(self.UUmean[-4:-1])\
+            + self.uumin + avg_u_norm*(self.uumax-self.uumin)
         avg_U = avg_U.reshape([1,3])
-        grad_U_wall = np.dot(avg_U, normdata.fd_coeffs)
-        U_bulk = 1/(normdata.y_h[-1]-normdata.y_h[0])*np.trapz(normdata.UUmean, 
-                                                               normdata.y_h)
-        c_f = 2*normdata.ny*grad_U_wall/(U_bulk**2)
+        grad_U_wall = np.dot(avg_U, self.fd_coeffs)
+        U_bulk = 1/(self.y_h[-1]-self.y_h[0])*np.trapz(self.UUmean, 
+                                                               self.y_h)
+        c_f = 2*self.ny*grad_U_wall/(U_bulk**2)
         
         return c_f
     
@@ -388,16 +435,29 @@ class shap_conf():
         hf.create_dataset('dUdy', data=grad_U_wall)
             
             
-    def model_function(self,zs):
+    def model_function_mse(self,zs):
         ii = 0
         lm = zs.shape[0]
         mse = np.zeros((lm,1))
         for zii in zs:
-            print('Calculating SHAP: '+str(ii/lm))
+            print('Calculating SHAP (mse): '+str(ii/lm))
             model_input = self.mask_dom(zii)
-            mse[ii,0] = self.shap_model_kernel(model_input)
+            mse[ii,0] = self.shap_model_kernel(model_input, error='mse')
             ii += 1
         return mse
+    
+    
+    def model_function_cf(self,zs):
+        ii = 0
+        lm = zs.shape[0]
+        cf = np.zeros((lm,1))
+        for zii in zs:
+            print('Calculating SHAP (cf): '+str(ii/lm))
+            model_input = self.mask_dom(zii)
+            cf[ii,0] = self.shap_model_kernel(model_input, error='cf')
+            ii += 1
+        return cf
+    
 
     def create_background(self,data,value=0):
         """
