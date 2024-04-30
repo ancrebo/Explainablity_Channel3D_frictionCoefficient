@@ -10,6 +10,7 @@ File containing the functions for reading the data
 import numpy as np
 import h5py
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 #%%
 class get_data_norm():
@@ -944,7 +945,7 @@ class get_data_norm():
         Function for calculating the uv structures
         """       
         self.read_Delta_threshold()
-        for ii in range(start,end):
+        for ii in tqdm(range(start,end)):
             uv_str = self.chong_struc_solve(ii)
             try:
                 from os import mkdir
