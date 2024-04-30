@@ -910,7 +910,7 @@ class get_data_norm():
     
     
     def read_Delta_threshold(self):
-        file = h5py.File('./P125_21pi_vu.1000_9999_25.h5.stdD_dim', 'r+')
+        file = h5py.File('./P125_21pi_vu.1000_9999_1.h5.stdD_dim', 'r+')
         std_Delta = np.array(file['stdD'])
         # copy vector to all points in x,z
         self.Delta_thresh = np.einsum('i,j,k->ijk', 
@@ -971,12 +971,19 @@ class get_data_norm():
             hf.close()
         
         
-    def read_uvstruc(self,ii,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',padpix=0):
+    def read_uvstruc(self,
+                     ii,
+                     cwd='./',
+                     padpix=0,
+                     structure='Q-structure'):
         """
         Function for reading the uv structures
         """
         uv_str = uvstruc()
-        uv_str.read_struc(ii,fileQ=fileQ,padpix=padpix)
+        uv_str.read_struc(ii,
+                          cwd=cwd,
+                          padpix=padpix, 
+                          structure=structure)
         return uv_str
     
 
@@ -1436,12 +1443,29 @@ class uvstruc():
         if len(mat_struc)>0:
             self.mat_struc = mat_struc
     
-    def read_struc(self,ii,fileQ='../P125_21pi_vu_Q/P125_21pi_vu',padpix=0):
-        fileQ_ii = fileQ+'.'+str(ii)+'.h5.Q'
+    def read_struc(self,
+                   ii,
+                   cwd='./',
+                   padpix=0,
+                   structure='Q-structure'):
+        if structure == 'streak':
+            path = cwd+'P125_21pi_vu_streak/P125_21pi_vu'
+            fileQ_ii = path+'.'+str(ii)+'.h5.streak'
+        elif structure == 'Q-structure':
+            path = cwd+'P125_21pi_vu_Q_divide/P125_21pi_vu'
+            fileQ_ii = path+'.'+str(ii)+'.h5.Q'
+        elif structure == 'hunt':
+            path = cwd+'P125_21pi_vu_hunt/P125_21pi_vu'
+            fileQ_ii = path+'.'+str(ii)+'.h5.hunt'
+        elif structure == 'chong':
+            path = cwd+'P125_21pi_vu_chong/P125_21pi_vu'
+            fileQ_ii = path+'.'+str(ii)+'.h5.chong'
+            
+        
         file = h5py.File(fileQ_ii, 'r')
         print('Reading: '+fileQ_ii)
         mat_struc = np.array(file['Qs'])
-        mat_event = np.array(file['Qs_event'])
+        # mat_event = np.array(file['Qs_event'])
         mat_segment = np.array(file['Qs_segment'])
         self.dx = np.array(file['dx'])
         self.dz = np.array(file['dz'])
@@ -1455,38 +1479,52 @@ class uvstruc():
         self.cdg_x = np.array(file['cdg_x'])
         self.cdg_y = np.array(file['cdg_y'])
         self.cdg_z = np.array(file['cdg_z'])
-        self.event = np.array(file['event'])
+        # self.event = np.array(file['event'])
         if padpix > 0:
             fshape = mat_struc.shape
             dim0 = fshape[0]
             dim1 = fshape[1]
             dim2 = fshape[2]
             mat_struc_pad = np.zeros((dim0,dim1+2*padpix,dim2+2*padpix))
-            mat_event_pad = np.zeros((dim0,dim1+2*padpix,dim2+2*padpix))
+            # mat_event_pad = np.zeros((dim0,dim1+2*padpix,dim2+2*padpix))
             mat_segment_pad = np.zeros((dim0,dim1+2*padpix,dim2+2*padpix))
             mat_struc_pad[:,padpix:-padpix,padpix:-padpix] = mat_struc.copy()
             mat_struc_pad[:,:padpix,padpix:-padpix] = mat_struc[:,-padpix:,:]
             mat_struc_pad[:,-padpix:,padpix:-padpix] = mat_struc[:,:padpix,:]
             mat_struc_pad[:,:,:padpix] = mat_struc_pad[:,:,-2*padpix:-padpix]
             mat_struc_pad[:,:,-padpix:] = mat_struc_pad[:,:,padpix:2*padpix]
-            mat_event_pad[:,padpix:-padpix,padpix:-padpix] = mat_event.copy()
-            mat_event_pad[:,:padpix,padpix:-padpix] = mat_event[:,-padpix:,:]
-            mat_event_pad[:,-padpix:,padpix:-padpix] = mat_event[:,:padpix,:]
-            mat_event_pad[:,:,:padpix] = mat_event_pad[:,:,-2*padpix:-padpix]
-            mat_event_pad[:,:,-padpix:] = mat_event_pad[:,:,padpix:2*padpix]
+            # mat_event_pad[:,padpix:-padpix,padpix:-padpix] = mat_event.copy()
+            # mat_event_pad[:,:padpix,padpix:-padpix] = mat_event[:,-padpix:,:]
+            # mat_event_pad[:,-padpix:,padpix:-padpix] = mat_event[:,:padpix,:]
+            # mat_event_pad[:,:,:padpix] = mat_event_pad[:,:,-2*padpix:-padpix]
+            # mat_event_pad[:,:,-padpix:] = mat_event_pad[:,:,padpix:2*padpix]
             mat_segment_pad[:,padpix:-padpix,padpix:-padpix] = mat_segment.copy()
             mat_segment_pad[:,:padpix,padpix:-padpix] = mat_segment[:,-padpix:,:]
             mat_segment_pad[:,-padpix:,padpix:-padpix] = mat_segment[:,:padpix,:]
             mat_segment_pad[:,:,:padpix] = mat_segment_pad[:,:,-2*padpix:-padpix]
             mat_segment_pad[:,:,-padpix:] = mat_segment_pad[:,:,padpix:2*padpix]
             mat_struc = mat_struc_pad.copy()
-            mat_event = mat_event_pad.copy()
+            # mat_event = mat_event_pad.copy()
             mat_segment = mat_segment_pad.copy()
         self.mat_struc = mat_struc
-        self.mat_event = mat_event
+        # self.mat_event = mat_event
         self.mat_segment = mat_segment
         
-                        
+        if structure=='Q-structure':
+            mat_event = np.array(file['Qs_event'])
+            self.event = np.array(file['event'])
+            if padpix > 0:
+                mat_event_pad = np.zeros((dim0,dim1+2*padpix,dim2+2*padpix))
+                mat_event_pad[:,padpix:-padpix,padpix:-padpix] = mat_event.copy()
+                mat_event_pad[:,:padpix,padpix:-padpix] = mat_event[:,-padpix:,:]
+                mat_event_pad[:,-padpix:,padpix:-padpix] = mat_event[:,:padpix,:]
+                mat_event_pad[:,:,:padpix] = mat_event_pad[:,:,-2*padpix:-padpix]
+                mat_event_pad[:,:,-padpix:] = mat_event_pad[:,:,padpix:2*padpix]
+                mat_event = mat_event_pad.copy()
+            self.mat_event = mat_event
+            
+            
+            
     def get_cluster_3D6P(self,uu=[],vv=[],flagdiv=0):
         """
         Generate a sparse matrix to find the wall structures
