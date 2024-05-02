@@ -3,10 +3,10 @@ import numpy as np
 from tqdm import tqdm
 
 
-path = './P125_21pi_vu/grad/P125_21pi_vu'
+path = '/media/nils/Elements/P125_21pi_vu/grad/P125_21pi_vu'
 
-start = 4544
-end = 4555
+start = 1000
+end = 9999
 step = 1
 
 for ii in tqdm(range(start, end, step)):
