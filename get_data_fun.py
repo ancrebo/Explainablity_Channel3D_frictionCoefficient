@@ -729,7 +729,7 @@ class get_data_norm():
             hf.close()
             
     def streak_struc_solve(self,ii,umeanfile="Umean.txt",urmsfile="Urms.txt",\
-                           alpha_perc=3.4): 
+                           alpha_perc=3.4, fluc_negative=True): 
         """
         Function for defining the Q structures in the domain
         """  
@@ -741,7 +741,9 @@ class get_data_norm():
         
         # Calculate where is the structure
         mat_struc = np.heaviside(np.sqrt(uu**2+ww**2)-alpha_perc*self.vtau,0)
-        mat_struc[uu>=0] = 0
+        if fluc_negative:
+            mat_struc[uu>=0] = 0
+            
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
         uv_str.get_cluster_3D6P()
@@ -754,18 +756,22 @@ class get_data_norm():
         
     def calc_streak_struc(self,start,end,umeanfile="Umean.txt",urmsfile="Urms.txt",\
                      alpha_perc=3.4,file_streak='../P125_21pi_vu_streak/P125_21pi_vu',\
-                     fold='../P125_21pi_vu_streak'):
+                     fold='../P125_21pi_vu_streak',
+                     fluc_negative=True):
         """
         Function for calculating the uv structures
         """       
         for ii in range(start,end):
-            uv_str = self.streak_struc_solve(ii)
+            uv_str = self.streak_struc_solve(ii, fluc_negative=fluc_negative)
             try:
                 from os import mkdir
                 mkdir(fold)
             except:
                 pass
-            hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak', 'w')
+            if fluc_negative:
+                hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak', 'w')
+            else:
+                hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak_aug', 'w')
             hf.create_dataset('Qs', data=uv_str.mat_struc)
             #hf.create_dataset('Qs_event', data=uv_str.mat_event)
             hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
