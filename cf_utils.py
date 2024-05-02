@@ -83,7 +83,7 @@ def calc_cf(fileuvw,
             fileUmean="Umean.txt",
             filenorm="norm.txt",
             filerms="Urms.txt",
-            padpix=15,
+            padpix=0,
             high_precision=False):
     '''
     Calculate the friction coefficient for a portion of the dataset.
