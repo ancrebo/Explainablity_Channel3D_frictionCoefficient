@@ -21,6 +21,7 @@ class get_data_norm():
     def __init__(self,file_read='../P125_21pi_vu/P125_21pi_vu',
                  file_grad='../P125_21pi_vu/grad/P125_21pi_vu',
                  file_Q_Delta='../P125_21pi_vu/hunt_chong/P125_21pi_vu',
+                 file_cf='./P125_21pi_vu_cf/P125_21pi_vu',
                  rey=125,vtau=0.060523258443963,pond='none'):
         """ 
         Initialize the normalization
@@ -28,6 +29,7 @@ class get_data_norm():
         self.file = file_read
         self.file_grad = file_grad
         self.file_Q_Delta = file_Q_Delta
+        self.file_cf = file_cf
         self.rey  = rey
         self.vtau = vtau
         self.pond = pond
@@ -583,6 +585,12 @@ class get_data_norm():
         file_read = h5py.File(file, 'r+')
         
         self.fd_coeffs = np.array(file_read['coeff'])
+        
+        
+    def read_c_f(self, ii):
+        file = h5py.File(self.file_cf+f'.{ii}.cf', 'r+')
+        c_f = file['c_f']
+        return c_f
 
                 
     def trainvali_data(self,index,ts=0.2,umeanfile="Umean.txt",\
@@ -592,7 +600,8 @@ class get_data_norm():
         import tensorflow as tf
         vel_data_in = np.zeros((len(index),self.my,self.mz+2*padpix,\
                                 self.mx+2*padpix,3))
-        vel_data_out = np.zeros((len(index),self.my,self.mz,self.mx,3))
+        # vel_data_out = np.zeros((len(index),self.my,self.mz,self.mx,3))
+        vel_data_out = np.zeros(len(index))
         try:
             self.UUmean 
         except:
@@ -610,8 +619,9 @@ class get_data_norm():
             uu_i0,vv_i0,ww_i0 = self.read_velocity(index[ii],padpix=padpix)
             vel_data_in[ii,:,:,:,:] = self.norm_velocity(uu_i0,vv_i0,ww_i0,\
                        padpix=padpix)
-            uu_i1,vv_i1,ww_i1 = self.read_velocity(index[ii]+delta_pred)
-            vel_data_out[ii,:,:,:,:] = self.norm_velocity(uu_i1,vv_i1,ww_i1)
+            # uu_i1,vv_i1,ww_i1 = self.read_velocity(index[ii]+delta_pred)
+            # vel_data_out[ii,:,:,:,:] = self.norm_velocity(uu_i1,vv_i1,ww_i1)
+            vel_data_out[ii] = self.read_c_f(index[ii]+delta_pred)
         data_X = vel_data_in
         data_Y = vel_data_out
         train_X,valid_X,train_Y,valid_Y = \
@@ -620,8 +630,10 @@ class get_data_norm():
         del data_X,data_Y
         train_X = train_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3)
         valid_X = valid_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3) 
-        train_Y = train_Y.reshape(-1,self.my,self.mz,self.mx,3)
-        valid_Y = valid_Y.reshape(-1,self.my,self.mz,self.mx,3)
+        # train_Y = train_Y.reshape(-1,self.my,self.mz,self.mx,3)
+        train_Y = train_Y.reshape(-1)
+        # valid_Y = valid_Y.reshape(-1,self.my,self.mz,self.mx,3)
+        valid_Y = valid_Y.reshape(-1)
         train_data = tf.data.Dataset.from_tensor_slices((train_X, train_Y))
         del train_X,train_Y
         val_data = tf.data.Dataset.from_tensor_slices((valid_X, valid_Y))

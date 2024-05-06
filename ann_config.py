@@ -54,7 +54,7 @@ def block(xx,nfil,stride,activ,kernel):
     from tensorflow.keras.layers import Conv3D, BatchNormalization,\
         Activation
     xx = Conv3D(nfil, kernel_size=kernel, 
-                strides=(stride,stride,stride),padding="same")(xx)
+                strides=(stride,stride,stride),padding="valid")(xx)
     xx = BatchNormalization()(xx) 
     xx = Activation(activ)(xx)
     return xx
@@ -125,10 +125,11 @@ class convolutional_residual():
     Class for creating a convolutional neural network with a residual layer
     """
     def __init__(self,ngpu=1,fileddbb='../P125_21pi_vu/P125_21pi_vu',\
-                 pond='none'):
+                 pond='none', file_cf='./P125_21pi_vu_cf/P125_21pi_vu'):
         self.devices(ngpu)
         self.fileddbb = fileddbb
         self.pond = pond
+        self.file_cf = file_cf
                 
     def devices(self,ngpu):
         """
@@ -152,7 +153,7 @@ class convolutional_residual():
             outputs : output data of the model
         """
         from tensorflow.keras.layers import Input,MaxPool3D,\
-        Concatenate,Add,Activation
+        Concatenate,Add,Activation,Flatten,Dense
         from tensorflow.image import crop_to_bounding_box
         dim0 = shp[0]
         dim1 = shp[1]+2*padpix
@@ -162,41 +163,55 @@ class convolutional_residual():
         self.inputs = Input(shape=shp)
         # First layer
         xx11 = block(self.inputs,nfil[0],stride[0],activ[0],kernel[0]) 
+        # xx11p = MaxPool3D(3)(xx11)
         xx12 = block(xx11,nfil[0],stride[0],activ[0],kernel[0]) 
-        xx13 = block(xx12,nfil[0],stride[0],activ[0],kernel[0])
+        xx12p= MaxPool3D(3)(xx12)
+        xx13 = block(xx12p,nfil[0],stride[0],activ[0],kernel[0])
+        # xx13p = MaxPool3D(3)(xx13)
         xx14 = block(xx13,nfil[0],stride[0],activ[0],kernel[0])
+        xx14p = MaxPool3D(3)(xx14)
+        xx15 = block(xx14p,nfil[0],stride[0],activ[0],kernel[0]) 
+        # xx15p = MaxPool3D(3)(xx15)
+        xx16 = block(xx15,nfil[0],stride[0],activ[0],kernel[0])
+        # xx16p = MaxPool3D(3)(xx16)
+        # xx17 = block(xx16p,1,stride[0],activ[0],kernel[0])
+        xxf = Flatten()(xx16)
+        xxd = Dense(1)(xxf)
+        
         # to second layer
-        xx20 = MaxPool3D(3)(xx14)
-        # second layer
-        xx21 = block(xx20,nfil[1],stride[1],activ[1],kernel[1])
-        xx22 = block(xx21,nfil[1],stride[1],activ[1],kernel[1])
-        xx23 = block(xx22,nfil[1],stride[1],activ[1],kernel[1])
-        xx24 = block(xx23,nfil[1],stride[1],activ[1],kernel[1])
-        # to third layer
-        xx30 = MaxPool3D(3)(xx24)
-        # third layer
-        xx31 = block(xx30,nfil[2],stride[2],activ[2],kernel[2])
-        xx32 = block(xx31,nfil[2],stride[2],activ[2],kernel[2])
-        xx33 = block(xx32,nfil[2],stride[2],activ[2],kernel[2])
-        xx34 = block(xx33,nfil[2],stride[2],activ[2],kernel[2])
+        # xx20 = MaxPool3D(3)(xx14)
+        # # second layer
+        # xx21 = block(xx20,nfil[1],stride[1],activ[1],kernel[1])
+        # xx22 = block(xx21,nfil[1],stride[1],activ[1],kernel[1])
+        # xx23 = block(xx22,nfil[1],stride[1],activ[1],kernel[1])
+        # xx24 = block(xx23,nfil[1],stride[1],activ[1],kernel[1])
+        # # to third layer
+        # xx30 = MaxPool3D(3)(xx24)
+        # # third layer
+        # xx31 = block(xx30,nfil[2],stride[2],activ[2],kernel[2])
+        # xx32 = block(xx31,nfil[2],stride[2],activ[2],kernel[2])
+        # xx33 = block(xx32,nfil[2],stride[2],activ[2],kernel[2])
+        # xx34 = block(xx33,1,stride[2],activ[2],kernel[2])
+        # xx35f = Flatten()(xx34)
+        # xx36f = Dense(26)(xx35f)
         # go to second layer
-        xx20b = invblock(xx34,nfil[1],3,activ[1],kernel[1],outpad=(1,0,2))
-        xx21b = Concatenate()([xx24,xx20b])   
-        # second layer
-        xx22b = block(xx21b,nfil[1],stride[1],activ[1],kernel[1])
-        xx23b = block(xx22b,nfil[1],stride[1],activ[1],kernel[1])
-        xx24b = block(xx23b,nfil[1],stride[1],activ[1],kernel[1])
-#        # go to first layer
-        xx10b = invblock(xx24b,nfil[0],3,activ[0],kernel[0],outpad=(0,0,0)) 
-        xx11b = Concatenate()([xx10b,xx14])
-        # First layer
-        xx12b = block(xx11b,nfil[0],stride[0],activ[0],kernel[0])
-        xx13b = block(xx12b,nfil[0],stride[0],activ[0],kernel[0])
-        xx14b = block(xx13b,nfil[0],stride[0],activ[0],kernel[0])
-        xx15b = block(xx14b,3,stride[0],activ[0],kernel[0])
-        #
-        xx16b = xx15b[:,:,padpix:-padpix,padpix:-padpix,:]
-        self.outputs = xx16b
+#         xx20b = invblock(xx34,nfil[1],3,activ[1],kernel[1],outpad=(1,0,2))
+#         xx21b = Concatenate()([xx24,xx20b])   
+#         # second layer
+#         xx22b = block(xx21b,nfil[1],stride[1],activ[1],kernel[1])
+#         xx23b = block(xx22b,nfil[1],stride[1],activ[1],kernel[1])
+#         xx24b = block(xx23b,nfil[1],stride[1],activ[1],kernel[1])
+# #        # go to first layer
+#         xx10b = invblock(xx24b,nfil[0],3,activ[0],kernel[0],outpad=(0,0,0)) 
+#         xx11b = Concatenate()([xx10b,xx14])
+#         # First layer
+#         xx12b = block(xx11b,nfil[0],stride[0],activ[0],kernel[0])
+#         xx13b = block(xx12b,nfil[0],stride[0],activ[0],kernel[0])
+#         xx14b = block(xx13b,nfil[0],stride[0],activ[0],kernel[0])
+#         xx15b = block(xx14b,3,stride[0],activ[0],kernel[0])
+#         #
+#         xx16b = xx15b[:,:,padpix:-padpix,padpix:-padpix,:]
+        self.outputs = xxd #xx16b
         
     
     def define_model(self,shp=(201,96,192,3),nfil=np.array([32,64,96]),\
@@ -248,7 +263,7 @@ class convolutional_residual():
         
     def train_model(self,start,end,delta_t=10,delta_e=20,max_epoch=100,\
                     batch_size=1,down_y=1,down_z=1,down_x=1,\
-                    trainfile='trained_model.h5',trainhist='hist.txt',\
+                    trainfile='trained_model_cf.h5',trainhist='hist.txt',\
                     delta_pred=1,padpix=15):
         """
         Function for training the CNN model
@@ -274,7 +289,7 @@ class convolutional_residual():
         ii_ini = 0
         ii_fin = ii_ini+delta_t
         # Initialize and normalize the data
-        data = gd.get_data_norm(self.fileddbb,pond=self.pond)
+        data = gd.get_data_norm(self.fileddbb,pond=self.pond, file_cf=self.file_cf)
         data.geom_param(start,down_y,down_z,down_x)
         try:
             data.read_norm()
