@@ -589,7 +589,7 @@ class get_data_norm():
         
     def read_c_f(self, ii):
         file = h5py.File(self.file_cf+f'.{ii}.cf', 'r+')
-        c_f = file['c_f_mean']
+        c_f = np.array(file['c_f_mean'])
         return c_f
 
                 
@@ -621,7 +621,7 @@ class get_data_norm():
                        padpix=padpix)
             # uu_i1,vv_i1,ww_i1 = self.read_velocity(index[ii]+delta_pred)
             # vel_data_out[ii,:,:,:,:] = self.norm_velocity(uu_i1,vv_i1,ww_i1)
-            vel_data_out[ii] = self.read_c_f(index[ii]+delta_pred)
+            vel_data_out[ii] = self.read_c_f(index[ii]+delta_pred)[0]
         data_X = vel_data_in
         data_Y = vel_data_out
         train_X,valid_X,train_Y,valid_Y = \
