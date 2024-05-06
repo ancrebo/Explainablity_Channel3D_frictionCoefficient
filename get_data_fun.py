@@ -589,7 +589,7 @@ class get_data_norm():
         
     def read_c_f(self, ii):
         file = h5py.File(self.file_cf+f'.{ii}.cf', 'r+')
-        c_f = file['c_f']
+        c_f = file['c_f_mean']
         return c_f
 
                 
