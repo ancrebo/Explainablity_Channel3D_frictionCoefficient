@@ -9,8 +9,8 @@ path_cf = '/media/nils/Elements/P125_21pi_vu_cf/P125_21pi_vu'
 # path_grad = './P125_21pi_vu/grad/P125_21pi_vu'
 # path_cf = './P125_21pi_vu_cf/P125_21pi_vu'
 
-start = 4544
-end = 4555
+start = 1000
+end = 9999
 step = 1
 
 ny = 0.0004761904761904762
@@ -32,7 +32,10 @@ for ii in tqdm(range(start, end, step)):
     # file2.close()
     
     c_f = np.array(file2['c_f'])
-    c_f_mean[0, int(np.floor((ii-start)/step))] = np.mean(c_f)
+    if 'c_f_mean' in file2:
+        del file2['c_f_mean']
+    file2.create_dataset('c_f_mean', data=np.mean(c_f))
+    file2.close()
     
-print(np.mean(c_f_mean))
+
     
