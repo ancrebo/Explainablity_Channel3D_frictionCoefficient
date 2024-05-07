@@ -587,9 +587,15 @@ class get_data_norm():
         self.fd_coeffs = np.array(file_read['coeff'])
         
         
-    def read_c_f(self, ii):
+    def read_c_f(self, 
+                 ii, 
+                 normalize=True, 
+                 c_f_mean=0.008910999719904408):
+        
         file = h5py.File(self.file_cf+f'.{ii}.cf', 'r+')
         c_f = np.array(file['c_f_mean'])
+        if normalize:
+            c_f = c_f/c_f_mean
         return c_f
 
                 
