@@ -166,17 +166,18 @@ class convolutional_residual():
         # xx11p = MaxPool3D(3)(xx11)
         xx12 = block(xx11,nfil[0],stride[0],activ[0],kernel[0]) 
         xx12p= MaxPool3D(3)(xx12)
-        xx13 = block(xx12p,nfil[0],stride[0],activ[0],kernel[0])
+        xx13 = block(xx12p,nfil[1],stride[0],activ[0],kernel[0])
         # xx13p = MaxPool3D(3)(xx13)
-        xx14 = block(xx13,nfil[0],stride[0],activ[0],kernel[0])
+        xx14 = block(xx13,nfil[1],stride[0],activ[0],kernel[0])
         xx14p = MaxPool3D(3)(xx14)
-        xx15 = block(xx14p,nfil[0],stride[0],activ[0],kernel[0]) 
+        xx15 = block(xx14p,nfil[2],stride[0],activ[0],kernel[0]) 
         # xx15p = MaxPool3D(3)(xx15)
-        xx16 = block(xx15,nfil[0],stride[0],activ[0],kernel[0])
+        xx16 = block(xx15,nfil[2],stride[0],activ[0],kernel[0])
         # xx16p = MaxPool3D(3)(xx16)
         # xx17 = block(xx16p,1,stride[0],activ[0],kernel[0])
         xxf = Flatten()(xx16)
-        xxd = Dense(1)(xxf)
+        xx17d = Dense(10, activation='relu')(xxf)
+        xx18d = Dense(1)(xx17d)
         
         # to second layer
         # xx20 = MaxPool3D(3)(xx14)
@@ -211,10 +212,10 @@ class convolutional_residual():
 #         xx15b = block(xx14b,3,stride[0],activ[0],kernel[0])
 #         #
 #         xx16b = xx15b[:,:,padpix:-padpix,padpix:-padpix,:]
-        self.outputs = xxd #xx16b
+        self.outputs = xx18d #xx16b
         
     
-    def define_model(self,shp=(201,96,192,3),nfil=np.array([32,64,96]),\
+    def define_model(self,shp=(201,96,192,3),nfil=np.array([16,32,48]),\
                      stride=np.array([1,1,1]),\
                      activ=["relu","relu","relu"],\
                      kernel=[(3,3,3),(3,3,3),(3,3,3)],optmom=0.9,\
@@ -233,7 +234,7 @@ class convolutional_residual():
         import tensorflow as tf
         from tensorflow.keras import Model
         from tensorflow.keras.optimizers import RMSprop
-        os.environ["CUDA_VISIBLE_DEVICES"]= self.cudadevice
+        os.environ["CUDA_VISIBLE_DEVICES"] = self.cudadevice
         print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
         physical_devices = tf.config.list_physical_devices('GPU')
         available_gpus   = len(physical_devices)
