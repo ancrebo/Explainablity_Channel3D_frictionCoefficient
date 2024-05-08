@@ -16,7 +16,7 @@ step = 1
 ny = 0.0004761904761904762
 U_bulk = 0.8988189365467902
 
-c_f_mean = np.zeros((1, int(np.floor((end-start)/step)+1)))
+c_f_var = np.zeros((1, int(np.floor((end-start)/step)+1)))
 
 for ii in tqdm(range(start, end, step)):
     # file = h5py.File(path_grad+f'.{ii}.grad', 'r+')
@@ -32,10 +32,12 @@ for ii in tqdm(range(start, end, step)):
     # file2.close()
     
     c_f = np.array(file2['c_f'])
-    if 'c_f_mean' in file2:
-        del file2['c_f_mean']
-    file2.create_dataset('c_f_mean', data=np.mean(c_f))
+    # if 'c_f_mean' in file2:
+    #     del file2['c_f_mean']
+    # file2.create_dataset('c_f_mean', data=np.mean(c_f))
+    c_f_var[0, int(np.floor((ii-start)/step))] = np.var(c_f)
     file2.close()
     
+    print(np.sqrt(np.mean(c_f_var)))
 
     
