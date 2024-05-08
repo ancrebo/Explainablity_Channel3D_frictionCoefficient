@@ -657,7 +657,6 @@ class get_data_norm():
             valid_Y = valid_Y.reshape(-1)
 
         train_data = tf.data.Dataset.from_tensor_slices((train_X, train_Y))
-        print(train_data)
         del train_X,train_Y
         val_data = tf.data.Dataset.from_tensor_slices((valid_X, valid_Y))
         del valid_X,valid_Y
