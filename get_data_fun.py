@@ -650,16 +650,14 @@ class get_data_norm():
         train_X = train_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3)
         valid_X = valid_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3) 
         if dim_2D:
-            print(index, len(index))
-            print(train_Y.shape)
-            train_Y = train_Y.reshape(-1,self.mz,self.mx,2)
-            valid_Y = valid_Y.reshape(-1,self.mz,self.mx,2)
-            print(train_Y.shape)
+            train_Y = train_Y#.reshape(-1,self.mz,self.mx,2)
+            valid_Y = valid_Y#.reshape(-1,self.mz,self.mx,2)
         else:
             train_Y = train_Y.reshape(-1)
             valid_Y = valid_Y.reshape(-1)
 
         train_data = tf.data.Dataset.from_tensor_slices((train_X, train_Y))
+        print(train_data)
         del train_X,train_Y
         val_data = tf.data.Dataset.from_tensor_slices((valid_X, valid_Y))
         del valid_X,valid_Y
