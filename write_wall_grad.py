@@ -38,6 +38,6 @@ for ii in tqdm(range(start, end, step)):
     c_f_var[0, int(np.floor((ii-start)/step))] = np.var(c_f)
     file2.close()
     
-    print(np.sqrt(np.mean(c_f_var)))
+print(np.sqrt(np.mean(c_f_var)))
 
     
