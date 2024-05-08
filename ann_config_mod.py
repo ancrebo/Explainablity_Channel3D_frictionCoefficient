@@ -224,7 +224,7 @@ class convolutional_residual():
         # Flatten and reshape
         xx17b = Flatten()(xx16b)
         # xx18b = reshape(xx17b,[-1,dim1o,dim2o,dim0])
-        xx18b = Reshape([-1,dim1o,dim2o,dim0])(xx17b)
+        xx18b = Reshape([dim1o,dim2o,-1])(xx17b)
         xx19b = block2d(xx18b,2,stride[0],activ[0],kernel[0])
         
         self.outputs = xx19b
