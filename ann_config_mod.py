@@ -174,7 +174,7 @@ class convolutional_residual():
             outputs : output data of the model
         """
         from tensorflow.keras.layers import Input,MaxPool3D,\
-        Concatenate,Add,Activation,Flatten,Dense
+        Concatenate,Add,Activation,Flatten,Dense, Reshape
         from tensorflow.image import crop_to_bounding_box
         from tensorflow import reshape
         dim0 = shp[0]
@@ -223,7 +223,8 @@ class convolutional_residual():
         xx16b = xx15b[:,:,padpix:-padpix,padpix:-padpix,:]
         # Flatten and reshape
         xx17b = Flatten()(xx16b)
-        xx18b = reshape(xx17b,[-1,dim1o,dim2o,dim0])
+        # xx18b = reshape(xx17b,[-1,dim1o,dim2o,dim0])
+        xx18b = Reshape([dim1o,dim2o,dim0])(xx17b)
         xx19b = block2d(xx18b,2,stride[0],activ[0],kernel[0])
         
         self.outputs = xx19b
