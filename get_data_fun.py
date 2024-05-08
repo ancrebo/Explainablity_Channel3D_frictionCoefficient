@@ -650,6 +650,8 @@ class get_data_norm():
         train_X = train_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3)
         valid_X = valid_X.reshape(-1,self.my,self.mz+2*padpix,self.mx+2*padpix,3) 
         if dim_2D:
+            print(index, len(index))
+            print(train_Y.shape)
             train_Y = train_Y.reshape(-1,self.mz,self.mx,2)
             valid_Y = valid_Y.reshape(-1,self.mz,self.mx,2)
             print(train_Y.shape)

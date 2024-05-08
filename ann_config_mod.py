@@ -211,7 +211,7 @@ class convolutional_residual():
         xx22b = block(xx21b,nfil[1],stride[1],activ[1],kernel[1])
         xx23b = block(xx22b,nfil[1],stride[1],activ[1],kernel[1])
         xx24b = block(xx23b,nfil[1],stride[1],activ[1],kernel[1])
-#        # go to first layer
+        # go to first layer
         xx10b = invblock(xx24b,nfil[0],3,activ[0],kernel[0],outpad=(0,0,0)) 
         xx11b = Concatenate()([xx10b,xx14])
         # First layer
