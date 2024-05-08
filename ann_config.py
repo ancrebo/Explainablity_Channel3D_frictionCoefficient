@@ -176,8 +176,8 @@ class convolutional_residual():
         xx16p = MaxPool3D(3)(xx15)
         # xx17 = block(xx16p,1,stride[0],activ[0],kernel[0])
         xxf = Flatten()(xx16p)
-        xx17d = Dense(10, activation='relu')(xxf)
-        xx18d = Dense(1)(xx17d)
+        # xx17d = Dense(10, activation='relu')(xxf)
+        xx18d = Dense(1)(xxf)
         
         # to second layer
         # xx20 = MaxPool3D(3)(xx14)
@@ -215,7 +215,7 @@ class convolutional_residual():
         self.outputs = xx18d #xx16b
         
     
-    def define_model(self,shp=(201,96,192,3),nfil=np.array([16,32,48]),\
+    def define_model(self,shp=(201,96,192,3),nfil=np.array([8,16,32]),\
                      stride=np.array([1,1,1]),\
                      activ=["relu","relu","relu"],\
                      kernel=[(3,3,3),(3,3,3),(3,3,3)],optmom=0.9,\
