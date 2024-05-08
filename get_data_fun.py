@@ -652,6 +652,7 @@ class get_data_norm():
         if dim_2D:
             train_Y = train_Y.reshape(-1,self.mz,self.mx,2)
             valid_Y = valid_Y.reshape(-1,self.mz,self.mx,2)
+            print(train_Y.shape)
         else:
             train_Y = train_Y.reshape(-1)
             valid_Y = valid_Y.reshape(-1)
