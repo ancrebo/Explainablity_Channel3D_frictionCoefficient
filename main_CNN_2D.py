@@ -6,7 +6,7 @@ Created on Mon Jun  5 10:10:03 2023
 
 File containing the configuration of the CNN model and the training process
 """
-import ann_config_mod as ann
+import ann_config_2D as ann
 import numpy as np
 import get_data_fun as gd
 
