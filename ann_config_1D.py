@@ -1498,7 +1498,7 @@ class convolutional_residual():
             # uu_p = pfield[:,:,:,0]
             # vv_p = pfield[:,:,:,1]
             # ww_p = pfield[:,:,:,2]
-            cf_p = pfield
+            cf_p = pfield[0][0]
             # uu_s,vv_s,ww_s = data.read_velocity(ii+delta_t)
             cf_s = data.read_c_f(ii+delta_t, dim_2D=False)
             # error_uu = abs(uu_p-uu_s)/np.max([abs(data.uumax),abs(data.uumin)])
@@ -1528,7 +1528,7 @@ class convolutional_residual():
         # print("Error u: " + str(self.mre_uu))
         # print("Error v: " + str(self.mre_vv))
         # print("Error w: " + str(self.mre_ww))
-        self.mre_cf = cf_err
+        self.mre_cf = cf_err[0,:]
         print('error (mean): ', np.mean(cf_err))
         print('error (max): ', np.max(cf_err))
         print('error (std): ', np.std(cf_err))
