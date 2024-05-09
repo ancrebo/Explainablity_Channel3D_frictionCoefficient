@@ -1491,33 +1491,40 @@ class convolutional_residual():
         for ii in range(start,end,step):
             pfield = self.eval_model(ii,down_y=down_y,down_z=down_z,\
                                      down_x=down_x,start=ii,padpix=padpix)
-            uu_p = pfield[:,:,:,0]
-            vv_p = pfield[:,:,:,1]
-            ww_p = pfield[:,:,:,2]
-            uu_s,vv_s,ww_s = data.read_velocity(ii+delta_t)
-            error_uu = abs(uu_p-uu_s)/np.max([abs(data.uumax),abs(data.uumin)])
-            error_vv = abs(vv_p-vv_s)/np.max([abs(data.vvmax),abs(data.vvmin)])
-            error_ww = abs(ww_p-ww_s)/np.max([abs(data.wwmax),abs(data.wwmin)])
+            # uu_p = pfield[:,:,:,0]
+            # vv_p = pfield[:,:,:,1]
+            # ww_p = pfield[:,:,:,2]
+            cf_p = pfield
+            # uu_s,vv_s,ww_s = data.read_velocity(ii+delta_t)
+            cf_s = data.read_c_f(ii+delta_t, dim_2D=False)
+            # error_uu = abs(uu_p-uu_s)/np.max([abs(data.uumax),abs(data.uumin)])
+            # error_vv = abs(vv_p-vv_s)/np.max([abs(data.vvmax),abs(data.vvmin)])
+            # error_ww = abs(ww_p-ww_s)/np.max([abs(data.wwmax),abs(data.wwmin)])
+            error_cf = np.abs(cf_p-cf_s)
             if ii==start:
-                error_uu_cum = np.sum(np.multiply(error_uu,data.vol))
-                error_vv_cum = np.sum(np.multiply(error_vv,data.vol))
-                error_ww_cum = np.sum(np.multiply(error_ww,data.vol))
-                vol_cum = np.sum(data.vol)
+                # error_uu_cum = np.sum(np.multiply(error_uu,data.vol))
+                # error_vv_cum = np.sum(np.multiply(error_vv,data.vol))
+                # error_ww_cum = np.sum(np.multiply(error_ww,data.vol))
+                # vol_cum = np.sum(data.vol)
+                error_cf_cum = error_cf
             else:
-                error_uu_cum += np.sum(np.multiply(error_uu,data.vol))
-                error_vv_cum += np.sum(np.multiply(error_vv,data.vol))
-                error_ww_cum += np.sum(np.multiply(error_ww,data.vol))
-                vol_cum += np.sum(data.vol)
-            print('err_u: '+str(np.sum(np.multiply(error_uu,data.vol))/np.sum(data.vol))+\
-                  'err_v: '+str(np.sum(np.multiply(error_vv,data.vol))/np.sum(data.vol))+\
-                  'err_w: '+str(np.sum(np.multiply(error_ww,data.vol))/np.sum(data.vol)))
+                # error_uu_cum += np.sum(np.multiply(error_uu,data.vol))
+                # error_vv_cum += np.sum(np.multiply(error_vv,data.vol))
+                # error_ww_cum += np.sum(np.multiply(error_ww,data.vol))
+                # vol_cum += np.sum(data.vol)
+                error_cf_cum += error_cf
+            # print('err_u: '+str(np.sum(np.multiply(error_uu,data.vol))/np.sum(data.vol))+\
+            #       'err_v: '+str(np.sum(np.multiply(error_vv,data.vol))/np.sum(data.vol))+\
+            #       'err_w: '+str(np.sum(np.multiply(error_ww,data.vol))/np.sum(data.vol)))
+            print('error (this field): ', error_cf)
             sleep(0.5)
-        self.mre_uu = error_uu_cum/vol_cum
-        self.mre_vv = error_vv_cum/vol_cum
-        self.mre_ww = error_ww_cum/vol_cum
-        print("Error u: " + str(self.mre_uu))
-        print("Error v: " + str(self.mre_vv))
-        print("Error w: " + str(self.mre_ww))
+        # self.mre_uu = error_uu_cum/vol_cum
+        # self.mre_vv = error_vv_cum/vol_cum
+        # self.mre_ww = error_ww_cum/vol_cum
+        # print("Error u: " + str(self.mre_uu))
+        # print("Error v: " + str(self.mre_vv))
+        # print("Error w: " + str(self.mre_ww))
+        print('error (total): ', error_cf_cum/(end-start))
         
 
     
