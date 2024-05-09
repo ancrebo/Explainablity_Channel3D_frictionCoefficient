@@ -1503,7 +1503,7 @@ class convolutional_residual():
             # error_uu = abs(uu_p-uu_s)/np.max([abs(data.uumax),abs(data.uumin)])
             # error_vv = abs(vv_p-vv_s)/np.max([abs(data.vvmax),abs(data.vvmin)])
             # error_ww = abs(ww_p-ww_s)/np.max([abs(data.wwmax),abs(data.wwmin)])
-            cf_err[0, int(np.floor((ii-start)/step))] = np.abs(cf_p-cf_s)
+            cf_err[0, int(np.floor((ii-start)/step))] = np.abs((cf_p-cf_s)/cf_s)
             # if ii==start:
             #     # error_uu_cum = np.sum(np.multiply(error_uu,data.vol))
             #     # error_vv_cum = np.sum(np.multiply(error_vv,data.vol))
