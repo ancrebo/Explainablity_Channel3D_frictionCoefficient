@@ -7,6 +7,7 @@ Created on Mon Jun  5 10:12:37 2023
 file containing the functions to configurate the CNN
 """
 import numpy as np
+import pandas as pd
 
 def nearest(array,value):
     array_value = abs(array-value)
@@ -1527,8 +1528,10 @@ class convolutional_residual():
         # print("Error u: " + str(self.mre_uu))
         # print("Error v: " + str(self.mre_vv))
         # print("Error w: " + str(self.mre_ww))
+        self.mre_cf = cf_err
         print('error (mean): ', np.mean(cf_err))
         print('error (max): ', np.max(cf_err))
+        print('error (std): ', np.std(cf_err))
         
 
     
@@ -1545,3 +1548,9 @@ class convolutional_residual():
         content = "Error w: " + str(self.mre_ww) + '\n'
         file_save.write(content)         
 
+
+    def savemre_to_csv(self, file='mre_predic.csv'):
+        df_mre = pd.DataFrame()
+        df_mre['mre'] = self.mre_cf
+        df_mre.to_csv(file, index=False)
+        
