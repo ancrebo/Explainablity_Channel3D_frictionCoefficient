@@ -399,16 +399,17 @@ class convolutional_residual():
             data.read_Umean()
         uu,vv,ww = data.read_velocity(index,padpix=padpix)
         past_field = data.norm_velocity(uu,vv,ww,padpix=padpix)
-        pred_field = self.model.predict(past_field)
-        pred_field_dim = data.dimensional_velocity(pred_field)
-        past_field_dim = np.zeros((data.my,data.mz+2*padpix,data.mx+2*padpix,3))
-        past_field_dim[:,:,:,0] = uu
-        past_field_dim[:,:,:,1] = vv
-        past_field_dim[:,:,:,2] = ww
-        self.my = data.my
-        self.mz = data.mz
-        self.mx = data.mx
-        return pred_field_dim
+        #pred_field = self.model.predict(past_field)
+        pred_cf = self.model.predict(past_field)
+        # pred_field_dim = data.dimensional_velocity(pred_field)
+        # past_field_dim = np.zeros((data.my,data.mz+2*padpix,data.mx+2*padpix,3))
+        # past_field_dim[:,:,:,0] = uu
+        # past_field_dim[:,:,:,1] = vv
+        # past_field_dim[:,:,:,2] = ww
+        # self.my = data.my
+        # self.mz = data.mz
+        # self.mx = data.mx
+        return pred_cf
         
     def _calc_rms(self,uu,vv,ww,uu2_cum=0,vv2_cum=0,ww2_cum=0,uv_cum=0,\
               vw_cum=0,uw_cum=0,nn_cum=0):
