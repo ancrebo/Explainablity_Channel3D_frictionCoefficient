@@ -62,7 +62,7 @@ def calculate_vorticity(start,
     for ii in tqdm(range(start, end, step)):
         G = normdata.read_gradients(ii)
         vorticity = np.einsum('ijk,kjyzx->iyzx', levi_civita, G)
-        file = h5py.File(file_grad+f'.{ii}.vort', 'r+')
+        file = h5py.File(file_vort+f'.{ii}.vort', 'w')
         file.create_dataset('omega', data=vorticity)
         
         
