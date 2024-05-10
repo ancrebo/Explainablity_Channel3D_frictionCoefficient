@@ -12,9 +12,14 @@ start = 7000
 end = 7001 #1001
 step = 1
 shap = sc.shap_conf()
-shap.calc_shap_kernel(start,end,step,\
-                      file='../P125_21pi_vu_SHAP_ann4_backmod/P125_21pi_vu',\
-                      fileQ='../P125_21pi_vu_Q_divide/P125_21pi_vu',backgroundrms=True)
+shap.calc_shap_kernel(start,
+                      end,
+                      structure='streak',
+                      error='mse',
+                      dir_shap='/media/nils/Elements/',
+		      dir_uvw='/data/cremades/',
+                      dir_structures='/data2/nils/',
+                      backgroundrms=False)
                       
 #shap.eval_shap(start=start,end=end,step=step,\
 #               fileuvw='../P125_21pi_vu/P125_21pi_vu',\
