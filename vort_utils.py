@@ -1,6 +1,7 @@
 import numpy as np
 import get_data_fun as gd
 import h5py
+from tqdm import tqdm
 
 
 
@@ -58,7 +59,7 @@ def calculate_vorticity(start,
     normdata.geom_param(start,1,1,1)
     levi_civita = generate_levi_civita()
 
-    for ii in range(start, end, step):
+    for ii in tqdm(range(start, end, step)):
         G = normdata.read_gradients(ii)
         vorticity = np.einsum('ijk,kjyzx->iyzx', levi_civita, G)
         file = h5py.File(file_grad+f'.{ii}.vort', 'r+')
