@@ -46,6 +46,25 @@ def calculate_enstrophy(start,
         file.create_dataset('enstrophy', data=enstrophy)
         
         
+def calculate_vorticity(start,
+                        end,
+                        step,
+                        file_read='./P125_21pi_vu/P125_21pi_vu',
+                        file_grad='./P125_21pi_vu/grad/P125_21pi_vu',
+                        file_vort='./P125_21pi_vu/vort/P125_21pi_vu'):
+    
+    normdata = gd.get_data_norm(file_read=file_read,
+                                file_grad=file_grad)
+    normdata.geom_param(start,1,1,1)
+    levi_civita = generate_levi_civita()
+
+    for ii in range(start, end, step):
+        G = normdata.read_gradients(ii)
+        vorticity = np.einsum('ijk,kjyzx->iyzx', levi_civita, G)
+        file = h5py.File(file_grad+f'.{ii}.vort', 'r+')
+        file.create_dataset('omega', data=vorticity)
+        
+        
         
 def calc_enstrophy_shares(start,
                           end,
