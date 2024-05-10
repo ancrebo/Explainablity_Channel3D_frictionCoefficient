@@ -14,7 +14,7 @@ class shap_conf():
         """
         Initialization of the SHAP class
         """
-        import ann_config as ann
+        import ann_config_3D as ann
         self.background = None
         CNN = ann.convolutional_residual()
         CNN.load_ANN(filename=filecnn)
