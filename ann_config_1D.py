@@ -177,8 +177,8 @@ class convolutional_residual():
         xx16p = MaxPool3D(3)(xx15)
         # xx17 = block(xx16p,1,stride[0],activ[0],kernel[0])
         xxf = Flatten()(xx16p)
-        xx17d = Dense(5, activation='relu')(xxf)
-        xx18d = Dense(1)(xx17d)
+        # xx17d = Dense(5, activation='relu')(xxf)
+        xx18d = Dense(1)(xxf)
         
         # to second layer
         # xx20 = MaxPool3D(3)(xx14)
