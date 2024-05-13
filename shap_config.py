@@ -19,7 +19,9 @@ class shap_conf():
         self.background = None
         CNN = ann.convolutional_residual()
         CNN.load_ANN(filename=filecnn)
+        CNN.load_frozen_model()
         self.model = CNN.model
+        self.frozen_func = CNN.frozen_func
         
     def calc_shap_kernel(self,
                          start,
@@ -114,6 +116,11 @@ class shap_conf():
                                              np.zeros((1,nmax2)))
             shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
             self.write_output(shap_values,ii,file=file)
+            
+    def predict_frozen(self, input_field):
+        import tensorflow as tf
+        predictions = self.frozen_func(Input=tf.constant(input_field))
+        return predictions[0].numpy()
             
             
     def write_output(self,shap,ii,file='../P125_21pi_vu_SHAP/P125_21pi_vu'):
@@ -221,7 +228,8 @@ class shap_conf():
                                              model_input.shape[2],\
                                                  model_input.shape[3])
         time2 = time()
-        pred = self.model.predict(input_pred)
+        pred = self.predict_frozen(input_pred)
+        #pred = self.model.predict(input_pred)
         time3 = time()
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]

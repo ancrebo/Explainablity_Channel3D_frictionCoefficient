@@ -141,6 +141,28 @@ def residual_block(xx,nfil,stride,activ,kernel):
     return out
 
 
+def wrap_frozen_graph(graph_def, inputs, outputs, print_graph=False):
+    
+    import tensorflow as tf
+    def _imports_graph_def():
+        tf.compat.v1.import_graph_def(graph_def, name="")
+
+    wrapped_import = tf.compat.v1.wrap_function(_imports_graph_def, [])
+    import_graph = wrapped_import.graph
+
+    print("-" * 50)
+    print("Frozen model layers: ")
+    layers = [op.name for op in import_graph.get_operations()]
+    if print_graph == True:
+        for layer in layers:
+            print(layer)
+    print("-" * 50)
+
+    return wrapped_import.prune(
+        tf.nest.map_structure(import_graph.as_graph_element, inputs),
+        tf.nest.map_structure(import_graph.as_graph_element, outputs))
+
+
 class convolutional_residual():
     """
     Class for creating a convolutional neural network with a residual layer
@@ -362,6 +384,44 @@ class convolutional_residual():
         """
         import tensorflow as tf 
         self.model = tf.keras.models.load_model(filename)
+        
+    def freeze_model(self, filename='trained_model.pb'):
+        import tensorflow as tf
+        from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
+        # Convert Keras model to ConcreteFunction
+        full_model = tf.function(lambda x: self.model(x))
+        full_model = full_model.get_concrete_function(
+            tf.TensorSpec(self.model.inputs[0].shape, 
+                          self.model.inputs[0].dtype))
+
+        # Get frozen ConcreteFunction
+        frozen_func = convert_variables_to_constants_v2(full_model)
+        frozen_func.graph.as_graph_def()
+
+
+        # Save frozen graph from frozen ConcreteFunction to hard drive
+        tf.io.write_graph(graph_or_graph_def=frozen_func.graph,
+                          logdir="./",
+                          name=filename,
+                          as_text=False)
+        
+    def load_frozen_model(self, filename='trained_model.pb'):
+        import tensorflow as tf
+        with tf.io.gfile.GFile(f'./{filename}', "rb") as f:
+            graph_def = tf.compat.v1.GraphDef()
+            loaded = graph_def.ParseFromString(f.read())
+
+        # Wrap frozen graph to ConcreteFunctions
+        self.frozen_func = wrap_frozen_graph(graph_def=graph_def,
+                                             inputs=["Input:0"],
+                                             outputs=["Identity:0"],
+                                             print_graph=True)
+    
+    def predict_frozen(self, input_field):
+        import tensorflow as tf
+        predictions = self.frozen_func(Input=tf.constant(input_field))
+        return predictions[0].numpy()
+        
     
     def load_model(self,filename='trained_model.h5'): 
         """
