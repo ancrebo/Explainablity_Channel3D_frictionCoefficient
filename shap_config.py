@@ -7,6 +7,7 @@ Created on Tue Jun 27 12:58:26 2023
 File containing the functions of the SHAP
 """
 import numpy as np
+from time import time
 
 class shap_conf():
     
@@ -88,7 +89,7 @@ class shap_conf():
             struc = normdata.read_uvstruc(ii,
                                           cwd=dir_structures,
                                           padpix=padpix,
-                                          structure=structure)
+                                          structure=structure
             
             # Get array of the ground truth velocity fields
             uvmax = np.max(struc.mat_segment)
@@ -440,10 +441,18 @@ class shap_conf():
         lm = zs.shape[0]
         mse = np.zeros((lm,1))
         for zii in zs:
+            time1 = time()
             print('Calculating SHAP (mse): '+str(ii/lm))
+            time2 = time()
             model_input = self.mask_dom(zii)
+            time3 = time()
             mse[ii,0] = self.shap_model_kernel(model_input, error='mse')
+            time4 = time()
             ii += 1
+            print('Time total : ', time4-time1)
+            print('Time print : ', time2-time1)
+            print('Time mask_dom : ', time3-time2)
+            print('Time shap_model_kernel : ', time4-time3)
         return mse
     
     
