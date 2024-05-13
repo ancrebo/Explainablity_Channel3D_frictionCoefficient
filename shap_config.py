@@ -185,9 +185,12 @@ class shap_conf():
         Function for making the domain
         """
         # If no background is defined the mean value of the field is taken
+        time1 = time()
         if self.background is None:
             self.background = self.input.mean((0,1))*np.ones((3,))
+        time2 = time()
         mask_out = self.input.copy()
+        time3 = time()
         # Replace the values of the field in which the feature is deleted
         for jj in range(zs.shape[0]):
             if zs[jj] == 0:
@@ -195,24 +198,40 @@ class shap_conf():
                     mask_out[self.segmentation == jj,:] = self.background
                 else:
                     mask_out[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]
+        time4 = time()
+        print('mask_dom if background : ', time2-time1)
+        print('mask_dom mask_out: ', time3-time2)
+        print('mask_dom loop : ', time4-time3)
+        
         return mask_out
     
     def shap_model_kernel(self,model_input,error='mse'):
         """
         Model to calculate the shap value
         """
+        time1 = time()
         input_pred = model_input.reshape(1,model_input.shape[0],\
                                          model_input.shape[1],\
                                              model_input.shape[2],\
                                                  model_input.shape[3])
+        time2 = time()
         pred = self.model.predict(input_pred)
+        time3 = time()
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
+        time4 = time()
     
         if error == 'mse':
+            time5 = time()
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
+            time6 = time()
+            print('shap_model_kernel model_input reshape: ', time2-time1)
+            print('shap_model_kernel model predict: ', time3-time2)
+            print('shap_model_kernel len: ', time4-time3)
+            print('shap_model_kernel if clause: ', time5-time4)
+            print('shap_model_kernel mse: ', time6-time5)
             return mse
         
         elif error == 'cf':
@@ -449,10 +468,6 @@ class shap_conf():
             mse[ii,0] = self.shap_model_kernel(model_input, error='mse')
             time4 = time()
             ii += 1
-            print('Time total : ', time4-time1)
-            print('Time print : ', time2-time1)
-            print('Time mask_dom : ', time3-time2)
-            print('Time shap_model_kernel : ', time4-time3)
         return mse
     
     
