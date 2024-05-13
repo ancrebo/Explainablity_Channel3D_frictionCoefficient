@@ -197,14 +197,15 @@ class shap_conf():
             self.background = self.input.mean((0,1))*np.ones((3,))
         time2 = time()
         mask_out = self.input.copy()
+        mask_out_correct = self.input.copy()
         
         # Replace the values of the field in which the feature is deleted
-        '''for jj in range(zs.shape[0]):
+        for jj in range(zs.shape[0]):
             if zs[jj] == 0:
                 if len(self.background.shape) == 1:
-                    mask_out[self.segmentation == jj,:] = self.background
+                    mask_out_correct[self.segmentation == jj,:] = self.background
                 else:
-                    mask_out[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]'''
+                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]
         time3 = time()
         indx = np.where(zs==0)
         if len(self.background.shape) == 1:
@@ -212,6 +213,7 @@ class shap_conf():
         else:
             mask_out[self.segmentation == indx,:] = self.background[self.segmentation == indx,:]
         time4 = time()
+        print('mask_out_error: ', np.max(np.abs(mask_out-mask_out_correct)))
         print('mask_dom if background : ', time2-time1)
         print('mask_dom mask_out: ', time3-time2)
         print('mask_dom loop : ', time4-time3)
