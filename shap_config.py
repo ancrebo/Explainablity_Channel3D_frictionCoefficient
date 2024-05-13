@@ -89,7 +89,7 @@ class shap_conf():
             struc = normdata.read_uvstruc(ii,
                                           cwd=dir_structures,
                                           padpix=padpix,
-                                          structure=structure
+                                          structure=structure)
             
             # Get array of the ground truth velocity fields
             uvmax = np.max(struc.mat_segment)
