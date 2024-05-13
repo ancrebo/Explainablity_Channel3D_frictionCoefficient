@@ -413,13 +413,13 @@ class convolutional_residual():
 
         # Wrap frozen graph to ConcreteFunctions
         self.frozen_func = wrap_frozen_graph(graph_def=graph_def,
-                                             inputs=["Input:0"],
+                                             inputs=["x:0"],
                                              outputs=["Identity:0"],
                                              print_graph=True)
     
     def predict_frozen(self, input_field):
         import tensorflow as tf
-        predictions = self.frozen_func(Input=tf.constant(input_field))
+        predictions = self.frozen_func(x=tf.constant(input_field))
         return predictions[0].numpy()
         
     
