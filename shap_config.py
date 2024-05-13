@@ -119,7 +119,7 @@ class shap_conf():
             
     def predict_frozen(self, input_field):
         import tensorflow as tf
-        predictions = self.frozen_func(x=tf.constant(input_field, dtype=tf.int32))
+        predictions = self.frozen_func(x=tf.constant(input_field, dtype=tf.float32))
         return predictions[0].numpy()
             
             
