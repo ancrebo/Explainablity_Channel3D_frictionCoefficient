@@ -200,20 +200,21 @@ class shap_conf():
         mask_out_correct = self.input.copy()
         
         # Replace the values of the field in which the feature is deleted
-        for jj in range(zs.shape[0]):
+        '''for jj in range(zs.shape[0]):
             if zs[jj] == 0:
+                print(jj)
                 if len(self.background.shape) == 1:
                     mask_out_correct[self.segmentation == jj,:] = self.background
                 else:
-                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]
+                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]'''
         time3 = time()
-        indx = np.where(zs==0)
+        struc_selected = np.where(zs==0)[0]
+        indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
         if len(self.background.shape) == 1:
-            mask_out[self.segmentation == indx,:] = self.background
+            mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background
         else:
-            mask_out[self.segmentation == indx,:] = self.background[self.segmentation == indx,:]
+            mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background[self.segmentation == indx[:,0], indx[:,1], indx[:,2], :]
         time4 = time()
-        print('mask_out_error: ', np.max(np.abs(mask_out-mask_out_correct)))
         print('mask_dom if background : ', time2-time1)
         print('mask_dom mask_out: ', time3-time2)
         print('mask_dom loop : ', time4-time3)
