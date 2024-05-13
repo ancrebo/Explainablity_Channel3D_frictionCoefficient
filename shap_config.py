@@ -199,14 +199,11 @@ class shap_conf():
                 else:
                     mask_out[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]'''
         time3 = time()
+        indx = np.where(zs==0)
         if len(self.background.shape) == 1:
-            for jj in range(zs.shape[0]):
-                if zs[jj] == 0:
-                    mask_out[self.segmentation == jj,:] = self.background
-        else: 
-            for jj in range(zs.shape[0]):
-                if zs[jj] == 0:
-                    mask_out[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]
+            mask_out[self.segmentation == indx,:] = self.background
+        else:
+            mask_out[self.segmentation == indx,:] = self.background[self.segmentation == indx,:]
         time4 = time()
         print('mask_dom if background : ', time2-time1)
         print('mask_dom mask_out: ', time3-time2)
