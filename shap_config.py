@@ -217,8 +217,6 @@ class shap_conf():
                     mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]        
         time3 = time()
         struc_selected = np.where(zs==0)[0].astype(int)
-        struc_selected = struc_selected.reshape([-1,1])
-        print(struc_selected.shape)
         # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
         struc_indx = [self.struc_indx[ind] for ind in struc_selected]
         indx = np.vstack(struc_indx)
