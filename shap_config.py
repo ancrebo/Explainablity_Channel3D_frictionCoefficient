@@ -193,7 +193,8 @@ class shap_conf():
         for ii in range(num_struc):
             indx = np.array(np.where(self.segmentation == ii)).transpose()
             struc_indx.append(indx.astype(int))
-        self.struc_indx = struc_indx
+        # self.struc_indx = struc_indx
+        self.struc_indx = np.array(struc_indx, dtype=object)
         
         
     def mask_dom(self,zs):
@@ -220,10 +221,12 @@ class shap_conf():
         time3 = time()
         struc_selected = np.where(zs==0)[0].astype(int)
         # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
-        struc_indx = [self.struc_indx[ind] for ind in struc_selected]
+        '''struc_indx = [self.struc_indx[ind] for ind in struc_selected]
         print(zs)
         print(struc_indx)
-        indx = np.vstack(struc_indx)
+        indx = np.vstack(struc_indx)'''
+        indx = np.vstack(self.struc_indx[struc_selected]).astype(int)
+        print(indx)
         if len(self.background.shape) == 1:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background
         else:
