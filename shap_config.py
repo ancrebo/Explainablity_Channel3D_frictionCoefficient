@@ -193,7 +193,6 @@ class shap_conf():
         for ii in range(num_struc):
             indx = np.array(np.where(self.segmentation == ii)).transpose()
             struc_indx.append(indx.astype(int))
-        # self.struc_indx = struc_indx
         self.struc_indx = np.array(struc_indx, dtype=object)
         
         
@@ -208,33 +207,15 @@ class shap_conf():
         mask_out = self.input.copy()
         if 0 not in zs:
             return mask_out
-        mask_out_correct = self.input.copy()
         
-        time2 = time()
         # Replace the values of the field in which the feature is deleted
-        for jj in range(zs.shape[0]):
-            if zs[jj] == 0:
-                if len(self.background.shape) == 1:
-                    mask_out_correct[self.segmentation == jj,:] = self.background
-                else:
-                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]        
-        time3 = time()
+        
         struc_selected = np.where(zs==0)[0].astype(int)
-        # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
-        '''struc_indx = [self.struc_indx[ind] for ind in struc_selected]
-        print(zs)
-        print(struc_indx)
-        indx = np.vstack(struc_indx)'''
         indx = np.vstack(self.struc_indx[struc_selected]).astype(int)
-        print(indx)
         if len(self.background.shape) == 1:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background
         else:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background[self.segmentation == indx[:,0], indx[:,1], indx[:,2], :]
-        time4 = time()
-        print('mask_out_error: ', np.max(np.abs(mask_out-mask_out_correct)))
-        print('mask_dom loop: ', time3-time2)
-        print('mask_dom indx selection : ', time4-time3)
         
         return mask_out
     
@@ -242,29 +223,26 @@ class shap_conf():
         """
         Model to calculate the shap value
         """
-        time1 = time()
         input_pred = model_input.reshape(1,model_input.shape[0],\
                                          model_input.shape[1],\
                                              model_input.shape[2],\
                                                  model_input.shape[3])
         time2 = time()
         pred = self.predict_frozen(input_pred)
-        pred_correct = self.model.predict(input_pred)
-        print('prediction error :', np.max(np.abs(pred-pred_correct)))
         time3 = time()
+        pred_correct = self.model.predict(input_pred)
+        time4 = time()
+        print('prediction error :', np.max(np.abs(pred-pred_correct)))
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
-        time4 = time()
     
         if error == 'mse':
-            time5 = time()
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
-            time6 = time()
+            print('shap_model_kernel frozen predict: ', time3-time2)
+            print('shap_model_kernel model predict: ', time4-time3)
             
-        
-            print('shap_model_kernel model predict: ', time3-time2)
             return mse
         
         elif error == 'cf':
