@@ -233,7 +233,7 @@ class shap_conf():
         # pred_1 = self.predict_frozen(input_pred)
         time3 = time()
         pred = self.model.predict(input_pred)
-        pred = pred.astype(np.float32)
+        pred = pred.astype(np.float16)
         time4 = time()
         pred_2 = self.model_opt.predict(input_pred)
         time5 = time()
