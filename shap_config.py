@@ -196,7 +196,7 @@ class shap_conf():
         self.struc_indx = struc_indx
         print(struc_indx[1])
         print(struc_indx[2])
-        print(np.hstack(struc_indx[1:3]))
+        print(np.vstack(struc_indx[1:3]))
         
         
     def mask_dom(self,zs):
