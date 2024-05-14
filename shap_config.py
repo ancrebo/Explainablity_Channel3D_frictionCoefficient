@@ -194,9 +194,6 @@ class shap_conf():
             indx = np.array(np.where(self.segmentation == ii)).transpose()
             struc_indx.append(indx)
         self.struc_indx = struc_indx
-        print(struc_indx[1])
-        print(struc_indx[2])
-        print()
         
         
     def mask_dom(self,zs):
@@ -214,14 +211,13 @@ class shap_conf():
         # Replace the values of the field in which the feature is deleted
         for jj in range(zs.shape[0]):
             if zs[jj] == 0:
-                print(jj)
                 if len(self.background.shape) == 1:
                     mask_out_correct[self.segmentation == jj,:] = self.background
                 else:
                     mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]        
         time3 = time()
         struc_selected = np.where(zs==0)[0].astype(int)
-        type(struc_selected)
+        print(type(struc_selected))
         # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
         indx = np.vstack(self.struc_indx[struc_selected])
         if len(self.background.shape) == 1:
