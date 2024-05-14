@@ -107,6 +107,7 @@ class shap_conf():
             # Calculate SHAP values 
             nmax2 = len(struc.vol)+1
             zshap = np.ones((1,nmax2))
+            self.get_structure_indices(nmax2)
             # If clause MSE or CF 
             if error == 'mse':
                 explainer = shap.KernelExplainer(self.model_function_mse,\
@@ -185,6 +186,12 @@ class shap_conf():
         import h5py
         hf = h5py.File('mse_fg2.h5', 'w')
         hf.create_dataset('mse_fg2', data=self.error_mse2)
+        
+        
+    def get_structure_indices(self, num_struc):
+        struc_indx = []
+        for ii in range(num_struc):
+            print(np.where(self.segmentation == ii))
         
         
     def mask_dom(self,zs):
