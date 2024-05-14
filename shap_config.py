@@ -249,7 +249,8 @@ class shap_conf():
                                                  model_input.shape[3])
         time2 = time()
         pred = self.predict_frozen(input_pred)
-        #pred = self.model.predict(input_pred)
+        pred_correct = self.model.predict(input_pred)
+        print('prediction error :', np.max(np.abs(pred-pred_correct)))
         time3 = time()
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
@@ -261,11 +262,9 @@ class shap_conf():
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
             time6 = time()
-            print('shap_model_kernel model_input reshape: ', time2-time1)
+            
+        
             print('shap_model_kernel model predict: ', time3-time2)
-            print('shap_model_kernel len: ', time4-time3)
-            print('shap_model_kernel if clause: ', time5-time4)
-            print('shap_model_kernel mse: ', time6-time5)
             return mse
         
         elif error == 'cf':
