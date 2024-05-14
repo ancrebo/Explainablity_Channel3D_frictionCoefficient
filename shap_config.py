@@ -232,7 +232,7 @@ class shap_conf():
         time3 = time()
         pred_correct = self.model.predict(input_pred)
         time4 = time()
-        print('max relative prediction error :', np.max(np.abs((pred-pred_correct)/pred_correct)))
+        print('max relative prediction error :', np.max(np.abs((pred-pred_correct)/np.max(pred_correct))))
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
