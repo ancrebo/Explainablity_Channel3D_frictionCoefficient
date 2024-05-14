@@ -205,7 +205,7 @@ class shap_conf():
             self.background = self.input.mean((0,1))*np.ones((3,))
         
         mask_out = self.input.copy()
-        if len(zs) == 0:
+        if 0 not in zs:
             return mask_out
         mask_out_correct = self.input.copy()
         
