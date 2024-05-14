@@ -192,7 +192,7 @@ class shap_conf():
         struc_indx = []
         for ii in range(num_struc):
             indx = np.array(np.where(self.segmentation == ii)).transpose()
-            struc_indx.append(indx)
+            struc_indx.append(indx.astype(int))
         self.struc_indx = np.array(struc_indx)
         
         
