@@ -405,7 +405,7 @@ class convolutional_residual():
                           name=filename,
                           as_text=False)
         
-    def load_optimized_model(self, dir_save='./saved_model', precision='FP16'):
+    def load_optimized_model(self, dir_save='./', precision='FP16'):
         from helper import ModelOptimizer
         opt_model = ModelOptimizer(dir_save)
         opt_trt = opt_model.convert(dir_save+'_'+precision, precision=precision)
