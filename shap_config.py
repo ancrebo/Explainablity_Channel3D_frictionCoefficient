@@ -191,7 +191,9 @@ class shap_conf():
     def get_structure_indices(self, num_struc):
         struc_indx = []
         for ii in range(num_struc):
-            print(np.where(self.segmentation == ii))
+            indx = np.array(np.where(self.segmentation == ii)).transpose()
+            struc_indx.append(indx)
+            print(indx)
         
         
     def mask_dom(self,zs):
