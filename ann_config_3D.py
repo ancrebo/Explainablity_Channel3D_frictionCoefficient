@@ -405,6 +405,39 @@ class convolutional_residual():
                           name=filename,
                           as_text=False)
         
+    '''def optimize_model_openvino(self,
+                                path_model='./saved_model.pb',
+                                path_save='./model_opt_openvino.xml'):
+        import tensorflow as tf
+        from pathlib import Path
+        import os
+        # Construct the command for Model Optimizer.
+        model_path = Path(path_model)
+        mo_command = f"""mo
+                         --saved_model_dir "{model_path}"
+                         --input_shape "[201,126,222,3]"
+                         --model_name "{model_path.name}"
+                         --compress_to_fp16
+                         --output_dir "{model_path.parent}"
+                         """
+        mo_command = " ".join(mo_command.split())
+        
+        # Run Model Optimizer if the IR model file does not exist
+        if not path_save.exists():
+            print("Exporting TensorFlow model to IR... This may take a few minutes.")
+            os.system(mo_command)
+        else:
+            print(f"IR model {path_save} already exists.")
+            
+    def load_openvino_optimized_model(self, path='./model_opt_openvino.xml'):
+        from openvino.runtime import Core
+        ie = Core()
+        model = ie.read_model(path)
+        compiled_model = ie.compile_model(model=model, device_name="GPU")
+        self.compiled_model = compiled_model
+        self.output_key = compiled_model.output(0)'''
+        
+        
     def load_optimized_model(self, dir_save='./', precision='FP32'):
         from helper import ModelOptimizer
         opt_model = ModelOptimizer(dir_save)

@@ -8,6 +8,7 @@ File containing the functions of the SHAP
 """
 import numpy as np
 from time import time
+from tqdm import tqdm
 
 class shap_conf():
     
@@ -21,9 +22,12 @@ class shap_conf():
         CNN.load_ANN(filename=filecnn)
         CNN.load_frozen_model()
         CNN.load_optimized_model()
+        # CNN.load_openvino_optimized_model()
         self.model = CNN.model
         self.frozen_func = CNN.frozen_func
         self.model_opt = CNN.model_opt 
+        # self.model_opt_openvino = CNN.compiled_model
+        # self.output_key = CNN.output_key
         
     def calc_shap_kernel(self,
                          start,
@@ -233,12 +237,14 @@ class shap_conf():
         # pred_1 = self.predict_frozen(input_pred)
         time3 = time()
         pred = self.model.predict(input_pred)
-        pred = pred.astype(np.float16)
         time4 = time()
-        pred_2 = self.model_opt.predict(input_pred)
+        # pred_2 = self.model_opt.predict(input_pred)
         time5 = time()
+        # pred_3 = self.model_opt_openvino(input_pred)[self.output_key]
+        time6 = time()
         # print('max relative prediction error 1:', np.max(np.abs((pred_1-pred)/np.max(pred))))
-        print('max relative prediction error 2:', np.max(np.abs((pred_2-pred)/np.max(pred))))
+        # print('max relative prediction error 2:', np.max(np.abs((pred_2-pred)/np.max(pred))))
+        # print('max relative prediction error 3:', np.max(np.abs((pred_3-pred)/np.max(pred))))
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
@@ -246,9 +252,10 @@ class shap_conf():
         if error == 'mse':
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
-            print('shap_model_kernel frozen predict: ', time3-time2)
+            # print('shap_model_kernel frozen predict: ', time3-time2)
             print('shap_model_kernel model predict: ', time4-time3)
-            print('shap_model_kernel opt predict: ', time5-time4)
+            # print('shap_model_kernel opt predict: ', time5-time4)
+            print('shap_model_kernel openvino predict: ', time5-time4)
             
             return mse
         
@@ -477,14 +484,9 @@ class shap_conf():
         ii = 0
         lm = zs.shape[0]
         mse = np.zeros((lm,1))
-        for zii in zs:
-            time1 = time()
-            print('Calculating SHAP (mse): '+str(ii/lm))
-            time2 = time()
+        for zii in tqdm(zs):
             model_input = self.mask_dom(zii)
-            time3 = time()
             mse[ii,0] = self.shap_model_kernel(model_input, error='mse')
-            time4 = time()
             ii += 1
         return mse
     
@@ -493,8 +495,7 @@ class shap_conf():
         ii = 0
         lm = zs.shape[0]
         cf = np.zeros((lm,1))
-        for zii in zs:
-            print('Calculating SHAP (cf): '+str(ii/lm))
+        for zii in tqdm(zs):
             model_input = self.mask_dom(zii)
             cf[ii,0] = self.shap_model_kernel(model_input, error='cf')
             ii += 1
