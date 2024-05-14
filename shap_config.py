@@ -193,7 +193,10 @@ class shap_conf():
         for ii in range(num_struc):
             indx = np.array(np.where(self.segmentation == ii)).transpose()
             struc_indx.append(indx)
-            print(indx)
+        self.struc_indx = struc_indx
+        print(struc_indx[1])
+        print(struc_indx[2])
+        print(np.hstack(struc_indx[1:3]))
         
         
     def mask_dom(self,zs):
