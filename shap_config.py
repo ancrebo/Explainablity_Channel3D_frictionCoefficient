@@ -196,40 +196,41 @@ class shap_conf():
         self.struc_indx = struc_indx
         print(struc_indx[1])
         print(struc_indx[2])
-        print(np.vstack(struc_indx[1:3]))
+        print()
         
         
     def mask_dom(self,zs):
         """
         Function for making the domain
         """
-        # If no background is defined the mean value of the field is taken
-        time1 = time()
+        # If no background is defined the mean value of the field is take
         if self.background is None:
             self.background = self.input.mean((0,1))*np.ones((3,))
-        time2 = time()
+        
         mask_out = self.input.copy()
         mask_out_correct = self.input.copy()
         
+        time2 = time()
         # Replace the values of the field in which the feature is deleted
-        '''for jj in range(zs.shape[0]):
+        for jj in range(zs.shape[0]):
             if zs[jj] == 0:
                 print(jj)
                 if len(self.background.shape) == 1:
                     mask_out_correct[self.segmentation == jj,:] = self.background
                 else:
-                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]'''
+                    mask_out_correct[self.segmentation == jj,:] = self.background[self.segmentation == jj,:]        
         time3 = time()
         struc_selected = np.where(zs==0)[0]
-        indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
+        # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
+        indx = np.vstack(self.struc_indx[struc_selected])
         if len(self.background.shape) == 1:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background
         else:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background[self.segmentation == indx[:,0], indx[:,1], indx[:,2], :]
         time4 = time()
-        print('mask_dom if background : ', time2-time1)
-        print('mask_dom mask_out: ', time3-time2)
-        print('mask_dom loop : ', time4-time3)
+        print('mask_out_error: ', np.max(np.abs(mask_out-mask_out_correct)))
+        print('mask_dom loop: ', time3-time2)
+        print('mask_dom indx selection : ', time4-time3)
         
         return mask_out
     
