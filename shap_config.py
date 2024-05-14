@@ -219,6 +219,8 @@ class shap_conf():
         struc_selected = np.where(zs==0)[0].astype(int)
         # indx = np.array(np.where(self.segmentation[..., np.newaxis] == struc_selected)[:3]).transpose()
         struc_indx = [self.struc_indx[ind] for ind in struc_selected]
+        print(zs)
+        print(struc_index)
         indx = np.vstack(struc_indx)
         if len(self.background.shape) == 1:
             mask_out[indx[:,0], indx[:,1], indx[:,2], :] = self.background
