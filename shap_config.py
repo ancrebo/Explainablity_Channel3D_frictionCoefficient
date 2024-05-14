@@ -20,8 +20,10 @@ class shap_conf():
         CNN = ann.convolutional_residual()
         CNN.load_ANN(filename=filecnn)
         CNN.load_frozen_model()
+        CNN.load_optimized_model()
         self.model = CNN.model
         self.frozen_func = CNN.frozen_func
+        self.model_opt = CNN.model_opt 
         
     def calc_shap_kernel(self,
                          start,
@@ -232,7 +234,10 @@ class shap_conf():
         time3 = time()
         pred_correct = self.model.predict(input_pred)
         time4 = time()
-        print('max relative prediction error :', np.max(np.abs((pred-pred_correct)/np.max(pred_correct))))
+        pred_2 = self.model_opt.predict(input_pred)
+        time5 = time()
+        print('max relative prediction error 1:', np.max(np.abs((pred-pred_correct)/np.max(pred_correct))))
+        print('max relative prediction error 2:', np.max(np.abs((pred_2-pred_correct)/np.max(pred_correct))))
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
@@ -242,6 +247,7 @@ class shap_conf():
                                     -pred)**2))
             print('shap_model_kernel frozen predict: ', time3-time2)
             print('shap_model_kernel model predict: ', time4-time3)
+            print('shap_model_kernel opt predict: ', time5-time4)
             
             return mse
         
