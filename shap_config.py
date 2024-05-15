@@ -20,11 +20,11 @@ class shap_conf():
         self.background = None
         CNN = ann.convolutional_residual()
         CNN.load_ANN(filename=filecnn)
-        CNN.load_frozen_model()
+        # CNN.load_frozen_model()
         CNN.load_optimized_model()
         # CNN.load_openvino_optimized_model()
         self.model = CNN.model
-        self.frozen_func = CNN.frozen_func
+        # self.frozen_func = CNN.frozen_func
         self.model_opt = CNN.model_opt 
         # self.model_opt_openvino = CNN.compiled_model
         # self.output_key = CNN.output_key
@@ -233,18 +233,10 @@ class shap_conf():
                                          model_input.shape[1],\
                                              model_input.shape[2],\
                                                  model_input.shape[3])
-        time2 = time()
-        # pred_1 = self.predict_frozen(input_pred)
-        time3 = time()
-        pred = self.model.predict(input_pred)
-        time4 = time()
-        # pred_2 = self.model_opt.predict(input_pred)
-        time5 = time()
-        # pred_3 = self.model_opt_openvino(input_pred)[self.output_key]
-        time6 = time()
-        # print('max relative prediction error 1:', np.max(np.abs((pred_1-pred)/np.max(pred))))
-        # print('max relative prediction error 2:', np.max(np.abs((pred_2-pred)/np.max(pred))))
-        # print('max relative prediction error 3:', np.max(np.abs((pred_3-pred)/np.max(pred))))
+        
+        # pred = self.model.predict(input_pred)
+        pred = self.model_opt.predict(input_pred)
+        
         len_y = self.output.shape[0]
         len_z = self.output.shape[1]
         len_x = self.output.shape[2]
@@ -252,11 +244,6 @@ class shap_conf():
         if error == 'mse':
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
-            # print('shap_model_kernel frozen predict: ', time3-time2)
-            print('shap_model_kernel model predict: ', time4-time3)
-            # print('shap_model_kernel opt predict: ', time5-time4)
-            print('shap_model_kernel openvino predict: ', time5-time4)
-            
             return mse
         
         elif error == 'cf':
