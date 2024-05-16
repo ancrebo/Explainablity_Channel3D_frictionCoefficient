@@ -9,6 +9,7 @@ File containing the functions of the SHAP
 import numpy as np
 from time import time
 from tqdm import tqdm
+import cuml
 
 class shap_conf():
     
@@ -116,12 +117,17 @@ class shap_conf():
             self.get_structure_indices(nmax2)
             # If clause MSE or CF 
             if error == 'mse':
-                explainer = shap.KernelExplainer(self.model_function_mse,\
-                                             np.zeros((1,nmax2)))
+                '''explainer = shap.KernelExplainer(self.model_function_mse,\
+                                             np.zeros((1,nmax2)))'''
+                explainer = cuml.explainer.KernelExplainer(self.model_function_mse,\
+                                                            np.zeros((1,nmax2)),
+                                                            nsamples="auto",
+                                                            is_gpu_model=None)
             if error == 'cf':
                 explainer = shap.KernelExplainer(self.model_function_cf,\
                                              np.zeros((1,nmax2)))
-            shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
+            # shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
+            shap_values = explainer.shap_values(zshap)[0][0]
             self.write_output(shap_values,ii,file=file)
             
     def predict_frozen(self, input_field):
