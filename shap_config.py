@@ -121,8 +121,7 @@ class shap_conf():
             if error == 'cf':
                 explainer = shap.KernelExplainer(self.model_function_cf,\
                                              np.zeros((1,nmax2)))
-            # shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
-            shap_values = explainer.shap_values(zshap)[0][0]
+            shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
             self.write_output(shap_values,ii,file=file)
             
     def predict_frozen(self, input_field):
