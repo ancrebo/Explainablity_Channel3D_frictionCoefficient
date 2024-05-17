@@ -77,7 +77,7 @@ def calc_enstrophy_shares(start,
                           root_Q='./'):
     
     normdata = gd.get_data_norm(file_read=root+dataset+'/'+dataset,
-                                file_grad=root+dataset+'/grad/'+dataset)
+                                file_grad=root_grad+dataset+'/grad/'+dataset)
     normdata.geom_param(start,1,1,1)
     # volume_total = normdata.voltot
     
