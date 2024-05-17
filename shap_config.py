@@ -9,7 +9,6 @@ File containing the functions of the SHAP
 import numpy as np
 from time import time
 from tqdm import tqdm
-import cuml
 
 class shap_conf():
     
@@ -20,11 +19,11 @@ class shap_conf():
         import ann_config_3D as ann
         self.background = None
         CNN = ann.convolutional_residual()
-        CNN.load_ANN(filename=filecnn)
+        # CNN.load_ANN(filename=filecnn)
         # CNN.load_frozen_model()
         CNN.load_optimized_model()
         # CNN.load_openvino_optimized_model()
-        self.model = CNN.model
+        # self.model = CNN.model
         # self.frozen_func = CNN.frozen_func
         self.model_opt = CNN.model_opt 
         # self.model_opt_openvino = CNN.compiled_model
@@ -117,12 +116,8 @@ class shap_conf():
             self.get_structure_indices(nmax2)
             # If clause MSE or CF 
             if error == 'mse':
-                '''explainer = shap.KernelExplainer(self.model_function_mse,\
-                                             np.zeros((1,nmax2)))'''
-                explainer = cuml.explainer.KernelExplainer(self.model_function_mse,\
-                                                            np.zeros((1,nmax2)),
-                                                            nsamples="auto",
-                                                            is_gpu_model=None)
+                explainer = shap.KernelExplainer(self.model_function_mse,\
+                                             np.zeros((1,nmax2)))
             if error == 'cf':
                 explainer = shap.KernelExplainer(self.model_function_cf,\
                                              np.zeros((1,nmax2)))
