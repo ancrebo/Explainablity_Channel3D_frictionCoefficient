@@ -104,7 +104,7 @@ def calc_enstrophy_shares(start,
     volume_ratio_chong = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
     
     
-    for ii in range(start, end, step):
+    for ii in tqdm(range(start, end, step)):
         file_Q = h5py.File(path_Q+f'.{ii}.h5.Q', 'r+')
         file_streak = h5py.File(path_streak+f'.{ii}.h5.streak', 'r+')
         file_streak_hv = h5py.File(path_streak_hv+f'.{ii}.h5.streak_high_vel', 'r+')
