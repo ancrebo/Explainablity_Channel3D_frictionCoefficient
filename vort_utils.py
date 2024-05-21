@@ -80,6 +80,10 @@ def calc_enstrophy_shares(start,
     normdata = gd.get_data_norm(file_read=root+dataset+'/'+dataset,
                                 file_grad=root_grad+dataset+'/grad/'+dataset)
     normdata.geom_param(start,1,1,1)
+    try:
+        normdata.read_Umean()
+    except:
+        normdata.calc_Umean(start,end)
     # volume_total = normdata.voltot
     
     path_Q = root_Q+dataset+'_Q_divide/'+dataset
