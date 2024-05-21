@@ -106,7 +106,7 @@ def calc_enstrophy_shares(start,
     
     
     for ii in tqdm(range(start, end, step)):
-        file_Q = h5py.File(path_Q+f'.{ii}.h5.Q', 'r+')
+        file_Q = h5py.File(path_Q+f'.{ii}.h5.Q', 'r')
         file_streak = h5py.File(path_streak+f'.{ii}.h5.streak', 'r+')
         file_streak_hv = h5py.File(path_streak_hv+f'.{ii}.h5.streak_high_vel', 'r+')
         file_hunt = h5py.File(path_hunt+f'.{ii}.h5.hunt', 'r+')
@@ -168,6 +168,121 @@ def calc_enstrophy_shares(start,
     file_enstrophy.create_dataset('vol_streak_high_vel', data=mean_vol_ratio_streak_hv)
     file_enstrophy.create_dataset('vol_hunt', data=mean_vol_ratio_hunt)
     file_enstrophy.create_dataset('vol_chong', data=mean_vol_ratio_chong)
+    
+    
+def calc_intensity_shares(start,
+                          end,
+                          step,
+                          dataset='P125_21pi_vu',
+                          root='./',
+                          root_grad='./',
+                          root_structures='./',
+                          root_Q='./'):
+    
+    normdata = gd.get_data_norm(file_read=root+dataset+'/'+dataset,
+                                file_grad=root_grad+dataset+'/grad/'+dataset)
+    normdata.geom_param(start,1,1,1)
+    # volume_total = normdata.voltot
+    
+    path_Q = root_Q+dataset+'_Q_divide/'+dataset
+    path_streak = root_structures+dataset+'_streak/'+dataset
+    path_streak_hv = root_structures+dataset+'_streak_high_vel/'+dataset
+    path_hunt = root_structures+dataset+'_hunt/'+dataset
+    path_chong = root_structures+dataset+'_chong/'+dataset
+    path_grad = root_grad+dataset+'/grad/'+dataset
+    path_intensity = root_structures+dataset+'_intensity/'
+    
+    intensity_square_mean = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    intensity_square_Q = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    intensity_square_streak = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    intensity_square_streak_hv = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    intensity_square_hunt = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    intensity_square_chong = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    # volume_ratio_hunt = np.zeros((1, int(np.floor((end-start)/step)+1)))
+    # volume_ratio_chong = np.zeros((1, int(np.floor((end-start)/step)+1)))
+    volume_ratio_Q = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_streak = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_streak_hv = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_hunt = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_chong = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    
+    
+    for ii in tqdm(range(start, end, step)):
+        file_Q = h5py.File(path_Q+f'.{ii}.h5.Q', 'r')
+        file_streak = h5py.File(path_streak+f'.{ii}.h5.streak', 'r+')
+        file_streak_hv = h5py.File(path_streak_hv+f'.{ii}.h5.streak_high_vel', 'r+')
+        file_hunt = h5py.File(path_hunt+f'.{ii}.h5.hunt', 'r+')
+        file_chong = h5py.File(path_chong+f'.{ii}.h5.chong', 'r+')
+        
+        uu,vv,ww = normdata.read_velocity(ii)
+        intensity_square = np.zeros((4, normdata.my, normdata.mz, normdata.mx))
+        intensity_square[0,:,:,:] = uu*uu
+        intensity_square[1,:,:,:] = vv*vv
+        intensity_square[2,:,:,:] = ww*ww
+        intensity_square[3,:,:,:] = uu*vv
+        
+        
+        binary_Q = np.array(file_Q['Qs'])
+        # vol_Q = np.array(file_Q['vol'])
+        binary_streak = np.array(file_streak['Qs'])
+        # vol_streak = np.array(file_streak['vol'])
+        binary_streak_hv = np.array(file_streak_hv['Qs'])
+        # vol_streak_hv = np.array(file_streak_hv['vol'])
+        binary_hunt = np.array(file_hunt['Qs'])
+        # vol_hunt = np.array(file_hunt['vol'])
+        binary_chong = np.array(file_chong['Qs'])
+        # vol_chong = np.array(file_chong['vol'])
+        
+        intensity_square_mean[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square, axis=(2,3))
+        intensity_square_Q[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square*binary_Q, axis=(2,3))
+        intensity_square_streak[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square*binary_streak, axis=(2,3))
+        intensity_square_streak_hv[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square*binary_streak_hv, axis=(2,3))
+        intensity_square_hunt[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square*binary_hunt, axis=(2,3))
+        intensity_square_chong[:, :, int(np.floor((ii-start)/step))] = np.mean(intensity_square*binary_chong, axis=(2,3))
+        # enstrophy_hunt[:, int(np.floor((ii-start)/step))] = conditional_avg(enstrophy, binary_hunt)
+        # enstrophy_chong[:, int(np.floor((ii-start)/step))] = conditional_avg(enstrophy, binary_chong)
+        # volume_ratio_hunt[0, int(np.floor((ii-start)/step))] = np.sum(vol_hunt)/volume_total
+        # volume_ratio_chong[0, int(np.floor((ii-start)/step))] = np.sum(vol_chong)/volume_total 
+        volume_ratio_Q[:, int(np.floor((ii-start)/step))] = np.mean(binary_Q, axis=(1,2))
+        volume_ratio_streak[:, int(np.floor((ii-start)/step))] = np.mean(binary_streak, axis=(1,2))
+        volume_ratio_streak_hv[:, int(np.floor((ii-start)/step))] = np.mean(binary_streak_hv, axis=(1,2))
+        volume_ratio_hunt[:, int(np.floor((ii-start)/step))] = np.mean(binary_hunt, axis=(1,2))
+        volume_ratio_chong[:, int(np.floor((ii-start)/step))] = np.mean(binary_chong, axis=(1,2))
+        
+    intensity_mean_all_fields = np.mean(intensity_square_mean, axis=2)
+    intensity_Q_all_fields = np.mean(intensity_square_Q, axis=2)
+    intensity_streak_all_fields = np.mean(intensity_square_streak, axis=2)
+    intensity_streak_hv_all_fields = np.mean(intensity_square_streak_hv, axis=2)
+    intensity_hunt_all_fields = np.mean(intensity_square_hunt, axis=2)
+    intensity_chong_all_fields = np.mean(intensity_square_chong, axis=2)
+    
+    intensity_mean_all_fields[:3,:,:] = np.sqrt(intensity_mean_all_fields[:3,:,:])
+    intensity_Q_all_fields[:3,:,:] = np.sqrt(intensity_Q_all_fields[:3,:,:])
+    intensity_streak_all_fields[:3,:,:] = np.sqrt(intensity_streak_all_fields[:3,:,:])
+    intensity_streak_hv_all_fields[:3,:,:] = np.sqrt(intensity_streak_hv_all_fields[:3,:,:])
+    intensity_hunt_all_fields[:3,:,:] = np.sqrt(intensity_hunt_all_fields[:3,:,:])
+    intensity_chong_all_fields[:3,:,:] = np.sqrt(intensity_chong_all_fields[:3,:,:])
+    # mean_vol_ratio_hunt = np.mean(volume_ratio_hunt)
+    # mean_vol_ratio_chong = np.mean(volume_ratio_chong)
+    mean_vol_ratio_Q = np.mean(volume_ratio_Q, axis=1)
+    mean_vol_ratio_streak = np.mean(volume_ratio_streak, axis=1)
+    mean_vol_ratio_streak_hv = np.mean(volume_ratio_streak_hv, axis=1)
+    mean_vol_ratio_hunt = np.mean(volume_ratio_hunt, axis=1)
+    mean_vol_ratio_chong = np.mean(volume_ratio_chong, axis=1)
+    
+    
+    file_intensity = h5py.File(path_intensity+dataset+f'.{start},{end},{step}.h5.int', 'w')
+    file_intensity.create_dataset('mean', data=intensity_mean_all_fields)
+    file_intensity.create_dataset('Q-structure', data=intensity_Q_all_fields)
+    file_intensity.create_dataset('streak', data=intensity_streak_all_fields)
+    file_intensity.create_dataset('streak_high_vel', data=intensity_streak_hv_all_fields)
+    file_intensity.create_dataset('hunt', data=intensity_hunt_all_fields)
+    file_intensity.create_dataset('chong', data=intensity_chong_all_fields)
+    file_intensity.create_dataset('vol_Q-structure', data=mean_vol_ratio_Q)
+    file_intensity.create_dataset('vol_streak', data=mean_vol_ratio_streak)
+    file_intensity.create_dataset('vol_streak_high_vel', data=mean_vol_ratio_streak_hv)
+    file_intensity.create_dataset('vol_hunt', data=mean_vol_ratio_hunt)
+    file_intensity.create_dataset('vol_chong', data=mean_vol_ratio_chong)
     
     
 def plot_enstrophy_shares(file,
