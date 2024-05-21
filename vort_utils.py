@@ -2,6 +2,7 @@ import numpy as np
 import get_data_fun as gd
 import h5py
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 
 
@@ -167,6 +168,46 @@ def calc_enstrophy_shares(start,
     file_enstrophy.create_dataset('vol_streak_high_vel', data=mean_vol_ratio_streak_hv)
     file_enstrophy.create_dataset('vol_hunt', data=mean_vol_ratio_hunt)
     file_enstrophy.create_dataset('vol_chong', data=mean_vol_ratio_chong)
+    
+    
+def plot_enstrophy_shares(file,
+                          filenorm='./P125_21pi_vu/P125_21pi_vu',
+                          structure=['Q-structure',
+                                     'streak',
+                                     'streak_high_vel',
+                                     'hunt',
+                                     'chong'],
+                          plot_mean=False,
+                          window=(None,None)):
+    normdata = gd.get_data_norm(filenorm)
+    normdata.geom_param(4544, 1,1,1)
+    y = normdata.y_h
+    hf = h5py.File(file, 'r+')
+    enstrophy_mean = np.array(hf['mean'])
+    legend = []
+    colors = ['r', 'b', 'k', 'm', 'c']
+    
+    for ii, struc in enumerate(structure):
+        enstrophy_struc = np.array(hf[struc])
+        vol_struc = np.array(hf[f'vol_{struc}'])
+        plt.plot(y[window[0]:window[1]], 
+                 enstrophy_struc[window[0]:window[1]], 
+                 f'{colors[ii]}')
+        legend.append(f'phi({struc})')
+        plt.plot(y[window[0]:window[1]], 
+                 (vol_struc*enstrophy_mean)[window[0]:window[1]], 
+                 f'{colors[ii]}--') 
+        legend.append(f'phi_mean*vol({struc})')
+        
+        
+    if plot_mean:
+        plt.plot(y[window[0]:window[1]], enstrophy_mean[window[0]:window[1]], '--')
+        legend.append('phi_mean')
+        
+    plt.title('Enstrophy Contribution of Different Structures')
+    plt.xlabel('y/h')
+    plt.ylabel('phi [1/s²]')
+    plt.legend(legend)
     
         
         
