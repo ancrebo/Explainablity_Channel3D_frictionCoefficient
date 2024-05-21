@@ -204,11 +204,11 @@ def calc_intensity_shares(start,
     intensity_square_chong = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
     # volume_ratio_hunt = np.zeros((1, int(np.floor((end-start)/step)+1)))
     # volume_ratio_chong = np.zeros((1, int(np.floor((end-start)/step)+1)))
-    volume_ratio_Q = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
-    volume_ratio_streak = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
-    volume_ratio_streak_hv = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
-    volume_ratio_hunt = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
-    volume_ratio_chong = np.zeros((4, normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_Q = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_streak = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_streak_hv = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_hunt = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
+    volume_ratio_chong = np.zeros((normdata.my, int(np.floor((end-start)/step)+1)))
     
     
     for ii in tqdm(range(start, end, step)):
