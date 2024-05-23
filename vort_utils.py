@@ -166,7 +166,7 @@ def calc_enstrophy_shares(start,
         
         segmentation_Q = np.array(file_Q['Qs_segment'])
         event = np.array(file_Q['event'])
-        y_min = np.array(file_Q['y_min'])
+        y_min = np.array(file_Q['ymin'])
         y_min_plus = (1-np.abs(y_min))*normdata.vtau/normdata.ny
         
         binary_Q2_wa, binary_Q2_wd, binary_Q4_wa, binary_Q4_wd = wall_attached_detached(segmentation_Q, 
@@ -358,7 +358,7 @@ def calc_intensity_shares(start,
         
         segmentation_Q = np.array(file_Q['Qs_segment'])
         event = np.array(file_Q['event'])
-        y_min = np.array(file_Q['y_min'])
+        y_min = np.array(file_Q['ymin'])
         y_min_plus = (1-np.abs(y_min))*normdata.vtau/normdata.ny
         
         binary_Q2_wa, binary_Q2_wd, binary_Q4_wa, binary_Q4_wd = wall_attached_detached(segmentation_Q, 
