@@ -873,7 +873,9 @@ class shap_conf():
                 try:
                     uu,vv,ww = normdata.read_velocity(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
-                    uv_struc = normdata.read_uvstruc(ii,fileQ=fileQ)
+                    uv_struc = normdata.read_uvstruc(ii,
+                                                     cwd=fileQ.replace('P125_21pi_vu_Q_divide/P125_21pi_vu', 
+                                                                       ''))
                     if editq3:
                         for jjind in np.arange(len(uv_struc.event)):
                             if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
@@ -1093,7 +1095,7 @@ class shap_conf():
                     volback = np.sum(normdata.vol)-np.sum(uv_struc.vol)
                     self.shapbackvol_list.append(shapback/volback)
                 except:
-                    print('Missing: '+file+str(ii)+'.h5.shap')
+                    print('Missing: '+file+'.'+str(ii)+'.h5.shap')
             for ii_arlim1 in np.arange(ngrid):
                 for ii_arlim2 in np.arange(ngrid):
                     if self.npoin1[ii_arlim1,ii_arlim2] == 0:
