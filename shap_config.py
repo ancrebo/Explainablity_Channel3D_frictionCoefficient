@@ -876,6 +876,7 @@ class shap_conf():
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=fileQ.replace('P125_21pi_vu_Q_divide/P125_21pi_vu', 
                                                                        ''))
+                    print(1)
                     if editq3:
                         for jjind in np.arange(len(uv_struc.event)):
                             if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
@@ -884,6 +885,7 @@ class shap_conf():
                     lenstruc = len(uv_struc.event)
                     uvtot_cum += uvtot
                     voltot_cum += voltot
+                    print(2)
                     if any(uv_struc.vol>5e6):
                         print(ii)
                     lenstruc = len(uv_struc.event)
@@ -901,6 +903,7 @@ class shap_conf():
                         self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
+                    print(3)
                     uv = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
                     for jj in np.arange(lenstruc):
@@ -924,6 +927,7 @@ class shap_conf():
                                 uv_Qminus_wa += uv[jj]
                                 vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
+                        print(4)
                         if uv_struc.vol[jj] > self.volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
                             Dz = uv_struc.dz[jj]
@@ -962,6 +966,7 @@ class shap_conf():
                                                 self.SHAP_grid4vol[ii_arlim1,ii_arlim2] +=\
                                                 shapvalues[jj]/uv_struc.vol[jj]
                                                 self.npoin4[ii_arlim1,ii_arlim2] += 1
+                            print(5)
                             if yplus_min_ii < 20:
                                 self.volume_wa.append(uv_struc.vol[jj]/1e6)
                                 self.uv_uvtot_wa.append(uv[jj])
@@ -1088,6 +1093,7 @@ class shap_conf():
                                     self.shap_4_wd.append(shapvalues[jj]*1e3)
                                     self.shap_4_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                     self.event_4_wd.append(uv_struc.event[jj])
+                    print(7)
                     vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
                     self.shapbcum += shapvalues[-1]
                     self.shap_volbcum += shapvalues[-1]/vol_b
