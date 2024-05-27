@@ -889,16 +889,23 @@ class shap_conf():
                     if any(uv_struc.vol>5e6):
                         print(ii)
                     lenstruc = len(uv_struc.event)
+                    print(21)
                     if absolute:
+                        print(22)
                         shapvalues = abs(self.read_shap(ii,file=file))
+                        print(23)
                         shapback = abs(shapvalues[-1])
+                        print(24)
                         self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
                         self.shapmin = 0
                         self.shapmaxvol = np.max(abs(np.array([self.shapminvol,self.shapmaxvol])))
                         self.shapminvol = 0
                     else:
+                        print(25)
                         shapvalues = self.read_shap(ii,file=file)
+                        print(26)
                         shapback = shapvalues[-1]
+                        print(27)
                         self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
                         self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
