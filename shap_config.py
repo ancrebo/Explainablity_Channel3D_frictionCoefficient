@@ -143,8 +143,11 @@ class shap_conf():
         Function for read the SHAP values
         """
         import h5py
+        print(1)
         hf = h5py.File(file+'.'+str(ii)+'.h5.shap', 'r+')
+        print(2)
         shap_values = np.array(hf['SHAP'])
+        print(3)
         return shap_values
     
     def eval_shap(self,start=1000,end=9999,step=1,\
