@@ -15,7 +15,12 @@ def nearest(array,value):
     nearest = array[index]
     return nearest,index
 
-def plottrain(file="hist.txt"):
+def moving_average(a, n=20):
+    ret = np.cumsum(a, dtype=float)
+    ret[n:] = (ret[n:] - ret[:-n]) / n
+    return ret[:]
+
+def plottrain(file="hist.txt", moving_avg=False):
     """
     Function for plotting the training of the neural network
     """ 
@@ -25,10 +30,18 @@ def plottrain(file="hist.txt"):
     import matplotlib.pyplot as plt
     fs = 16
     plt.figure()
-    plt.plot(data_train[:,0],data_train[:,2], color='#7AD151',\
-             label='Validation loss',linewidth=2)
-    plt.plot(data_train[:,0],data_train[:,1], color='#440154',\
-             label='Training loss',linewidth=2)
+    if not moving_avg:
+        plt.plot(data_train[:,0],data_train[:,2], color='#7AD151',\
+                 label='Validation loss',linewidth=2)
+        plt.plot(data_train[:,0],data_train[:,1], color='#440154',\
+                 label='Training loss',linewidth=2)
+            
+    else:
+        plt.plot(data_train[:,0],moving_average(data_train[:,2]), color='#7AD151',\
+                 label='Validation loss',linewidth=2)
+        plt.plot(data_train[:,0],moving_average(data_train[:,1]), color='#440154',\
+                 label='Training loss',linewidth=2)
+            
     plt.title('Training and validation loss',fontsize=fs)
     plt.xlabel('Epoch',fontsize=fs)
     plt.ylabel('Loss function (-)',fontsize=fs)
@@ -236,6 +249,8 @@ class convolutional_residual():
         import tensorflow as tf
         from tensorflow.keras import Model
         from tensorflow.keras.optimizers import RMSprop
+        from tensorflow.keras.optimizers.schedules import ExponentialDecay
+        
         os.environ["CUDA_VISIBLE_DEVICES"] = self.cudadevice
         print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
         physical_devices = tf.config.list_physical_devices('GPU')
@@ -255,7 +270,11 @@ class convolutional_residual():
             print(gpu.name)
         with strategy.scope(): 
             self.model_base(shp,nfil,stride,activ,kernel,padpix)
-            optimizer = RMSprop(learning_rate=learat,momentum=optmom) 
+            lr_schedule = ExponentialDecay(learat,
+                                           decay_steps=10,
+                                           decay_rate=0.95,
+                                           staircase=True)
+            optimizer = RMSprop(learning_rate=lr_schedule,momentum=optmom) 
             self.model = Model(self.inputs, self.outputs)
             self.model.compile(loss=tf.keras.losses.MeanSquaredError(),\
                                optimizer=optimizer)
