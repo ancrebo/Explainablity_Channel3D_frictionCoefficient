@@ -107,9 +107,12 @@ class shap_conf():
             self.input = normdata.norm_velocity(uu_i,vv_i,ww_i,padpix=padpix)[0,:,:,:,:]
             if backgroundrms:
                 self.create_background_rms(normdata,struc,padpix=padpix,perc_H=perc_H,Href=Href)
-            uu_o,vv_o,ww_o = normdata.read_velocity(ii+1)
-            self.output = normdata.norm_velocity(uu_o,vv_o,ww_o)[0,:,:,:,:]
-            
+                
+            if error == 'mse':
+                uu_o,vv_o,ww_o = normdata.read_velocity(ii+1)
+                self.output = normdata.norm_velocity(uu_o,vv_o,ww_o)[0,:,:,:,:]
+            elif error == 'cf':
+                self.output = normdata.read_c_f(ii+1, dim_2D=False)
             # Calculate SHAP values 
             nmax2 = len(struc.vol)+1
             zshap = np.ones((1,nmax2))
@@ -118,11 +121,12 @@ class shap_conf():
             if error == 'mse':
                 explainer = shap.KernelExplainer(self.model_function_mse,\
                                              np.zeros((1,nmax2)))
-            if error == 'cf':
+            elif error == 'cf':
                 explainer = shap.KernelExplainer(self.model_function_cf,\
                                              np.zeros((1,nmax2)))
             shap_values = explainer.shap_values(zshap,nsamples="auto")[0][0]
             self.write_output(shap_values,ii,file=file)
+            
             
     def predict_frozen(self, input_field):
         import tensorflow as tf
@@ -247,10 +251,7 @@ class shap_conf():
             return mse
         
         elif error == 'cf':
-            mse_cf = np.mean(np.sqrt((
-                      self.friction_coefficient(
-                          self.output.reshape(-1,len_y,len_z,len_x,3))\
-                     -self.friction_coefficient(pred))**2))
+            mse_cf = np.sqrt((self.output-pred)**2)
             return mse_cf
     
     
