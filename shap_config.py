@@ -1292,332 +1292,332 @@ class shap_conf():
                          readdata=False,
                          editq3=False,
                          find_files=False):
-    """
-    Function for reading the data
-    """
-    import h5py
-    import os
-
-    fileread=f'data_plots.h5.{structure}'
-    if error == 'mse':
-        file_shap=dir_shap+f'{dataset}_{structure}_SHAP_mse/{dataset}'
-    elif error == 'cf':
-        file_shap=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
+        """
+        Function for reading the data
+        """
+        import h5py
+        import os
         
-    fileuvw=dir_uvw+f'{dataset}/{dataset}'
+        fileread=f'data_plots.h5.{structure}'
+        if error == 'mse':
+            file_shap=dir_shap+f'{dataset}_{structure}_SHAP_mse/{dataset}'
+        elif error == 'cf':
+            file_shap=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
+        
+        fileuvw=dir_uvw+f'{dataset}/{dataset}'
     
     
     
-    self.shapmin = shapmin
-    self.shapmax = shapmax
-    self.shapminvol = shapminvol
-    self.shapmaxvol = shapmaxvol
-    self.nbars = nbars
-    self.volmin = volmin
-    if absolute:
-        self.ylabel_shap = '$|\phi_i| \cdot 10^{-3}$'
-        self.ylabel_shap_vol = '$|\phi_i/V^+| \cdot 10^{-9}$'
-        self.clabel_shap = '$|\phi_i|$'
-        self.clabel_shap_vol = '$|\phi_i /V^+|$'
-    else:
-        self.ylabel_shap = '$\phi_i \cdot 10^{-3}$'
-        self.ylabel_shap_vol = '$\phi_i/V^+ \cdot 10^{-9}$'
-        self.clabel_shap = '$\phi_i$'
-        self.clabel_shap_vol = '$\phi_i /V^+$'
-    import get_data_fun as gd
-    normdata = gd.get_data_norm(file_read=fileuvw)
-    normdata.geom_param(start,1,1,1)
-    if readdata:
-        hf = h5py.File(fileread, 'r')
-        self.volume_wa = np.array(hf['volume_wa'])
-        self.volume_wd = np.array(hf['volume_wd'])
-        self.shap_wa = np.array(hf['shap_wa'])
-        self.shap_wd = np.array(hf['shap_wd'])
-        self.shap_wa_vol = np.array(hf['shap_wa_vol'])
-        self.shap_wd_vol = np.array(hf['shap_wd_vol'])
-        self.event_wa = np.array(hf['event_wa'])
-        self.event_wd = np.array(hf['event_wd'])
-        self.uv_uvtot_wa = np.array(hf['uv_uvtot_wa'])
-        self.uv_uvtot_wd = np.array(hf['uv_uvtot_wd'])
-        self.uv_uvtot_wa_vol = np.array(hf['uv_uvtot_wa_vol'])
-        self.uv_uvtot_wd_vol = np.array(hf['uv_uvtot_wd_vol'])
-        self.uv_vol_uvtot_vol_wa = np.array(hf['uv_vol_uvtot_vol_wa'])
-        self.uv_vol_uvtot_vol_wd = np.array(hf['uv_vol_uvtot_vol_wd'])
-        self.volume = np.array(hf['volume'])
-        self.volume_wa = np.array(hf['volume_wa'])
-        self.shap = np.array(hf['shap'])
-        self.shap_vol = np.array(hf['shap_vol'])
-        self.uv_uvtot = np.array(hf['uv_uvtot'])
-        self.uv_uvtot_vol = np.array(hf['uv_uvtot_vol'])
-        self.uv_vol_uvtot_vol = np.array(hf['uv_vol_uvtot_vol'])
-        self.event = np.array(hf['event'])
-        self.voltot = np.array(hf['voltot'])
-        self.shapback_list = np.array(hf['shapback_list'])
-        self.shapbackvol_list = np.array(hf['shapbackvol_list'])
-        self.AR1_grid = np.array(hf['AR1_grid'])
-        self.AR2_grid = np.array(hf['AR2_grid'])
-        self.SHAP_grid = np.array(hf['SHAP_grid'])
-        self.SHAP_gridvol = np.array(hf['SHAP_gridvol'])
-        self.npoin = np.array(hf['npoin'])
-        self.shapcum = np.array(hf['shapcum'])
-        self.shapbcum = np.array(hf['shapbcum'])
-        self.shap_volcum = np.array(hf['shap_volcum'])
-        self.shap_volbcum = np.array(hf['shap_volbcum'])
-        self.shapmax = np.array(hf['shapmax'])
-        self.shapmin = np.array(hf['shapmin'])
-        self.shapmaxvol = np.array(hf['shapmaxvol'])
-        self.shapminvol = np.array(hf['shapminvol'])
-        self.cdg_y = np.array(hf['cdg_y'])
-        self.cdg_y_wa = np.array(hf['cdg_y_wa'])
-        self.cdg_y_wd = np.array(hf['cdg_y_wd'])
-        hf.close()
-    else:
-        self.volume_wa = []
-        self.volume_wd = []
-        self.shap_wa = []
-        self.shap_wd = []
-        self.shap_wa_vol = []
-        self.shap_wd_vol = []
-        self.event_wa = []
-        self.event_wd = []
-        self.uv_uvtot_wa = []
-        self.uv_uvtot_wd = []
-        self.uv_uvtot_wa_vol = []
-        self.uv_uvtot_wd_vol = []
-        self.uv_vol_uvtot_vol_wa = []
-        self.uv_vol_uvtot_vol_wd = []
-        self.cdg_y_wa = []
-        self.cdg_y_wd = []
-        self.volume = []
-        self.uv_uvtot = []
-        self.uv_uvtot_vol = []
-        self.uv_vol_uvtot_vol = []
-        self.shap = []
-        self.shap_vol = []
-        self.event = []
-        self.cdg_y = []
-        self.voltot = np.sum(normdata.vol)
-        self.shapback_list = []
-        self.shapbackvol_list = []
-        expmax = 2
-        expmin = -1
-        ngrid = 50
-        AR1_vec = np.linspace(expmin,expmax,ngrid+1)
-        AR2_vec = np.linspace(expmin,expmax,ngrid+1)
-        self.AR1_grid = np.zeros((ngrid,ngrid))
-        self.AR2_grid = np.zeros((ngrid,ngrid))
-        self.SHAP_grid = np.zeros((ngrid,ngrid))
-        self.SHAP_gridvol = np.zeros((ngrid,ngrid))
-        self.npoin = np.zeros((ngrid,ngrid))
-        if find_files:
-            indbar = file_shap.rfind('/')
-            filesexist = os.listdir(file_shap[:indbar])
-            text1 = file_shap[indbar+1:]+'.'
-            text2 = '.h5.shap'
-            range_shap =[int(x_file.replace(text1,'').replace(text2,'')) for x_file in filesexist]
+        self.shapmin = shapmin
+        self.shapmax = shapmax
+        self.shapminvol = shapminvol
+        self.shapmaxvol = shapmaxvol
+        self.nbars = nbars
+        self.volmin = volmin
+        if absolute:
+            self.ylabel_shap = '$|\phi_i| \cdot 10^{-3}$'
+            self.ylabel_shap_vol = '$|\phi_i/V^+| \cdot 10^{-9}$'
+            self.clabel_shap = '$|\phi_i|$'
+            self.clabel_shap_vol = '$|\phi_i /V^+|$'
         else:
-            range_shap = range(start,end,step)
-        lenrange_shap = len(range_shap)
+            self.ylabel_shap = '$\phi_i \cdot 10^{-3}$'
+            self.ylabel_shap_vol = '$\phi_i/V^+ \cdot 10^{-9}$'
+            self.clabel_shap = '$\phi_i$'
+            self.clabel_shap_vol = '$\phi_i /V^+$'
+        import get_data_fun as gd
+        normdata = gd.get_data_norm(file_read=fileuvw)
+        normdata.geom_param(start,1,1,1)
+        if readdata:
+            hf = h5py.File(fileread, 'r')
+            self.volume_wa = np.array(hf['volume_wa'])
+            self.volume_wd = np.array(hf['volume_wd'])
+            self.shap_wa = np.array(hf['shap_wa'])
+            self.shap_wd = np.array(hf['shap_wd'])
+            self.shap_wa_vol = np.array(hf['shap_wa_vol'])
+            self.shap_wd_vol = np.array(hf['shap_wd_vol'])
+            self.event_wa = np.array(hf['event_wa'])
+            self.event_wd = np.array(hf['event_wd'])
+            self.uv_uvtot_wa = np.array(hf['uv_uvtot_wa'])
+            self.uv_uvtot_wd = np.array(hf['uv_uvtot_wd'])
+            self.uv_uvtot_wa_vol = np.array(hf['uv_uvtot_wa_vol'])
+            self.uv_uvtot_wd_vol = np.array(hf['uv_uvtot_wd_vol'])
+            self.uv_vol_uvtot_vol_wa = np.array(hf['uv_vol_uvtot_vol_wa'])
+            self.uv_vol_uvtot_vol_wd = np.array(hf['uv_vol_uvtot_vol_wd'])
+            self.volume = np.array(hf['volume'])
+            self.volume_wa = np.array(hf['volume_wa'])
+            self.shap = np.array(hf['shap'])
+            self.shap_vol = np.array(hf['shap_vol'])
+            self.uv_uvtot = np.array(hf['uv_uvtot'])
+            self.uv_uvtot_vol = np.array(hf['uv_uvtot_vol'])
+            self.uv_vol_uvtot_vol = np.array(hf['uv_vol_uvtot_vol'])
+            self.event = np.array(hf['event'])
+            self.voltot = np.array(hf['voltot'])
+            self.shapback_list = np.array(hf['shapback_list'])
+            self.shapbackvol_list = np.array(hf['shapbackvol_list'])
+            self.AR1_grid = np.array(hf['AR1_grid'])
+            self.AR2_grid = np.array(hf['AR2_grid'])
+            self.SHAP_grid = np.array(hf['SHAP_grid'])
+            self.SHAP_gridvol = np.array(hf['SHAP_gridvol'])
+            self.npoin = np.array(hf['npoin'])
+            self.shapcum = np.array(hf['shapcum'])
+            self.shapbcum = np.array(hf['shapbcum'])
+            self.shap_volcum = np.array(hf['shap_volcum'])
+            self.shap_volbcum = np.array(hf['shap_volbcum'])
+            self.shapmax = np.array(hf['shapmax'])
+            self.shapmin = np.array(hf['shapmin'])
+            self.shapmaxvol = np.array(hf['shapmaxvol'])
+            self.shapminvol = np.array(hf['shapminvol'])
+            self.cdg_y = np.array(hf['cdg_y'])
+            self.cdg_y_wa = np.array(hf['cdg_y_wa'])
+            self.cdg_y_wd = np.array(hf['cdg_y_wd'])
+            hf.close()
+        else:
+            self.volume_wa = []
+            self.volume_wd = []
+            self.shap_wa = []
+            self.shap_wd = []
+            self.shap_wa_vol = []
+            self.shap_wd_vol = []
+            self.event_wa = []
+            self.event_wd = []
+            self.uv_uvtot_wa = []
+            self.uv_uvtot_wd = []
+            self.uv_uvtot_wa_vol = []
+            self.uv_uvtot_wd_vol = []
+            self.uv_vol_uvtot_vol_wa = []
+            self.uv_vol_uvtot_vol_wd = []
+            self.cdg_y_wa = []
+            self.cdg_y_wd = []
+            self.volume = []
+            self.uv_uvtot = []
+            self.uv_uvtot_vol = []
+            self.uv_vol_uvtot_vol = []
+            self.shap = []
+            self.shap_vol = []
+            self.event = []
+            self.cdg_y = []
+            self.voltot = np.sum(normdata.vol)
+            self.shapback_list = []
+            self.shapbackvol_list = []
+            expmax = 2
+            expmin = -1
+            ngrid = 50
+            AR1_vec = np.linspace(expmin,expmax,ngrid+1)
+            AR2_vec = np.linspace(expmin,expmax,ngrid+1)
+            self.AR1_grid = np.zeros((ngrid,ngrid))
+            self.AR2_grid = np.zeros((ngrid,ngrid))
+            self.SHAP_grid = np.zeros((ngrid,ngrid))
+            self.SHAP_gridvol = np.zeros((ngrid,ngrid))
+            self.npoin = np.zeros((ngrid,ngrid))
+            if find_files:
+                indbar = file_shap.rfind('/')
+                filesexist = os.listdir(file_shap[:indbar])
+                text1 = file_shap[indbar+1:]+'.'
+                text2 = '.h5.shap'
+                range_shap =[int(x_file.replace(text1,'').replace(text2,'')) for x_file in filesexist]
+            else:
+                range_shap = range(start,end,step)
+            lenrange_shap = len(range_shap)
         
-        uv_Qminus = 0
-        vol_Qminus = 0
-        uv_Qminus_wa = 0
-        vol_Qminus_wa = 0
-        uvtot_cum = 0
-        voltot_cum = 0
-        self.shapcum = 0
-        self.shap_volcum = 0
-        self.shapbcum = 0
-        self.shap_volbcum = 0
+            uv_Qminus = 0
+            vol_Qminus = 0
+            uv_Qminus_wa = 0
+            vol_Qminus_wa = 0
+            uvtot_cum = 0
+            voltot_cum = 0
+            self.shapcum = 0
+            self.shap_volcum = 0
+            self.shapbcum = 0
+            self.shap_volbcum = 0
         
-        try:
-            normdata.read_norm()
-        except:
-            normdata.calc_norm(start,end)
-        try:
-            normdata.UUmean 
-        except:
-            normdata.read_Umean()
-        for ii_arlim1 in np.arange(ngrid):
-            arlim1inf = 10**AR1_vec[ii_arlim1]
-            arlim1sup = 10**AR1_vec[ii_arlim1+1]
-            for ii_arlim2 in np.arange(ngrid):
-                arlim2inf = 10**AR2_vec[ii_arlim2]
-                arlim2sup = 10**AR2_vec[ii_arlim2+1]
-                self.AR1_grid[ii_arlim1,ii_arlim2] = \
-                10**((AR1_vec[ii_arlim1]+AR1_vec[ii_arlim1+1])/2)
-                self.AR2_grid[ii_arlim1,ii_arlim2] =\
-                10**((AR2_vec[ii_arlim2]+AR2_vec[ii_arlim2+1])/2)
-        for ii in range_shap:
             try:
-                uu,vv,ww = normdata.read_velocity(ii)
-                uvtot = np.sum(abs(np.multiply(uu,vv)))
-                uv_struc = normdata.read_uvstruc(ii,
-                                                 cwd=dir_struc,
-                                                 structure=structure)
-                if editq3:
-                    for jjind in np.arange(len(uv_struc.event)):
-                        if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
-                            uv_struc.event[jjind] = 2
-                voltot = np.sum(normdata.vol)
-                lenstruc = len(uv_struc.event)
-                uvtot_cum += uvtot
-                voltot_cum += voltot
-                if any(uv_struc.vol>5e6):
-                    print(ii)
-                lenstruc = len(uv_struc.event)
-                if absolute:
-                    shapvalues = abs(self.read_shap(ii,file=file_shap))
-                    shapback = abs(shapvalues[-1])
-                    self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
-                    self.shapmin = 0
-                    self.shapmaxvol = np.max(abs(np.array([self.shapminvol,self.shapmaxvol])))
-                    self.shapminvol = 0
-                else:
-                    shapvalues = self.read_shap(ii,file=file_shap)
-                    shapback = shapvalues[-1]
-                    self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
-                    self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
-                    self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
-                    self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
-                uv = np.zeros((lenstruc,))
-                uv_vol = np.zeros((lenstruc,))
-                for jj in np.arange(lenstruc):
-                    indexuv = np.where(uv_struc.mat_segment==jj+1)
-                    for kk in np.arange(len(indexuv[0])):
-                        uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
-                                      indexuv[2][kk]]*vv[indexuv[0][kk],\
-                                             indexuv[1][kk],indexuv[2][kk]]) 
-                    uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
-                    uv_back_vol = (uvtot-np.sum(uv))/\
-                    (voltot-np.sum(uv_struc.vol))
-                    uv_vol_sum = np.sum(uv_vol)+uv_back_vol
-                    if uv_struc.cdg_y[jj] <= 0:
-                        yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
-                    else:
-                        yplus_min_ii = (1-uv_struc.ymax[jj])*normdata.rey
-                    if uv_struc.event[jj] == 2 or uv_struc.event[jj] == 4:
-                        uv_Qminus += uv[jj]
-                        vol_Qminus += uv_struc.vol[jj]
-                        if yplus_min_ii < 20:
-                            uv_Qminus_wa += uv[jj]
-                            vol_Qminus_wa += uv_struc.vol[jj]
-                    uv[jj] /= uvtot
-                    if uv_struc.vol[jj] > self.volmin:                  
-                        Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
-                        Dz = uv_struc.dz[jj]
-                        Dx = uv_struc.dx[jj]
-                        AR1 = Dx/Dy
-                        AR2 = Dz/Dy
-                        for ii_arlim1 in np.arange(ngrid):
-                            arlim1inf = 10**AR1_vec[ii_arlim1]
-                            arlim1sup = 10**AR1_vec[ii_arlim1+1]
-                            if AR1 >= arlim1inf and AR1<arlim1sup:
-                                for ii_arlim2 in np.arange(ngrid):
-                                    arlim2inf = 10**AR2_vec[ii_arlim2]
-                                    arlim2sup = 10**AR2_vec[ii_arlim2+1]
-                                    if AR2 >= arlim2inf and AR2<arlim2sup:
-                                        self.SHAP_grid[ii_arlim1,ii_arlim2] +=\
-                                        shapvalues[jj]
-                                        self.SHAP_gridvol[ii_arlim1,ii_arlim2] +=\
-                                        shapvalues[jj]/uv_struc.vol[jj]
-                                        self.npoin[ii_arlim1,ii_arlim2] += 1
-                                        
-                        if yplus_min_ii < 20:
-                            self.volume_wa.append(uv_struc.vol[jj]/1e6)
-                            self.uv_uvtot_wa.append(uv[jj])
-                            self.uv_uvtot_wa_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                            self.uv_vol_uvtot_vol_wa.append(uv_vol[jj]/uv_vol_sum)
-                            self.shap_wa.append(shapvalues[jj]*1e3)
-                            self.shap_wa_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                            self.event_wa.append(uv_struc.event[jj])
-                            self.cdg_y_wa.append(uv_struc.cdg_y[jj])
-                        else:
-                            self.volume_wd.append(uv_struc.vol[jj]/1e6)
-                            self.uv_uvtot_wd.append(uv[jj])
-                            self.uv_uvtot_wd_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                            self.uv_vol_uvtot_vol_wd.append(uv_vol[jj]/uv_vol_sum)
-                            self.shap_wd.append(shapvalues[jj]*1e3)
-                            self.shap_wd_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                            self.event_wd.append(uv_struc.event[jj])
-                            self.cdg_y_wd.append(uv_struc.cdg_y[jj])
-                        
-                        self.volume.append(uv_struc.vol[jj]/1e6)
-                        self.uv_uvtot.append(uv[jj])
-                        self.uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                        self.uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
-                        self.shap.append(shapvalues[jj]*1e3)
-                        self.shap_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                        self.event.append(uv_struc.event[jj])
-                        self.shapcum += shapvalues[jj]
-                        self.shap_volcum += shapvalues[jj]/uv_struc.vol[jj]
-                        self.cdg_y.append(uv_struc.cdg_y[jj])
-                            
-                vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
-                self.shapbcum += shapvalues[-1]
-                self.shap_volbcum += shapvalues[-1]/vol_b
-                self.shapback_list.append(shapback)
-                volback = np.sum(normdata.vol)-np.sum(uv_struc.vol)
-                self.shapbackvol_list.append(shapback/volback)
+                normdata.read_norm()
             except:
-                print('Missing: '+file_shap+'.'+str(ii)+'.h5.shap')
-        for ii_arlim1 in np.arange(ngrid):
-            for ii_arlim2 in np.arange(ngrid):
-                if self.npoin[ii_arlim1,ii_arlim2] == 0:
-                    self.SHAP_grid[ii_arlim1,ii_arlim2] = np.nan
-                    self.SHAP_gridvol[ii_arlim1,ii_arlim2] = np.nan
-                else:
-                    self.SHAP_grid[ii_arlim1,ii_arlim2] /= self.npoin[ii_arlim1,ii_arlim2]
-                    self.SHAP_gridvol[ii_arlim1,ii_arlim2] /= self.npoin[ii_arlim1,ii_arlim2]
-                
-        file_save = open('Qinfo.txt', "w+") 
-        file_save.write('uv_Q- '+str(uv_Qminus/uvtot_cum)+'\n')
-        file_save.write('vol_Q- '+str(vol_Qminus/voltot_cum)+'\n')
-        file_save.write('uv_Q-_wa '+str(uv_Qminus_wa/uvtot_cum)+'\n')
-        file_save.write('vol_Q-_wa '+str(vol_Qminus_wa/voltot_cum)+'\n')
-        file_save.close()
-        hf = h5py.File(fileread, 'w')
-        hf.create_dataset('volume_wa', data=self.volume_wa)
-        hf.create_dataset('volume_wd', data=self.volume_wd)
-        hf.create_dataset('shap_wa', data=self.shap_wa)
-        hf.create_dataset('shap_wd', data=self.shap_wd)
-        hf.create_dataset('shap_wa_vol', data=self.shap_wa_vol)
-        hf.create_dataset('shap_wd_vol', data=self.shap_wd_vol)
-        hf.create_dataset('event_wa', data=self.event_wa)
-        hf.create_dataset('event_wd', data=self.event_wd)
-        hf.create_dataset('uv_uvtot_wa', data=self.uv_uvtot_wa)
-        hf.create_dataset('uv_uvtot_wd', data=self.uv_uvtot_wd)
-        hf.create_dataset('uv_uvtot_wa_vol', data=self.uv_uvtot_wa_vol)
-        hf.create_dataset('uv_uvtot_wd_vol', data=self.uv_uvtot_wd_vol)
-        hf.create_dataset('uv_vol_uvtot_vol_wa', data=self.uv_vol_uvtot_vol_wa)
-        hf.create_dataset('uv_vol_uvtot_vol_wd', data=self.uv_vol_uvtot_vol_wd)
-        hf.create_dataset('volume', data=self.volume)
-        hf.create_dataset('shap', data=self.shap)
-        hf.create_dataset('shap_vol', data=self.shap_vol)
-        hf.create_dataset('uv_uvtot', data=self.uv_uvtot)
-        hf.create_dataset('uv_uvtot_vol', data=self.uv_uvtot_vol)
-        hf.create_dataset('uv_vol_uvtot_vol', data=self.uv_vol_uvtot_vol)
-        hf.create_dataset('event', data=self.event)
-        hf.create_dataset('voltot', data=self.voltot)
-        hf.create_dataset('shapback_list', data=self.shapback_list)
-        hf.create_dataset('shapbackvol_list', data=self.shapbackvol_list)
-        hf.create_dataset('AR1_grid', data=self.AR1_grid)
-        hf.create_dataset('AR2_grid', data=self.AR2_grid)
-        hf.create_dataset('SHAP_grid', data=self.SHAP_grid)
-        hf.create_dataset('SHAP_gridvol', data=self.SHAP_gridvol)
-        hf.create_dataset('npoin', data=self.npoin)
-        hf.create_dataset('shapcum', data=self.shapcum)
-        hf.create_dataset('shapbcum', data=self.shapbcum)
-        hf.create_dataset('shap_volcum', data=self.shap_volcum)
-        hf.create_dataset('shap_volbcum', data=self.shap_volbcum)
-        hf.create_dataset('shapmax', data=self.shapmax)
-        hf.create_dataset('shapmin', data=self.shapmin)
-        hf.create_dataset('shapmaxvol', data=self.shapmaxvol)
-        hf.create_dataset('shapminvol', data=self.shapminvol)
-        hf.create_dataset('cdg_y', data=self.cdg_y)
-        hf.create_dataset('cdg_y_wa', data=self.cdg_y_wa)
-        hf.create_dataset('cdg_y_wd', data=self.cdg_y_wd)
-        hf.close()
+                normdata.calc_norm(start,end)
+            try:
+                normdata.UUmean 
+            except:
+                normdata.read_Umean()
+            for ii_arlim1 in np.arange(ngrid):
+                arlim1inf = 10**AR1_vec[ii_arlim1]
+                arlim1sup = 10**AR1_vec[ii_arlim1+1]
+                for ii_arlim2 in np.arange(ngrid):
+                    arlim2inf = 10**AR2_vec[ii_arlim2]
+                    arlim2sup = 10**AR2_vec[ii_arlim2+1]
+                    self.AR1_grid[ii_arlim1,ii_arlim2] = \
+                    10**((AR1_vec[ii_arlim1]+AR1_vec[ii_arlim1+1])/2)
+                    self.AR2_grid[ii_arlim1,ii_arlim2] =\
+                    10**((AR2_vec[ii_arlim2]+AR2_vec[ii_arlim2+1])/2)
+            for ii in range_shap:
+                try:
+                    uu,vv,ww = normdata.read_velocity(ii)
+                    uvtot = np.sum(abs(np.multiply(uu,vv)))
+                    uv_struc = normdata.read_uvstruc(ii,
+                                                     cwd=dir_struc,
+                                                     structure=structure)
+                    if editq3:
+                        for jjind in np.arange(len(uv_struc.event)):
+                            if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
+                                uv_struc.event[jjind] = 2
+                    voltot = np.sum(normdata.vol)
+                    lenstruc = len(uv_struc.event)
+                    uvtot_cum += uvtot
+                    voltot_cum += voltot
+                    if any(uv_struc.vol>5e6):
+                        print(ii)
+                    lenstruc = len(uv_struc.event)
+                    if absolute:
+                        shapvalues = abs(self.read_shap(ii,file=file_shap))
+                        shapback = abs(shapvalues[-1])
+                        self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
+                        self.shapmin = 0
+                        self.shapmaxvol = np.max(abs(np.array([self.shapminvol,self.shapmaxvol])))
+                        self.shapminvol = 0
+                    else:
+                        shapvalues = self.read_shap(ii,file=file_shap)
+                        shapback = shapvalues[-1]
+                        self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
+                        self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
+                        self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
+                        self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
+                    uv = np.zeros((lenstruc,))
+                    uv_vol = np.zeros((lenstruc,))
+                    for jj in np.arange(lenstruc):
+                        indexuv = np.where(uv_struc.mat_segment==jj+1)
+                        for kk in np.arange(len(indexuv[0])):
+                            uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
+                                          indexuv[2][kk]]*vv[indexuv[0][kk],\
+                                                 indexuv[1][kk],indexuv[2][kk]]) 
+                        uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
+                        uv_back_vol = (uvtot-np.sum(uv))/\
+                        (voltot-np.sum(uv_struc.vol))
+                        uv_vol_sum = np.sum(uv_vol)+uv_back_vol
+                        if uv_struc.cdg_y[jj] <= 0:
+                            yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
+                        else:
+                            yplus_min_ii = (1-uv_struc.ymax[jj])*normdata.rey
+                        if uv_struc.event[jj] == 2 or uv_struc.event[jj] == 4:
+                            uv_Qminus += uv[jj]
+                            vol_Qminus += uv_struc.vol[jj]
+                            if yplus_min_ii < 20:
+                                uv_Qminus_wa += uv[jj]
+                                vol_Qminus_wa += uv_struc.vol[jj]
+                        uv[jj] /= uvtot
+                        if uv_struc.vol[jj] > self.volmin:                  
+                            Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
+                            Dz = uv_struc.dz[jj]
+                            Dx = uv_struc.dx[jj]
+                            AR1 = Dx/Dy
+                            AR2 = Dz/Dy
+                            for ii_arlim1 in np.arange(ngrid):
+                                arlim1inf = 10**AR1_vec[ii_arlim1]
+                                arlim1sup = 10**AR1_vec[ii_arlim1+1]
+                                if AR1 >= arlim1inf and AR1<arlim1sup:
+                                    for ii_arlim2 in np.arange(ngrid):
+                                        arlim2inf = 10**AR2_vec[ii_arlim2]
+                                        arlim2sup = 10**AR2_vec[ii_arlim2+1]
+                                        if AR2 >= arlim2inf and AR2<arlim2sup:
+                                            self.SHAP_grid[ii_arlim1,ii_arlim2] +=\
+                                            shapvalues[jj]
+                                            self.SHAP_gridvol[ii_arlim1,ii_arlim2] +=\
+                                            shapvalues[jj]/uv_struc.vol[jj]
+                                            self.npoin[ii_arlim1,ii_arlim2] += 1
+                                            
+                            if yplus_min_ii < 20:
+                                self.volume_wa.append(uv_struc.vol[jj]/1e6)
+                                self.uv_uvtot_wa.append(uv[jj])
+                                self.uv_uvtot_wa_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                self.uv_vol_uvtot_vol_wa.append(uv_vol[jj]/uv_vol_sum)
+                                self.shap_wa.append(shapvalues[jj]*1e3)
+                                self.shap_wa_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
+                                self.event_wa.append(uv_struc.event[jj])
+                                self.cdg_y_wa.append(uv_struc.cdg_y[jj])
+                            else:
+                                self.volume_wd.append(uv_struc.vol[jj]/1e6)
+                                self.uv_uvtot_wd.append(uv[jj])
+                                self.uv_uvtot_wd_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                self.uv_vol_uvtot_vol_wd.append(uv_vol[jj]/uv_vol_sum)
+                                self.shap_wd.append(shapvalues[jj]*1e3)
+                                self.shap_wd_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
+                                self.event_wd.append(uv_struc.event[jj])
+                                self.cdg_y_wd.append(uv_struc.cdg_y[jj])
+                            
+                            self.volume.append(uv_struc.vol[jj]/1e6)
+                            self.uv_uvtot.append(uv[jj])
+                            self.uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                            self.uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
+                            self.shap.append(shapvalues[jj]*1e3)
+                            self.shap_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
+                            self.event.append(uv_struc.event[jj])
+                            self.shapcum += shapvalues[jj]
+                            self.shap_volcum += shapvalues[jj]/uv_struc.vol[jj]
+                            self.cdg_y.append(uv_struc.cdg_y[jj])
+                                
+                    vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
+                    self.shapbcum += shapvalues[-1]
+                    self.shap_volbcum += shapvalues[-1]/vol_b
+                    self.shapback_list.append(shapback)
+                    volback = np.sum(normdata.vol)-np.sum(uv_struc.vol)
+                    self.shapbackvol_list.append(shapback/volback)
+                except:
+                    print('Missing: '+file_shap+'.'+str(ii)+'.h5.shap')
+            for ii_arlim1 in np.arange(ngrid):
+                for ii_arlim2 in np.arange(ngrid):
+                    if self.npoin[ii_arlim1,ii_arlim2] == 0:
+                        self.SHAP_grid[ii_arlim1,ii_arlim2] = np.nan
+                        self.SHAP_gridvol[ii_arlim1,ii_arlim2] = np.nan
+                    else:
+                        self.SHAP_grid[ii_arlim1,ii_arlim2] /= self.npoin[ii_arlim1,ii_arlim2]
+                        self.SHAP_gridvol[ii_arlim1,ii_arlim2] /= self.npoin[ii_arlim1,ii_arlim2]
+                    
+            file_save = open('Qinfo.txt', "w+") 
+            file_save.write('uv_Q- '+str(uv_Qminus/uvtot_cum)+'\n')
+            file_save.write('vol_Q- '+str(vol_Qminus/voltot_cum)+'\n')
+            file_save.write('uv_Q-_wa '+str(uv_Qminus_wa/uvtot_cum)+'\n')
+            file_save.write('vol_Q-_wa '+str(vol_Qminus_wa/voltot_cum)+'\n')
+            file_save.close()
+            hf = h5py.File(fileread, 'w')
+            hf.create_dataset('volume_wa', data=self.volume_wa)
+            hf.create_dataset('volume_wd', data=self.volume_wd)
+            hf.create_dataset('shap_wa', data=self.shap_wa)
+            hf.create_dataset('shap_wd', data=self.shap_wd)
+            hf.create_dataset('shap_wa_vol', data=self.shap_wa_vol)
+            hf.create_dataset('shap_wd_vol', data=self.shap_wd_vol)
+            hf.create_dataset('event_wa', data=self.event_wa)
+            hf.create_dataset('event_wd', data=self.event_wd)
+            hf.create_dataset('uv_uvtot_wa', data=self.uv_uvtot_wa)
+            hf.create_dataset('uv_uvtot_wd', data=self.uv_uvtot_wd)
+            hf.create_dataset('uv_uvtot_wa_vol', data=self.uv_uvtot_wa_vol)
+            hf.create_dataset('uv_uvtot_wd_vol', data=self.uv_uvtot_wd_vol)
+            hf.create_dataset('uv_vol_uvtot_vol_wa', data=self.uv_vol_uvtot_vol_wa)
+            hf.create_dataset('uv_vol_uvtot_vol_wd', data=self.uv_vol_uvtot_vol_wd)
+            hf.create_dataset('volume', data=self.volume)
+            hf.create_dataset('shap', data=self.shap)
+            hf.create_dataset('shap_vol', data=self.shap_vol)
+            hf.create_dataset('uv_uvtot', data=self.uv_uvtot)
+            hf.create_dataset('uv_uvtot_vol', data=self.uv_uvtot_vol)
+            hf.create_dataset('uv_vol_uvtot_vol', data=self.uv_vol_uvtot_vol)
+            hf.create_dataset('event', data=self.event)
+            hf.create_dataset('voltot', data=self.voltot)
+            hf.create_dataset('shapback_list', data=self.shapback_list)
+            hf.create_dataset('shapbackvol_list', data=self.shapbackvol_list)
+            hf.create_dataset('AR1_grid', data=self.AR1_grid)
+            hf.create_dataset('AR2_grid', data=self.AR2_grid)
+            hf.create_dataset('SHAP_grid', data=self.SHAP_grid)
+            hf.create_dataset('SHAP_gridvol', data=self.SHAP_gridvol)
+            hf.create_dataset('npoin', data=self.npoin)
+            hf.create_dataset('shapcum', data=self.shapcum)
+            hf.create_dataset('shapbcum', data=self.shapbcum)
+            hf.create_dataset('shap_volcum', data=self.shap_volcum)
+            hf.create_dataset('shap_volbcum', data=self.shap_volbcum)
+            hf.create_dataset('shapmax', data=self.shapmax)
+            hf.create_dataset('shapmin', data=self.shapmin)
+            hf.create_dataset('shapmaxvol', data=self.shapmaxvol)
+            hf.create_dataset('shapminvol', data=self.shapminvol)
+            hf.create_dataset('cdg_y', data=self.cdg_y)
+            hf.create_dataset('cdg_y_wa', data=self.cdg_y_wa)
+            hf.create_dataset('cdg_y_wd', data=self.cdg_y_wd)
+            hf.close()
            
         
             
