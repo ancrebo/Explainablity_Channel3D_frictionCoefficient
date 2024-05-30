@@ -230,7 +230,7 @@ class convolutional_residual():
         self.outputs = xx18d #xx16b
         
     
-    def define_model(self,shp=(201,96,192,3),nfil=np.array([8,16,32]),\
+    def define_model(self,shp=(201,96,192,3),nfil=np.array([16,24,48]),\
                      stride=np.array([1,1,1]),\
                      activ=["relu","relu","relu"],\
                      kernel=[(3,3,3),(3,3,3),(3,3,3)],optmom=0.9,\
@@ -1512,6 +1512,7 @@ class convolutional_residual():
             data.read_norm()
             
         cf_err = np.zeros((1, int(np.floor((end-start)/step)+1)))
+        over_5 = 0
         for ii in range(start,end,step):
             pfield = self.eval_model(ii,down_y=down_y,down_z=down_z,\
                                      down_x=down_x,start=ii,padpix=padpix)
@@ -1525,6 +1526,8 @@ class convolutional_residual():
             # error_vv = abs(vv_p-vv_s)/np.max([abs(data.vvmax),abs(data.vvmin)])
             # error_ww = abs(ww_p-ww_s)/np.max([abs(data.wwmax),abs(data.wwmin)])
             cf_err[0, int(np.floor((ii-start)/step))] = np.abs((cf_p-cf_s)/cf_s)
+            if np.abs((cf_p-cf-s)/cf_s) > 0.05:
+                over_5 += 1
             # if ii==start:
             #     # error_uu_cum = np.sum(np.multiply(error_uu,data.vol))
             #     # error_vv_cum = np.sum(np.multiply(error_vv,data.vol))
@@ -1552,7 +1555,7 @@ class convolutional_residual():
         print('error (mean): ', np.mean(cf_err))
         print('error (max): ', np.max(cf_err))
         print('error (std): ', np.std(cf_err))
-        
+        print('with over 5% error: ', over_5)
 
     
             
