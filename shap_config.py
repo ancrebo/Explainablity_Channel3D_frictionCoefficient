@@ -1450,11 +1450,14 @@ class shap_conf():
                     10**((AR2_vec[ii_arlim2]+AR2_vec[ii_arlim2+1])/2)
             for ii in range_shap:
                 try:
+                    print(1)
                     uu,vv,ww = normdata.read_velocity(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
+                    print(2)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=dir_struc,
                                                      structure=structure)
+                    print(3)
                     if editq3:
                         for jjind in np.arange(len(uv_struc.event)):
                             if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
@@ -1467,14 +1470,18 @@ class shap_conf():
                         print(ii)
                     lenstruc = len(uv_struc.event)
                     if absolute:
+                        print(4)
                         shapvalues = abs(self.read_shap(ii,file=file_shap))
+                        print(5)
                         shapback = abs(shapvalues[-1])
                         self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
                         self.shapmin = 0
                         self.shapmaxvol = np.max(abs(np.array([self.shapminvol,self.shapmaxvol])))
                         self.shapminvol = 0
                     else:
+                        print(6)
                         shapvalues = self.read_shap(ii,file=file_shap)
+                        print(7)
                         shapback = shapvalues[-1]
                         self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
                         self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
@@ -1618,8 +1625,6 @@ class shap_conf():
             hf.create_dataset('cdg_y_wa', data=self.cdg_y_wa)
             hf.create_dataset('cdg_y_wd', data=self.cdg_y_wd)
             hf.close()
-           
-        
             
         
         
