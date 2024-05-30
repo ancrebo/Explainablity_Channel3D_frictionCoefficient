@@ -1269,29 +1269,29 @@ class shap_conf():
             
             
 
-def read_data_simple(self,start,end,step,\
-                     # file='../../../data2/cremades/P125_21pi_vu_SHAP_ann4_divide/P125_21pi_vu',\
-                     dir_shap = './',
-                     dir_struc = './',
-                     dir_uvw = './',
-                     dir_save = './',
-                     structure = 'streak',
-                     dataset = 'P125_21pi_vu',
-                     error = 'mse',
-                     # fileQ='../../../data2/cremades/P125_21pi_vu_Q_divide/P125_21pi_vu',\
-                     # fileuvw='../P125_21pi_vu/P125_21pi_vu',\
-                     fileUmean="Umean.txt",
-                     filenorm="norm.txt",
-                     shapmin=-8,
-                     shapmax=5,
-                     shapminvol=-8,
-                     shapmaxvol=8,
-                     nbars=1000,                     
-                     absolute=True,
-                     volmin=2.7e4,
-                     readdata=False,
-                     editq3=False,
-                     find_files=False):
+    def read_data_simple(self,start,end,step,\
+                         # file='../../../data2/cremades/P125_21pi_vu_SHAP_ann4_divide/P125_21pi_vu',\
+                         dir_shap = './',
+                         dir_struc = './',
+                         dir_uvw = './',
+                         dir_save = './',
+                         structure = 'streak',
+                         dataset = 'P125_21pi_vu',
+                         error = 'mse',
+                         # fileQ='../../../data2/cremades/P125_21pi_vu_Q_divide/P125_21pi_vu',\
+                         # fileuvw='../P125_21pi_vu/P125_21pi_vu',\
+                         fileUmean="Umean.txt",
+                         filenorm="norm.txt",
+                         shapmin=-8,
+                         shapmax=5,
+                         shapminvol=-8,
+                         shapmaxvol=8,
+                         nbars=1000,                     
+                         absolute=True,
+                         volmin=2.7e4,
+                         readdata=False,
+                         editq3=False,
+                         find_files=False):
     """
     Function for reading the data
     """
