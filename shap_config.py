@@ -1503,12 +1503,12 @@ class shap_conf():
                             yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
                         else:
                             yplus_min_ii = (1-uv_struc.ymax[jj])*normdata.rey
-                        if uv_struc.event[jj] == 2 or uv_struc.event[jj] == 4:
-                            uv_Qminus += uv[jj]
-                            vol_Qminus += uv_struc.vol[jj]
-                            if yplus_min_ii < 20:
-                                uv_Qminus_wa += uv[jj]
-                                vol_Qminus_wa += uv_struc.vol[jj]
+                        # if uv_struc.event[jj] == 2 or uv_struc.event[jj] == 4:
+                        #     uv_Qminus += uv[jj]
+                        #     vol_Qminus += uv_struc.vol[jj]
+                        #     if yplus_min_ii < 20:
+                        #         uv_Qminus_wa += uv[jj]
+                        #         vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
                         if uv_struc.vol[jj] > self.volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
@@ -1537,7 +1537,7 @@ class shap_conf():
                                 self.uv_vol_uvtot_vol_wa.append(uv_vol[jj]/uv_vol_sum)
                                 self.shap_wa.append(shapvalues[jj]*1e3)
                                 self.shap_wa_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                                self.event_wa.append(uv_struc.event[jj])
+                                # self.event_wa.append(uv_struc.event[jj])
                                 self.cdg_y_wa.append(uv_struc.cdg_y[jj])
                             else:
                                 self.volume_wd.append(uv_struc.vol[jj]/1e6)
@@ -1546,7 +1546,7 @@ class shap_conf():
                                 self.uv_vol_uvtot_vol_wd.append(uv_vol[jj]/uv_vol_sum)
                                 self.shap_wd.append(shapvalues[jj]*1e3)
                                 self.shap_wd_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                                self.event_wd.append(uv_struc.event[jj])
+                                # self.event_wd.append(uv_struc.event[jj])
                                 self.cdg_y_wd.append(uv_struc.cdg_y[jj])
                             
                             self.volume.append(uv_struc.vol[jj]/1e6)
@@ -1555,7 +1555,7 @@ class shap_conf():
                             self.uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
                             self.shap.append(shapvalues[jj]*1e3)
                             self.shap_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
-                            self.event.append(uv_struc.event[jj])
+                            # self.event.append(uv_struc.event[jj])
                             self.shapcum += shapvalues[jj]
                             self.shap_volcum += shapvalues[jj]/uv_struc.vol[jj]
                             self.cdg_y.append(uv_struc.cdg_y[jj])
