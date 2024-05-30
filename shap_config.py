@@ -1458,17 +1458,17 @@ class shap_conf():
                                                      cwd=dir_struc,
                                                      structure=structure)
                     print(3)
-                    if editq3:
-                        for jjind in np.arange(len(uv_struc.event)):
-                            if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
-                                uv_struc.event[jjind] = 2
+                    # if editq3:
+                    #     for jjind in np.arange(len(uv_struc.event)):
+                    #         if uv_struc.cdg_y[jjind]>0.9 and uv_struc.event[jjind]==3:
+                    #             uv_struc.event[jjind] = 2
                     voltot = np.sum(normdata.vol)
-                    lenstruc = len(uv_struc.event)
+                    lenstruc = len(uv_struc.vol)
                     uvtot_cum += uvtot
                     voltot_cum += voltot
                     if any(uv_struc.vol>5e6):
                         print(ii)
-                    lenstruc = len(uv_struc.event)
+                    lenstruc = len(uv_struc.vol)
                     if absolute:
                         print(4)
                         shapvalues = abs(self.read_shap(ii,file=file_shap))
