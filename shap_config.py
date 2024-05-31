@@ -1986,18 +1986,18 @@ class shap_conf():
         
         fs = 20
         plt.figure()
-        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
-        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
-        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
-        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
-        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
-        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
-        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
-        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
-        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
-        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
