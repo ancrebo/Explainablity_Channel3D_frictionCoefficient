@@ -1325,12 +1325,16 @@ class shap_conf():
         
         for att in attr:
             if not hasattr(self, att):
+                print(1)
                 exec(f'self.{att}'+' = {}')
-            elif type(globals()[f'self.{att}']) != dict:
-                exec(f'self.{att}'+' = {}')
-                
-            print(type(globals()[f'self.{att}']))
-            print(hasattr(self, att))
+            else:
+                try:
+                    print(2)
+                    exec(f'self.{att}["test"] = False')
+                except TypeError:
+                    print(3)
+                    exec(f'self.{att}'+' = {}')
+                    
         # self.shapmin = shapmin
         # self.shapmax = shapmax
         # self.shapminvol = shapminvol
