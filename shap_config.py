@@ -1331,7 +1331,7 @@ class shap_conf():
                 try:
                     print(2)
                     exec(f'self.{att}["test"] = False')
-                except TypeError:
+                except IndexError:
                     print(3)
                     exec(f'self.{att}'+' = {}')
                     
