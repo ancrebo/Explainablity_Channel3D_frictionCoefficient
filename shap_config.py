@@ -1464,9 +1464,9 @@ class shap_conf():
                 for ii_arlim2 in np.arange(ngrid):
                     arlim2inf = 10**AR2_vec[ii_arlim2]
                     arlim2sup = 10**AR2_vec[ii_arlim2+1]
-                    AR1_grid[structure][ii_arlim1,ii_arlim2] = \
+                    AR1_grid[ii_arlim1,ii_arlim2] = \
                     10**((AR1_vec[ii_arlim1]+AR1_vec[ii_arlim1+1])/2)
-                    AR2_grid[structure][ii_arlim1,ii_arlim2] =\
+                    AR2_grid[ii_arlim1,ii_arlim2] =\
                     10**((AR2_vec[ii_arlim2]+AR2_vec[ii_arlim2+1])/2)
             for ii in range_shap:
                 try:
