@@ -1838,6 +1838,7 @@ class shap_conf():
             
         plt.contour(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        print(histogram_Q2.T)
         plt.contour(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
         plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
@@ -1845,6 +1846,7 @@ class shap_conf():
             colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,0]
             colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,1]
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,2]
+            print(histograms_struc[structure].T)
             plt.contour(vol_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -1862,11 +1864,32 @@ class shap_conf():
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
         labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
         
-        for structure in structures:
+        for ii, structure in enumerate(structures):
             if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,2]
                 labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
             elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,2]
                 labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
