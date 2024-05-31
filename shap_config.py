@@ -1324,8 +1324,9 @@ class shap_conf():
                 'cdg_y', 'cdg_y_wa', 'cdg_y_wd']
         
         for att in attr:
-            print(type(locals()[f'self.{att}']))
-            if not hasattr(self, att) or type(locals()[f'self.{att}']) != dict:
+            print(type(globals()[f'self.{att}']))
+            print(hasattr(self, att))
+            if not hasattr(self, att) or type(globals()[f'self.{att}']) != dict:
                 exec(f'self.{att}'+' = {}')
     
         # self.shapmin = shapmin
