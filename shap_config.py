@@ -1832,7 +1832,6 @@ class shap_conf():
             
         plt.contour(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
-        print(histogram_Q2.T)
         plt.contour(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
         plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
@@ -1840,7 +1839,6 @@ class shap_conf():
             colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
             colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
-            print(histograms_struc[structure].T)
             plt.contour(vol_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -2025,7 +2023,6 @@ class shap_conf():
             colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
             colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
-            print(histograms_struc[structure].T)
             plt.contour(vol_grid_vol,
                         shap_grid_vol,
                         histograms_struc_vol[structure].T,
@@ -2074,7 +2071,7 @@ class shap_conf():
         plt.tight_layout()
         plt.xlim([0,3.5])
         plt.ylim([0,5.5])
-        plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+'_30+.png')
+        plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
   
     def plot_shaps_uv_pdf(self,colormap='viridis',bin_num=100,lev_val=2.5,alf=0.5):
