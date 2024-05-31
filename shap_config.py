@@ -1767,25 +1767,25 @@ class shap_conf():
                           vol_value2,
                           vol_value3,
                           vol_value4]\
-                         +[vol_value[struc] for struc in structures])
+                         +[vol_values[struc] for struc in structures])
             
         max_vol = np.max([vol_value1,
                           vol_value2,
                           vol_value3,
                           vol_value4]\
-                         +[vol_value[struc] for struc in structures])
+                         +[vol_values[struc] for struc in structures])
             
         min_shap = np.min([shap_value1,
                            shap_value2,
                            shap_value3,
                            shap_value4]\
-                          +[shap_value[struc] for struc in structures])
+                          +[shap_values[struc] for struc in structures])
         
         max_shap = np.max([shap_value1,
                            shap_value2,
                            shap_value3,
                            shap_value4]\
-                          +[shap_value[struc] for struc in structures])
+                          +[shap_values[struc] for struc in structures])
         
         interp_h1 = interp2d(vol_value1,shap_value1,histogram1)
         interp_h2 = interp2d(vol_value2,shap_value2,histogram2)
@@ -1799,12 +1799,12 @@ class shap_conf():
         histogram_Q3 = interp_h3(vec_vol,vec_shap)
         histogram_Q4 = interp_h4(vec_vol,vec_shap)
     
-        histogram_struc = {}
+        histograms_struc = {}
         for structure in structures:
-            interp_h = interp2d(vol_value[structure],
-                                shap_value[structure],
-                                histogram[structure])
-            histogram_struc[structure] = interp_h(vec_vol,vec_shap)
+            interp_h = interp2d(vol_values[structure],
+                                shap_values[structure],
+                                histograms[structure])
+            histograms_struc[structure] = interp_h(vec_vol,vec_shap)
         
         fs = 20
         plt.figure()
@@ -1831,7 +1831,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,2]
             plt.contourf(vol_grid,
                          shap_grid,
-                         histogram_struc[structure].T,
+                         histograms_struc[structure].T,
                          levels=[lev_val,1e5*lev_val],
                          colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
@@ -1847,7 +1847,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+1,2]
             plt.contour(vol_grid,
                         shap_grid,
-                        histogram_struc[structure].T,
+                        histograms_struc[structure].T,
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)])
         
