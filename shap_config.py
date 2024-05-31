@@ -1329,7 +1329,7 @@ class shap_conf():
             else:
                 try:
                     exec(f'self.{att}["test"] = False')
-                except IndexError:
+                except:
                     exec(f'self.{att}'+' = {}')
                     
         # self.shapmin = shapmin
