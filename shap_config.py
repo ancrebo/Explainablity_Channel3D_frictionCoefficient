@@ -937,15 +937,15 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
-                            k[jj] += 0.5*(uu**2[indexuv[0][kk],
-                                                indexuv[1][kk],
-                                                indexuv[2][kk]]\
-                                          +vv**2[indexuv[0][kk],
-                                                 indexuv[1][kk],
-                                                 indexuv[2][kk]]\
-                                          +ww**2[indexuv[0][kk],
-                                                 indexuv[1][kk],
-                                                 indexuv[2][kk]]) 
+                            k[jj] += 0.5*(uu[indexuv[0][kk],
+                                             indexuv[1][kk],
+                                             indexuv[2][kk]]**2\
+                                          +vv[indexuv[0][kk],
+                                              indexuv[1][kk],
+                                              indexuv[2][kk]]**2\
+                                          +ww[indexuv[0][kk],
+                                              indexuv[1][kk],
+                                              indexuv[2][kk]]**2) 
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
@@ -1588,15 +1588,15 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]]) 
-                            k[jj] += 0.5*(uu**2[indexuv[0][kk],
-                                                indexuv[1][kk],
-                                                indexuv[2][kk]]\
-                                          +vv**2[indexuv[0][kk],
-                                                 indexuv[1][kk],
-                                                 indexuv[2][kk]]\
-                                          +ww**2[indexuv[0][kk],
-                                                 indexuv[1][kk],
-                                                 indexuv[2][kk]]) 
+                            k[jj] += 0.5*(uu[indexuv[0][kk],
+                                             indexuv[1][kk],
+                                             indexuv[2][kk]]**2\
+                                          +vv[indexuv[0][kk],
+                                              indexuv[1][kk],
+                                              indexuv[2][kk]]**2\
+                                          +ww[indexuv[0][kk],
+                                              indexuv[1][kk],
+                                              indexuv[2][kk]]**2) 
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
