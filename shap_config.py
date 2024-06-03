@@ -148,6 +148,7 @@ class shap_conf():
         """
         import h5py
         print(511)
+        print(file+'.'+str(ii)+'.h5.shap')
         hf = h5py.File(file+'.'+str(ii)+'.h5.shap', 'r')
         print(512)
         shap_values = np.array(hf['SHAP'])
