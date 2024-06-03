@@ -599,17 +599,22 @@ def plot_intensity_shares(file,
     utau = normdata.vtau
     y_plus = (1-np.abs(y))*utau/ny
     hf = h5py.File(file, 'r+')
+    
     intensity_mean = np.array(hf['mean'])
+    k_mean = 0.5*(np.sum(intensity_mean[:3,:]**2, axis=0))
+    k_mean = k_mean.reshape([1,-1])
+    intensity_mean = np.append(intensity_mean, k_mean, axis=0)
+    
     intensity_mean_plus = intensity_mean
     intensity_mean_plus[:3,:] = intensity_mean_plus[:3,:]/utau
-    intensity_mean_plus[3,:] = intensity_mean[3,:]/(utau**2)
+    intensity_mean_plus[3:,:] = intensity_mean[3:,:]/(utau**2)
 
     
     legend = []
     cmap = mpl.colormaps['twilight']
     colors = cmap(np.linspace(0, 1, len(structure)+len(Q_events)+3))
     # colors = ['r', 'b', 'k', 'm', 'c']
-    intensities = ["u'", "v'", "w'", "uv"]
+    intensities = ["u'", "v'", "w'", "uv", "k"]
     linewidth = 3
     fontsize = 14
     fontweight = 500
@@ -622,7 +627,12 @@ def plot_intensity_shares(file,
                 if event == 'all':
                     continue
                 intensity_struc = np.array(hf[event])
-                if intensity != 'uv':
+                
+                k = 0.5*(np.sum(intensity_struc[:3,:]**2, axis=0))
+                k = k.reshape([1,-1])
+                intensity_struc = np.append(intensity_struc, k, axis=0)
+                
+                if intensity != 'uv' and intensity != 'k':
                     intensity_struc_plus = intensity_struc/utau
                 else:
                     intensity_struc_plus = intensity_struc/(utau**2)
@@ -632,14 +642,14 @@ def plot_intensity_shares(file,
                                               window[0]:window[1]], 
                          color=colors[ii+jj+1],
                          linewidth=linewidth)
-                legend.append(f'$\phi⁺ ({event})$')
+                legend.append(f'{intensity}⁺ ({event})')
                 plt.plot(y_plus[window[0]:window[1]], 
                          (vol_struc*intensity_mean_plus)[intensities.index(intensity),
                                                          window[0]:window[1]], 
                          '--',
                          color=colors[ii+jj+1],
                          linewidth=linewidth) 
-                legend.append(r'$\phi⁺_{mean}$*'+f'$V({event})'+r'/V_{tot}$')
+                legend.append(f'{intensity}⁺'+r'$_{tot}$*'+f'$V({event})'+r'/V_{tot}$')
                 jj += 1
                 
         jj = len(Q_events)-1
@@ -649,7 +659,12 @@ def plot_intensity_shares(file,
         
         
         intensity_struc = np.array(hf[struc])
-        if intensity != 'uv':
+        
+        k = 0.5*(np.sum(intensity_struc[:3,:]**2, axis=0))
+        k = k.reshape([1,-1])
+        intensity_struc = np.append(intensity_struc, k, axis=0)
+        
+        if intensity != 'uv' and intensity != 'k':
             intensity_struc_plus = intensity_struc/utau
         else:
             intensity_struc_plus = intensity_struc/(utau**2)
@@ -679,12 +694,12 @@ def plot_intensity_shares(file,
                      '--',
                      color = colors[ii+jj+1],
                      linewidth=linewidth) 
-            if intensity != 'uv':
+            if intensity != 'uv' and intensity != 'k':
                 legend.append(f'{intensity}⁺({struc})')
-                legend.append(f'{intensity}⁺*V({struc})'+r'/V_{tot}$')
+                legend.append(f'{intensity}⁺'+r'$_{tot}$'+f'*V({struc})'+r'/V_{tot}$')
             else:
                 legend.append(f'{intensity}⁺({struc})')
-                legend.append(f'{intensity}⁺'+r'$_{mean}$*'+f'$V({struc})'+r'/V_{tot}$')
+                legend.append(f'{intensity}⁺'+r'$_{tot}$'+f'*V({struc})'+r'/V_{tot}$')
             
         
         
@@ -705,7 +720,7 @@ def plot_intensity_shares(file,
                fontsize=fontsize,
                fontweight=fontweight)
     if not ratio:
-        if intensity != 'uv':
+        if intensity != 'uv' and intensity != 'k':
             plt.ylabel(f'${intensity}⁺$', 
                        fontsize=fontsize,
                        fontweight=fontweight,

@@ -618,6 +618,10 @@ class shap_conf():
             self.uv_uvtot_2 = np.array(hf['uv_uvtot_2'])
             self.uv_uvtot_3 = np.array(hf['uv_uvtot_3'])
             self.uv_uvtot_4 = np.array(hf['uv_uvtot_4'])
+            self.k_ktot_1 = np.array(hf['k_ktot_1'])
+            self.k_ktot_2 = np.array(hf['k_ktot_2'])
+            self.k_ktot_3 = np.array(hf['k_ktot_3'])
+            self.k_ktot_4 = np.array(hf['k_ktot_4'])
             self.uv_uvtot_1_wa = np.array(hf['uv_uvtot_1_wa'])
             self.uv_uvtot_2_wa = np.array(hf['uv_uvtot_2_wa'])
             self.uv_uvtot_3_wa = np.array(hf['uv_uvtot_3_wa'])
@@ -630,6 +634,10 @@ class shap_conf():
             self.uv_uvtot_2_vol = np.array(hf['uv_uvtot_2_vol'])
             self.uv_uvtot_3_vol = np.array(hf['uv_uvtot_3_vol'])
             self.uv_uvtot_4_vol = np.array(hf['uv_uvtot_4_vol'])
+            self.k_ktot_1_vol = np.array(hf['k_ktot_1_vol'])
+            self.k_ktot_2_vol = np.array(hf['k_ktot_2_vol'])
+            self.k_ktot_3_vol = np.array(hf['k_ktot_3_vol'])
+            self.k_ktot_4_vol = np.array(hf['k_ktot_4_vol'])
             self.uv_uvtot_1_vol_wa = np.array(hf['uv_uvtot_1_vol_wa'])
             self.uv_uvtot_2_vol_wa = np.array(hf['uv_uvtot_2_vol_wa'])
             self.uv_uvtot_3_vol_wa = np.array(hf['uv_uvtot_3_vol_wa'])
@@ -642,6 +650,10 @@ class shap_conf():
             self.uv_vol_uvtot_vol_2 = np.array(hf['uv_vol_uvtot_vol_2'])
             self.uv_vol_uvtot_vol_3 = np.array(hf['uv_vol_uvtot_vol_3'])
             self.uv_vol_uvtot_vol_4 = np.array(hf['uv_vol_uvtot_vol_4'])
+            self.k_vol_ktot_vol_1 = np.array(hf['k_vol_ktot_vol_1'])
+            self.k_vol_ktot_vol_2 = np.array(hf['k_vol_ktot_vol_2'])
+            self.k_vol_ktot_vol_3 = np.array(hf['k_vol_ktot_vol_3'])
+            self.k_vol_ktot_vol_4 = np.array(hf['k_vol_ktot_vol_4'])
             self.uv_vol_uvtot_vol_1_wa = np.array(hf['uv_vol_uvtot_vol_1_wa'])
             self.uv_vol_uvtot_vol_2_wa = np.array(hf['uv_vol_uvtot_vol_2_wa'])
             self.uv_vol_uvtot_vol_3_wa = np.array(hf['uv_vol_uvtot_vol_3_wa'])
@@ -721,6 +733,9 @@ class shap_conf():
             self.uv_uvtot_1 = []
             self.uv_uvtot_1_vol = []
             self.uv_vol_uvtot_vol_1 = []
+            self.k_ktot_1 = []
+            self.k_ktot_1_vol = []
+            self.k_vol_ktot_vol_1 = []
             self.shap_1 = []
             self.shap_1_vol = []
             self.event_1 = []
@@ -743,6 +758,9 @@ class shap_conf():
             self.uv_uvtot_2 = []
             self.uv_uvtot_2_vol = []
             self.uv_vol_uvtot_vol_2 = []
+            self.k_ktot_2 = []
+            self.k_ktot_2_vol = []
+            self.k_vol_ktot_vol_2 = []
             self.shap_2 = []
             self.shap_2_vol = []
             self.event_2 = []
@@ -765,6 +783,9 @@ class shap_conf():
             self.uv_uvtot_3 = []
             self.uv_uvtot_3_vol = []
             self.uv_vol_uvtot_vol_3 = []
+            self.k_ktot_3 = []
+            self.k_ktot_3_vol = []
+            self.k_vol_ktot_vol_3 = []
             self.shap_3 = []
             self.shap_3_vol = []
             self.event_3 = []
@@ -787,6 +808,9 @@ class shap_conf():
             self.uv_uvtot_4 = []
             self.uv_uvtot_4_vol = []
             self.uv_vol_uvtot_vol_4 = []
+            self.k_ktot_4 = []
+            self.k_ktot_4_vol = []
+            self.k_vol_ktot_vol_4 = []
             self.shap_4 = []
             self.shap_4_vol = []
             self.event_4 = []
@@ -874,6 +898,7 @@ class shap_conf():
                 try:
                     uu,vv,ww = normdata.read_velocity(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
+                    ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=fileQ.replace('P125_21pi_vu_Q_divide/P125_21pi_vu', 
                                                                        ''))
@@ -903,17 +928,32 @@ class shap_conf():
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
                     uv = np.zeros((lenstruc,))
+                    k = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
+                    k_vol = np.zeros((lenstruc,))
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
-                                                 indexuv[1][kk],indexuv[2][kk]]) 
+                                                 indexuv[1][kk],indexuv[2][kk]])
+                            k[jj] += 0.5*(uu**2[indexuv[0][kk],
+                                                indexuv[1][kk],
+                                                indexuv[2][kk]]\
+                                          +vv**2[indexuv[0][kk],
+                                                 indexuv[1][kk],
+                                                 indexuv[2][kk]]\
+                                          +ww**2[indexuv[0][kk],
+                                                 indexuv[1][kk],
+                                                 indexuv[2][kk]]) 
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
+                        k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
+                        k_back_vol = (ktot-np.sum(k))/\
+                        (voltot-np.sum(uv_struc.vol))
+                        k_vol_sum = np.sum(k_vol)+k_back_vol
                         if uv_struc.cdg_y[jj] <= 0:
                             yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
                         else:
@@ -925,6 +965,7 @@ class shap_conf():
                                 uv_Qminus_wa += uv[jj]
                                 vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
+                        k[jj] /= ktot
                         if uv_struc.vol[jj] > self.volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
                             Dz = uv_struc.dz[jj]
@@ -986,6 +1027,9 @@ class shap_conf():
                                 self.uv_uvtot_1.append(uv[jj])
                                 self.uv_uvtot_1_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_1.append(uv_vol[jj]/uv_vol_sum)
+                                self.k_ktot_1.append(k[jj])
+                                self.k_ktot_1_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                self.k_vol_ktot_vol_1.append(k_vol[jj]/k_vol_sum)
                                 self.shap_1.append(shapvalues[jj]*1e3)
                                 self.shap_1_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                 self.event_1.append(uv_struc.event[jj])
@@ -1013,6 +1057,9 @@ class shap_conf():
                                 self.uv_uvtot_2.append(uv[jj])
                                 self.uv_uvtot_2_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_2.append(uv_vol[jj]/uv_vol_sum)
+                                self.k_ktot_2.append(k[jj])
+                                self.k_ktot_2_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                self.k_vol_ktot_vol_2.append(k_vol[jj]/k_vol_sum)
                                 self.shap_2.append(shapvalues[jj]*1e3)
                                 self.shap_2_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                 self.event_2.append(uv_struc.event[jj])
@@ -1040,6 +1087,9 @@ class shap_conf():
                                 self.uv_uvtot_3.append(uv[jj])
                                 self.uv_uvtot_3_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_3.append(uv_vol[jj]/uv_vol_sum)
+                                self.k_ktot_3.append(k[jj])
+                                self.k_ktot_3_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                self.k_vol_ktot_vol_3.append(k_vol[jj]/k_vol_sum)
                                 self.shap_3.append(shapvalues[jj]*1e3)
                                 self.shap_3_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                 self.event_3.append(uv_struc.event[jj])
@@ -1067,6 +1117,9 @@ class shap_conf():
                                 self.uv_uvtot_4.append(uv[jj])
                                 self.uv_uvtot_4_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_4.append(uv_vol[jj]/uv_vol_sum)
+                                self.k_ktot_4.append(k[jj])
+                                self.k_ktot_4_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                self.k_vol_ktot_vol_4.append(k_vol[jj]/k_vol_sum)
                                 self.shap_4.append(shapvalues[jj]*1e3)
                                 self.shap_4_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                 self.event_4.append(uv_struc.event[jj])
@@ -1168,6 +1221,18 @@ class shap_conf():
             hf.create_dataset('uv_vol_uvtot_vol_2', data=self.uv_vol_uvtot_vol_2)
             hf.create_dataset('uv_vol_uvtot_vol_3', data=self.uv_vol_uvtot_vol_3)
             hf.create_dataset('uv_vol_uvtot_vol_4', data=self.uv_vol_uvtot_vol_4)
+            hf.create_dataset('k_ktot_1', data=self.k_ktot_1)
+            hf.create_dataset('k_ktot_2', data=self.k_ktot_2)
+            hf.create_dataset('k_ktot_3', data=self.k_ktot_3)
+            hf.create_dataset('k_ktot_4', data=self.k_ktot_4)
+            hf.create_dataset('k_ktot_1_vol', data=self.k_ktot_1_vol)
+            hf.create_dataset('k_ktot_2_vol', data=self.k_ktot_2_vol)
+            hf.create_dataset('k_ktot_3_vol', data=self.k_ktot_3_vol)
+            hf.create_dataset('k_ktot_4_vol', data=self.k_ktot_4_vol)
+            hf.create_dataset('k_vol_ktot_vol_1', data=self.k_vol_ktot_vol_1)
+            hf.create_dataset('k_vol_ktot_vol_2', data=self.k_vol_ktot_vol_2)
+            hf.create_dataset('k_vol_ktot_vol_3', data=self.k_vol_ktot_vol_3)
+            hf.create_dataset('k_vol_ktot_vol_4', data=self.k_vol_ktot_vol_4)
             hf.create_dataset('event_1', data=self.event_1)
             hf.create_dataset('event_2', data=self.event_2)
             hf.create_dataset('event_3', data=self.event_3)
@@ -1316,6 +1381,7 @@ class shap_conf():
                 'uv_vol_uvtot_vol_wa', 'uv_vol_uvtot_vol_wd', 
                 'volume', 'volume_wa', 'shap', 'shap_vol', 
                 'uv_uvtot', 'uv_uvtot_vol', 'uv_vol_uvtot_vol', 
+                'k_ktot', 'k_ktot_vol', 'k_vol_ktot_vol',
                 'event', 'voltot', 'shapback_list', 
                 'shapbackvol_list', 'AR1_grid', 'AR2_grid', 
                 'SHAP_grid', 'SHAP_gridvol', 'npoin', 'shapcum', 
@@ -1374,6 +1440,9 @@ class shap_conf():
             self.uv_uvtot[structure] = np.array(hf['uv_uvtot'])
             self.uv_uvtot_vol[structure] = np.array(hf['uv_uvtot_vol'])
             self.uv_vol_uvtot_vol[structure] = np.array(hf['uv_vol_uvtot_vol'])
+            self.k_ktot[structure] = np.array(hf['k_ktot'])
+            self.k_ktot_vol[structure] = np.array(hf['k_ktot_vol'])
+            self.k_vol_ktot_vol[structure] = np.array(hf['k_vol_ktot_vol'])
             self.event[structure] = np.array(hf['event'])
             self.voltot[structure] = np.array(hf['voltot'])
             self.shapback_list[structure] = np.array(hf['shapback_list'])
@@ -1416,6 +1485,9 @@ class shap_conf():
             uv_uvtot = []
             uv_uvtot_vol = []
             uv_vol_uvtot_vol = []
+            k_ktot = []
+            k_ktot_vol = []
+            k_vol_ktot_vol = []
             shap = []
             shap_vol = []
             event = []
@@ -1477,6 +1549,7 @@ class shap_conf():
                 try:
                     uu,vv,ww = normdata.read_velocity(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
+                    ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=dir_struc,
                                                      structure=structure)
@@ -1506,17 +1579,32 @@ class shap_conf():
                         shapmaxvol = np.max(np.array([shapminvol,shapmaxvol]))
                         shapminvol = np.min(np.array([shapminvol,shapmaxvol]))
                     uv = np.zeros((lenstruc,))
+                    k = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
+                    k_vol = np.zeros((lenstruc,))
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]]) 
+                            k[jj] += 0.5*(uu**2[indexuv[0][kk],
+                                                indexuv[1][kk],
+                                                indexuv[2][kk]]\
+                                          +vv**2[indexuv[0][kk],
+                                                 indexuv[1][kk],
+                                                 indexuv[2][kk]]\
+                                          +ww**2[indexuv[0][kk],
+                                                 indexuv[1][kk],
+                                                 indexuv[2][kk]]) 
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
+                        k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
+                        k_back_vol = (ktot-np.sum(k))/\
+                        (voltot-np.sum(uv_struc.vol))
+                        k_vol_sum = np.sum(k_vol)+k_back_vol
                         if uv_struc.cdg_y[jj] <= 0:
                             yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
                         else:
@@ -1571,6 +1659,9 @@ class shap_conf():
                             uv_uvtot.append(uv[jj])
                             uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                             uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
+                            k_ktot.append(k[jj])
+                            k_ktot_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                            k_vol_ktot_vol.append(k_vol[jj]/k_vol_sum)
                             shap.append(shapvalues[jj]*1e3)
                             shap_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                             # self.event.append(uv_struc.event[jj])
@@ -1623,6 +1714,9 @@ class shap_conf():
             self.uv_uvtot[structure] = uv_uvtot
             self.uv_uvtot_vol[structure] = uv_uvtot_vol
             self.uv_vol_uvtot_vol[structure] = uv_vol_uvtot_vol
+            self.k_ktot[structure] = k_ktot
+            self.k_ktot_vol[structure] = k_ktot_vol
+            self.k_vol_ktot_vol[structure] = k_vol_ktot_vol
             self.event[structure] = event
             self.voltot[structure] = voltot
             self.shapback_list[structure] = shapback_list
@@ -1665,6 +1759,9 @@ class shap_conf():
             hf.create_dataset('uv_uvtot', data=uv_uvtot)
             hf.create_dataset('uv_uvtot_vol', data=uv_uvtot_vol)
             hf.create_dataset('uv_vol_uvtot_vol', data=uv_vol_uvtot_vol)
+            hf.create_dataset('k_ktot', data=k_ktot)
+            hf.create_dataset('k_ktot_vol', data=k_ktot_vol)
+            hf.create_dataset('k_vol_ktot_vol', data=k_vol_ktot_vol)
             hf.create_dataset('event', data=event)
             hf.create_dataset('voltot', data=voltot)
             hf.create_dataset('shapback_list', data=shapback_list)
@@ -2509,6 +2606,443 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+.png')
+        
+        
+    def plot_shaps_k_pdf(self,
+                          colormap='viridis',
+                          bin_num=100,
+                          lev_val=2.5,
+                          alf=0.5,
+                          structures=[]):
+        """ 
+        Function for plotting the results of the SHAP vs the Reynolds stress
+        """
+        import matplotlib.pyplot as plt
+        import matplotlib as mpl    
+        from scipy.interpolate import interp2d
+        
+        xhistmin = np.min([np.min(self.k_ktot_1),
+                           np.min(self.k_ktot_2),
+                           np.min(self.k_ktot_3),
+                           np.min(self.k_ktot_4)]\
+                          +[np.min(self.k_ktot[struc]) for struc in structures]
+                          )/1.2
+            
+        xhistmax = np.max([np.max(self.k_ktot_1),
+                           np.max(self.k_ktot_2),
+                           np.max(self.k_ktot_3),
+                           np.max(self.k_ktot_4)]\
+                          +[np.max(self.k_ktot[struc]) for struc in structures]
+                          )*1.2
+            
+        yhistmin = np.min([np.min(self.shap_1),
+                           np.min(self.shap_2),
+                           np.min(self.shap_3),
+                           np.min(self.shap_4)]\
+                          +[np.min(self.shap[struc]) for struc in structures]
+                          )/1.2
+        
+        yhistmax = np.max([np.max(self.shap_1),
+                           np.max(self.shap_2),
+                           np.max(self.shap_3),
+                           np.max(self.shap_4)]
+                          +[np.max(self.shap[struc]) for struc in structures]
+                          )*1.2
+        # xhistmin = np.min([np.min(self.uv_uvtot_1),np.min(self.uv_uvtot_2),np.min(self.uv_uvtot_3),np.min(self.uv_uvtot_4)])/1.2
+        # xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
+        # yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
+        # yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
+        histogram1,k_value1,shap_value1 = np.histogram2d(self.k_ktot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2,k_value2,shap_value2 = np.histogram2d(self.k_ktot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3,k_value3,shap_value3 = np.histogram2d(self.k_ktot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4,k_value4,shap_value4 = np.histogram2d(self.k_ktot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        k_value1 = k_value1[:-1]+np.diff(k_value1)/2
+        shap_value1 = shap_value1[:-1]+np.diff(shap_value1)/2
+        k_value2 = k_value2[:-1]+np.diff(k_value2)/2
+        shap_value2 = shap_value2[:-1]+np.diff(shap_value2)/2
+        k_value3 = k_value3[:-1]+np.diff(k_value3)/2
+        shap_value3 = shap_value3[:-1]+np.diff(shap_value3)/2
+        k_value4 = k_value4[:-1]+np.diff(k_value4)/2
+        shap_value4 = shap_value4[:-1]+np.diff(shap_value4)/2
+        
+        histograms = {}
+        k_values = {}
+        shap_values = {}
+        for structure in structures:
+            histogram,k_value,shap_value = np.histogram2d(self.k_ktot[structure],
+                                                            self.shap[structure],
+                                                            bins=bin_num,
+                                                            range=[[xhistmin,xhistmax],
+                                                                   [yhistmin,yhistmax]])
+            k_value = k_value[:-1]+np.diff(k_value)/2
+            shap_value = shap_value[:-1]+np.diff(shap_value)/2
+            histograms[structure] = histogram
+            k_values[structure] = k_value
+            shap_values[structure] = shap_value 
+            
+        min_k = np.min([k_value1,
+                         k_value2,
+                         k_value3,
+                         k_value4]\
+                        +[k_values[struc] for struc in structures])
+            
+        max_k = np.max([k_value1,
+                         k_value2,
+                         k_value3,
+                         k_value4]\
+                        +[k_values[struc] for struc in structures])
+            
+        min_shap = np.min([shap_value1,
+                           shap_value2,
+                           shap_value3,
+                           shap_value4]\
+                          +[shap_values[struc] for struc in structures])
+        
+        max_shap = np.max([shap_value1,
+                           shap_value2,
+                           shap_value3,
+                           shap_value4]\
+                          +[shap_values[struc] for struc in structures])
+        
+        # min_uv = np.min([uv_value1,uv_value2,uv_value3,uv_value4])
+        # max_uv = np.max([uv_value1,uv_value2,uv_value3,uv_value4])
+        # min_shap = np.min([shap_value1,shap_value2,shap_value3,shap_value4])
+        # max_shap = np.max([shap_value1,shap_value2,shap_value3,shap_value4])
+        interp_h1 = interp2d(k_value1,shap_value1,histogram1)
+        interp_h2 = interp2d(k_value2,shap_value2,histogram2)
+        interp_h3 = interp2d(k_value3,shap_value3,histogram3)
+        interp_h4 = interp2d(k_value4,shap_value4,histogram4)
+        vec_k = np.linspace(min_k,max_k,1000)
+        vec_shap = np.linspace(min_shap,max_shap,1000)
+        k_grid,shap_grid = np.meshgrid(vec_k,vec_shap)
+        histogram_Q1 = interp_h1(vec_k,vec_shap)
+        histogram_Q2 = interp_h2(vec_k,vec_shap)
+        histogram_Q3 = interp_h3(vec_k,vec_shap)
+        histogram_Q4 = interp_h4(vec_k,vec_shap)
+        
+        histograms_struc = {}
+        for structure in structures:
+            interp_h = interp2d(k_values[structure],
+                                shap_values[structure],
+                                histograms[structure])
+            histograms_struc[structure] = interp_h(vec_k,vec_shap)
+        
+        fs = 20
+        plt.figure()        
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
+        plt.contourf(k_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(k_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(k_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(k_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(k_grid,
+                         shap_grid,
+                         histograms_struc[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
+        plt.contour(k_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(k_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(k_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(k_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(k_grid,
+                        shap_grid,
+                        histograms_struc[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)])
+        
+        plt.grid()
+        plt.xlim([0,0.2])
+        plt.ylim([0,7])
+        plt.xlabel('$\overline{k}_e/(\overline{k}_\mathrm{tot})$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        
+        for ii, structure in enumerate(structures):
+            if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_kktot_SHAP_'+colormap+str(structures)+'_30+.png')
+        
+        xhistmin = np.min([np.min(self.k_ktot_1_vol),
+                           np.min(self.k_ktot_2_vol),
+                           np.min(self.k_ktot_3_vol),
+                           np.min(self.k_ktot_4_vol)]\
+                          +[np.min(self.k_ktot_vol[struc]) for struc in structures]
+                          )/1.2
+            
+        xhistmax = np.max([np.max(self.k_ktot_1_vol),
+                           np.max(self.k_ktot_2_vol),
+                           np.max(self.k_ktot_3_vol),
+                           np.max(self.k_ktot_4_vol)]\
+                          +[np.max(self.k_ktot_vol[struc]) for struc in structures]
+                          )*1.2
+            
+        yhistmin = np.min([np.min(self.shap_1_vol),
+                           np.min(self.shap_2_vol),
+                           np.min(self.shap_3_vol),
+                           np.min(self.shap_4_vol)]\
+                          +[np.min(self.shap_vol[struc]) for struc in structures]
+                          )/1.2
+        
+        yhistmax = np.max([np.max(self.shap_1_vol),
+                           np.max(self.shap_2_vol),
+                           np.max(self.shap_3_vol),
+                           np.max(self.shap_4_vol)]
+                          +[np.max(self.shap_vol[struc]) for struc in structures]
+                          )*1.2
+        
+        # xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
+        # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
+        # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
+        # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
+        histogram1_vol,k_value1_vol,shap_value1_vol = np.histogram2d(self.k_ktot_1_vol,self.shap_1_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_vol,k_value2_vol,shap_value2_vol = np.histogram2d(self.k_ktot_2_vol,self.shap_2_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_vol,k_value3_vol,shap_value3_vol = np.histogram2d(self.k_ktot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_vol,k_value4_vol,shap_value4_vol = np.histogram2d(self.k_ktot_4_vol,self.shap_4_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        k_value1_vol = k_value1_vol[:-1]+np.diff(k_value1_vol)/2
+        shap_value1_vol = shap_value1_vol[:-1]+np.diff(shap_value1_vol)/2
+        k_value2_vol = k_value2_vol[:-1]+np.diff(k_value2_vol)/2
+        shap_value2_vol = shap_value2_vol[:-1]+np.diff(shap_value2_vol)/2
+        k_value3_vol = k_value3_vol[:-1]+np.diff(k_value3_vol)/2
+        shap_value3_vol = shap_value3_vol[:-1]+np.diff(shap_value3_vol)/2
+        k_value4_vol = k_value4_vol[:-1]+np.diff(k_value4_vol)/2
+        shap_value4_vol = shap_value4_vol[:-1]+np.diff(shap_value4_vol)/2
+        
+        histograms_vol = {}
+        k_values_vol = {}
+        shap_values_vol = {}
+        for structure in structures:
+            histogram,k_value,shap_value = np.histogram2d(self.k_ktot_vol[structure],
+                                                            self.shap_vol[structure],
+                                                            bins=bin_num,
+                                                            range=[[xhistmin,xhistmax],
+                                                                   [yhistmin,yhistmax]])
+            k_value = k_value[:-1]+np.diff(k_value)/2
+            shap_value = shap_value[:-1]+np.diff(shap_value)/2
+            histograms_vol[structure] = histogram
+            k_values_vol[structure] = k_value
+            shap_values_vol[structure] = shap_value 
+            
+        min_k_vol = np.min([k_value1_vol,
+                         k_value2_vol,
+                         k_value3_vol,
+                         k_value4_vol]\
+                        +[k_values_vol[struc] for struc in structures])
+            
+        max_k_vol = np.max([k_value1_vol,
+                         k_value2_vol,
+                         k_value3_vol,
+                         k_value4_vol]\
+                        +[k_values_vol[struc] for struc in structures])
+            
+        min_shap_vol = np.min([shap_value1_vol,
+                           shap_value2_vol,
+                           shap_value3_vol,
+                           shap_value4_vol]\
+                          +[shap_values_vol[struc] for struc in structures])
+        
+        max_shap_vol = np.max([shap_value1_vol,
+                           shap_value2_vol,
+                           shap_value3_vol,
+                           shap_value4_vol]\
+                          +[shap_values_vol[struc] for struc in structures])
+        
+        # min_uv_vol = np.min([uv_value1_vol,uv_value2_vol,uv_value3_vol,uv_value4_vol])
+        # max_uv_vol = np.max([uv_value1_vol,uv_value2_vol,uv_value3_vol,uv_value4_vol])
+        # min_shap_vol = np.min([shap_value1_vol,shap_value2_vol,shap_value3_vol,shap_value4_vol])
+        # max_shap_vol = np.max([shap_value1_vol,shap_value2_vol,shap_value3_vol,shap_value4_vol])
+        interp_h1_vol = interp2d(k_value1_vol,shap_value1_vol,histogram1_vol)
+        interp_h2_vol = interp2d(k_value2_vol,shap_value2_vol,histogram2_vol)
+        interp_h3_vol = interp2d(k_value3_vol,shap_value3_vol,histogram3_vol)
+        interp_h4_vol = interp2d(k_value4_vol,shap_value4_vol,histogram4_vol)
+        vec_k_vol = np.linspace(min_k_vol,max_k_vol,1000)
+        vec_shap_vol = np.linspace(min_shap_vol,max_shap_vol,1000)
+        k_grid_vol,shap_grid_vol = np.meshgrid(vec_k_vol,vec_shap_vol)
+        histogram_Q1_vol = interp_h1_vol(vec_k_vol,vec_shap_vol)
+        histogram_Q2_vol = interp_h2_vol(vec_k_vol,vec_shap_vol)
+        histogram_Q3_vol = interp_h3_vol(vec_k_vol,vec_shap_vol)
+        histogram_Q4_vol = interp_h4_vol(vec_k_vol,vec_shap_vol)
+        
+        histograms_struc_vol = {}
+        for structure in structures:
+            interp_h = interp2d(k_values_vol[structure],
+                                shap_values_vol[structure],
+                                histograms_vol[structure])
+            histograms_struc_vol[structure] = interp_h(vec_k_vol,vec_shap_vol)
+        
+        fs = 20
+        plt.figure()
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        x0 = 0
+        x0b = 0.7
+        x1 = 0.08
+        x2 = 1.16
+        x3 = 1.7
+        y0_1 = 2
+        y1_1 = 3.9
+        y0_2 = 0
+        y1_2 = 0.8
+        ytop = 4.5
+        ytop2 = y1_1
+        plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+                         color=cmap_fill(0.9),alpha=0.1)
+        plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+                         [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+        plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+                         color=cmap_fill(0.1),alpha=0.1)
+        plt.plot([x0,x0],[y0_1,y0_2],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+        plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+        plt.plot([x2,x3],[ytop2,ytop2],color='k')
+        plt.plot([x2,x2],[y1_2,y1_1],color='k')
+        plt.plot([x2,x2],[ytop,y1_1],color='k')
+        plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
+        plt.contourf(k_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(k_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(k_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(k_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(k_grid_vol,
+                         shap_grid_vol,
+                         histograms_struc_vol[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
+        plt.contour(k_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(k_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(k_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(k_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(k_grid_vol,
+                        shap_grid_vol,
+                        histograms_struc_vol[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)])
+        
+        plt.text(0.5, 0.1, 'A', fontsize = 20)
+        plt.text(1.5, 2.1, 'B', fontsize = 20)   
+        plt.text(0.5, 4, 'C', fontsize = 20) 
+        plt.ylim([y0_2,ytop])
+        plt.xlim([x0,x3])
+        plt.grid()
+        plt.xlabel('$\overline{k}_e/(\overline{k}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        
+        for ii, structure in enumerate(structures):
+            if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+        
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_kktotvol_SHAPvol_'+colormap+str(structures)+'_30+.png')
           
           
     def plot_shaps_total_noback(self,start=1,end=2,step=1,\
