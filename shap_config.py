@@ -918,8 +918,10 @@ class shap_conf():
                     if any(uv_struc.vol>5e6):
                         print(ii)
                     lenstruc = len(uv_struc.event)
+                    print(51)
                     if absolute:
                         shapvalues = abs(self.read_shap(ii,file=file))
+                        print(52)
                         shapback = abs(shapvalues[-1])
                         self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
                         self.shapmin = 0
@@ -927,17 +929,21 @@ class shap_conf():
                         self.shapminvol = 0
                     else:
                         shapvalues = self.read_shap(ii,file=file)
+                        print(53)
                         shapback = shapvalues[-1]
                         self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
                         self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
+                    print(54)
                     uv = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
                     k_vol = np.zeros((lenstruc,))
+                    print(55)
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
+                        print(56)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
