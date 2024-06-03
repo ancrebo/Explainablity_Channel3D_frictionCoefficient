@@ -937,6 +937,7 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
+                            print(1)
                             k[jj] += 0.5*(uu[indexuv[0][kk],
                                              indexuv[1][kk],
                                              indexuv[2][kk]]**2\
@@ -946,6 +947,7 @@ class shap_conf():
                                           +ww[indexuv[0][kk],
                                               indexuv[1][kk],
                                               indexuv[2][kk]]**2) 
+                        print(2)
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
@@ -1004,6 +1006,8 @@ class shap_conf():
                                                 self.SHAP_grid4vol[ii_arlim1,ii_arlim2] +=\
                                                 shapvalues[jj]/uv_struc.vol[jj]
                                                 self.npoin4[ii_arlim1,ii_arlim2] += 1
+                                                
+                            print(3)
                             if yplus_min_ii < 20:
                                 self.volume_wa.append(uv_struc.vol[jj]/1e6)
                                 self.uv_uvtot_wa.append(uv[jj])
@@ -1142,6 +1146,8 @@ class shap_conf():
                                     self.shap_4_wd.append(shapvalues[jj]*1e3)
                                     self.shap_4_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                     self.event_4_wd.append(uv_struc.event[jj])
+                                    
+                    print(4)
                     vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
                     self.shapbcum += shapvalues[-1]
                     self.shap_volbcum += shapvalues[-1]/vol_b
