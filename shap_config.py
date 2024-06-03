@@ -147,12 +147,8 @@ class shap_conf():
         Function for read the SHAP values
         """
         import h5py
-        print(511)
-        print(file+'.'+str(ii)+'.h5.shap')
         hf = h5py.File(file+'.'+str(ii)+'.h5.shap', 'r')
-        print(512)
         shap_values = np.array(hf['SHAP'])
-        print(513)
         return shap_values
     
     def eval_shap(self,start=1000,end=9999,step=1,\
@@ -717,7 +713,6 @@ class shap_conf():
             self.cdg_y_wd = np.array(hf['cdg_y_wd'])
             hf.close()
         else:
-            print(1)
             self.volume_wa = []
             self.volume_wd = []
             self.shap_wa = []
@@ -837,7 +832,6 @@ class shap_conf():
             self.voltot = np.sum(normdata.vol)
             self.shapback_list = []
             self.shapbackvol_list = []
-            print(2)
             expmax = 2
             expmin = -1
             ngrid = 50
@@ -882,7 +876,6 @@ class shap_conf():
             self.shap_vol4cum = 0
             self.shapbcum = 0
             self.shap_volbcum = 0
-            print(3)
             try:
                 normdata.read_norm()
             except:
@@ -901,7 +894,6 @@ class shap_conf():
                     10**((AR1_vec[ii_arlim1]+AR1_vec[ii_arlim1+1])/2)
                     self.AR2_grid[ii_arlim1,ii_arlim2] =\
                     10**((AR2_vec[ii_arlim2]+AR2_vec[ii_arlim2+1])/2)
-            print(4)
             for ii in range_shap:
                 try:
                     uu,vv,ww = normdata.read_velocity(ii)
@@ -918,14 +910,11 @@ class shap_conf():
                     lenstruc = len(uv_struc.event)
                     uvtot_cum += uvtot
                     voltot_cum += voltot
-                    print(5)
                     if any(uv_struc.vol>5e6):
                         print(ii)
                     lenstruc = len(uv_struc.event)
-                    print(51)
                     if absolute:
                         shapvalues = abs(self.read_shap(ii,file=file))
-                        print(52)
                         shapback = abs(shapvalues[-1])
                         self.shapmax = np.max(abs(np.array([self.shapmin,self.shapmax])))
                         self.shapmin = 0
@@ -933,26 +922,21 @@ class shap_conf():
                         self.shapminvol = 0
                     else:
                         shapvalues = self.read_shap(ii,file=file)
-                        print(53)
                         shapback = shapvalues[-1]
                         self.shapmax = np.max(np.array([self.shapmin,self.shapmax]))
                         self.shapmin = np.min(np.array([self.shapmin,self.shapmax]))
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
-                    print(54)
                     uv = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
                     k_vol = np.zeros((lenstruc,))
-                    print(55)
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
-                        print(56)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
-                            print(6)
                             k[jj] += 0.5*(uu[indexuv[0][kk],
                                              indexuv[1][kk],
                                              indexuv[2][kk]]**2\
@@ -962,7 +946,6 @@ class shap_conf():
                                           +ww[indexuv[0][kk],
                                               indexuv[1][kk],
                                               indexuv[2][kk]]**2) 
-                        print(7)
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
@@ -1022,7 +1005,6 @@ class shap_conf():
                                                 shapvalues[jj]/uv_struc.vol[jj]
                                                 self.npoin4[ii_arlim1,ii_arlim2] += 1
                                                 
-                            print(8)
                             if yplus_min_ii < 20:
                                 self.volume_wa.append(uv_struc.vol[jj]/1e6)
                                 self.uv_uvtot_wa.append(uv[jj])
@@ -1161,8 +1143,7 @@ class shap_conf():
                                     self.shap_4_wd.append(shapvalues[jj]*1e3)
                                     self.shap_4_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
                                     self.event_4_wd.append(uv_struc.event[jj])
-                                    
-                    print(9)
+                                 
                     vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
                     self.shapbcum += shapvalues[-1]
                     self.shap_volbcum += shapvalues[-1]/vol_b
