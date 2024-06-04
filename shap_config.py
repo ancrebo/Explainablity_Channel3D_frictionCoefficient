@@ -2717,8 +2717,6 @@ class shap_conf():
                            shap_value4]\
                           +[shap_values[struc] for struc in structures])
             
-        print('max_k: ', max_k)
-        print('min_k: ', min_k)
         # min_uv = np.min([uv_value1,uv_value2,uv_value3,uv_value4])
         # max_uv = np.max([uv_value1,uv_value2,uv_value3,uv_value4])
         # min_shap = np.min([shap_value1,shap_value2,shap_value3,shap_value4])
@@ -2772,7 +2770,6 @@ class shap_conf():
                          levels=[lev_val,1e5*lev_val],
                          colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
-            print(histograms_struc[structure].T)    
                     
         plt.contour(k_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(k_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
@@ -2790,8 +2787,8 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        #plt.xlim([0,0.2])
+        #plt.ylim([0,7])
         plt.xlabel('$\overline{k}_e/(\overline{k}_\mathrm{tot})$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
@@ -3016,8 +3013,8 @@ class shap_conf():
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
-        plt.ylim([y0_2,ytop])
-        plt.xlim([x0,x3])
+        # plt.ylim([y0_2,ytop])
+        # plt.xlim([x0,x3])
         plt.grid()
         plt.xlabel('$\overline{k}_e/(\overline{k}_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
