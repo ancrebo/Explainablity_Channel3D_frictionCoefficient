@@ -2716,7 +2716,9 @@ class shap_conf():
                            shap_value3,
                            shap_value4]\
                           +[shap_values[struc] for struc in structures])
-        
+            
+        print('max_k: ', max_k)
+        print('min_k: ', min_k)
         # min_uv = np.min([uv_value1,uv_value2,uv_value3,uv_value4])
         # max_uv = np.max([uv_value1,uv_value2,uv_value3,uv_value4])
         # min_shap = np.min([shap_value1,shap_value2,shap_value3,shap_value4])
@@ -2770,7 +2772,8 @@ class shap_conf():
                          levels=[lev_val,1e5*lev_val],
                          colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
-        
+            print(histograms_struc[structure].T)    
+                    
         plt.contour(k_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(k_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
         plt.contour(k_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
