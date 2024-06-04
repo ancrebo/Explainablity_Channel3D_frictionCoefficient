@@ -603,6 +603,12 @@ class get_data_norm():
         if normalize:
             c_f = c_f/c_f_mean
         return c_f
+    
+    
+    def read_enstrophy(self, ii):
+        file = h5py.File(self.file_grad+f'.{ii}.grad', 'r+')
+        phi = np.array(file['enstrophy'])
+        return phi
 
                 
     def trainvali_data(self,index,ts=0.2,umeanfile="Umean.txt",\
