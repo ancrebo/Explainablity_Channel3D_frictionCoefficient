@@ -899,7 +899,6 @@ class shap_conf():
                     uu,vv,ww = normdata.read_velocity(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
                     ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
-                    print('k_tot: ', ktot)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=fileQ.replace('P125_21pi_vu_Q_divide/P125_21pi_vu', 
                                                                        ''))
@@ -947,18 +946,14 @@ class shap_conf():
                                           +ww[indexuv[0][kk],
                                               indexuv[1][kk],
                                               indexuv[2][kk]]**2) 
-                            print('k_jj', k[jj])
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
-                        print('k_vol,jj', k_vol[jj])
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
                         k_back_vol = (ktot-np.sum(k))/\
                         (voltot-np.sum(uv_struc.vol))
                         k_vol_sum = np.sum(k_vol)+k_back_vol
-                        print('k_back_vol', k_back_vol)
-                        print('k_vol_sum', k_vol_sum)
                         
                         if uv_struc.cdg_y[jj] <= 0:
                             yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
@@ -972,7 +967,7 @@ class shap_conf():
                                 vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
                         k[jj] /= ktot
-                        print('k_jj/ktot', k[jj])
+                        
                         if uv_struc.vol[jj] > self.volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
                             Dz = uv_struc.dz[jj]
@@ -1341,10 +1336,6 @@ class shap_conf():
             hf.create_dataset('cdg_y_wd', data=self.cdg_y_wd)
             hf.close()
             
-            print('max 1 Q4: ', np.max(self.k_ktot_4))
-            print('max 2 Q4: ', np.max(self.k_ktot_4_vol))
-            print('max 3 Q4: ', np.max(self.k_vol_ktot_vol_4))
-            
             
 
     def read_data_simple(self,start,end,step,\
@@ -1629,6 +1620,7 @@ class shap_conf():
                         #         uv_Qminus_wa += uv[jj]
                         #         vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
+                        k[jj] /= ktot
                         if uv_struc.vol[jj] > volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
                             Dz = uv_struc.dz[jj]
