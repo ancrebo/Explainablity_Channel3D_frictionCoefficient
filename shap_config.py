@@ -632,10 +632,26 @@ class shap_conf():
             self.uv_uvtot_2_wa = np.array(hf['uv_uvtot_2_wa'])
             self.uv_uvtot_3_wa = np.array(hf['uv_uvtot_3_wa'])
             self.uv_uvtot_4_wa = np.array(hf['uv_uvtot_4_wa'])
+            self.k_ktot_1_wa = np.array(hf['k_ktot_1_wa'])
+            self.k_ktot_2_wa = np.array(hf['k_ktot_2_wa'])
+            self.k_ktot_3_wa = np.array(hf['k_ktot_3_wa'])
+            self.k_ktot_4_wa = np.array(hf['k_ktot_4_wa'])
+            self.ens_enstot_1_wa = np.array(hf['ens_enstot_1_wa'])
+            self.ens_enstot_2_wa = np.array(hf['ens_enstot_2_wa'])
+            self.ens_enstot_3_wa = np.array(hf['ens_enstot_3_wa'])
+            self.ens_enstot_4_wa = np.array(hf['ens_enstot_4_wa'])
             self.uv_uvtot_1_wd = np.array(hf['uv_uvtot_1_wd'])
             self.uv_uvtot_2_wd = np.array(hf['uv_uvtot_2_wd'])
             self.uv_uvtot_3_wd = np.array(hf['uv_uvtot_3_wd'])
             self.uv_uvtot_4_wd = np.array(hf['uv_uvtot_4_wd'])
+            self.k_ktot_1_wd = np.array(hf['k_ktot_1_wd'])
+            self.k_ktot_2_wd = np.array(hf['k_ktot_2_wd'])
+            self.k_ktot_3_wd = np.array(hf['k_ktot_3_wd'])
+            self.k_ktot_4_wd = np.array(hf['k_ktot_4_wd'])
+            self.ens_enstot_1_wd = np.array(hf['ens_enstot_1_wd'])
+            self.ens_enstot_2_wd = np.array(hf['ens_enstot_2_wd'])
+            self.ens_enstot_3_wd = np.array(hf['ens_enstot_3_wd'])
+            self.ens_enstot_4_wd = np.array(hf['ens_enstot_4_wd'])
             self.uv_uvtot_1_vol = np.array(hf['uv_uvtot_1_vol'])
             self.uv_uvtot_2_vol = np.array(hf['uv_uvtot_2_vol'])
             self.uv_uvtot_3_vol = np.array(hf['uv_uvtot_3_vol'])
@@ -652,10 +668,26 @@ class shap_conf():
             self.uv_uvtot_2_vol_wa = np.array(hf['uv_uvtot_2_vol_wa'])
             self.uv_uvtot_3_vol_wa = np.array(hf['uv_uvtot_3_vol_wa'])
             self.uv_uvtot_4_vol_wa = np.array(hf['uv_uvtot_4_vol_wa'])
+            self.k_ktot_1_vol_wa = np.array(hf['k_ktot_1_vol_wa'])
+            self.k_ktot_2_vol_wa = np.array(hf['k_ktot_2_vol_wa'])
+            self.k_ktot_3_vol_wa = np.array(hf['k_ktot_3_vol_wa'])
+            self.k_ktot_4_vol_wa = np.array(hf['k_ktot_4_vol_wa'])
+            self.ens_enstot_1_vol_wa = np.array(hf['ens_enstot_1_vol_wa'])
+            self.ens_enstot_2_vol_wa = np.array(hf['ens_enstot_2_vol_wa'])
+            self.ens_enstot_3_vol_wa = np.array(hf['ens_enstot_3_vol_wa'])
+            self.ens_enstot_4_vol_wa = np.array(hf['ens_enstot_4_vol_wa'])
             self.uv_uvtot_1_vol_wd = np.array(hf['uv_uvtot_1_vol_wd'])
             self.uv_uvtot_2_vol_wd = np.array(hf['uv_uvtot_2_vol_wd'])
             self.uv_uvtot_3_vol_wd = np.array(hf['uv_uvtot_3_vol_wd'])
             self.uv_uvtot_4_vol_wd = np.array(hf['uv_uvtot_4_vol_wd'])
+            self.k_ktot_1_vol_wd = np.array(hf['k_ktot_1_vol_wd'])
+            self.k_ktot_2_vol_wd = np.array(hf['k_ktot_2_vol_wd'])
+            self.k_ktot_3_vol_wd = np.array(hf['k_ktot_3_vol_wd'])
+            self.k_ktot_4_vol_wd = np.array(hf['k_ktot_4_vol_wd'])
+            self.ens_enstot_1_vol_wd = np.array(hf['ens_enstot_1_vol_wd'])
+            self.ens_enstot_2_vol_wd = np.array(hf['ens_enstot_2_vol_wd'])
+            self.ens_enstot_3_vol_wd = np.array(hf['ens_enstot_3_vol_wd'])
+            self.ens_enstot_4_vol_wd = np.array(hf['ens_enstot_4_vol_wd'])
             self.uv_vol_uvtot_vol_1 = np.array(hf['uv_vol_uvtot_vol_1'])
             self.uv_vol_uvtot_vol_2 = np.array(hf['uv_vol_uvtot_vol_2'])
             self.uv_vol_uvtot_vol_3 = np.array(hf['uv_vol_uvtot_vol_3'])
@@ -761,6 +793,10 @@ class shap_conf():
             self.uv_uvtot_1_wa = []
             self.uv_uvtot_1_vol_wa = []
             self.uv_vol_uvtot_vol_1_wa = []
+            self.k_ktot_1_wa = []
+            self.k_ktot_1_vol_wa = []
+            self.ens_enstot_1_wa = []
+            self.ens_enstot_1_vol_wa = []
             self.shap_1_wa = []
             self.shap_1_vol_wa = []
             self.event_1_wa = []
@@ -768,6 +804,10 @@ class shap_conf():
             self.uv_uvtot_1_wd = []
             self.uv_uvtot_1_vol_wd = []
             self.uv_vol_uvtot_vol_1_wd = []
+            self.k_ktot_1_wd = []
+            self.k_ktot_1_vol_wd = []
+            self.ens_enstot_1_wd = []
+            self.ens_enstot_1_vol_wd = []
             self.shap_1_wd = []
             self.shap_1_vol_wd = []
             self.event_1_wd = []
@@ -789,6 +829,10 @@ class shap_conf():
             self.uv_uvtot_2_wa = []
             self.uv_uvtot_2_vol_wa = []
             self.uv_vol_uvtot_vol_2_wa = []
+            self.k_ktot_2_wa = []
+            self.k_ktot_2_vol_wa = []
+            self.ens_enstot_2_wa = []
+            self.ens_enstot_2_vol_wa = []
             self.shap_2_wa = []
             self.shap_2_vol_wa = []
             self.event_2_wa = []
@@ -796,6 +840,10 @@ class shap_conf():
             self.uv_uvtot_2_wd = []
             self.uv_uvtot_2_vol_wd = []
             self.uv_vol_uvtot_vol_2_wd = []
+            self.k_ktot_2_wd = []
+            self.k_ktot_2_vol_wd = []
+            self.ens_enstot_2_wd = []
+            self.ens_enstot_2_vol_wd = []
             self.shap_2_wd = []
             self.shap_2_vol_wd = []
             self.event_2_wd = []
@@ -817,6 +865,10 @@ class shap_conf():
             self.uv_uvtot_3_wa = []
             self.uv_uvtot_3_vol_wa = []
             self.uv_vol_uvtot_vol_3_wa = []
+            self.k_ktot_3_wa = []
+            self.k_ktot_3_vol_wa = []
+            self.ens_enstot_3_wa = []
+            self.ens_enstot_3_vol_wa = []
             self.shap_3_wa = []
             self.shap_3_vol_wa = []
             self.event_3_wa = []
@@ -824,6 +876,10 @@ class shap_conf():
             self.uv_uvtot_3_wd = []
             self.uv_uvtot_3_vol_wd = []
             self.uv_vol_uvtot_vol_3_wd = []
+            self.k_ktot_3_wd = []
+            self.k_ktot_3_vol_wd = []
+            self.ens_enstot_3_wd = []
+            self.ens_enstot_3_vol_wd = []
             self.shap_3_wd = []
             self.shap_3_vol_wd = []
             self.event_3_wd = []
@@ -831,6 +887,10 @@ class shap_conf():
             self.uv_uvtot_4 = []
             self.uv_uvtot_4_vol = []
             self.uv_vol_uvtot_vol_4 = []
+            self.k_ktot_4_wa = []
+            self.k_ktot_4_vol_wa = []
+            self.ens_enstot_4_wa = []
+            self.ens_enstot_4_vol_wa = []
             self.k_ktot_4 = []
             self.k_ktot_4_vol = []
             self.k_vol_ktot_vol_4 = []
@@ -852,6 +912,10 @@ class shap_conf():
             self.uv_uvtot_4_wd = []
             self.uv_uvtot_4_vol_wd = []
             self.uv_vol_uvtot_vol_4_wd = []
+            self.k_ktot_4_wd = []
+            self.k_ktot_4_vol_wd = []
+            self.ens_enstot_4_wd = []
+            self.ens_enstot_4_vol_wd = []
             self.shap_4_wd = []
             self.shap_4_vol_wd = []
             self.event_4_wd = []
@@ -1084,6 +1148,10 @@ class shap_conf():
                                     self.volume_1_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wa.append(uv[jj])
                                     self.uv_uvtot_1_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_1_wa.append(k[jj])
+                                    self.k_ktot_1_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_1_wa.append(ens[jj])
+                                    self.ens_enstot_1_vol_wa.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_1_wa.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_1_wa.append(shapvalues[jj]*1e3)
                                     self.shap_1_vol_wa.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1092,6 +1160,10 @@ class shap_conf():
                                     self.volume_1_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wd.append(uv[jj])
                                     self.uv_uvtot_1_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_1_wd.append(k[jj])
+                                    self.k_ktot_1_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_1_wd.append(ens[jj])
+                                    self.ens_enstot_1_vol_wd.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_1_wd.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_1_wd.append(shapvalues[jj]*1e3)
                                     self.shap_1_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1117,6 +1189,10 @@ class shap_conf():
                                     self.volume_2_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wa.append(uv[jj])
                                     self.uv_uvtot_2_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_2_wa.append(k[jj])
+                                    self.k_ktot_2_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_2_wa.append(ens[jj])
+                                    self.ens_enstot_2_vol_wa.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_2_wa.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_2_wa.append(shapvalues[jj]*1e3)
                                     self.shap_2_vol_wa.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1125,6 +1201,10 @@ class shap_conf():
                                     self.volume_2_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wd.append(uv[jj])
                                     self.uv_uvtot_2_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_2_wd.append(k[jj])
+                                    self.k_ktot_2_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_2_wd.append(ens[jj])
+                                    self.ens_enstot_2_vol_wd.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_2_wd.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_2_wd.append(shapvalues[jj]*1e3)
                                     self.shap_2_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1150,6 +1230,10 @@ class shap_conf():
                                     self.volume_3_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wa.append(uv[jj])
                                     self.uv_uvtot_3_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_3_wa.append(k[jj])
+                                    self.k_ktot_3_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_3_wa.append(ens[jj])
+                                    self.ens_enstot_3_vol_wa.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_3_wa.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_3_wa.append(shapvalues[jj]*1e3)
                                     self.shap_3_vol_wa.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1158,6 +1242,10 @@ class shap_conf():
                                     self.volume_3_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wd.append(uv[jj])
                                     self.uv_uvtot_3_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_3_wd.append(k[jj])
+                                    self.k_ktot_3_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_3_wd.append(ens[jj])
+                                    self.ens_enstot_3_vol_wd.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_3_wd.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_3_wd.append(shapvalues[jj]*1e3)
                                     self.shap_3_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1183,6 +1271,10 @@ class shap_conf():
                                     self.volume_4_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wa.append(uv[jj])
                                     self.uv_uvtot_4_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_4_wa.append(k[jj])
+                                    self.k_ktot_4_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_4_wa.append(ens[jj])
+                                    self.ens_enstot_4_vol_wa.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_4_wa.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_4_wa.append(shapvalues[jj]*1e3)
                                     self.shap_4_vol_wa.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1191,6 +1283,10 @@ class shap_conf():
                                     self.volume_4_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wd.append(uv[jj])
                                     self.uv_uvtot_4_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.k_ktot_4_wd.append(k[jj])
+                                    self.k_ktot_4_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                    self.ens_enstot_4_wd.append(ens[jj])
+                                    self.ens_enstot_4_vol_wd.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                     self.uv_vol_uvtot_vol_4_wd.append(uv_vol[jj]/uv_vol_sum)
                                     self.shap_4_wd.append(shapvalues[jj]*1e3)
                                     self.shap_4_vol_wd.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1323,6 +1419,22 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_2_vol_wa', data=self.uv_uvtot_2_vol_wa)
             hf.create_dataset('uv_uvtot_3_vol_wa', data=self.uv_uvtot_3_vol_wa)
             hf.create_dataset('uv_uvtot_4_vol_wa', data=self.uv_uvtot_4_vol_wa)
+            hf.create_dataset('k_ktot_1_wa', data=self.k_ktot_1_wa)
+            hf.create_dataset('k_ktot_2_wa', data=self.k_ktot_2_wa)
+            hf.create_dataset('k_ktot_3_wa', data=self.k_ktot_3_wa)
+            hf.create_dataset('k_ktot_4_wa', data=self.k_ktot_4_wa)
+            hf.create_dataset('k_ktot_1_vol_wa', data=self.k_ktot_1_vol_wa)
+            hf.create_dataset('k_ktot_2_vol_wa', data=self.k_ktot_2_vol_wa)
+            hf.create_dataset('k_ktot_3_vol_wa', data=self.k_ktot_3_vol_wa)
+            hf.create_dataset('k_ktot_4_vol_wa', data=self.k_ktot_4_vol_wa)
+            hf.create_dataset('ens_enstot_1_wa', data=self.ens_enstot_1_wa)
+            hf.create_dataset('ens_enstot_2_wa', data=self.ens_enstot_2_wa)
+            hf.create_dataset('ens_enstot_3_wa', data=self.ens_enstot_3_wa)
+            hf.create_dataset('ens_enstot_4_wa', data=self.ens_enstot_4_wa)
+            hf.create_dataset('ens_enstot_1_vol_wa', data=self.ens_enstot_1_vol_wa)
+            hf.create_dataset('ens_enstot_2_vol_wa', data=self.ens_enstot_2_vol_wa)
+            hf.create_dataset('ens_enstot_3_vol_wa', data=self.ens_enstot_3_vol_wa)
+            hf.create_dataset('ens_enstot_4_vol_wa', data=self.ens_enstot_4_vol_wa)
             hf.create_dataset('uv_vol_uvtot_vol_1_wa', data=self.uv_vol_uvtot_vol_1_wa)
             hf.create_dataset('uv_vol_uvtot_vol_2_wa', data=self.uv_vol_uvtot_vol_2_wa)
             hf.create_dataset('uv_vol_uvtot_vol_3_wa', data=self.uv_vol_uvtot_vol_3_wa)
@@ -1445,7 +1557,11 @@ class shap_conf():
         attr = ['volume_wa', 'volume_wd', 'shap_wa', 'shap_wd',
                 'shap_wa_vol', 'shap_wd_vol', 'event_wa', 
                 'event_wd', 'uv_uvtot_wa', 'uv_uvtot_wd', 
+                'k_ktot_wa', 'k_ktot_wd',
+                'ens_enstot_wa', 'ens_enstot_wd',
                 'uv_uvtot_wa_vol', 'uv_uvtot_wd_vol', 
+                'k_ktot_wa_vol', 'k_ktot_wd_vol',
+                'ens_enstot_wa_vol', 'ens_enstot_wd_vol',
                 'uv_vol_uvtot_vol_wa', 'uv_vol_uvtot_vol_wd', 
                 'volume', 'volume_wa', 'shap', 'shap_vol', 
                 'uv_uvtot', 'uv_uvtot_vol', 'uv_vol_uvtot_vol', 
@@ -1501,6 +1617,14 @@ class shap_conf():
             self.uv_uvtot_wd[structure] = np.array(hf['uv_uvtot_wd'])
             self.uv_uvtot_wa_vol[structure] = np.array(hf['uv_uvtot_wa_vol'])
             self.uv_uvtot_wd_vol[structure] = np.array(hf['uv_uvtot_wd_vol'])
+            self.k_ktot_wa[structure] = np.array(hf['k_ktot_wa'])
+            self.k_ktot_wd[structure] = np.array(hf['k_ktot_wd'])
+            self.k_ktot_wa_vol[structure] = np.array(hf['k_ktot_wa_vol'])
+            self.k_ktot_wd_vol[structure] = np.array(hf['k_ktot_wd_vol'])
+            self.ens_enstot_wa[structure] = np.array(hf['ens_enstot_wa'])
+            self.ens_enstot_wd[structure] = np.array(hf['ens_enstot_wd'])
+            self.ens_uvtot_wa_vol[structure] = np.array(hf['ens_enstot_wa_vol'])
+            self.ens_enstot_wd_vol[structure] = np.array(hf['ens_enstot_wd_vol'])
             self.uv_vol_uvtot_vol_wa[structure] = np.array(hf['uv_vol_uvtot_vol_wa'])
             self.uv_vol_uvtot_vol_wd[structure] = np.array(hf['uv_vol_uvtot_vol_wd'])
             self.volume[structure] = np.array(hf['volume'])
@@ -1550,6 +1674,14 @@ class shap_conf():
             uv_uvtot_wd = []
             uv_uvtot_wa_vol = []
             uv_uvtot_wd_vol = []
+            k_ktot_wa = []
+            k_ktot_wd = []
+            k_ktot_wa_vol = []
+            k_ktot_wd_vol = []
+            ens_enstot_wa = []
+            ens_enstot_wd = []
+            ens_enstot_wa_vol = []
+            ens_enstot_wd_vol = []
             uv_vol_uvtot_vol_wa = []
             uv_vol_uvtot_vol_wd = []
             cdg_y_wa = []
@@ -1731,6 +1863,10 @@ class shap_conf():
                                 volume_wa.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wa.append(uv[jj])
                                 uv_uvtot_wa_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                k_ktot_wa.append(k[jj])
+                                k_ktot_wa_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                ens_enstot_wa.append(ens[jj])
+                                ens_enstot_wa_vol.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                 uv_vol_uvtot_vol_wa.append(uv_vol[jj]/uv_vol_sum)
                                 shap_wa.append(shapvalues[jj]*1e3)
                                 shap_wa_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1740,6 +1876,10 @@ class shap_conf():
                                 volume_wd.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wd.append(uv[jj])
                                 uv_uvtot_wd_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                k_ktot_wd.append(k[jj])
+                                k_ktot_wd_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
+                                ens_enstot_wd.append(ens[jj])
+                                ens_enstot_wd_vol.append(ens[jj]/uv_struc.vol[jj]*1e7)
                                 uv_vol_uvtot_vol_wd.append(uv_vol[jj]/uv_vol_sum)
                                 shap_wd.append(shapvalues[jj]*1e3)
                                 shap_wd_vol.append(shapvalues[jj]/uv_struc.vol[jj]*1e9)
@@ -1799,6 +1939,14 @@ class shap_conf():
             self.uv_uvtot_wd[structure] = uv_uvtot_wd
             self.uv_uvtot_wa_vol[structure] = uv_uvtot_wa_vol
             self.uv_uvtot_wd_vol[structure] = uv_uvtot_wd_vol
+            self.k_ktot_wa[structure] = k_ktot_wa
+            self.k_ktot_wd[structure] = k_ktot_wd
+            self.k_ktot_wa_vol[structure] = k_ktot_wa_vol
+            self.k_ktot_wd_vol[structure] = k_ktot_wd_vol
+            self.ens_enstot_wa[structure] = ens_enstot_wa
+            self.ens_enstot_wd[structure] = ens_enstot_wd
+            self.ens_enstot_wa_vol[structure] = ens_enstot_wa_vol
+            self.ens_enstot_wd_vol[structure] = ens_enstot_wd_vol
             self.uv_vol_uvtot_vol_wa[structure] = uv_vol_uvtot_vol_wa
             self.uv_vol_uvtot_vol_wd[structure] = uv_vol_uvtot_vol_wd
             self.volume[structure] = volume
@@ -1848,6 +1996,14 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_wd', data=uv_uvtot_wd)
             hf.create_dataset('uv_uvtot_wa_vol', data=uv_uvtot_wa_vol)
             hf.create_dataset('uv_uvtot_wd_vol', data=uv_uvtot_wd_vol)
+            hf.create_dataset('k_ktot_wa', data=k_ktot_wa)
+            hf.create_dataset('k_ktot_wd', data=k_ktot_wd)
+            hf.create_dataset('k_ktot_wa_vol', data=k_ktot_wa_vol)
+            hf.create_dataset('k_ktot_wd_vol', data=k_ktot_wd_vol)
+            hf.create_dataset('ens_enstot_wa', data=ens_enstot_wa)
+            hf.create_dataset('ens_enstot_wd', data=ens_enstot_wd)
+            hf.create_dataset('ens_enstot_wa_vol', data=ens_enstot_wa_vol)
+            hf.create_dataset('ens_enstot_wd_vol', data=ens_enstot_wd_vol)
             hf.create_dataset('uv_vol_uvtot_vol_wa', data=uv_vol_uvtot_vol_wa)
             hf.create_dataset('uv_vol_uvtot_vol_wd', data=uv_vol_uvtot_vol_wd)
             hf.create_dataset('volume', data=volume)
@@ -4019,3 +4175,447 @@ class shap_conf():
         plt.xlim([0,3.5])
         plt.ylim([0,5.5])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+'_30+_walldetach.png')
+        
+        
+    def plot_shaps_uv_pdf_wall(self,colormap='viridis',bin_num=100,lev_val=2.5,alf=0.5):
+        """ 
+        Function for plotting the results of the SHAP vs the Reynolds stress
+        """
+        import matplotlib.pyplot as plt
+        import matplotlib as mpl    
+        from scipy.interpolate import interp2d
+        xhistmin = np.min([np.min(self.uv_uvtot_1),np.min(self.uv_uvtot_2),np.min(self.uv_uvtot_3),np.min(self.uv_uvtot_4)])/1.2
+        xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
+        yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
+        yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
+        histogram1_wa,uv_value1_wa,shap_value1_wa = np.histogram2d(self.uv_uvtot_1_wa,self.shap_1_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_wa,uv_value2_wa,shap_value2_wa = np.histogram2d(self.uv_uvtot_2_wa,self.shap_2_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.uv_uvtot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.uv_uvtot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        uv_value1_wa = uv_value1_wa[:-1]+np.diff(uv_value1_wa)/2
+        shap_value1_wa = shap_value1_wa[:-1]+np.diff(shap_value1_wa)/2
+        uv_value2_wa = uv_value2_wa[:-1]+np.diff(uv_value2_wa)/2
+        shap_value2_wa = shap_value2_wa[:-1]+np.diff(shap_value2_wa)/2
+        uv_value3_wa = uv_value3_wa[:-1]+np.diff(uv_value3_wa)/2
+        shap_value3_wa = shap_value3_wa[:-1]+np.diff(shap_value3_wa)/2
+        uv_value4_wa = uv_value4_wa[:-1]+np.diff(uv_value4_wa)/2
+        shap_value4_wa = shap_value4_wa[:-1]+np.diff(shap_value4_wa)/2
+        xhistmin = np.min([np.min(self.uv_uvtot_1),np.min(self.uv_uvtot_2),np.min(self.uv_uvtot_3),np.min(self.uv_uvtot_4)])/1.2
+        xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
+        yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
+        yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
+        histogram1_wd,uv_value1_wd,shap_value1_wd = np.histogram2d(self.uv_uvtot_1_wd,self.shap_1_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_wd,uv_value2_wd,shap_value2_wd = np.histogram2d(self.uv_uvtot_2_wd,self.shap_2_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_wd,uv_value3_wd,shap_value3_wd = np.histogram2d(self.uv_uvtot_3_wd,self.shap_3_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_wd,uv_value4_wd,shap_value4_wd = np.histogram2d(self.uv_uvtot_4_wd,self.shap_4_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        uv_value1_wd = uv_value1_wd[:-1]+np.diff(uv_value1_wd)/2
+        shap_value1_wd = shap_value1_wd[:-1]+np.diff(shap_value1_wd)/2
+        uv_value2_wd = uv_value2_wd[:-1]+np.diff(uv_value2_wd)/2
+        shap_value2_wd = shap_value2_wd[:-1]+np.diff(shap_value2_wd)/2
+        uv_value3_wd = uv_value3_wd[:-1]+np.diff(uv_value3_wd)/2
+        shap_value3_wd = shap_value3_wd[:-1]+np.diff(shap_value3_wd)/2
+        uv_value4_wd = uv_value4_wd[:-1]+np.diff(uv_value4_wd)/2
+        shap_value4_wd = shap_value4_wd[:-1]+np.diff(shap_value4_wd)/2
+        min_uv = np.min([uv_value1_wa,uv_value2_wa,uv_value3_wa,uv_value4_wa,uv_value1_wd,uv_value2_wd,uv_value3_wd,uv_value4_wd])
+        max_uv = np.max([uv_value1_wa,uv_value2_wa,uv_value3_wa,uv_value4_wa,uv_value1_wd,uv_value2_wd,uv_value3_wd,uv_value4_wd])
+        min_shap = np.min([shap_value1_wa,shap_value2_wa,shap_value3_wa,shap_value4_wa,shap_value1_wd,shap_value2_wd,shap_value3_wd,shap_value4_wd])
+        max_shap = np.max([shap_value1_wa,shap_value2_wa,shap_value3_wa,shap_value4_wa,shap_value1_wd,shap_value2_wd,shap_value3_wd,shap_value4_wd])
+        interp_h1_wa = interp2d(uv_value1_wa,shap_value1_wa,histogram1_wa)
+        interp_h2_wa = interp2d(uv_value2_wa,shap_value2_wa,histogram2_wa)
+        interp_h3_wa = interp2d(uv_value3_wa,shap_value3_wa,histogram3_wa)
+        interp_h4_wa = interp2d(uv_value4_wa,shap_value4_wa,histogram4_wa)
+        interp_h1_wd = interp2d(uv_value1_wd,shap_value1_wd,histogram1_wd)
+        interp_h2_wd = interp2d(uv_value2_wd,shap_value2_wd,histogram2_wd)
+        interp_h3_wd = interp2d(uv_value3_wd,shap_value3_wd,histogram3_wd)
+        interp_h4_wd = interp2d(uv_value4_wd,shap_value4_wd,histogram4_wd)
+        vec_uv = np.linspace(min_uv,max_uv,1000)
+        vec_shap = np.linspace(min_shap,max_shap,1000)
+        uv_grid,shap_grid = np.meshgrid(vec_uv,vec_shap)
+        histogram_Q1_wa = interp_h1_wa(vec_uv,vec_shap)
+        histogram_Q2_wa = interp_h2_wa(vec_uv,vec_shap)
+        histogram_Q3_wa = interp_h3_wa(vec_uv,vec_shap)
+        histogram_Q4_wa = interp_h4_wa(vec_uv,vec_shap)
+        histogram_Q1_wd = interp_h1_wd(vec_uv,vec_shap)
+        histogram_Q2_wd = interp_h2_wd(vec_uv,vec_shap)
+        histogram_Q3_wd = interp_h3_wd(vec_uv,vec_shap)
+        histogram_Q4_wd = interp_h4_wd(vec_uv,vec_shap)
+        fs = 20
+        plt.figure()        
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid,shap_grid,histogram_Q1_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q2_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q3_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q4_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid,shap_grid,histogram_Q1_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid,shap_grid,histogram_Q2_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid,shap_grid,histogram_Q3_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid,shap_grid,histogram_Q4_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.contourf(uv_grid,shap_grid,histogram_Q1_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q2_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q3_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q4_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid,shap_grid,histogram_Q1_wd.T,levels=[lev_val],colors=[(color11,color12,color13)],linestyles='dashed')
+        plt.contour(uv_grid,shap_grid,histogram_Q2_wd.T,levels=[lev_val],colors=[(color21,color22,color23)],linestyles='dashed')
+        plt.contour(uv_grid,shap_grid,histogram_Q3_wd.T,levels=[lev_val],colors=[(color31,color32,color33)],linestyles='dashed')
+        plt.contour(uv_grid,shap_grid,histogram_Q4_wd.T,levels=[lev_val],colors=[(color41,color42,color43)],linestyles='dashed')
+        plt.grid()
+        plt.xlim([0,0.2])
+        plt.ylim([0,7])
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf)),\
+                   mpl.lines.Line2D([0],[0],linestyle='solid',color='k'),\
+                   mpl.lines.Line2D([0],[0],linestyle='dashed',color='k')]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps','W-A','W-D']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+'_30+_wall.png')
+        
+        
+        fs = 20
+        plt.figure()        
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid,shap_grid,histogram_Q1_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q2_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q3_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q4_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid,shap_grid,histogram_Q1_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid,shap_grid,histogram_Q2_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid,shap_grid,histogram_Q3_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid,shap_grid,histogram_Q4_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.grid()
+        plt.xlim([0,0.2])
+        plt.ylim([0,7])
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+'_30+_wallattach.png')
+        
+        fs = 20
+        plt.figure()        
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid,shap_grid,histogram_Q1_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q2_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q3_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid,shap_grid,histogram_Q4_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid,shap_grid,histogram_Q1_wd.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid,shap_grid,histogram_Q2_wd.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid,shap_grid,histogram_Q3_wd.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid,shap_grid,histogram_Q4_wd.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.grid()
+        plt.xlim([0,0.2])
+        plt.ylim([0,7])
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+'_30+_walldetach.png')
+        
+        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
+        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
+        yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
+        yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
+        histogram1_vol_wa,uv_value1_vol_wa,shap_value1_vol_wa = np.histogram2d(self.uv_uvtot_1_vol_wa,self.shap_1_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_vol_wa,uv_value2_vol_wa,shap_value2_vol_wa = np.histogram2d(self.uv_uvtot_2_vol_wa,self.shap_2_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_vol_wa,uv_value3_vol_wa,shap_value3_vol_wa = np.histogram2d(self.uv_uvtot_3_vol_wa,self.shap_3_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_vol_wa,uv_value4_vol_wa,shap_value4_vol_wa = np.histogram2d(self.uv_uvtot_4_vol_wa,self.shap_4_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        uv_value1_vol_wa = uv_value1_vol_wa[:-1]+np.diff(uv_value1_vol_wa)/2
+        shap_value1_vol_wa = shap_value1_vol_wa[:-1]+np.diff(shap_value1_vol_wa)/2
+        uv_value2_vol_wa = uv_value2_vol_wa[:-1]+np.diff(uv_value2_vol_wa)/2
+        shap_value2_vol_wa = shap_value2_vol_wa[:-1]+np.diff(shap_value2_vol_wa)/2
+        uv_value3_vol_wa = uv_value3_vol_wa[:-1]+np.diff(uv_value3_vol_wa)/2
+        shap_value3_vol_wa = shap_value3_vol_wa[:-1]+np.diff(shap_value3_vol_wa)/2
+        uv_value4_vol_wa = uv_value4_vol_wa[:-1]+np.diff(uv_value4_vol_wa)/2
+        shap_value4_vol_wa = shap_value4_vol_wa[:-1]+np.diff(shap_value4_vol_wa)/2
+        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
+        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
+        yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
+        yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
+        histogram1_vol_wd,uv_value1_vol_wd,shap_value1_vol_wd = np.histogram2d(self.uv_uvtot_1_vol_wd,self.shap_1_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_vol_wd,uv_value2_vol_wd,shap_value2_vol_wd = np.histogram2d(self.uv_uvtot_2_vol_wd,self.shap_2_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_vol_wd,uv_value3_vol_wd,shap_value3_vol_wd = np.histogram2d(self.uv_uvtot_3_vol_wd,self.shap_3_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_vol_wd,uv_value4_vol_wd,shap_value4_vol_wd = np.histogram2d(self.uv_uvtot_4_vol_wd,self.shap_4_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        uv_value1_vol_wd = uv_value1_vol_wd[:-1]+np.diff(uv_value1_vol_wd)/2
+        shap_value1_vol_wd = shap_value1_vol_wd[:-1]+np.diff(shap_value1_vol_wd)/2
+        uv_value2_vol_wd = uv_value2_vol_wd[:-1]+np.diff(uv_value2_vol_wd)/2
+        shap_value2_vol_wd = shap_value2_vol_wd[:-1]+np.diff(shap_value2_vol_wd)/2
+        uv_value3_vol_wd = uv_value3_vol_wd[:-1]+np.diff(uv_value3_vol_wd)/2
+        shap_value3_vol_wd = shap_value3_vol_wd[:-1]+np.diff(shap_value3_vol_wd)/2
+        uv_value4_vol_wd = uv_value4_vol_wd[:-1]+np.diff(uv_value4_vol_wd)/2
+        shap_value4_vol_wd = shap_value4_vol_wd[:-1]+np.diff(shap_value4_vol_wd)/2
+        min_uv_vol = np.min([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
+        max_uv_vol = np.max([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
+        min_shap_vol = np.min([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
+        max_shap_vol = np.max([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
+        interp_h1_vol_wa = interp2d(uv_value1_vol_wa,shap_value1_vol_wa,histogram1_vol_wa)
+        interp_h2_vol_wa = interp2d(uv_value2_vol_wa,shap_value2_vol_wa,histogram2_vol_wa)
+        interp_h3_vol_wa = interp2d(uv_value3_vol_wa,shap_value3_vol_wa,histogram3_vol_wa)
+        interp_h4_vol_wa = interp2d(uv_value4_vol_wa,shap_value4_vol_wa,histogram4_vol_wa)
+        interp_h1_vol_wd = interp2d(uv_value1_vol_wd,shap_value1_vol_wd,histogram1_vol_wd)
+        interp_h2_vol_wd = interp2d(uv_value2_vol_wd,shap_value2_vol_wd,histogram2_vol_wd)
+        interp_h3_vol_wd = interp2d(uv_value3_vol_wd,shap_value3_vol_wd,histogram3_vol_wd)
+        interp_h4_vol_wd = interp2d(uv_value4_vol_wd,shap_value4_vol_wd,histogram4_vol_wd)
+        vec_uv_vol = np.linspace(min_uv_vol,max_uv_vol,1000)
+        vec_shap_vol = np.linspace(min_shap_vol,max_shap_vol,1000)
+        uv_grid_vol,shap_grid_vol = np.meshgrid(vec_uv_vol,vec_shap_vol)
+        histogram_Q1_vol_wa = interp_h1_vol_wa(vec_uv_vol,vec_shap_vol)
+        histogram_Q2_vol_wa = interp_h2_vol_wa(vec_uv_vol,vec_shap_vol)
+        histogram_Q3_vol_wa = interp_h3_vol_wa(vec_uv_vol,vec_shap_vol)
+        histogram_Q4_vol_wa = interp_h4_vol_wa(vec_uv_vol,vec_shap_vol)
+        histogram_Q1_vol_wd = interp_h1_vol_wd(vec_uv_vol,vec_shap_vol)
+        histogram_Q2_vol_wd = interp_h2_vol_wd(vec_uv_vol,vec_shap_vol)
+        histogram_Q3_vol_wd = interp_h3_vol_wd(vec_uv_vol,vec_shap_vol)
+        histogram_Q4_vol_wd = interp_h4_vol_wd(vec_uv_vol,vec_shap_vol)
+        fs = 20
+        plt.figure()
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        x0 = 0
+        x0b = 0.7
+        x1 = 0.08
+        x2 = 1.16
+        x3 = 1.7
+        y0_1 = 2
+        y1_1 = 3.9
+        y0_2 = 0
+        y1_2 = 0.8
+        ytop = 4.5
+        ytop2 = y1_1
+        plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+                         color=cmap_fill(0.9),alpha=0.1)
+        plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+                         [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+        plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+                         color=cmap_fill(0.1),alpha=0.1)
+        plt.plot([x0,x0],[y0_1,y0_2],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+        plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+        plt.plot([x2,x3],[ytop2,ytop2],color='k')
+        plt.plot([x2,x2],[y1_2,y1_1],color='k')
+        plt.plot([x2,x2],[ytop,y1_1],color='k')
+        plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val],colors=[(color11,color12,color13)],linestyles='dashed')
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val],colors=[(color21,color22,color23)],linestyles='dashed')
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val],colors=[(color31,color32,color33)],linestyles='dashed')
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val],colors=[(color41,color42,color43)],linestyles='dashed')
+        plt.text(0.5, 0.1, 'A', fontsize = 20)
+        plt.text(1.5, 2.1, 'B', fontsize = 20)   
+        plt.text(0.5, 4, 'C', fontsize = 20) 
+        plt.ylim([y0_2,ytop])
+        plt.xlim([x0,x3])
+        plt.grid()
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf)),\
+                   mpl.lines.Line2D([0],[0],linestyle='solid',color='k'),\
+                   mpl.lines.Line2D([0],[0],linestyle='dashed',color='k')]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps','W-A','W-D']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_wall.png')
+        
+        
+        fs = 20
+        plt.figure()
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+                         color=cmap_fill(0.9),alpha=0.1)
+        plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+                         [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+        plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+                         color=cmap_fill(0.1),alpha=0.1)
+        plt.plot([x0,x0],[y0_1,y0_2],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+        plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+        plt.plot([x2,x3],[ytop2,ytop2],color='k')
+        plt.plot([x2,x2],[y1_2,y1_1],color='k')
+        plt.plot([x2,x2],[ytop,y1_1],color='k')
+        plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.text(0.5, 0.1, 'A', fontsize = 20)
+        plt.text(1.5, 2.1, 'B', fontsize = 20)   
+        plt.text(0.5, 4, 'C', fontsize = 20) 
+        plt.ylim([y0_2,ytop])
+        plt.xlim([x0,x3])
+        plt.grid()
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_wallattach.png')
+        
+        
+        
+        fs = 20
+        plt.figure()
+        cmap_fill = plt.cm.get_cmap('viridis', 10)
+        plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+                         color=cmap_fill(0.9),alpha=0.1)
+        plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+                         [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+        plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+                         color=cmap_fill(0.1),alpha=0.1)
+        plt.plot([x0,x0],[y0_1,y0_2],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+        plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+        plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+        plt.plot([x2,x3],[ytop2,ytop2],color='k')
+        plt.plot([x2,x2],[y1_2,y1_1],color='k')
+        plt.plot([x2,x2],[ytop,y1_1],color='k')
+        plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
+        plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val],colors=[(color11,color12,color13)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val],colors=[(color31,color32,color33)])
+        plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.text(0.5, 0.1, 'A', fontsize = 20)
+        plt.text(1.5, 2.1, 'B', fontsize = 20)   
+        plt.text(0.5, 4, 'C', fontsize = 20) 
+        plt.ylim([y0_2,ytop])
+        plt.xlim([x0,x3])
+        plt.grid()
+        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                   fontsize=fs)
+        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        plt.tick_params(axis='both', which='major', labelsize=fs)
+        handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_walldettach.png')
