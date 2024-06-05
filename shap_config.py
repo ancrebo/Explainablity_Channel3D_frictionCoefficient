@@ -1624,10 +1624,14 @@ class shap_conf():
             for ii in range_shap:
                 try:
                     uu,vv,ww = normdata.read_velocity(ii)
+                    print(1)
                     phi = normdata.read_enstrophy(ii)
+                    print(2)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
                     ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
+                    print(3)
                     enstot = np.sum(phi) 
+                    print(4)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=dir_struc,
                                                      structure=structure)
@@ -1656,15 +1660,18 @@ class shap_conf():
                         shapmin = np.min(np.array([shapmin,shapmax]))
                         shapmaxvol = np.max(np.array([shapminvol,shapmaxvol]))
                         shapminvol = np.min(np.array([shapminvol,shapmaxvol]))
+                    print(5)    
                     uv = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     ens = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
                     k_vol = np.zeros((lenstruc,))
                     ens_vol = np.zeros((lenstruc,))
+                    print(6)
                     
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
+                        print(7)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
@@ -1681,6 +1688,7 @@ class shap_conf():
                             ens[jj] += phi[indexuv[0][kk],
                                            indexuv[1][kk],
                                            indexuv[2][kk]]
+                        print(8)
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         ens_vol[jj] = ens[jj]/uv_struc.vol[jj]
@@ -1693,6 +1701,7 @@ class shap_conf():
                         ens_back_vol = (enstot-np.sum(ens))/\
                         (voltot-np.sum(uv_struc.vol))
                         ens_vol_sum = np.sum(ens_vol)+ens_back_vol
+                        print(9)
                         if uv_struc.cdg_y[jj] <= 0:
                             yplus_min_ii = (1+uv_struc.ymin[jj])*normdata.rey
                         else:
@@ -1706,6 +1715,7 @@ class shap_conf():
                         uv[jj] /= uvtot
                         k[jj] /= ktot
                         ens[jj] /= enstot
+                        print(10)
                         
                         if uv_struc.vol[jj] > volmin:                  
                             Dy = uv_struc.ymax[jj]-uv_struc.ymin[jj]
@@ -1746,6 +1756,7 @@ class shap_conf():
                                 # self.event_wd.append(uv_struc.event[jj])
                                 cdg_y_wd.append(uv_struc.cdg_y[jj])
                             
+                            print(11)
                             volume.append(uv_struc.vol[jj]/1e6)
                             uv_uvtot.append(uv[jj])
                             uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
@@ -1762,6 +1773,7 @@ class shap_conf():
                             shapcum += shapvalues[jj]
                             shap_volcum += shapvalues[jj]/uv_struc.vol[jj]
                             cdg_y.append(uv_struc.cdg_y[jj])
+                            print(12)
                                 
                     vol_b = np.sum(normdata.vol)-np.sum(uv_struc.vol)
                     shapbcum += shapvalues[-1]
