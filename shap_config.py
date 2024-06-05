@@ -1780,12 +1780,12 @@ class shap_conf():
                         SHAP_grid[ii_arlim1,ii_arlim2] /= npoin[ii_arlim1,ii_arlim2]
                         SHAP_gridvol[ii_arlim1,ii_arlim2] /= npoin[ii_arlim1,ii_arlim2]
                     
-            file_save = open('Qinfo.txt', "w+") 
-            file_save.write('uv_Q- '+str(uv_Qminus/uvtot_cum)+'\n')
-            file_save.write('vol_Q- '+str(vol_Qminus/voltot_cum)+'\n')
-            file_save.write('uv_Q-_wa '+str(uv_Qminus_wa/uvtot_cum)+'\n')
-            file_save.write('vol_Q-_wa '+str(vol_Qminus_wa/voltot_cum)+'\n')
-            file_save.close()
+            # file_save = open('Qinfo.txt', "w+") 
+            # file_save.write('uv_Q- '+str(uv_Qminus/uvtot_cum)+'\n')
+            # file_save.write('vol_Q- '+str(vol_Qminus/voltot_cum)+'\n')
+            # file_save.write('uv_Q-_wa '+str(uv_Qminus_wa/uvtot_cum)+'\n')
+            # file_save.write('vol_Q-_wa '+str(vol_Qminus_wa/voltot_cum)+'\n')
+            # file_save.close()
         
             self.volume_wa[structure] = volume_wa
             self.volume_wd[structure] = volume_wd
