@@ -4776,53 +4776,127 @@ class shap_conf():
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
-    def plot_shaps_uv_pdf_wall(self,
+    def plot_shaps_x_pdf_wall(self,
                                colormap='viridis',
                                bin_num=100,
                                lev_val=2.5,
                                alf=0.5,
-                               structures=[]):
+                               structures=[],
+                               x='uv'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
         import matplotlib.pyplot as plt
         import matplotlib as mpl    
         from scipy.interpolate import interp2d
-        xhistmin = np.min([np.min(self.uv_uvtot_1),
-                           np.min(self.uv_uvtot_2),
-                           np.min(self.uv_uvtot_3),
-                           np.min(self.uv_uvtot_4)]\
-                          +[np.min(self.uv_uvtot[struc]) for struc in structures]
-                          )/1.2
-            
-        xhistmax = np.max([np.max(self.uv_uvtot_1),
-                           np.max(self.uv_uvtot_2), 
-                           np.max(self.uv_uvtot_3),
-                           np.max(self.uv_uvtot_4)]\
-                          +[np.max(self.uv_uvtot[struc]) for struc in structures]
-                          )*1.2
-            
-        yhistmin = np.min([np.min(self.shap_1),
-                           np.min(self.shap_2),
-                           np.min(self.shap_3),
-                           np.min(self.shap_4)]\
-                          +[np.min(self.shap[struc]) for struc in structures]
-                          )/1.2
         
-        yhistmax = np.max([np.max(self.shap_1),
-                           np.max(self.shap_2),
-                           np.max(self.shap_3),
-                           np.max(self.shap_4)]
-                          +[np.max(self.shap[struc]) for struc in structures]
-                          )*1.2
+        if x == 'uv':
+            xhistmin = np.min([np.min(self.uv_uvtot_1),
+                               np.min(self.uv_uvtot_2),
+                               np.min(self.uv_uvtot_3),
+                               np.min(self.uv_uvtot_4)]\
+                              +[np.min(self.uv_uvtot[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.uv_uvtot_1),
+                               np.max(self.uv_uvtot_2), 
+                               np.max(self.uv_uvtot_3),
+                               np.max(self.uv_uvtot_4)]\
+                              +[np.max(self.uv_uvtot[struc]) for struc in structures]
+                              )*1.2
+                
+            yhistmin = np.min([np.min(self.shap_1),
+                               np.min(self.shap_2),
+                               np.min(self.shap_3),
+                               np.min(self.shap_4)]\
+                              +[np.min(self.shap[struc]) for struc in structures]
+                              )/1.2
+            
+            yhistmax = np.max([np.max(self.shap_1),
+                               np.max(self.shap_2),
+                               np.max(self.shap_3),
+                               np.max(self.shap_4)]
+                              +[np.max(self.shap[struc]) for struc in structures]
+                              )*1.2
+            
+            histogram1_wa,uv_value1_wa,shap_value1_wa = np.histogram2d(self.uv_uvtot_1_wa,self.shap_1_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2_wa,uv_value2_wa,shap_value2_wa = np.histogram2d(self.uv_uvtot_2_wa,self.shap_2_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.uv_uvtot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.uv_uvtot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            
+        elif x == 'uv':
+            xhistmin = np.min([np.min(self.k_ktot_1),
+                               np.min(self.k_ktot_2),
+                               np.min(self.k_ktot_3),
+                               np.min(self.k_ktot_4)]\
+                              +[np.min(self.k_ktot[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.k_ktot_1),
+                               np.max(self.k_ktot_2), 
+                               np.max(self.k_ktot_3),
+                               np.max(self.k_ktot_4)]\
+                              +[np.max(self.k_ktot[struc]) for struc in structures]
+                              )*1.2
+                
+            yhistmin = np.min([np.min(self.shap_1),
+                               np.min(self.shap_2),
+                               np.min(self.shap_3),
+                               np.min(self.shap_4)]\
+                              +[np.min(self.shap[struc]) for struc in structures]
+                              )/1.2
+            
+            yhistmax = np.max([np.max(self.shap_1),
+                               np.max(self.shap_2),
+                               np.max(self.shap_3),
+                               np.max(self.shap_4)]
+                              +[np.max(self.shap[struc]) for struc in structures]
+                              )*1.2
+            
+            histogram1_wa,uv_value1_wa,shap_value1_wa = np.histogram2d(self.k_ktot_1_wa,self.shap_1_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2_wa,uv_value2_wa,shap_value2_wa = np.histogram2d(self.k_ktot_2_wa,self.shap_2_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.k_ktot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.k_ktot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            
+        elif x == 'ens':
+            xhistmin = np.min([np.min(self.ens_enstot_1),
+                               np.min(self.ens_enstot_2),
+                               np.min(self.ens_enstot_3),
+                               np.min(self.ens_enstot_4)]\
+                              +[np.min(self.ens_enstot[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.ens_enstot_1),
+                               np.max(self.ens_enstot_2), 
+                               np.max(self.ens_enstot_3),
+                               np.max(self.ens_enstot_4)]\
+                              +[np.max(self.ens_enstot[struc]) for struc in structures]
+                              )*1.2
+                
+            yhistmin = np.min([np.min(self.shap_1),
+                               np.min(self.shap_2),
+                               np.min(self.shap_3),
+                               np.min(self.shap_4)]\
+                              +[np.min(self.shap[struc]) for struc in structures]
+                              )/1.2
+            
+            yhistmax = np.max([np.max(self.shap_1),
+                               np.max(self.shap_2),
+                               np.max(self.shap_3),
+                               np.max(self.shap_4)]
+                              +[np.max(self.shap[struc]) for struc in structures]
+                              )*1.2
+            
+            histogram1_wa,uv_value1_wa,shap_value1_wa = np.histogram2d(self.ens_enstot_1_wa,self.shap_1_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2_wa,uv_value2_wa,shap_value2_wa = np.histogram2d(self.ens_enstot_2_wa,self.shap_2_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.ens_enstot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.ens_enstot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            
         # xhistmin = np.min([np.min(self.uv_uvtot_1),np.min(self.uv_uvtot_2),np.min(self.uv_uvtot_3),np.min(self.uv_uvtot_4)])/1.2
         # xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
         # yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
         # yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
-        histogram1_wa,uv_value1_wa,shap_value1_wa = np.histogram2d(self.uv_uvtot_1_wa,self.shap_1_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2_wa,uv_value2_wa,shap_value2_wa = np.histogram2d(self.uv_uvtot_2_wa,self.shap_2_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.uv_uvtot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.uv_uvtot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        
         uv_value1_wa = uv_value1_wa[:-1]+np.diff(uv_value1_wa)/2
         shap_value1_wa = shap_value1_wa[:-1]+np.diff(shap_value1_wa)/2
         uv_value2_wa = uv_value2_wa[:-1]+np.diff(uv_value2_wa)/2
@@ -4836,7 +4910,13 @@ class shap_conf():
         uv_values_wa = {}
         shap_values_wa = {}
         for structure in structures:
-            histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot_wa[structure],
+            if x == 'uv':
+                x_xtot_wa = self.uv_uvtot_wa[structure]
+            elif x == 'k':
+                x_xtot_wa = self.k_ktot_wa[structure]
+            elif x == 'ens':
+                x_xtot_wa = self.ens_enstot_wa[structure]
+            histogram,uv_value,shap_value = np.histogram2d(x_xtot_wa,
                                                            self.shap_wa[structure],
                                                            bins=bin_num,
                                                            range=[[xhistmin,xhistmax],
@@ -4851,10 +4931,25 @@ class shap_conf():
         # xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
         # yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
         # yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
-        histogram1_wd,uv_value1_wd,shap_value1_wd = np.histogram2d(self.uv_uvtot_1_wd,self.shap_1_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2_wd,uv_value2_wd,shap_value2_wd = np.histogram2d(self.uv_uvtot_2_wd,self.shap_2_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3_wd,uv_value3_wd,shap_value3_wd = np.histogram2d(self.uv_uvtot_3_wd,self.shap_3_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4_wd,uv_value4_wd,shap_value4_wd = np.histogram2d(self.uv_uvtot_4_wd,self.shap_4_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        if x == 'uv':
+            x_xtot_1_wd = self.uv_uvtot_1_wd[structure]
+            x_xtot_2_wd = self.uv_uvtot_2_wd[structure]
+            x_xtot_3_wd = self.uv_uvtot_3_wd[structure]
+            x_xtot_4_wd = self.uv_uvtot_4_wd[structure]
+        elif x == 'k':
+            x_xtot_1_wd = self.k_ktot_1_wd[structure]
+            x_xtot_2_wd = self.k_ktot_2_wd[structure]
+            x_xtot_3_wd = self.k_ktot_3_wd[structure]
+            x_xtot_4_wd = self.k_ktot_4_wd[structure]
+        elif x == 'ens':
+            x_xtot_1_wd = self.ens_enstot_1_wd[structure]
+            x_xtot_2_wd = self.ens_enstot_2_wd[structure]
+            x_xtot_3_wd = self.ens_enstot_3_wd[structure]
+            x_xtot_4_wd = self.ens_enstot_4_wd[structure]
+        histogram1_wd,uv_value1_wd,shap_value1_wd = np.histogram2d(x_xtot_1_wd,self.shap_1_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_wd,uv_value2_wd,shap_value2_wd = np.histogram2d(x_xtot_2_wd,self.shap_2_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_wd,uv_value3_wd,shap_value3_wd = np.histogram2d(x_xtot_3_wd,self.shap_3_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_wd,uv_value4_wd,shap_value4_wd = np.histogram2d(x_xtot_4_wd,self.shap_4_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         uv_value1_wd = uv_value1_wd[:-1]+np.diff(uv_value1_wd)/2
         shap_value1_wd = shap_value1_wd[:-1]+np.diff(shap_value1_wd)/2
         uv_value2_wd = uv_value2_wd[:-1]+np.diff(uv_value2_wd)/2
@@ -4868,7 +4963,13 @@ class shap_conf():
         uv_values_wd = {}
         shap_values_wd = {}
         for structure in structures:
-            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(self.uv_uvtot_wd[structure],
+            if x == 'uv':
+                x_xtot_wd = self.uv_uvtot_wd[structure]
+            elif x == 'k':
+                x_xtot_wd = self.k_ktot_wd[structure]
+            elif x == 'ens':
+                x_xtot_wd = self.ens_enstot_wd[structure]
+            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(x_xtot_wd[structure],
                                                             self.shap_wd[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
@@ -5042,8 +5143,15 @@ class shap_conf():
         plt.grid()
         plt.xlim([0,0.2])
         plt.ylim([0,7])
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
-                   fontsize=fs)
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5085,7 +5193,7 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+_wall.png')
+        plt.savefig('hist2d_interp_'+x+x+'tot_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
         
         fs = 20
@@ -5137,8 +5245,15 @@ class shap_conf():
         plt.grid()
         plt.xlim([0,0.2])
         plt.ylim([0,7])
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
-                   fontsize=fs)
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5176,7 +5291,7 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
+        plt.savefig('hist2d_interp_'+x+x+'tot_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
         fs = 20
         plt.figure()        
@@ -5227,8 +5342,15 @@ class shap_conf():
         plt.grid()
         plt.xlim([0,0.2])
         plt.ylim([0,7])
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
-                   fontsize=fs)
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5266,20 +5388,41 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
+        plt.savefig('hist2d_interp_'+x+x+'tot_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
-        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),
-                           np.min(self.uv_uvtot_2_vol),
-                           np.min(self.uv_uvtot_3_vol),
-                           np.min(self.uv_uvtot_4_vol)]\
-                          +[np.min(self.uv_uvtot_vol[struc]) for struc in structures]
+        if x == 'uv':
+            x_xtot_1_vol = self.uv_uvtot_1_vol
+            x_xtot_2_vol = self.uv_uvtot_2_vol
+            x_xtot_3_vol = self.uv_uvtot_3_vol
+            x_xtot_4_vol = self.uv_uvtot_4_vol
+            x_xtot_vol = self.uv_uvtot_vol
+            
+        elif x == 'k':
+            x_xtot_1_vol = self.k_ktot_1_vol
+            x_xtot_2_vol = self.k_ktot_2_vol
+            x_xtot_3_vol = self.k_ktot_3_vol
+            x_xtot_4_vol = self.k_ktot_4_vol
+            x_xtot_vol = self.k_ktot_vol
+        
+        elif x == 'ens':
+            x_xtot_1_vol = self.ens_enstot_1_vol
+            x_xtot_2_vol = self.ens_enstot_2_vol
+            x_xtot_3_vol = self.ens_enstot_3_vol
+            x_xtot_4_vol = self.ens_enstot_4_vol
+            x_xtot_vol = self.ens_enstot_vol
+        
+        xhistmin = np.min([np.min(x_xtot_1_vol),
+                           np.min(x_xtot_2_vol),
+                           np.min(x_xtot_3_vol),
+                           np.min(x_xtot_4_vol)]\
+                          +[np.min(x_xtot_vol[struc]) for struc in structures]
                           )/1.2
             
-        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),
-                           np.max(self.uv_uvtot_2_vol), 
-                           np.max(self.uv_uvtot_3_vol),
-                           np.max(self.uv_uvtot_4_vol)]\
-                          +[np.max(self.uv_uvtot_vol[struc]) for struc in structures]
+        xhistmax = np.max([np.max(x_xtot_1_vol),
+                           np.max(x_xtot_2_vol), 
+                           np.max(x_xtot_3_vol),
+                           np.max(x_xtot_4_vol)]\
+                          +[np.max(x_xtot_vol[struc]) for struc in structures]
                           )*1.2
             
         yhistmin = np.min([np.min(self.shap_1_vol),
@@ -5300,10 +5443,27 @@ class shap_conf():
         # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
         # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
         # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
-        histogram1_vol_wa,uv_value1_vol_wa,shap_value1_vol_wa = np.histogram2d(self.uv_uvtot_1_vol_wa,self.shap_1_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2_vol_wa,uv_value2_vol_wa,shap_value2_vol_wa = np.histogram2d(self.uv_uvtot_2_vol_wa,self.shap_2_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3_vol_wa,uv_value3_vol_wa,shap_value3_vol_wa = np.histogram2d(self.uv_uvtot_3_vol_wa,self.shap_3_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4_vol_wa,uv_value4_vol_wa,shap_value4_vol_wa = np.histogram2d(self.uv_uvtot_4_vol_wa,self.shap_4_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        
+        if x == 'uv':
+            x_xtot_1_vol_wa = self.uv_uvtot_1_vol_wa[structure]
+            x_xtot_2_vol_wa = self.uv_uvtot_2_vol_wa[structure]
+            x_xtot_3_vol_wa = self.uv_uvtot_3_vol_wa[structure]
+            x_xtot_4_vol_wa = self.uv_uvtot_4_vol_wa[structure]
+        elif x == 'k':
+            x_xtot_1_vol_wa = self.k_ktot_1_vol_wa[structure]
+            x_xtot_2_vol_wa = self.k_ktot_2_vol_wa[structure]
+            x_xtot_3_vol_wa = self.k_ktot_3_vol_wa[structure]
+            x_xtot_4_vol_wa = self.k_ktot_4_vol_wa[structure]
+        elif x == 'ens':
+            x_xtot_1_vol_wa = self.ens_enstot_1_vol_wa[structure]
+            x_xtot_2_vol_wa = self.ens_enstot_2_vol_wa[structure]
+            x_xtot_3_vol_wa = self.ens_enstot_3_vol_wa[structure]
+            x_xtot_4_vol_wa = self.ens_enstot_4_vol_wa[structure]
+        
+        histogram1_vol_wa,uv_value1_vol_wa,shap_value1_vol_wa = np.histogram2d(x_xtot_1_vol_wa,self.shap_1_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_vol_wa,uv_value2_vol_wa,shap_value2_vol_wa = np.histogram2d(x_xtot_2_vol_wa,self.shap_2_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_vol_wa,uv_value3_vol_wa,shap_value3_vol_wa = np.histogram2d(x_xtot_3_vol_wa,self.shap_3_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_vol_wa,uv_value4_vol_wa,shap_value4_vol_wa = np.histogram2d(x_xtot_4_vol_wa,self.shap_4_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         uv_value1_vol_wa = uv_value1_vol_wa[:-1]+np.diff(uv_value1_vol_wa)/2
         shap_value1_vol_wa = shap_value1_vol_wa[:-1]+np.diff(shap_value1_vol_wa)/2
         uv_value2_vol_wa = uv_value2_vol_wa[:-1]+np.diff(uv_value2_vol_wa)/2
@@ -5317,7 +5477,13 @@ class shap_conf():
         uv_values_vol_wa = {}
         shap_values_vol_wa = {}
         for structure in structures:
-            histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot_vol_wa[structure],
+            if x == 'uv':
+                x_xtot_vol_wa = self.uv_uvtot_vol_wa[structure]
+            elif x == 'k':
+                x_xtot_vol_wa = self.k_ktot_vol_wa[structure]
+            elif x == 'ens':
+                x_xtot_vol_wa = self.ens_enstot_vol_wa[structure]
+            histogram,uv_value,shap_value = np.histogram2d(x_xtot_vol_wa[structure],
                                                            self.shap_vol_wa[structure],
                                                            bins=bin_num,
                                                            range=[[xhistmin,xhistmax],
@@ -5332,10 +5498,27 @@ class shap_conf():
         # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
         # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
         # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
-        histogram1_vol_wd,uv_value1_vol_wd,shap_value1_vol_wd = np.histogram2d(self.uv_uvtot_1_vol_wd,self.shap_1_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2_vol_wd,uv_value2_vol_wd,shap_value2_vol_wd = np.histogram2d(self.uv_uvtot_2_vol_wd,self.shap_2_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3_vol_wd,uv_value3_vol_wd,shap_value3_vol_wd = np.histogram2d(self.uv_uvtot_3_vol_wd,self.shap_3_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4_vol_wd,uv_value4_vol_wd,shap_value4_vol_wd = np.histogram2d(self.uv_uvtot_4_vol_wd,self.shap_4_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        
+        if x == 'uv':
+            x_xtot_1_vol_wd = self.uv_uvtot_1_vol_wd[structure]
+            x_xtot_2_vol_wd = self.uv_uvtot_2_vol_wd[structure]
+            x_xtot_3_vol_wd = self.uv_uvtot_3_vol_wd[structure]
+            x_xtot_4_vol_wd = self.uv_uvtot_4_vol_wd[structure]
+        elif x == 'k':
+            x_xtot_1_vol_wd = self.k_ktot_1_vol_wd[structure]
+            x_xtot_2_vol_wd = self.k_ktot_2_vol_wd[structure]
+            x_xtot_3_vol_wd = self.k_ktot_3_vol_wd[structure]
+            x_xtot_4_vol_wd = self.k_ktot_4_vol_wd[structure]
+        elif x == 'ens':
+            x_xtot_1_vol_wd = self.ens_enstot_1_vol_wd[structure]
+            x_xtot_2_vol_wd = self.ens_enstot_2_vol_wd[structure]
+            x_xtot_3_vol_wd = self.ens_enstot_3_vol_wd[structure]
+            x_xtot_4_vol_wd = self.ens_enstot_4_vol_wd[structure]
+        
+        histogram1_vol_wd,uv_value1_vol_wd,shap_value1_vol_wd = np.histogram2d(x_xtot_1_vol_wd,self.shap_1_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram2_vol_wd,uv_value2_vol_wd,shap_value2_vol_wd = np.histogram2d(x_xtot_2_vol_wd,self.shap_2_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram3_vol_wd,uv_value3_vol_wd,shap_value3_vol_wd = np.histogram2d(x_xtot_3_vol_wd,self.shap_3_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        histogram4_vol_wd,uv_value4_vol_wd,shap_value4_vol_wd = np.histogram2d(x_xtot_4_vol_wd,self.shap_4_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         uv_value1_vol_wd = uv_value1_vol_wd[:-1]+np.diff(uv_value1_vol_wd)/2
         shap_value1_vol_wd = shap_value1_vol_wd[:-1]+np.diff(shap_value1_vol_wd)/2
         uv_value2_vol_wd = uv_value2_vol_wd[:-1]+np.diff(uv_value2_vol_wd)/2
@@ -5349,7 +5532,13 @@ class shap_conf():
         uv_values_vol_wd = {}
         shap_values_vol_wd = {}
         for structure in structures:
-            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(self.uv_uvtot_vol_wd[structure],
+            if x == 'uv':
+                x_xtot_vol_wd = self.uv_uvtot_vol_wd[structure]
+            elif x == 'k':
+                x_xtot_vol_wd = self.k_ktot_vol_wd[structure]
+            elif x == 'ens':
+                x_xtot_vol_wd = self.ens_enstot_vol_wd[structure]
+            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(x_xtot_vol_wd,
                                                             self.shap_vol_wd[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
@@ -5553,8 +5742,16 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
         plt.grid()
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
-                   fontsize=fs)
+            
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5667,8 +5864,15 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
         plt.grid()
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
-                   fontsize=fs)
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5778,8 +5982,15 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
         plt.grid()
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
-                   fontsize=fs)
+        if x == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'k':
+            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
+        elif x == 'ens':
+            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                       fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
@@ -5818,3 +6029,4 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_walldettach.png')
+        
