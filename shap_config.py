@@ -5550,13 +5550,13 @@ class shap_conf():
         shap_values_vol_wd = {}
         for structure in structures:
             if x == 'uv':
-                x_xtot_vol_wd = self.uv_uvtot_vol_wd[structure]
+                x_xtot_vol_wd = self.uv_uvtot_wd_vol[structure]
             elif x == 'k':
-                x_xtot_vol_wd = self.k_ktot_vol_wd[structure]
+                x_xtot_vol_wd = self.k_ktot_wd_vol[structure]
             elif x == 'ens':
-                x_xtot_vol_wd = self.ens_enstot_vol_wd[structure]
+                x_xtot_vol_wd = self.ens_enstot_wd_vol[structure]
             histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(x_xtot_vol_wd,
-                                                            self.shap_vol_wd[structure],
+                                                            self.shap_wd_vol[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
                                                                    [yhistmin,yhistmax]])
