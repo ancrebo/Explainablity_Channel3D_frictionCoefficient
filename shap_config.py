@@ -5793,7 +5793,7 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
+        plt.savefig('hist2d_interp_'+x+x+'totvol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
         
         fs = 20
@@ -5910,7 +5910,7 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
+        plt.savefig('hist2d_interp_'+x+x+'totvol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
         
         
@@ -6028,5 +6028,5 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_walldettach.png')
+        plt.savefig('hist2d_interp_'+x+x+'totvol_SHAPvol_'+colormap+str(structures)+'_30+_walldettach.png')
         
