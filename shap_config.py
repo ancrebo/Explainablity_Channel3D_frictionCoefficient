@@ -1639,7 +1639,7 @@ class shap_conf():
             self.k_ktot_wd_vol[structure] = np.array(hf['k_ktot_wd_vol'])
             self.ens_enstot_wa[structure] = np.array(hf['ens_enstot_wa'])
             self.ens_enstot_wd[structure] = np.array(hf['ens_enstot_wd'])
-            self.ens_uvtot_wa_vol[structure] = np.array(hf['ens_enstot_wa_vol'])
+            self.ens_enstot_wa_vol[structure] = np.array(hf['ens_enstot_wa_vol'])
             self.ens_enstot_wd_vol[structure] = np.array(hf['ens_enstot_wd_vol'])
             self.uv_vol_uvtot_vol_wa[structure] = np.array(hf['uv_vol_uvtot_vol_wa'])
             self.uv_vol_uvtot_vol_wd[structure] = np.array(hf['uv_vol_uvtot_vol_wd'])
