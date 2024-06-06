@@ -4840,7 +4840,7 @@ class shap_conf():
             histogram3_wa,uv_value3_wa,shap_value3_wa = np.histogram2d(self.uv_uvtot_3_wa,self.shap_3_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram4_wa,uv_value4_wa,shap_value4_wa = np.histogram2d(self.uv_uvtot_4_wa,self.shap_4_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             
-        elif x == 'uv':
+        elif x == 'k':
             xhistmin = np.min([np.min(self.k_ktot_1),
                                np.min(self.k_ktot_2),
                                np.min(self.k_ktot_3),
@@ -4995,6 +4995,17 @@ class shap_conf():
             histograms_wd[structure] = histogram
             uv_values_wd[structure] = uv_value
             shap_values_wd[structure] = shap_value 
+            
+        print([uv_value1_wa,
+                          uv_value2_wa,
+                          uv_value3_wa,
+                          uv_value4_wa,
+                          uv_value1_wd,
+                          uv_value2_wd,
+                          uv_value3_wd,
+                          uv_value4_wd]\
+                         +[uv_values_wa[struc] for struc in structures]\
+                         +[uv_values_wd[struc] for struc in structures])
         
         min_uv = np.min([uv_value1_wa,
                           uv_value2_wa,
