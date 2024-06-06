@@ -3915,7 +3915,7 @@ class shap_conf():
         vol_values_wd = {}
         shap_values_wd = {}
         for structure in structures:
-            histogram_wd,vol_value_wd,shap_value_wd = np.histogram2d(self.volume_wd[structure],
+            histogram,vol_value,shap_value = np.histogram2d(self.volume_wd[structure],
                                                             self.shap_wd[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
