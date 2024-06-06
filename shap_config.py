@@ -4948,20 +4948,20 @@ class shap_conf():
         # yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
         # yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
         if x == 'uv':
-            x_xtot_1_wd = self.uv_uvtot_1_wd[structure]
-            x_xtot_2_wd = self.uv_uvtot_2_wd[structure]
-            x_xtot_3_wd = self.uv_uvtot_3_wd[structure]
-            x_xtot_4_wd = self.uv_uvtot_4_wd[structure]
+            x_xtot_1_wd = self.uv_uvtot_1_wd
+            x_xtot_2_wd = self.uv_uvtot_2_wd
+            x_xtot_3_wd = self.uv_uvtot_3_wd
+            x_xtot_4_wd = self.uv_uvtot_4_wd
         elif x == 'k':
-            x_xtot_1_wd = self.k_ktot_1_wd[structure]
-            x_xtot_2_wd = self.k_ktot_2_wd[structure]
-            x_xtot_3_wd = self.k_ktot_3_wd[structure]
-            x_xtot_4_wd = self.k_ktot_4_wd[structure]
+            x_xtot_1_wd = self.k_ktot_1_wd
+            x_xtot_2_wd = self.k_ktot_2_wd
+            x_xtot_3_wd = self.k_ktot_3_wd
+            x_xtot_4_wd = self.k_ktot_4_wd
         elif x == 'ens':
-            x_xtot_1_wd = self.ens_enstot_1_wd[structure]
-            x_xtot_2_wd = self.ens_enstot_2_wd[structure]
-            x_xtot_3_wd = self.ens_enstot_3_wd[structure]
-            x_xtot_4_wd = self.ens_enstot_4_wd[structure]
+            x_xtot_1_wd = self.ens_enstot_1_wd
+            x_xtot_2_wd = self.ens_enstot_2_wd
+            x_xtot_3_wd = self.ens_enstot_3_wd
+            x_xtot_4_wd = self.ens_enstot_4_wd
         histogram1_wd,uv_value1_wd,shap_value1_wd = np.histogram2d(x_xtot_1_wd,self.shap_1_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2_wd,uv_value2_wd,shap_value2_wd = np.histogram2d(x_xtot_2_wd,self.shap_2_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram3_wd,uv_value3_wd,shap_value3_wd = np.histogram2d(x_xtot_3_wd,self.shap_3_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
@@ -5461,20 +5461,20 @@ class shap_conf():
         # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
         
         if x == 'uv':
-            x_xtot_1_vol_wa = self.uv_uvtot_1_vol_wa[structure]
-            x_xtot_2_vol_wa = self.uv_uvtot_2_vol_wa[structure]
-            x_xtot_3_vol_wa = self.uv_uvtot_3_vol_wa[structure]
-            x_xtot_4_vol_wa = self.uv_uvtot_4_vol_wa[structure]
+            x_xtot_1_vol_wa = self.uv_uvtot_1_vol_wa
+            x_xtot_2_vol_wa = self.uv_uvtot_2_vol_wa
+            x_xtot_3_vol_wa = self.uv_uvtot_3_vol_wa
+            x_xtot_4_vol_wa = self.uv_uvtot_4_vol_wa
         elif x == 'k':
-            x_xtot_1_vol_wa = self.k_ktot_1_vol_wa[structure]
-            x_xtot_2_vol_wa = self.k_ktot_2_vol_wa[structure]
-            x_xtot_3_vol_wa = self.k_ktot_3_vol_wa[structure]
-            x_xtot_4_vol_wa = self.k_ktot_4_vol_wa[structure]
+            x_xtot_1_vol_wa = self.k_ktot_1_vol_wa
+            x_xtot_2_vol_wa = self.k_ktot_2_vol_wa
+            x_xtot_3_vol_wa = self.k_ktot_3_vol_wa
+            x_xtot_4_vol_wa = self.k_ktot_4_vol_wa
         elif x == 'ens':
-            x_xtot_1_vol_wa = self.ens_enstot_1_vol_wa[structure]
-            x_xtot_2_vol_wa = self.ens_enstot_2_vol_wa[structure]
-            x_xtot_3_vol_wa = self.ens_enstot_3_vol_wa[structure]
-            x_xtot_4_vol_wa = self.ens_enstot_4_vol_wa[structure]
+            x_xtot_1_vol_wa = self.ens_enstot_1_vol_wa
+            x_xtot_2_vol_wa = self.ens_enstot_2_vol_wa
+            x_xtot_3_vol_wa = self.ens_enstot_3_vol_wa
+            x_xtot_4_vol_wa = self.ens_enstot_4_vol_wa
         
         histogram1_vol_wa,uv_value1_vol_wa,shap_value1_vol_wa = np.histogram2d(x_xtot_1_vol_wa,self.shap_1_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2_vol_wa,uv_value2_vol_wa,shap_value2_vol_wa = np.histogram2d(x_xtot_2_vol_wa,self.shap_2_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
@@ -5516,20 +5516,20 @@ class shap_conf():
         # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
         
         if x == 'uv':
-            x_xtot_1_vol_wd = self.uv_uvtot_1_vol_wd[structure]
-            x_xtot_2_vol_wd = self.uv_uvtot_2_vol_wd[structure]
-            x_xtot_3_vol_wd = self.uv_uvtot_3_vol_wd[structure]
-            x_xtot_4_vol_wd = self.uv_uvtot_4_vol_wd[structure]
+            x_xtot_1_vol_wd = self.uv_uvtot_1_vol_wd
+            x_xtot_2_vol_wd = self.uv_uvtot_2_vol_wd
+            x_xtot_3_vol_wd = self.uv_uvtot_3_vol_wd
+            x_xtot_4_vol_wd = self.uv_uvtot_4_vol_wd
         elif x == 'k':
-            x_xtot_1_vol_wd = self.k_ktot_1_vol_wd[structure]
-            x_xtot_2_vol_wd = self.k_ktot_2_vol_wd[structure]
-            x_xtot_3_vol_wd = self.k_ktot_3_vol_wd[structure]
-            x_xtot_4_vol_wd = self.k_ktot_4_vol_wd[structure]
+            x_xtot_1_vol_wd = self.k_ktot_1_vol_wd
+            x_xtot_2_vol_wd = self.k_ktot_2_vol_wd
+            x_xtot_3_vol_wd = self.k_ktot_3_vol_wd
+            x_xtot_4_vol_wd = self.k_ktot_4_vol_wd
         elif x == 'ens':
-            x_xtot_1_vol_wd = self.ens_enstot_1_vol_wd[structure]
-            x_xtot_2_vol_wd = self.ens_enstot_2_vol_wd[structure]
-            x_xtot_3_vol_wd = self.ens_enstot_3_vol_wd[structure]
-            x_xtot_4_vol_wd = self.ens_enstot_4_vol_wd[structure]
+            x_xtot_1_vol_wd = self.ens_enstot_1_vol_wd
+            x_xtot_2_vol_wd = self.ens_enstot_2_vol_wd
+            x_xtot_3_vol_wd = self.ens_enstot_3_vol_wd
+            x_xtot_4_vol_wd = self.ens_enstot_4_vol_wd
         
         histogram1_vol_wd,uv_value1_vol_wd,shap_value1_vol_wd = np.histogram2d(x_xtot_1_vol_wd,self.shap_1_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2_vol_wd,uv_value2_vol_wd,shap_value2_vol_wd = np.histogram2d(x_xtot_2_vol_wd,self.shap_2_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
