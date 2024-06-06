@@ -5555,7 +5555,7 @@ class shap_conf():
                 x_xtot_vol_wd = self.k_ktot_wd_vol[structure]
             elif x == 'ens':
                 x_xtot_vol_wd = self.ens_enstot_wd_vol[structure]
-            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(x_xtot_vol_wd,
+            histogram,uv_value,shap_value = np.histogram2d(x_xtot_vol_wd,
                                                             self.shap_wd_vol[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
