@@ -5268,10 +5268,38 @@ class shap_conf():
         plt.tight_layout()
         plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
-        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
-        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
-        yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
-        yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
+        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),
+                           np.min(self.uv_uvtot_2_vol),
+                           np.min(self.uv_uvtot_3_vol),
+                           np.min(self.uv_uvtot_4_vol)]\
+                          +[np.min(self.uv_uvtot_vol[struc]) for struc in structures]
+                          )/1.2
+            
+        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),
+                           np.max(self.uv_uvtot_2_vol), 
+                           np.max(self.uv_uvtot_3_vol),
+                           np.max(self.uv_uvtot_4_vol)]\
+                          +[np.max(self.uv_uvtot_vol[struc]) for struc in structures]
+                          )*1.2
+            
+        yhistmin = np.min([np.min(self.shap_1_vol),
+                           np.min(self.shap_2_vol),
+                           np.min(self.shap_3_vol),
+                           np.min(self.shap_4_vol)]\
+                          +[np.min(self.shap_vol[struc]) for struc in structures]
+                          )/1.2
+        
+        yhistmax = np.max([np.max(self.shap_1_vol),
+                           np.max(self.shap_2_vol),
+                           np.max(self.shap_3_vol),
+                           np.max(self.shap_4_vol)]
+                          +[np.max(self.shap_vol[struc]) for struc in structures]
+                          )*1.2
+        
+        # xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
+        # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
+        # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
+        # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
         histogram1_vol_wa,uv_value1_vol_wa,shap_value1_vol_wa = np.histogram2d(self.uv_uvtot_1_vol_wa,self.shap_1_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2_vol_wa,uv_value2_vol_wa,shap_value2_vol_wa = np.histogram2d(self.uv_uvtot_2_vol_wa,self.shap_2_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram3_vol_wa,uv_value3_vol_wa,shap_value3_vol_wa = np.histogram2d(self.uv_uvtot_3_vol_wa,self.shap_3_vol_wa,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
@@ -5284,10 +5312,26 @@ class shap_conf():
         shap_value3_vol_wa = shap_value3_vol_wa[:-1]+np.diff(shap_value3_vol_wa)/2
         uv_value4_vol_wa = uv_value4_vol_wa[:-1]+np.diff(uv_value4_vol_wa)/2
         shap_value4_vol_wa = shap_value4_vol_wa[:-1]+np.diff(shap_value4_vol_wa)/2
-        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
-        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
-        yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
-        yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
+        
+        histograms_vol_wa = {}
+        uv_values_vol_wa = {}
+        shap_values_vol_wa = {}
+        for structure in structures:
+            histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot_vol_wa[structure],
+                                                           self.shap_vol_wa[structure],
+                                                           bins=bin_num,
+                                                           range=[[xhistmin,xhistmax],
+                                                                  [yhistmin,yhistmax]])
+            uv_value = uv_value[:-1]+np.diff(uv_value)/2
+            shap_value = shap_value[:-1]+np.diff(shap_value)/2
+            histograms_vol_wa[structure] = histogram
+            uv_values_vol_wa[structure] = uv_value
+            shap_values_vol_wa[structure] = shap_value 
+            
+        # xhistmin = np.min([np.min(self.uv_uvtot_1_vol),np.min(self.uv_uvtot_2_vol),np.min(self.uv_uvtot_3_vol),np.min(self.uv_uvtot_4_vol)])/1.2
+        # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
+        # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
+        # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
         histogram1_vol_wd,uv_value1_vol_wd,shap_value1_vol_wd = np.histogram2d(self.uv_uvtot_1_vol_wd,self.shap_1_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2_vol_wd,uv_value2_vol_wd,shap_value2_vol_wd = np.histogram2d(self.uv_uvtot_2_vol_wd,self.shap_2_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram3_vol_wd,uv_value3_vol_wd,shap_value3_vol_wd = np.histogram2d(self.uv_uvtot_3_vol_wd,self.shap_3_vol_wd,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
@@ -5300,10 +5344,70 @@ class shap_conf():
         shap_value3_vol_wd = shap_value3_vol_wd[:-1]+np.diff(shap_value3_vol_wd)/2
         uv_value4_vol_wd = uv_value4_vol_wd[:-1]+np.diff(uv_value4_vol_wd)/2
         shap_value4_vol_wd = shap_value4_vol_wd[:-1]+np.diff(shap_value4_vol_wd)/2
-        min_uv_vol = np.min([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
-        max_uv_vol = np.max([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
-        min_shap_vol = np.min([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
-        max_shap_vol = np.max([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
+        
+        histograms_vol_wd = {}
+        uv_values_vol_wd = {}
+        shap_values_vol_wd = {}
+        for structure in structures:
+            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(self.uv_uvtot_vol_wd[structure],
+                                                            self.shap_vol_wd[structure],
+                                                            bins=bin_num,
+                                                            range=[[xhistmin,xhistmax],
+                                                                   [yhistmin,yhistmax]])
+            uv_value = uv_value[:-1]+np.diff(uv_value)/2
+            shap_value = shap_value[:-1]+np.diff(shap_value)/2
+            histograms_vol_wd[structure] = histogram
+            uv_values_vol_wd[structure] = uv_value
+            shap_values_vol_wd[structure] = shap_value 
+        
+        min_uv_vol = np.min([uv_value1_vol_wa,
+                         uv_value2_vol_wa,
+                         uv_value3_vol_wa,
+                          uv_value4_vol_wa,
+                          uv_value1_vol_wd,
+                          uv_value2_vol_wd,
+                          uv_value3_vol_wd,
+                          uv_value4_vol_wd]\
+                         +[uv_values_vol_wa[struc] for struc in structures]\
+                         +[uv_values_vol_wd[struc] for struc in structures])
+            
+        max_uv_vol = np.max([uv_value1_vol_wa,
+                          uv_value2_vol_wa,
+                          uv_value3_vol_wa,
+                          uv_value4_vol_wa,
+                          uv_value1_vol_wd,
+                          uv_value2_vol_wd,
+                          uv_value3_vol_wd,
+                          uv_value4_vol_wd]\
+                         +[uv_values_vol_wa[struc] for struc in structures]\
+                         +[uv_values_vol_wd[struc] for struc in structures])
+            
+        min_shap_vol = np.min([shap_value1_vol_wa,
+                           shap_value2_vol_wa,
+                           shap_value3_vol_wa,
+                           shap_value4_vol_wa,
+                           shap_value1_vol_wd,
+                           shap_value2_vol_wd,
+                           shap_value3_vol_wd,
+                           shap_value4_vol_wd]\
+                          +[shap_values_vol_wa[struc] for struc in structures]\
+                          +[shap_values_vol_wd[struc] for struc in structures])
+        
+        max_shap_vol = np.max([shap_value1_vol_wa,
+                           shap_value2_vol_wa,
+                           shap_value3_vol_wa,
+                           shap_value4_vol_wa,
+                           shap_value1_vol_wd,
+                           shap_value2_vol_wd,
+                           shap_value3_vol_wd,
+                           shap_value4_vol_wd]\
+                          +[shap_values_vol_wa[struc] for struc in structures]\
+                          +[shap_values_vol_wd[struc] for struc in structures])
+        
+        # min_uv_vol = np.min([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
+        # max_uv_vol = np.max([uv_value1_vol_wa,uv_value2_vol_wa,uv_value3_vol_wa,uv_value4_vol_wa,uv_value1_vol_wd,uv_value2_vol_wd,uv_value3_vol_wd,uv_value4_vol_wd])
+        # min_shap_vol = np.min([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
+        # max_shap_vol = np.max([shap_value1_vol_wa,shap_value2_vol_wa,shap_value3_vol_wa,shap_value4_vol_wa,shap_value1_vol_wd,shap_value2_vol_wd,shap_value3_vol_wd,shap_value4_vol_wd])
         interp_h1_vol_wa = interp2d(uv_value1_vol_wa,shap_value1_vol_wa,histogram1_vol_wa)
         interp_h2_vol_wa = interp2d(uv_value2_vol_wa,shap_value2_vol_wa,histogram2_vol_wa)
         interp_h3_vol_wa = interp2d(uv_value3_vol_wa,shap_value3_vol_wa,histogram3_vol_wa)
@@ -5323,6 +5427,21 @@ class shap_conf():
         histogram_Q2_vol_wd = interp_h2_vol_wd(vec_uv_vol,vec_shap_vol)
         histogram_Q3_vol_wd = interp_h3_vol_wd(vec_uv_vol,vec_shap_vol)
         histogram_Q4_vol_wd = interp_h4_vol_wd(vec_uv_vol,vec_shap_vol)
+        
+        histograms_struc_vol_wa = {}
+        for structure in structures:
+            interp_h = interp2d(uv_values_vol_wa[structure],
+                                shap_values_vol_wa[structure],
+                                histograms_vol_wa[structure])
+            histograms_struc_vol_wa[structure] = interp_h(vec_uv_vol,vec_shap_vol)
+            
+        histograms_struc_vol_wd = {}
+        for structure in structures:
+            interp_h = interp2d(uv_values_vol_wd[structure],
+                                shap_values_vol_wd[structure],
+                                histograms_vol_wd[structure])
+            histograms_struc_vol_wd[structure] = interp_h(vec_uv_vol,vec_shap_vol)
+        
         fs = 20
         plt.figure()
         cmap_fill = plt.cm.get_cmap('viridis', 10)
@@ -5353,34 +5472,81 @@ class shap_conf():
         plt.plot([x2,x2],[y1_2,y1_1],color='k')
         plt.plot([x2,x2],[ytop,y1_1],color='k')
         plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
-        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
-        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
-        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
-        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
-        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
-        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
-        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
-        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
-        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
-        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(uv_grid_vol,
+                         shap_grid_vol,
+                         histograms_struc_vol_wa[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(uv_grid_vol,
+                        shap_grid_vol,
+                        histograms_struc_vol_wa[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)])
+        
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(uv_grid_vol,
+                         shap_grid_vol,
+                         histograms_struc_vol_wd[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val],colors=[(color11,color12,color13)],linestyles='dashed')
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val],colors=[(color21,color22,color23)],linestyles='dashed')
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val],colors=[(color31,color32,color33)],linestyles='dashed')
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val],colors=[(color41,color42,color43)],linestyles='dashed')
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(uv_grid_vol,
+                        shap_grid_vol,
+                        histograms_struc_vol_wd[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)],
+                        linestyles='dashed')
+        
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
@@ -5394,13 +5560,43 @@ class shap_conf():
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
-                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf)),\
-                   mpl.lines.Line2D([0],[0],linestyle='solid',color='k'),\
-                   mpl.lines.Line2D([0],[0],linestyle='dashed',color='k')]
-        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps','W-A','W-D']
+                   mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
+        labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        
+        for ii, structure in enumerate(structures):
+            if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+        handles += [mpl.lines.Line2D([0],[0],linestyle='solid',color='k'),
+                    mpl.lines.Line2D([0],[0],linestyle='dashed',color='k')]
+        labels += ['W-A','W-D']
+        
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_wall.png')
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
         
         fs = 20
@@ -5422,26 +5618,49 @@ class shap_conf():
         plt.plot([x2,x2],[y1_2,y1_1],color='k')
         plt.plot([x2,x2],[ytop,y1_1],color='k')
         plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
-        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
-        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
-        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
-        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
-        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
-        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
-        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
-        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
-        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
-        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(uv_grid_vol,
+                         shap_grid_vol,
+                         histograms_struc_vol_wa[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wa.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wa.T,levels=[lev_val],colors=[(color21,color22,color23)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wa.T,levels=[lev_val],colors=[(color31,color32,color33)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wa.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(uv_grid_vol,
+                        shap_grid_vol,
+                        histograms_struc_vol_wa[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)])
+        
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
@@ -5457,9 +5676,37 @@ class shap_conf():
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
         labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        
+        for ii, structure in enumerate(structures):
+            if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+        
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_wallattach.png')
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
         
         
@@ -5482,26 +5729,49 @@ class shap_conf():
         plt.plot([x2,x2],[y1_2,y1_1],color='k')
         plt.plot([x2,x2],[ytop,y1_1],color='k')
         plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
-        color11 = plt.cm.get_cmap(colormap,4).colors[0,0]
-        color12 = plt.cm.get_cmap(colormap,4).colors[0,1]
-        color13 = plt.cm.get_cmap(colormap,4).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,4).colors[1,0]
-        color22 = plt.cm.get_cmap(colormap,4).colors[1,1]
-        color23 = plt.cm.get_cmap(colormap,4).colors[1,2]
-        color31 = plt.cm.get_cmap(colormap,4).colors[2,0]
-        color32 = plt.cm.get_cmap(colormap,4).colors[2,1]
-        color33 = plt.cm.get_cmap(colormap,4).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,4).colors[3,0]
-        color42 = plt.cm.get_cmap(colormap,4).colors[3,1]
-        color43 = plt.cm.get_cmap(colormap,4).colors[3,2]
+        color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
+        color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
+        color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,0]
+        color22 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,1]
+        color23 = plt.cm.get_cmap(colormap,4+len(structures)).colors[1,2]
+        color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
+        color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
+        color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
+        color41 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,4+len(structures)).colors[3,2]
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contourf(uv_grid_vol,
+                         shap_grid_vol,
+                         histograms_struc_vol_wd[structure].T,
+                         levels=[lev_val,1e5*lev_val],
+                         colors=[(colorx1,colorx2,colorx3)],
+                         alpha=alf)
+        
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q1_vol_wd.T,levels=[lev_val],colors=[(color11,color12,color13)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q2_vol_wd.T,levels=[lev_val],colors=[(color21,color22,color23)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q3_vol_wd.T,levels=[lev_val],colors=[(color31,color32,color33)])
         plt.contour(uv_grid_vol,shap_grid_vol,histogram_Q4_vol_wd.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        
+        for ii, structure in enumerate(structures):
+            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+            plt.contour(uv_grid_vol,
+                        shap_grid_vol,
+                        histograms_struc_vol_wd[structure].T,
+                        levels=[lev_val],
+                        colors=[(colorx1,colorx2,colorx3)])
+        
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
@@ -5517,6 +5787,34 @@ class shap_conf():
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color31,color32,color33,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color31,color32,color33,alf)),\
                    mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color41,color42,color43,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color41,color42,color43,alf))]
         labels= ['Outward\ninteractions','Ejections','Inward\ninteractions','Sweeps']
+        
+        for ii, structure in enumerate(structures):
+            if structure == 'streak':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'chong':
+                colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,0]
+                colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,1]
+                colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
+                labels.append('Vortices\n (Chong)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+        
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+'_30+_walldettach.png')
+        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+_walldettach.png')
