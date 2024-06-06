@@ -4405,6 +4405,17 @@ class shap_conf():
             vol_values_vol_wd[structure] = vol_value
             shap_values_vol_wd[structure] = shap_value 
             
+        print([vol_value1_vol_wa,
+                          vol_value2_vol_wa,
+                          vol_value3_vol_wa,
+                          vol_value4_vol_wa,
+                          vol_value1_vol_wd,
+                          vol_value2_vol_wd,
+                          vol_value3_vol_wd,
+                          vol_value4_vol_wd]\
+                         +[vol_values_vol_wa[struc] for struc in structures]\
+                         +[vol_values_vol_wd[struc] for struc in structures])
+            
         min_vol_vol = np.min([vol_value1_vol_wa,
                           vol_value2_vol_wa,
                           vol_value3_vol_wa,
