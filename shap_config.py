@@ -1537,7 +1537,7 @@ class shap_conf():
                          dir_grad='./',
                          structure = 'streak',
                          dataset = 'P125_21pi_vu',
-                         error = 'mse',
+                         mode = 'mse',
                          # fileQ='../../../data2/cremades/P125_21pi_vu_Q_divide/P125_21pi_vu',\
                          # fileuvw='../P125_21pi_vu/P125_21pi_vu',\
                          fileUmean="Umean.txt",
@@ -1559,9 +1559,9 @@ class shap_conf():
         import os
         
         fileread=f'data_plots.h5.{structure}'
-        if error == 'mse':
+        if mode == 'mse':
             file_shap=dir_shap+f'{dataset}_{structure}_SHAP_mse/{dataset}'
-        elif error == 'cf':
+        elif mode == 'cf':
             file_shap=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
         
         fileuvw=dir_uvw+f'{dataset}/{dataset}'
