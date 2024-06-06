@@ -4985,7 +4985,7 @@ class shap_conf():
                 x_xtot_wd = self.k_ktot_wd[structure]
             elif x == 'ens':
                 x_xtot_wd = self.ens_enstot_wd[structure]
-            histogram_wd,uv_value_wd,shap_value_wd = np.histogram2d(x_xtot_wd,
+            histogram,uv_value,shap_value = np.histogram2d(x_xtot_wd,
                                                             self.shap_wd[structure],
                                                             bins=bin_num,
                                                             range=[[xhistmin,xhistmax],
@@ -4996,10 +4996,6 @@ class shap_conf():
             uv_values_wd[structure] = uv_value
             shap_values_wd[structure] = shap_value 
             
-        print(type([uv_values_wa[struc] for struc in structures]\
-        +[uv_values_wd[struc] for struc in structures]))
-        print([uv_values_wa[struc] for struc in structures]\
-        +[uv_values_wd[struc] for struc in structures])
         
         min_uv = np.min([uv_value1_wa,
                           uv_value2_wa,
