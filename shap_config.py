@@ -244,11 +244,11 @@ class shap_conf():
         # pred = self.model.predict(input_pred)
         pred = self.model_opt.predict(input_pred)
         
-        len_y = self.output.shape[0]
-        len_z = self.output.shape[1]
-        len_x = self.output.shape[2]
-    
+        
         if error == 'mse':
+            len_y = self.output.shape[0]
+            len_z = self.output.shape[1]
+            len_x = self.output.shape[2]
             mse  = np.mean(np.sqrt((self.output.reshape(-1,len_y,len_z,len_x,3)\
                                     -pred)**2))
             return mse
