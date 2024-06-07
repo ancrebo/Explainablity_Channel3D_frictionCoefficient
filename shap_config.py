@@ -12,22 +12,37 @@ from tqdm import tqdm
 
 class shap_conf():
     
-    def __init__(self,filecnn='trained_model.h5'):
+    def __init__(self,filecnn='trained_model.h5', mode='mse'):
         """
         Initialization of the SHAP class
         """
-        import ann_config_3D as ann
-        self.background = None
-        CNN = ann.convolutional_residual()
-        # CNN.load_ANN(filename=filecnn)
-        # CNN.load_frozen_model()
-        CNN.load_optimized_model()
-        # CNN.load_openvino_optimized_model()
-        # self.model = CNN.model
-        # self.frozen_func = CNN.frozen_func
-        self.model_opt = CNN.model_opt 
-        # self.model_opt_openvino = CNN.compiled_model
-        # self.output_key = CNN.output_key
+        if mode == 'mse':
+            import ann_config_3D as ann
+            self.background = None
+            CNN = ann.convolutional_residual()
+            # CNN.load_ANN(filename=filecnn)
+            # CNN.load_frozen_model()
+            CNN.load_optimized_model()
+            # CNN.load_openvino_optimized_model()
+            # self.model = CNN.model
+            # self.frozen_func = CNN.frozen_func
+            self.model_opt = CNN.model_opt 
+            # self.model_opt_openvino = CNN.compiled_model
+            # self.output_key = CNN.output_key
+        elif mode == 'cf':
+            import ann_config_1D as ann
+            self.background = None
+            CNN = ann.convolutional_residual()
+            CNN.load_ANN(filename=filecnn)
+            # CNN.load_frozen_model()
+            # CNN.load_optimized_model()
+            # CNN.load_openvino_optimized_model()
+            self.model = CNN.model
+            # self.frozen_func = CNN.frozen_func
+            # self.model_opt = CNN.model_opt 
+            # self.model_opt_openvino = CNN.compiled_model
+            # self.output_key = CNN.output_key
+            
         
     def calc_shap_kernel(self,
                          start,
@@ -241,11 +256,8 @@ class shap_conf():
                                              model_input.shape[2],\
                                                  model_input.shape[3])
         
-        # pred = self.model.predict(input_pred)
-        pred = self.model_opt.predict(input_pred)
-        
-        
         if error == 'mse':
+            pred = self.model_opt.predict(input_pred)
             len_y = self.output.shape[0]
             len_z = self.output.shape[1]
             len_x = self.output.shape[2]
@@ -254,6 +266,7 @@ class shap_conf():
             return mse
         
         elif error == 'cf':
+            pred = self.model.predict(input_pred)
             mse_cf = np.mean(np.sqrt((self.output-pred)**2))
             return mse_cf
     
