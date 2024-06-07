@@ -254,7 +254,7 @@ class shap_conf():
             return mse
         
         elif error == 'cf':
-            mse_cf = np.sqrt((self.output-pred)**2)
+            mse_cf = np.mean(np.sqrt((self.output-pred)**2))
             return mse_cf
     
     
