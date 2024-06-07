@@ -39,6 +39,7 @@ class shap_conf():
                          dir_shap='./',
                          dir_uvw='./',
                          dir_structures='./',
+                         dir_cf='./',
                          fileUmean="Umean.txt",
                          filenorm="norm.txt",
                          filerms="Urms.txt",
@@ -57,7 +58,9 @@ class shap_conf():
             file=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
             
         fileuvw=dir_uvw+f'{dataset}/{dataset}'
-        normdata = gd.get_data_norm(file_read=fileuvw)
+        filecf=dir_cf+f'{dataset}_cf/{dataset}'
+        normdata = gd.get_data_norm(file_read=fileuvw,
+                                    file_cf=filecf)
         normdata.geom_param(start,1,1,1)
         try:
             normdata.read_Umean(file=fileUmean)
