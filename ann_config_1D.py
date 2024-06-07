@@ -230,7 +230,7 @@ class convolutional_residual():
         self.outputs = xx18d #xx16b
         
     
-    def define_model(self,shp=(201,96,192,3),nfil=np.array([16,24,48]),\
+    def define_model(self,shp=(201,96,192,3),nfil=np.array([8,16,32]),\
                      stride=np.array([1,1,1]),\
                      activ=["relu","relu","relu"],\
                      kernel=[(3,3,3),(3,3,3),(3,3,3)],optmom=0.9,\
@@ -249,7 +249,7 @@ class convolutional_residual():
         import tensorflow as tf
         from tensorflow.keras import Model
         from tensorflow.keras.optimizers import RMSprop
-        from tensorflow.keras.optimizers.schedules import ExponentialDecay
+        from tensorflow.keras.optimizers.schedules import PiecewiseConstantDecay
         
         os.environ["CUDA_VISIBLE_DEVICES"] = self.cudadevice
         print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
@@ -270,10 +270,8 @@ class convolutional_residual():
             print(gpu.name)
         with strategy.scope(): 
             self.model_base(shp,nfil,stride,activ,kernel,padpix)
-            lr_schedule = ExponentialDecay(learat,
-                                           decay_steps=10,
-                                           decay_rate=0.95,
-                                           staircase=True)
+            lr_schedule = PiecewiseConstantDecay(boundaries=[60, 2000],
+                                                 values=[learat, 0.1*learat, 0.01*learat])
             optimizer = RMSprop(learning_rate=lr_schedule,momentum=optmom) 
             self.model = Model(self.inputs, self.outputs)
             self.model.compile(loss=tf.keras.losses.MeanSquaredError(),\
@@ -1526,7 +1524,7 @@ class convolutional_residual():
             # error_vv = abs(vv_p-vv_s)/np.max([abs(data.vvmax),abs(data.vvmin)])
             # error_ww = abs(ww_p-ww_s)/np.max([abs(data.wwmax),abs(data.wwmin)])
             cf_err[0, int(np.floor((ii-start)/step))] = np.abs((cf_p-cf_s)/cf_s)
-            if np.abs((cf_p-cf-s)/cf_s) > 0.05:
+            if np.abs((cf_p-cf_s)/cf_s) > 0.05:
                 over_5 += 1
             # if ii==start:
             #     # error_uu_cum = np.sum(np.multiply(error_uu,data.vol))
