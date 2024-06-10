@@ -4281,7 +4281,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
             plt.contour(vol_grid,
                         shap_grid,
-                        histograms_struc_wa[structure].T,
+                        histograms_struc_wd[structure].T,
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)])
         
@@ -4325,8 +4325,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3])
-        plt.ylim([0,7])
+        plt.xlim([0,1])
+        plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4759,7 +4759,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+4,2]
             plt.contour(vol_grid_vol,
                         shap_grid_vol,
-                        histograms_struc_vol_wa[structure].T,
+                        histograms_struc_vol_wd[structure].T,
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)])
         
@@ -4803,8 +4803,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3.5])
-        plt.ylim([0,5.5])
+        plt.xlim([0,1])
+        plt.ylim([0,4.5])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
