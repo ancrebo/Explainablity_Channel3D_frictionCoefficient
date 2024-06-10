@@ -5373,8 +5373,8 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        plt.xlim([0,0.1])
+        plt.ylim([0,2])
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                        fontsize=fs)
@@ -5945,7 +5945,17 @@ class shap_conf():
         plt.tight_layout()
         plt.savefig('hist2d_interp_'+x+x+'totvol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
-        
+        x0 = 0
+        x0b = 0.5
+        x1 = 0.1
+        x2 = 0.3
+        x3 = 0.8
+        y0_1 = 2.5
+        y1_1 = 3.5
+        y0_2 = 0
+        y1_2 = 0.8
+        ytop = 4
+        ytop2 = y1_1
         
         fs = 20
         plt.figure()
