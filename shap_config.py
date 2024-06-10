@@ -5396,11 +5396,14 @@ class shap_conf():
         plt.grid()
         
         if x == 'ens':
-            plt.xlim([0,0.005])
-            plt.ylim([0,1.5])
-        else:
-            plt.xlim([0,0.025])
-            plt.ylim([0,1.3])
+            plt.xlim([0.0005,0.005])
+            plt.ylim([0.05,1.5])
+        elif x == 'k':
+            plt.xlim([0.002,0.025])
+            plt.ylim([0.05,1.3])
+        elif x == 'uv':
+            plt.xlim([0.005,0.04])
+            plt.ylim([0.05,1.3])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -6095,8 +6098,8 @@ class shap_conf():
             plt.ylim([0,4])
             plt.xlim([0,0.6])
         elif x == 'uv':
-            plt.xlim([0,4])
-            plt.ylim([0,1])
+            plt.ylim([0,4])
+            plt.xlim([0,1])
         
         plt.grid()
         if x == 'uv':
