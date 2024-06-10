@@ -4334,8 +4334,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,1])
-        plt.ylim([0,2])
+        plt.xlim([0.02,1])
+        plt.ylim([0.02,2])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4812,7 +4812,7 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,1])
+        plt.xlim([0.01,1])
         plt.ylim([0,4.5])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -5396,13 +5396,13 @@ class shap_conf():
         plt.grid()
         
         if x == 'ens':
-            plt.xlim([0.0005,0.005])
+            plt.xlim([0.0006,0.005])
             plt.ylim([0.05,1.5])
         elif x == 'k':
-            plt.xlim([0.002,0.025])
+            plt.xlim([0.001,0.025])
             plt.ylim([0.05,1.3])
         elif x == 'uv':
-            plt.xlim([0.005,0.04])
+            plt.xlim([0.0005,0.05])
             plt.ylim([0.05,1.3])
             
         if x == 'uv':
@@ -6093,7 +6093,7 @@ class shap_conf():
         '''
         if x == 'ens':
             plt.ylim([0,4.5])
-            plt.xlim([0,0.25])
+            plt.xlim([0.02,0.25])
         elif x == 'k':
             plt.ylim([0,4])
             plt.xlim([0,0.6])
