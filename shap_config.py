@@ -3499,7 +3499,7 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
+        plt.xlim([0,0.08])
         plt.ylim([0,7])
         plt.xlabel('$\overline{ens}_e/(\overline{ens}_\mathrm{tot})$',\
                    fontsize=fs)
@@ -3733,8 +3733,8 @@ class shap_conf():
         plt.xlim([x0,x3])
         '''
         
-        plt.ylim([0,6])
-        plt.xlim([0,3])
+        plt.ylim([0,5.5])
+        plt.xlim([0,2.5])
         
         plt.grid()
         plt.xlabel('$\overline{ens}_e/(\overline{ens}_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -5183,8 +5183,14 @@ class shap_conf():
                         linestyles='dashed')
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        
+        if x == 'ens':
+            plt.xlim([0,0.08])
+            plt.ylim([0,7])
+        else:
+            plt.xlim([0,0.2])
+            plt.ylim([0,7])
+            
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                        fontsize=fs)
@@ -5285,8 +5291,14 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        
+        if x == 'ens':
+            plt.xlim([0,0.08])
+            plt.ylim([0,7])
+        else:
+            plt.xlim([0,0.2])
+            plt.ylim([0,7])
+            
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                        fontsize=fs)
@@ -5382,8 +5394,14 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.1])
-        plt.ylim([0,2])
+        
+        if x == 'ens':
+            plt.xlim([0,0.02])
+            plt.ylim([0,1.5])
+        else:
+            plt.xlim([0,0.05])
+            plt.ylim([0,1.5])
+            
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                        fontsize=fs)
@@ -5687,6 +5705,7 @@ class shap_conf():
         y1_2 = 0.8
         ytop = 4.5
         ytop2 = y1_1
+        '''
         plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
                          color=cmap_fill(0.9),alpha=0.1)
         plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
@@ -5703,6 +5722,8 @@ class shap_conf():
         plt.plot([x2,x2],[y1_2,y1_1],color='k')
         plt.plot([x2,x2],[ytop,y1_1],color='k')
         plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        '''
+        
         color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
@@ -5777,12 +5798,20 @@ class shap_conf():
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)],
                         linestyles='dashed')
-        
+        '''
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
         plt.ylim([y0_2,ytop])
-        plt.xlim([x0,x3])
+        plt.xlim([x0,x3])'''
+        
+        if x == 'ens':
+            plt.xlim([0,2.5])
+            plt.ylim([0,5.5])
+        else:
+            plt.xlim([0,1.25])
+            plt.ylim([0,4.5])
+            
         plt.grid()
             
         if x == 'uv':
@@ -5899,12 +5928,21 @@ class shap_conf():
                         histograms_struc_vol_wa[structure].T,
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)])
-        
+        '''
         plt.text(0.5, 0.1, 'A', fontsize = 20)
         plt.text(1.5, 2.1, 'B', fontsize = 20)   
         plt.text(0.5, 4, 'C', fontsize = 20) 
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
+        '''
+        
+        if x == 'ens':
+            plt.xlim([0,2.5])
+            plt.ylim([0,5.5])
+        else:
+            plt.xlim([0,1.25])
+            plt.ylim([0,4.5])
+        
         plt.grid()
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -6041,12 +6079,12 @@ class shap_conf():
         plt.xlim([x0,x3])
         '''
         if x == 'ens':
-            plt.ylim([0,4])
-            plt.xlim([0,0.8])
+            plt.ylim([0,5])
+            plt.xlim([0,0.4])
             
         else:
             plt.ylim([0,4])
-            plt.xlim([0,0.8])
+            plt.xlim([0,0.6])
         
         plt.grid()
         if x == 'uv':
