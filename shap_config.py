@@ -3751,7 +3751,7 @@ class shap_conf():
         plt.xlim([0,2.5])
         
         plt.grid()
-        plt.xlabel('$\overline{ens}_e/(\overline{ens}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+        plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
