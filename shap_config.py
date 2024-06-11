@@ -3514,7 +3514,7 @@ class shap_conf():
         plt.grid()
         plt.xlim([0,0.05])
         plt.ylim([0,7])
-        plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+        plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -3751,7 +3751,7 @@ class shap_conf():
         plt.xlim([0,2.5])
         
         plt.grid()
-        plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+        plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -5219,7 +5219,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot})$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -5328,7 +5328,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot})$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -5435,7 +5435,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot})$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot})$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -5851,7 +5851,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -5989,7 +5989,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -6135,7 +6135,7 @@ class shap_conf():
             plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$ens_e/(ens_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
         plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
