@@ -2269,10 +2269,12 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
+        
         plt.tight_layout()
         plt.xlim([0,3])
         plt.ylim([0,7])
+        plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wo_label.png')
+        plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
         
         
