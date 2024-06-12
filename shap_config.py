@@ -4354,8 +4354,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0.02,1])
-        plt.ylim([0.02,2])
+        plt.xlim([0.02,0.9])
+        plt.ylim([0.02,1.5])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
