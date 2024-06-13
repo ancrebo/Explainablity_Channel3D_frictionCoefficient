@@ -5887,14 +5887,14 @@ class shap_conf():
                 
         if mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,3])
+                plt.ylim([0,120])
             elif x == 'k':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,2])
+                plt.ylim([0,120])
             elif x == 'uv':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,2])
+                plt.ylim([0,140])
             
         plt.grid()
             
@@ -6038,14 +6038,14 @@ class shap_conf():
                 
         if mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,3])
+                plt.ylim([0,120])
             elif x == 'k':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,2])
+                plt.ylim([0,120])
             elif x == 'uv':
-                plt.xlim([0,5])
-                plt.ylim([0,100])
+                plt.xlim([0,2])
+                plt.ylim([0,140])
         
         plt.grid()
         if x == 'uv':
@@ -6197,14 +6197,14 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([0,100])
-                plt.xlim([0.02,1])
+                plt.ylim([0,60])
+                plt.xlim([0.01,0.2])
             elif x == 'k':
                 plt.ylim([0,50])
-                plt.xlim([0,1])
+                plt.xlim([0,0.6])
             elif x == 'uv':
                 plt.ylim([0,45])
-                plt.xlim([0,1.5])
+                plt.xlim([0.1,1.1])
         
         plt.grid()
         if x == 'uv':
