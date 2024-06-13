@@ -2277,11 +2277,12 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
-        plt.tight_layout()
         if mode == 'mse':
+            plt.tight_layout()
             plt.xlim([0,3])
             plt.ylim([0,7])
         elif mode == 'cf':
+            plt.tight_layout(rect=(0.02,0,1,1))
             plt.xlim([0,4])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
@@ -4267,11 +4268,13 @@ class shap_conf():
         labels += ['W-A','W-D']
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
-        plt.tight_layout()
+        
         if mode =='mse':
+            plt.tight_layout()
             plt.xlim([0,3])
             plt.ylim([0,7])
         elif mode =='cf':
+            plt.tight_layout(rect=(0.02,0,1,1))
             plt.xlim([0,4])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
@@ -4377,7 +4380,7 @@ class shap_conf():
         
         if mode == 'cf':
             shap_grid *= 10
-        vol_grid /= 10
+        vol_grid *= 10
         
         fs = 20
         plt.figure()
@@ -4425,7 +4428,7 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlabel('$V^+\cdot10^7$',\
+        plt.xlabel('$V^+\cdot10^5$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -4884,7 +4887,7 @@ class shap_conf():
         
         if mode == 'cf':
             shap_grid_vol *= 10
-        vol_grid_vol /= 10 
+        vol_grid_vol *= 10 
         
         
         fs = 20
@@ -4933,7 +4936,7 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlabel('$V^+\cdot10^{6}$',\
+        plt.xlabel('$V^+\cdot10^{5}$',\
                    fontsize=fs) 
         if mode == 'mse':
             plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
@@ -5904,7 +5907,7 @@ class shap_conf():
         histogram_Q4_vol_wd = interp_h4_vol_wd(vec_uv_vol,vec_shap_vol)
         
         if mode == 'cf':
-            shap_grid_vol /= 10
+            shap_grid_vol /= 100
         
         histograms_struc_vol_wa = {}
         for structure in structures:
@@ -6266,7 +6269,7 @@ class shap_conf():
         
         if mode == 'cf':
             shap_grid_vol *= 10
-        uv_grid_vol /= 10
+        uv_grid_vol *= 10
         
         x0 = 0
         x0b = 0.5
@@ -6368,24 +6371,24 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([1,60])
+                plt.ylim([1,6])
                 plt.xlim([0.2,2])
             elif x == 'k':
-                plt.ylim([1,50])
+                plt.ylim([1,5])
                 plt.xlim([0,6])
             elif x == 'uv':
-                plt.ylim([1,45])
+                plt.ylim([1,4.5])
                 plt.xlim([0,11])
         
         plt.grid()
         if x == 'uv':
-            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-6}$',\
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-8}$',\
                        fontsize=fs)
         elif x == 'k':
-            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-6}$',\
+            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-8}$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-6}$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-8}$',\
                        fontsize=fs)
         if mode == 'mse':
             plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
