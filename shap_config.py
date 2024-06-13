@@ -4207,8 +4207,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,5])
-        plt.ylim([0,35])
+        if mode =='mse':
+            plt.xlim([0,3])
+            plt.ylim([0,7])
+        elif mode =='cf':
+            plt.xlim([0,4])
+            plt.ylim([0,30])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4298,8 +4302,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,5])
-        plt.ylim([0,35])
+        if mode == 'mse':
+            plt.xlim([0,3])
+            plt.ylim([0,7])
+        elif mode == 'cf':
+            plt.xlim([0,4])
+            plt.ylim([0,30])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
         
@@ -4388,9 +4396,14 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
-        plt.tight_layout(rect=(0.02,0,1,1))
-        plt.xlim([0.02,1])
-        plt.ylim([0.02,35])
+        if mode == 'mse':
+            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.xlim([0.02,1])
+            plt.ylim([0.02,2])
+        elif mode == 'cf':
+            plt.tight_layout()
+            plt.xlim([0.02,1])
+            plt.ylim([0.02,7])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4689,8 +4702,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3.5])
-        plt.ylim([0,5.5])
+        if mode == 'mse':
+            plt.xlim([0,3.5])
+            plt.ylim([0,5.5])
+        elif mode == 'cf':
+            plt.xlim([0,5])
+            plt.ylim([0,150])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4780,8 +4797,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3.5])
-        plt.ylim([0,5.5])
+        if mode == 'mse':
+            plt.xlim([0,3.5])
+            plt.ylim([0,5.5])
+        elif mode == 'cf':
+            plt.xlim([0,5])
+            plt.ylim([0,150])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
         fs = 20
@@ -4870,8 +4891,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0.01,1])
-        plt.ylim([0,4.5])
+        if mode == 'mse':
+            plt.xlim([0.01,1])
+            plt.ylim([0,4.5])
+        elif mode == 'cf':
+            plt.xlim([0.01,1])
+            plt.ylim([0,150])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
