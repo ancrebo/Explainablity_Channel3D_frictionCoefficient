@@ -4846,7 +4846,8 @@ class shap_conf():
                                lev_val=2.5,
                                alf=0.5,
                                structures=[],
-                               x='uv'):
+                               x='uv',
+                               mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -5206,13 +5207,22 @@ class shap_conf():
                         linestyles='dashed')
         
         plt.grid()
-        
-        if x == 'ens':
-            plt.xlim([0,0.05])
-            plt.ylim([0,7])
-        else:
-            plt.xlim([0,0.2])
-            plt.ylim([0,7])
+    
+        if mode == 'mse':
+            if x == 'ens':
+                plt.xlim([0,0.05])
+                plt.ylim([0,7])
+            else:
+                plt.xlim([0,0.2])
+                plt.ylim([0,7])
+                
+        elif mode == 'cf':
+            if x == 'ens':
+                plt.xlim([0,0.5])
+                plt.ylim([0,20])
+            else:
+                plt.xlim([0,0.5])
+                plt.ylim([0,20])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5316,12 +5326,21 @@ class shap_conf():
         
         plt.grid()
         
-        if x == 'ens':
-            plt.xlim([0,0.05])
-            plt.ylim([0,7])
-        else:
-            plt.xlim([0,0.2])
-            plt.ylim([0,7])
+        if mode == 'mse':
+            if x == 'ens':
+                plt.xlim([0,0.05])
+                plt.ylim([0,7])
+            else:
+                plt.xlim([0,0.2])
+                plt.ylim([0,7])
+            
+        elif mode == 'cf':
+            if x == 'ens':
+                plt.xlim([0,0.5])
+                plt.ylim([0,20])
+            else:
+                plt.xlim([0,0.5])
+                plt.ylim([0,20])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5420,15 +5439,27 @@ class shap_conf():
         
         plt.grid()
         
-        if x == 'ens':
-            plt.xlim([0.0006,0.005])
-            plt.ylim([0.05,1.5])
-        elif x == 'k':
-            plt.xlim([0.001,0.025])
-            plt.ylim([0.05,1.3])
-        elif x == 'uv':
-            plt.xlim([0.0005,0.05])
-            plt.ylim([0.05,1.3])
+        if mode == 'mse':
+            if x == 'ens':
+                plt.xlim([0.0006,0.005])
+                plt.ylim([0.05,1.5])
+            elif x == 'k':
+                plt.xlim([0.001,0.025])
+                plt.ylim([0.05,1.3])
+            elif x == 'uv':
+                plt.xlim([0.0005,0.05])
+                plt.ylim([0.05,1.3])
+                
+        elif mode == 'cf':
+            if x == 'ens':
+                plt.xlim([0.0006,0.05])
+                plt.ylim([0.25,5])
+            elif x == 'k':
+                plt.xlim([0.001,0.05])
+                plt.ylim([0.25,5])
+            elif x == 'uv':
+                plt.xlim([0.0005,0.05])
+                plt.ylim([0.05,5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5837,15 +5868,27 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])'''
         
-        if x == 'ens':
-            plt.xlim([0,2.5])
-            plt.ylim([0,5.5])
-        elif x == 'k':
-            plt.xlim([0,1.25])
-            plt.ylim([0,4.5])
-        elif x == 'uv':
-            plt.xlim([0,1.7])
-            plt.ylim([0,4.5])
+        if mode == 'mse':
+            if x == 'ens':
+                plt.xlim([0,2.5])
+                plt.ylim([0,5.5])
+            elif x == 'k':
+                plt.xlim([0,1.25])
+                plt.ylim([0,4.5])
+            elif x == 'uv':
+                plt.xlim([0,1.7])
+                plt.ylim([0,4.5])
+                
+        if mode == 'cf':
+            if x == 'ens':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
+            elif x == 'k':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
+            elif x == 'uv':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
             
         plt.grid()
             
@@ -5975,16 +6018,28 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
         '''
-        
-        if x == 'ens':
-            plt.xlim([0,2.5])
-            plt.ylim([0,5.5])
-        elif x == 'k':
-            plt.xlim([0,1.25])
-            plt.ylim([0,4.5])
-        elif x == 'uv':
-            plt.xlim([0,1.7])
-            plt.ylim([0,4.5])
+            
+        if mode == 'mse':
+            if x == 'ens':
+                plt.xlim([0,2.5])
+                plt.ylim([0,5.5])
+            elif x == 'k':
+                plt.xlim([0,1.25])
+                plt.ylim([0,4.5])
+            elif x == 'uv':
+                plt.xlim([0,1.7])
+                plt.ylim([0,4.5])
+                
+        if mode == 'cf':
+            if x == 'ens':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
+            elif x == 'k':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
+            elif x == 'uv':
+                plt.xlim([0,5])
+                plt.ylim([0,20])
         
         plt.grid()
         if x == 'uv':
@@ -6122,15 +6177,28 @@ class shap_conf():
         plt.ylim([y0_2,ytop])
         plt.xlim([x0,x3])
         '''
-        if x == 'ens':
-            plt.ylim([0,4.5])
-            plt.xlim([0.02,0.25])
-        elif x == 'k':
-            plt.ylim([0,4])
-            plt.xlim([0,0.6])
-        elif x == 'uv':
-            plt.ylim([0,4])
-            plt.xlim([0,1])
+        
+        if mode == 'mse':
+            if x == 'ens':
+                plt.ylim([0,4.5])
+                plt.xlim([0.02,0.25])
+            elif x == 'k':
+                plt.ylim([0,4])
+                plt.xlim([0,0.6])
+            elif x == 'uv':
+                plt.ylim([0,4])
+                plt.xlim([0,1])
+            
+        elif mode == 'cf':
+            if x == 'ens':
+                plt.ylim([0,20])
+                plt.xlim([0.02,1])
+            elif x == 'k':
+                plt.ylim([0,20])
+                plt.xlim([0,5])
+            elif x == 'uv':
+                plt.ylim([0,20])
+                plt.xlim([0,5])
         
         plt.grid()
         if x == 'uv':
