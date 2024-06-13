@@ -5218,11 +5218,11 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,0.5])
-                plt.ylim([0,20])
+                plt.xlim([0,0.1])
+                plt.ylim([0,30])
             else:
-                plt.xlim([0,0.5])
-                plt.ylim([0,20])
+                plt.xlim([0,0.2])
+                plt.ylim([0,30])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5336,11 +5336,11 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,0.5])
-                plt.ylim([0,20])
+                plt.xlim([0,0.1])
+                plt.ylim([0,30])
             else:
-                plt.xlim([0,0.5])
-                plt.ylim([0,20])
+                plt.xlim([0,0.2])
+                plt.ylim([0,30])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5452,14 +5452,14 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0.0006,0.05])
-                plt.ylim([0.25,5])
+                plt.xlim([0.0006,0.005])
+                plt.ylim([0.25,10])
             elif x == 'k':
-                plt.xlim([0.001,0.05])
-                plt.ylim([0.25,5])
+                plt.xlim([0.001,0.025])
+                plt.ylim([0.3,5])
             elif x == 'uv':
                 plt.xlim([0.0005,0.05])
-                plt.ylim([0.05,5])
+                plt.ylim([0.1,5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
