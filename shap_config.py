@@ -2217,9 +2217,9 @@ class shap_conf():
                          alpha=alf)
             
         # plt.contour(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
-        plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(vol_grid,shap_grid,histogram_Q2.T/10,levels=[lev_val],colors=[(color21,color22,color23)])
         # plt.contour(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
-        plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.contour(vol_grid,shap_grid,histogram_Q4.T/10,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+2,0]
