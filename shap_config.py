@@ -4368,11 +4368,12 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
-        plt.tight_layout()
         if mode == 'mse':
+            plt.tight_layout()
             plt.xlim([0,3])
             plt.ylim([0,7])
         elif mode == 'cf':
+            plt.tight_layout(rect=(0.02,0,1,1))
             plt.xlim([0,4])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
