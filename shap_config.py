@@ -2178,6 +2178,9 @@ class shap_conf():
         histogram_Q2 = interp_h2(vec_vol,vec_shap)
         histogram_Q3 = interp_h3(vec_vol,vec_shap)
         histogram_Q4 = interp_h4(vec_vol,vec_shap)
+        
+        if mode == 'cf':
+            shap_grid /= 10
     
         histograms_struc = {}
         for structure in structures:
@@ -2201,9 +2204,9 @@ class shap_conf():
         color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
         color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid/10,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid/10,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
@@ -2217,9 +2220,9 @@ class shap_conf():
                          alpha=alf)
             
         # plt.contour(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
-        plt.contour(vol_grid,shap_grid/10,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
+        plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
         # plt.contour(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
-        plt.contour(vol_grid,shap_grid/10,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
+        plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+2,0]
@@ -2371,6 +2374,9 @@ class shap_conf():
         histogram_Q3_vol = interp_h3_vol(vec_vol_vol,vec_shap_vol)
         histogram_Q4_vol = interp_h4_vol(vec_vol_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 100
+        
         histograms_struc_vol = {}
         for structure in structures:
             interp_h = interp2d(vol_values_vol[structure],
@@ -2426,7 +2432,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^{6}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -2469,7 +2478,7 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,4])
-            plt.ylim([0,200])
+            plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
   
@@ -2586,6 +2595,9 @@ class shap_conf():
         histogram_Q3 = interp_h3(vec_uv,vec_shap)
         histogram_Q4 = interp_h4(vec_uv,vec_shap)
         
+        if mode == 'cf':
+            shap_grid /= 10
+        
         histograms_struc = {}
         for structure in structures:
             interp_h = interp2d(uv_values[structure],
@@ -2645,10 +2657,13 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.2])
-            plt.ylim([0,35])
+            plt.ylim([0,3.5])
         plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles =   [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -2788,6 +2803,9 @@ class shap_conf():
         histogram_Q3_vol = interp_h3_vol(vec_uv_vol,vec_shap_vol)
         histogram_Q4_vol = interp_h4_vol(vec_uv_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 100
+        
         histograms_struc_vol = {}
         for structure in structures:
             interp_h = interp2d(uv_values_vol[structure],
@@ -2880,12 +2898,15 @@ class shap_conf():
             plt.xlim([x0,x3])
         elif mode == 'cf':
             plt.xlim([0,2])
-            plt.ylim([0,150])
+            plt.ylim([0,1.5])
             
         plt.grid()
         plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -3039,6 +3060,9 @@ class shap_conf():
         histogram_Q3 = interp_h3(vec_k,vec_shap)
         histogram_Q4 = interp_h4(vec_k,vec_shap)
         
+        if mode == 'cf':
+            shap_grid /= 10
+        
         histograms_struc = {}
         for structure in structures:
             interp_h = interp2d(k_values[structure],
@@ -3099,11 +3123,14 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.13])
-            plt.ylim([0,35])
+            plt.ylim([0,3.5])
             
         plt.xlabel('$k_e/(k_\mathrm{tot})$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -3243,6 +3270,9 @@ class shap_conf():
         histogram_Q3_vol = interp_h3_vol(vec_k_vol,vec_shap_vol)
         histogram_Q4_vol = interp_h4_vol(vec_k_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 100
+        
         histograms_struc_vol = {}
         for structure in structures:
             interp_h = interp2d(k_values_vol[structure],
@@ -3338,11 +3368,14 @@ class shap_conf():
             plt.ylim([0,4.5])
         elif mode == 'cf':
             plt.xlim([0,2])
-            plt.ylim([0,150])
+            plt.ylim([0,1.5])
         plt.grid()
         plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -3496,6 +3529,9 @@ class shap_conf():
         histogram_Q3 = interp_h3(vec_ens,vec_shap)
         histogram_Q4 = interp_h4(vec_ens,vec_shap)
         
+        if mode == 'cf':
+            shap_grid /= 10
+        
         histograms_struc = {}
         for structure in structures:
             interp_h = interp2d(ens_values[structure],
@@ -3555,10 +3591,13 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.05])
-            plt.ylim([0,25])
+            plt.ylim([0,2.5])
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -3698,6 +3737,9 @@ class shap_conf():
         histogram_Q3_vol = interp_h3_vol(vec_ens_vol,vec_shap_vol)
         histogram_Q4_vol = interp_h4_vol(vec_ens_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 100
+        
         histograms_struc_vol = {}
         for structure in structures:
             interp_h = interp2d(ens_values_vol[structure],
@@ -3794,12 +3836,15 @@ class shap_conf():
             plt.xlim([0,2.5])
         elif mode == 'cf':
             plt.xlim([0,3])
-            plt.ylim([0,150])
+            plt.ylim([0,1.5])
         
         plt.grid()
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4081,6 +4126,9 @@ class shap_conf():
         histogram_Q3_wd = interp_h3_wd(vec_vol,vec_shap)
         histogram_Q4_wd = interp_h4_wd(vec_vol,vec_shap)
         
+        if mode == 'cf':
+            shap_grid /= 10
+        
         histograms_struc_wa = {}
         for structure in structures:
             interp_h = interp2d(vol_values_wa[structure],
@@ -4175,7 +4223,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^6$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4222,7 +4273,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode =='cf':
             plt.xlim([0,4])
-            plt.ylim([0,30])
+            plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4274,7 +4325,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^6$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4317,9 +4371,13 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,4])
-            plt.ylim([0,30])
+            plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
+        
+        if mode == 'cf':
+            shap_grid *= 10
+        vol_grid /= 10
         
         fs = 20
         plt.figure()
@@ -4367,7 +4425,7 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlabel('$V^+\cdot10^6$',\
+        plt.xlabel('$V^+\cdot10^7$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
@@ -4408,11 +4466,11 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0.02,1])
+            plt.xlim([0.2,10])
             plt.ylim([0.02,2])
         elif mode == 'cf':
             plt.tight_layout()
-            plt.xlim([0.02,1])
+            plt.xlim([0.2,10])
             plt.ylim([0.02,6])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -4576,6 +4634,9 @@ class shap_conf():
         histogram_Q3_vol_wd = interp_h3_vol_wd(vec_vol_vol,vec_shap_vol)
         histogram_Q4_vol_wd = interp_h4_vol_wd(vec_vol_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 100
+        
         histograms_struc_vol_wa = {}
         for structure in structures:
             interp_h = interp2d(vol_values_vol_wa[structure],
@@ -4670,7 +4731,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^{6}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4717,7 +4781,7 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,4])
-            plt.ylim([0,200])
+            plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4769,7 +4833,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^{6}$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4812,8 +4879,13 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,4])
-            plt.ylim([0,200])
+            plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
+        
+        if mode == 'cf':
+            shap_grid_vol *= 10
+        vol_grid_vol /= 10 
+        
         
         fs = 20
         plt.figure()
@@ -4863,7 +4935,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^{6}$',\
                    fontsize=fs) 
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','8'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -4902,11 +4977,11 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
-            plt.xlim([0.01,1])
+            plt.xlim([0.1,10])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xlim([0.01,1])
-            plt.ylim([0,50])
+            plt.xlim([0.1,10])
+            plt.ylim([0,5])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
@@ -5184,6 +5259,9 @@ class shap_conf():
         histogram_Q3_wd = interp_h3_wd(vec_uv,vec_shap)
         histogram_Q4_wd = interp_h4_wd(vec_uv,vec_shap)
         
+        if mode == 'cf':
+            shap_grid /= 10
+        
         histograms_struc_wa = {}
         for structure in structures:
             interp_h = interp2d(uv_values_wa[structure],
@@ -5289,13 +5367,13 @@ class shap_conf():
         elif mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,0.05])
-                plt.ylim([0,25])
+                plt.ylim([0,2.5])
             elif x == 'k':
                 plt.xlim([0,0.13])
-                plt.ylim([0,35])
+                plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
-                plt.ylim([0,35])
+                plt.ylim([0,3.5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5306,7 +5384,10 @@ class shap_conf():
         elif x == 'ens':
             plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                        fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -5410,13 +5491,13 @@ class shap_conf():
         elif mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,0.05])
-                plt.ylim([0,25])
+                plt.ylim([0,2.5])
             elif x == 'k':
                 plt.xlim([0,0.13])
-                plt.ylim([0,35])
+                plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
-                plt.ylim([0,35])
+                plt.ylim([0,3.5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5427,7 +5508,10 @@ class shap_conf():
         elif x == 'ens':
             plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                        fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -5466,6 +5550,9 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         plt.savefig('hist2d_interp_'+x+x+'tot_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
+        
+        if mode == 'cf':
+            shap_grid *= 10
         
         fs = 20
         plt.figure()        
@@ -5816,6 +5903,9 @@ class shap_conf():
         histogram_Q3_vol_wd = interp_h3_vol_wd(vec_uv_vol,vec_shap_vol)
         histogram_Q4_vol_wd = interp_h4_vol_wd(vec_uv_vol,vec_shap_vol)
         
+        if mode == 'cf':
+            shap_grid_vol /= 10
+        
         histograms_struc_vol_wa = {}
         for structure in structures:
             interp_h = interp2d(uv_values_vol_wa[structure],
@@ -5958,13 +6048,13 @@ class shap_conf():
         if mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,3])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
             elif x == 'k':
                 plt.xlim([0,2])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
             elif x == 'uv':
                 plt.xlim([0,2])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
             
         plt.grid()
             
@@ -5977,7 +6067,10 @@ class shap_conf():
         elif x == 'ens':
             plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -6109,13 +6202,13 @@ class shap_conf():
         if mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,3])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
             elif x == 'k':
                 plt.xlim([0,2])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
             elif x == 'uv':
                 plt.xlim([0,2])
-                plt.ylim([0,150])
+                plt.ylim([0,1.5])
         
         plt.grid()
         if x == 'uv':
@@ -6127,7 +6220,10 @@ class shap_conf():
         elif x == 'ens':
             plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
                        fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('9','7'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
@@ -6166,6 +6262,11 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         plt.savefig('hist2d_interp_'+x+x+'totvol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
+        
+        
+        if mode == 'cf':
+            shap_grid_vol *= 10
+        uv_grid_vol /= 10
         
         x0 = 0
         x0b = 0.5
@@ -6257,36 +6358,39 @@ class shap_conf():
         if mode == 'mse':
             if x == 'ens':
                 plt.ylim([0,4.5])
-                plt.xlim([0.02,0.25])
+                plt.xlim([0.2,2.5])
             elif x == 'k':
                 plt.ylim([0,4])
-                plt.xlim([0,0.6])
+                plt.xlim([0,6])
             elif x == 'uv':
                 plt.ylim([0,4])
-                plt.xlim([0,1])
+                plt.xlim([0,10])
             
         elif mode == 'cf':
             if x == 'ens':
                 plt.ylim([1,60])
-                plt.xlim([0.02,0.2])
+                plt.xlim([0.2,2])
             elif x == 'k':
                 plt.ylim([1,50])
-                plt.xlim([0,0.6])
+                plt.xlim([0,6])
             elif x == 'uv':
                 plt.ylim([1,45])
-                plt.xlim([0,1.1])
+                plt.xlim([0,11])
         
         plt.grid()
         if x == 'uv':
-            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-6}$',\
                        fontsize=fs)
         elif x == 'k':
-            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-6}$',\
                        fontsize=fs)
         elif x == 'ens':
-            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
+            plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-6}$',\
                        fontsize=fs)
-        plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap_vol.replace('9','8'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         # handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
