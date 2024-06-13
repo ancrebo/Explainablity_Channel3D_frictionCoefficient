@@ -5484,21 +5484,24 @@ class shap_conf():
             x_xtot_2_vol = self.uv_uvtot_2_vol
             x_xtot_3_vol = self.uv_uvtot_3_vol
             x_xtot_4_vol = self.uv_uvtot_4_vol
-            x_xtot_vol = self.uv_uvtot_vol
+            if len(structures) > 0:
+                x_xtot_vol = self.uv_uvtot_vol
             
         elif x == 'k':
             x_xtot_1_vol = self.k_ktot_1_vol
             x_xtot_2_vol = self.k_ktot_2_vol
             x_xtot_3_vol = self.k_ktot_3_vol
             x_xtot_4_vol = self.k_ktot_4_vol
-            x_xtot_vol = self.k_ktot_vol
+            if len(structures) > 0:
+                x_xtot_vol = self.k_ktot_vol
         
         elif x == 'ens':
             x_xtot_1_vol = self.ens_enstot_1_vol
             x_xtot_2_vol = self.ens_enstot_2_vol
             x_xtot_3_vol = self.ens_enstot_3_vol
             x_xtot_4_vol = self.ens_enstot_4_vol
-            x_xtot_vol = self.ens_enstot_vol
+            if len(structures) > 0:
+                x_xtot_vol = self.ens_enstot_vol
         
         xhistmin = np.min([np.min(x_xtot_1_vol),
                            np.min(x_xtot_2_vol),
