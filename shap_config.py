@@ -2078,7 +2078,8 @@ class shap_conf():
                        bin_num=100,
                        lev_val=2.5,
                        alf=0.5,
-                       structures=[]):
+                       structures=[],
+                       mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -2271,9 +2272,12 @@ class shap_conf():
                 
         
         plt.tight_layout()
-        plt.xlim([0,3])
-        plt.ylim([0,7])
-        plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wo_label.png')
+        if mode == 'mse':
+            plt.xlim([0,3])
+            plt.ylim([0,7])
+        elif mode == 'cf':
+            plt.xlim([0,4])
+            plt.ylim([0,30])
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -2458,8 +2462,12 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3.5])
-        plt.ylim([0,5.5])
+        if mode == 'mse':
+            plt.xlim([0,3.5])
+            plt.ylim([0,5.5])
+        elif mode == 'cf':
+            plt.xlim([0,4])
+            plt.ylim([0,200])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
   
@@ -4403,7 +4411,7 @@ class shap_conf():
         elif mode == 'cf':
             plt.tight_layout()
             plt.xlim([0.02,1])
-            plt.ylim([0.02,7])    
+            plt.ylim([0.02,6])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4706,8 +4714,8 @@ class shap_conf():
             plt.xlim([0,3.5])
             plt.ylim([0,5.5])
         elif mode == 'cf':
-            plt.xlim([0,5])
-            plt.ylim([0,150])
+            plt.xlim([0,4])
+            plt.ylim([0,200])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4801,8 +4809,8 @@ class shap_conf():
             plt.xlim([0,3.5])
             plt.ylim([0,5.5])
         elif mode == 'cf':
-            plt.xlim([0,5])
-            plt.ylim([0,150])
+            plt.xlim([0,4])
+            plt.ylim([0,200])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
         fs = 20
@@ -4896,7 +4904,7 @@ class shap_conf():
             plt.ylim([0,4.5])
         elif mode == 'cf':
             plt.xlim([0.01,1])
-            plt.ylim([0,150])
+            plt.ylim([0,50])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
