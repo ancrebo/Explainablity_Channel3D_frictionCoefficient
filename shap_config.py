@@ -2201,9 +2201,9 @@ class shap_conf():
         color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
         color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
+        plt.contourf(vol_grid,shap_grid/10,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
+        plt.contourf(vol_grid,shap_grid/10,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
@@ -2211,7 +2211,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid,
                          shap_grid,
-                         histograms_struc[structure].T/10,
+                         histograms_struc[structure].T,
                          levels=[lev_val,1e5*lev_val],
                          colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
