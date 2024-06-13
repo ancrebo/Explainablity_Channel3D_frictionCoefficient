@@ -2468,7 +2468,8 @@ class shap_conf():
                           bin_num=100,
                           lev_val=2.5,
                           alf=0.5,
-                          structures=[]):
+                          structures=[],
+                          mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -2629,8 +2630,12 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        if mode == 'mse':
+            plt.xlim([0,0.2])
+            plt.ylim([0,7])
+        elif mode == 'cf':
+            plt.xlim([0,0.2])
+            plt.ylim([0,35])
         plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
@@ -2794,22 +2799,24 @@ class shap_conf():
         y1_2 = 0.8
         ytop = 4.5
         ytop2 = y1_1
-        plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
-                         color=cmap_fill(0.9),alpha=0.1)
-        plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
-                         [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
-        plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
-                         color=cmap_fill(0.1),alpha=0.1)
-        plt.plot([x0,x0],[y0_1,y0_2],color='k')
-        plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
-        plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
-        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
-        plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
-        plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
-        plt.plot([x2,x3],[ytop2,ytop2],color='k')
-        plt.plot([x2,x2],[y1_2,y1_1],color='k')
-        plt.plot([x2,x2],[ytop,y1_1],color='k')
-        plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        
+        if mode == 'mse':
+            plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+                              color=cmap_fill(0.9),alpha=0.1)
+            plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+                              [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+            plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+                              color=cmap_fill(0.1),alpha=0.1)
+            plt.plot([x0,x0],[y0_1,y0_2],color='k')
+            plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+            plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+            plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+            plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+            plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+            plt.plot([x2,x3],[ytop2,ytop2],color='k')
+            plt.plot([x2,x2],[y1_2,y1_1],color='k')
+            plt.plot([x2,x2],[ytop,y1_1],color='k')
+            plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
@@ -2853,11 +2860,18 @@ class shap_conf():
                         levels=[lev_val],
                         colors=[(colorx1,colorx2,colorx3)])
         
-        plt.text(0.5, 0.1, 'A', fontsize = 20)
-        plt.text(1.5, 2.1, 'B', fontsize = 20)   
-        plt.text(0.5, 4, 'C', fontsize = 20) 
-        plt.ylim([y0_2,ytop])
-        plt.xlim([x0,x3])
+        
+        
+        if mode == 'mse':
+            plt.text(0.5, 0.1, 'A', fontsize = 20)
+            plt.text(1.5, 2.1, 'B', fontsize = 20)   
+            plt.text(0.5, 4, 'C', fontsize = 20) 
+            plt.ylim([y0_2,ytop])
+            plt.xlim([x0,x3])
+        elif mode == 'cf':
+            plt.xlim([0,2])
+            plt.ylim([0,150])
+            
         plt.grid()
         plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
@@ -2907,7 +2921,8 @@ class shap_conf():
                           bin_num=100,
                           lev_val=2.5,
                           alf=0.5,
-                          structures=[]):
+                          structures=[],
+                          mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -3068,8 +3083,14 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.2])
-        plt.ylim([0,7])
+        
+        if mode == 'mse':
+            plt.xlim([0,0.2])
+            plt.ylim([0,7])
+        elif mode == 'cf':
+            plt.xlim([0,0.13])
+            plt.ylim([0,35])
+            
         plt.xlabel('$k_e/(k_\mathrm{tot})$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
@@ -3302,8 +3323,12 @@ class shap_conf():
         # plt.ylim([y0_2,ytop])
         # plt.xlim([x0,x3])
         
-        plt.xlim([0,1.25])
-        plt.ylim([0,4.5])
+        if mode == 'mse':
+            plt.xlim([0,1.25])
+            plt.ylim([0,4.5])
+        elif mode == 'cf':
+            plt.xlim([0,2])
+            plt.ylim([0,150])
         plt.grid()
         plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
@@ -3353,7 +3378,8 @@ class shap_conf():
                           bin_num=100,
                           lev_val=2.5,
                           alf=0.5,
-                          structures=[]):
+                          structures=[],
+                          mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -3514,8 +3540,12 @@ class shap_conf():
                         colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
-        plt.xlim([0,0.05])
-        plt.ylim([0,7])
+        if mode == 'mse':
+            plt.xlim([0,0.05])
+            plt.ylim([0,7])
+        elif mode == 'cf':
+            plt.xlim([0,0.05])
+            plt.ylim([0,25])
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                    fontsize=fs)
         plt.ylabel(self.ylabel_shap,fontsize=fs)
@@ -3749,8 +3779,12 @@ class shap_conf():
         plt.xlim([x0,x3])
         '''
         
-        plt.ylim([0,5.5])
-        plt.xlim([0,2.5])
+        if mode == 'mse':
+            plt.ylim([0,5.5])
+            plt.xlim([0,2.5])
+        elif mode == 'cf':
+            plt.xlim([0,3])
+            plt.ylim([0,150])
         
         plt.grid()
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -3870,7 +3904,8 @@ class shap_conf():
                             bin_num=100,
                             lev_val=2.5,
                             alf=0.5,
-                            structures=[]):
+                            structures=[],
+                            mode='mse'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -4172,8 +4207,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3])
-        plt.ylim([0,7])
+        plt.xlim([0,5])
+        plt.ylim([0,35])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
         
@@ -4263,8 +4298,8 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.xlim([0,3])
-        plt.ylim([0,7])
+        plt.xlim([0,5])
+        plt.ylim([0,35])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
         
@@ -4355,7 +4390,7 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout(rect=(0.02,0,1,1))
         plt.xlim([0.02,1])
-        plt.ylim([0.02,2])
+        plt.ylim([0.02,35])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
