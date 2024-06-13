@@ -2211,7 +2211,7 @@ class shap_conf():
             colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid,
                          shap_grid,
-                         histograms_struc[structure].T,
+                         histograms_struc[structure].T/10,
                          levels=[lev_val,1e5*lev_val],
                          colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
@@ -2234,7 +2234,10 @@ class shap_conf():
         plt.grid()
         plt.xlabel('$V^+\cdot10^6$',\
                    fontsize=fs)
-        plt.ylabel(self.ylabel_shap,fontsize=fs)
+        if mode == 'mse':
+            plt.ylabel(self.ylabel_shap,fontsize=fs)
+        elif mode == 'cf':
+            plt.ylabel(self.ylabel_shap.replace('3','2'),fontsize=fs)
         plt.tick_params(axis='both', which='major', labelsize=fs)
         #handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color11,color12,color13,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color11,color12,color13,alf)),\
         handles = [mpl.lines.Line2D([0],[0],marker='o',markeredgecolor=(color21,color22,color23,1),markersize=15, ls='',markeredgewidth=1,markerfacecolor=(color21,color22,color23,alf)),\
