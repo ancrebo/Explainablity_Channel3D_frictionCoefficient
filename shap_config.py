@@ -5218,11 +5218,14 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,0.1])
-                plt.ylim([0,30])
-            else:
+                plt.xlim([0,0.05])
+                plt.ylim([0,25])
+            elif x == 'k':
+                plt.xlim([0,0.13])
+                plt.ylim([0,35])
+            elif x == 'uv':
                 plt.xlim([0,0.2])
-                plt.ylim([0,30])
+                plt.ylim([0,35])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5336,11 +5339,14 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0,0.1])
-                plt.ylim([0,30])
-            else:
+                plt.xlim([0,0.05])
+                plt.ylim([0,25])
+            elif x == 'k':
+                plt.xlim([0,0.13])
+                plt.ylim([0,35])
+            elif x == 'uv':
                 plt.xlim([0,0.2])
-                plt.ylim([0,30])
+                plt.ylim([0,35])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5452,14 +5458,14 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0.0006,0.005])
-                plt.ylim([0.25,10])
+                plt.xlim([0.0006,0.003])
+                plt.ylim([0.25,6])
             elif x == 'k':
                 plt.xlim([0.001,0.025])
                 plt.ylim([0.3,5])
             elif x == 'uv':
-                plt.xlim([0.0005,0.05])
-                plt.ylim([0.1,5])
+                plt.xlim([0.001,0.04])
+                plt.ylim([0.2,5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -5882,13 +5888,13 @@ class shap_conf():
         if mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,40])
             elif x == 'k':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,50])
             elif x == 'uv':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,50])
             
         plt.grid()
             
@@ -6033,13 +6039,13 @@ class shap_conf():
         if mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,40])
             elif x == 'k':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,50])
             elif x == 'uv':
                 plt.xlim([0,5])
-                plt.ylim([0,20])
+                plt.ylim([0,50])
         
         plt.grid()
         if x == 'uv':
@@ -6191,13 +6197,13 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([0,20])
+                plt.ylim([0,40])
                 plt.xlim([0.02,1])
             elif x == 'k':
-                plt.ylim([0,20])
+                plt.ylim([0,50])
                 plt.xlim([0,5])
             elif x == 'uv':
-                plt.ylim([0,20])
+                plt.ylim([0,50])
                 plt.xlim([0,5])
         
         plt.grid()
