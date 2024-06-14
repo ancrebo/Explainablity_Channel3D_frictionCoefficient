@@ -4986,7 +4986,7 @@ class shap_conf():
             plt.xlim([0.1,10])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xlim([0.1,8])
+            plt.xlim([0.3,8])
             plt.ylim([0.1,8])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -6374,7 +6374,7 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([0.75,7.5])
+                plt.ylim([0.5,7.5])
                 plt.xlim([0.2,2])
             elif x == 'k':
                 plt.ylim([1,8])
