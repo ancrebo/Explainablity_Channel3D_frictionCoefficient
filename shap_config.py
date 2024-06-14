@@ -5621,7 +5621,7 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0.0006,0.003])
+                plt.xlim([0.0006,0.005])
                 plt.ylim([0.25,6])
             elif x == 'k':
                 plt.xlim([0.001,0.025])
@@ -6374,13 +6374,13 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([1,6])
+                plt.ylim([1,7.5])
                 plt.xlim([0.2,2])
             elif x == 'k':
-                plt.ylim([1,5])
+                plt.ylim([1,6])
                 plt.xlim([0,6])
             elif x == 'uv':
-                plt.ylim([1,4.5])
+                plt.ylim([1,6])
                 plt.xlim([0,11])
         
         plt.grid()
