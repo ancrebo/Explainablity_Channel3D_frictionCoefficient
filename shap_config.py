@@ -1574,10 +1574,12 @@ class shap_conf():
         import h5py
         import os
         
-        fileread=f'data_plots.h5.{structure}'
+        
         if mode == 'mse':
+            fileread=f'data_plots.h5.{structure}'
             file_shap=dir_shap+f'{dataset}_{structure}_SHAP_mse/{dataset}'
         elif mode == 'cf':
+            fileread=f'data_plots_cf.h5.{structure}'
             file_shap=dir_shap+f'{dataset}_{structure}_SHAP_cf/{dataset}'
         
         fileuvw=dir_uvw+f'{dataset}/{dataset}'
