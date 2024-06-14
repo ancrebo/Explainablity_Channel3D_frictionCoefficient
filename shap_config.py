@@ -2227,9 +2227,9 @@ class shap_conf():
         plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,4+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
             plt.contour(vol_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -2285,7 +2285,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,4])
+            plt.xlim([0,3])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -2900,7 +2900,7 @@ class shap_conf():
             plt.ylim([y0_2,ytop])
             plt.xlim([x0,x3])
         elif mode == 'cf':
-            plt.xlim([0,2])
+            plt.xlim([0,1.5])
             plt.ylim([0,1.5])
             
         plt.grid()
@@ -3125,7 +3125,7 @@ class shap_conf():
             plt.xlim([0,0.2])
             plt.ylim([0,7])
         elif mode == 'cf':
-            plt.xlim([0,0.13])
+            plt.xlim([0,0.2])
             plt.ylim([0,3.5])
             
         plt.xlabel('$k_e/(k_\mathrm{tot})$',\
@@ -3370,7 +3370,7 @@ class shap_conf():
             plt.xlim([0,1.25])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xlim([0,2])
+            plt.xlim([0,1.5])
             plt.ylim([0,1.5])
         plt.grid()
         plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -4277,7 +4277,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode =='cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,4])
+            plt.xlim([0,3])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
@@ -4376,7 +4376,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,4])
+            plt.xlim([0,3])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
@@ -4476,8 +4476,8 @@ class shap_conf():
             plt.ylim([0.02,2])
         elif mode == 'cf':
             plt.tight_layout()
-            plt.xlim([0.2,10])
-            plt.ylim([0.02,6])    
+            plt.xlim([0.3,10])
+            plt.ylim([0.2,6])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4986,8 +4986,8 @@ class shap_conf():
             plt.xlim([0.1,10])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xlim([0.1,10])
-            plt.ylim([0,5])
+            plt.xlim([0.1,8])
+            plt.ylim([0,8])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
@@ -5375,7 +5375,7 @@ class shap_conf():
                 plt.xlim([0,0.05])
                 plt.ylim([0,2.5])
             elif x == 'k':
-                plt.xlim([0,0.13])
+                plt.xlim([0,0.2])
                 plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
@@ -5499,7 +5499,7 @@ class shap_conf():
                 plt.xlim([0,0.05])
                 plt.ylim([0,2.5])
             elif x == 'k':
-                plt.xlim([0,0.13])
+                plt.xlim([0,0.2])
                 plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
@@ -5627,7 +5627,7 @@ class shap_conf():
                 plt.xlim([0.001,0.025])
                 plt.ylim([0.3,5])
             elif x == 'uv':
-                plt.xlim([0.001,0.04])
+                plt.xlim([0.001,0.05])
                 plt.ylim([0.2,5])
             
         if x == 'uv':
@@ -6056,10 +6056,10 @@ class shap_conf():
                 plt.xlim([0,3])
                 plt.ylim([0,1.5])
             elif x == 'k':
-                plt.xlim([0,2])
+                plt.xlim([0,1.5])
                 plt.ylim([0,1.5])
             elif x == 'uv':
-                plt.xlim([0,2])
+                plt.xlim([0,1.5])
                 plt.ylim([0,1.5])
             
         plt.grid()
@@ -6210,10 +6210,10 @@ class shap_conf():
                 plt.xlim([0,3])
                 plt.ylim([0,1.5])
             elif x == 'k':
-                plt.xlim([0,2])
+                plt.xlim([0,1.5])
                 plt.ylim([0,1.5])
             elif x == 'uv':
-                plt.xlim([0,2])
+                plt.xlim([0,1.5])
                 plt.ylim([0,1.5])
         
         plt.grid()
