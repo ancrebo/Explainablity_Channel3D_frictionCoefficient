@@ -4476,8 +4476,8 @@ class shap_conf():
             plt.ylim([0.02,2])
         elif mode == 'cf':
             plt.tight_layout()
-            plt.xlim([0.3,10])
-            plt.ylim([0.2,6])    
+            plt.xlim([0.3,8])
+            plt.ylim([0.3,6])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
         xhistmin = np.min([np.min(self.volume_1),
@@ -4987,7 +4987,7 @@ class shap_conf():
             plt.ylim([0,4.5])
         elif mode == 'cf':
             plt.xlim([0.1,8])
-            plt.ylim([0,8])
+            plt.ylim([0.1,8])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
         
@@ -5621,14 +5621,14 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
-                plt.xlim([0.0006,0.005])
+                plt.xlim([0.0006,0.004])
                 plt.ylim([0.25,6])
             elif x == 'k':
                 plt.xlim([0.001,0.025])
                 plt.ylim([0.3,5])
             elif x == 'uv':
                 plt.xlim([0.001,0.05])
-                plt.ylim([0.2,5])
+                plt.ylim([0.3,5])
             
         if x == 'uv':
             plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
@@ -6374,10 +6374,10 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.ylim([1,7.5])
+                plt.ylim([0.75,7.5])
                 plt.xlim([0.2,2])
             elif x == 'k':
-                plt.ylim([1,6])
+                plt.ylim([1,8])
                 plt.xlim([0,6])
             elif x == 'uv':
                 plt.ylim([1,6])
