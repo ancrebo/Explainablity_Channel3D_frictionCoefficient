@@ -3104,7 +3104,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,20])
+            plt.xlim([0,50])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_ymean_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -3299,7 +3299,7 @@ class shap_conf():
             plt.xlim([0,140])
             plt.ylim([0,5.5])
         elif mode == 'cf':
-            plt.xlim([0,20])
+            plt.xlim([0,50])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymean_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
