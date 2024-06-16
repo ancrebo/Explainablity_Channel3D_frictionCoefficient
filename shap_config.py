@@ -2905,8 +2905,6 @@ class shap_conf():
         plt.savefig('hist2d_interp_ymin_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
         
-        cdg_y_plus_1 =         
-        
         xhistmin = np.min([np.min(self.cdg_y_1),
                            np.min(self.cdg_y_2),
                            np.min(self.cdg_y_3),
