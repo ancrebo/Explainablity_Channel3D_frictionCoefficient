@@ -2703,8 +2703,8 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,20])
-            plt.ylim([0,3])
+            plt.xlim([0,5])
+            plt.ylim([0,5])
         plt.savefig('hist2d_interp_ymin_SHAP_'+colormap+str(structures)+'_30+.png')
         
         
@@ -2895,10 +2895,10 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
-            plt.xlim([0,50])
+            plt.xlim([0,5])
             plt.ylim([0,5.5])
         elif mode == 'cf':
-            plt.xlim([0,50])
+            plt.xlim([0,5])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymin_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
@@ -3100,8 +3100,8 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
-            plt.xlim([0,140])
-            plt.ylim([0,3])
+            # plt.xlim([0,140])
+            # plt.ylim([0,3])
         plt.savefig('hist2d_interp_ymean_SHAP_'+colormap+str(structures)+'_30+.png')
         
         
@@ -3295,8 +3295,9 @@ class shap_conf():
             plt.xlim([0,140])
             plt.ylim([0,5.5])
         elif mode == 'cf':
-            plt.xlim([0,140])
-            plt.ylim([0,2])
+            abc = 1
+            # plt.xlim([0,140])
+            # plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymean_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
   
