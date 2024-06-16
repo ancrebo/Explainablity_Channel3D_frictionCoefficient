@@ -2517,11 +2517,11 @@ class shap_conf():
                           +[np.min(self.y_plus_min[struc]) for struc in structures]
                           )/1.2
             
-        xhistmax = np.max([np.min(self.y_plus_min_1),
-                           np.min(self.y_plus_min_2),
-                           np.min(self.y_plus_min_3),
-                           np.min(self.y_plus_min_4)]\
-                          +[np.min(self.y_plus_min[struc]) for struc in structures]
+        xhistmax = np.max([np.max(self.y_plus_min_1),
+                           np.max(self.y_plus_min_2),
+                           np.max(self.y_plus_min_3),
+                           np.max(self.y_plus_min_4)]\
+                          +[np.max(self.y_plus_min[struc]) for struc in structures]
                           )/1.2
             
         yhistmin = np.min([np.min(self.shap_1),
@@ -2914,11 +2914,11 @@ class shap_conf():
                           +[np.min(self.cdg_y[struc]) for struc in structures]
                           )/1.2
             
-        xhistmax = np.max([np.min(self.cdg_y_1),
-                           np.min(self.cdg_y_2),
-                           np.min(self.cdg_y_3),
-                           np.min(self.cdg_y_4)]\
-                          +[np.min(self.cdg_y[struc]) for struc in structures]
+        xhistmax = np.max([np.max(self.cdg_y_1),
+                           np.max(self.cdg_y_2),
+                           np.max(self.cdg_y_3),
+                           np.max(self.cdg_y_4)]\
+                          +[np.max(self.cdg_y[struc]) for struc in structures]
                           )/1.2
             
         yhistmin = np.min([np.min(self.shap_1),
