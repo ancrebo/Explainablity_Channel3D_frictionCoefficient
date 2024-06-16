@@ -1655,6 +1655,8 @@ class shap_conf():
         normdata = gd.get_data_norm(file_read=fileuvw,
                                     file_grad=filegrad)
         normdata.geom_param(start,1,1,1)
+        utau = normdata.vtau
+        ny = normdata.ny
         if readdata:
             hf = h5py.File(fileread, 'r')
             self.volume_wa[structure] = np.array(hf['volume_wa'])
