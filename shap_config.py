@@ -580,6 +580,8 @@ class shap_conf():
         normdata = gd.get_data_norm(file_read=fileuvw,
                                     file_grad=filegrad)
         normdata.geom_param(start,1,1,1)
+        utau = normdata.vtau
+        ny = normdata.ny
         if readdata:
             hf = h5py.File(fileread, 'r')
             self.volume_wa = np.array(hf['volume_wa'])
@@ -767,10 +769,10 @@ class shap_conf():
             self.shapmin = np.array(hf['shapmin'])
             self.shapmaxvol = np.array(hf['shapmaxvol'])
             self.shapminvol = np.array(hf['shapminvol'])
-            self.cdg_y_1 = np.array(hf['cdg_y_1'])
-            self.cdg_y_2 = np.array(hf['cdg_y_2'])
-            self.cdg_y_3 = np.array(hf['cdg_y_3'])
-            self.cdg_y_4 = np.array(hf['cdg_y_4'])
+            self.cdg_y_1 = (1-np.abs(np.array(hf['cdg_y_1'])))*utau/ny
+            self.cdg_y_2 = (1-np.abs(np.array(hf['cdg_y_2'])))*utau/ny
+            self.cdg_y_3 = (1-np.abs(np.array(hf['cdg_y_3'])))*utau/ny
+            self.cdg_y_4 = (1-np.abs(np.array(hf['cdg_y_4'])))*utau/ny
             self.cdg_y_wa = np.array(hf['cdg_y_wa'])
             self.cdg_y_wd = np.array(hf['cdg_y_wd'])
             self.y_plus_min_1 = np.array(hf['y_plus_min_1'])
@@ -1707,7 +1709,7 @@ class shap_conf():
             self.shapmin[structure] = np.array(hf['shapmin'])
             self.shapmaxvol[structure] = np.array(hf['shapmaxvol'])
             self.shapminvol[structure] = np.array(hf['shapminvol'])
-            self.cdg_y[structure] = np.array(hf['cdg_y'])
+            self.cdg_y[structure] = (1-np.abs(np.array(hf['cdg_y'])))*utau/ny
             self.cdg_y_wa[structure] = np.array(hf['cdg_y_wa'])
             self.cdg_y_wd[structure] = np.array(hf['cdg_y_wd'])
             self.y_plus_min[structure] = np.array(hf['y_plus_min'])
@@ -2902,6 +2904,8 @@ class shap_conf():
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymin_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
+        
+        cdg_y_plus_1 =         
         
         xhistmin = np.min([np.min(self.cdg_y_1),
                            np.min(self.cdg_y_2),
