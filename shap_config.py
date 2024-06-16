@@ -1168,7 +1168,7 @@ class shap_conf():
                                 self.shap1cum += shapvalues[jj]
                                 self.shap_vol1cum += shapvalues[jj]/uv_struc.vol[jj]
                                 self.cdg_y_1.append(uv_struc.cdg_y[jj])
-                                self.y_plus_min_1.append[yplus_min_ii]
+                                self.y_plus_min_1.append(yplus_min_ii)
                                 if yplus_min_ii < 20:
                                     self.volume_1_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wa.append(uv[jj])
@@ -1210,7 +1210,7 @@ class shap_conf():
                                 self.shap2cum += shapvalues[jj]
                                 self.shap_vol2cum += shapvalues[jj]/uv_struc.vol[jj]
                                 self.cdg_y_2.append(uv_struc.cdg_y[jj])
-                                self.y_plus_min_2.append[yplus_min_ii]
+                                self.y_plus_min_2.append(yplus_min_ii)
                                 if yplus_min_ii < 20:
                                     self.volume_2_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wa.append(uv[jj])
@@ -1252,7 +1252,7 @@ class shap_conf():
                                 self.shap3cum += shapvalues[jj]
                                 self.shap_vol3cum += shapvalues[jj]/uv_struc.vol[jj]
                                 self.cdg_y_3.append(uv_struc.cdg_y[jj])
-                                self.y_plus_min_3.append[yplus_min_ii]
+                                self.y_plus_min_3.append(yplus_min_ii)
                                 if yplus_min_ii < 20:
                                     self.volume_3_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wa.append(uv[jj])
@@ -1294,7 +1294,7 @@ class shap_conf():
                                 self.shap4cum += shapvalues[jj]
                                 self.shap_vol4cum += shapvalues[jj]/uv_struc.vol[jj]
                                 self.cdg_y_4.append(uv_struc.cdg_y[jj])
-                                self.y_plus_min_4.append[yplus_min_ii]
+                                self.y_plus_min_4.append(yplus_min_ii)
                                 if yplus_min_ii < 20:
                                     self.volume_4_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wa.append(uv[jj])
