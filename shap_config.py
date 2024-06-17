@@ -1643,10 +1643,10 @@ class shap_conf():
         # self.volmin = volmin
         if absolute:
             if mode == 'mse':
-                self.ylabel_shap = '$|\phi_{\overrightarrow{u}}| \cdot 10^{-3}$'
-                self.ylabel_shap_vol = '$|\phi_{\overrightarrow{u}}/V^+| \cdot 10^{-9}$'
-                self.clabel_shap = '$|\phi_{\overrightarrow{u}}|$'
-                self.clabel_shap_vol = '$|\phi_{\overrightarrow{u}} /V^+|$'
+                self.ylabel_shap = r'$|\phi_{\overrightarrow{u}}| \cdot 10^{-3}$'
+                self.ylabel_shap_vol = r'$|\phi_{\overrightarrow{u}}/V^+| \cdot 10^{-9}$'
+                self.clabel_shap = r'$|\phi_{\overrightarrow{u}}|$'
+                self.clabel_shap_vol = r'$|\phi_{\overrightarrow{u}} /V^+|$'
             elif mode == 'cf':
                 self.ylabel_shap = r'$|\phi_{\tau_{w}}| \cdot 10^{-3}$'
                 self.ylabel_shap_vol = r'$|\phi_{\tau_{w}}/V^+| \cdot 10^{-9}$'
@@ -2315,8 +2315,9 @@ class shap_conf():
             plt.xlim([0,3])
             plt.ylim([0,7])
         elif mode == 'cf':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() #rect=(0.02,0,1,1)
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -2512,6 +2513,7 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,4])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
@@ -2712,8 +2714,9 @@ class shap_conf():
             plt.xlim([0,20])
             plt.ylim([0,7])
         elif mode == 'cf':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() #rect=(0.02,0,1,1)
             plt.xlim([0,95])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5])
         plt.savefig('hist2d_interp_ymin_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -2909,6 +2912,7 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,95])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymin_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
@@ -3111,6 +3115,7 @@ class shap_conf():
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
             plt.xlim([0,107])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_ymean_SHAP_'+colormap+str(structures)+'_30+.png')
         
@@ -3306,6 +3311,7 @@ class shap_conf():
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,107])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_ymean_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
