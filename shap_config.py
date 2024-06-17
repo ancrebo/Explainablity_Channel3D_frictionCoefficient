@@ -4447,6 +4447,7 @@ class shap_conf():
         
         plt.grid()
         if mode == 'mse':
+            plt.xticks([0.02, 0.04])
             plt.xlim([0,0.05])
             plt.yticks([2,4,6])
             plt.ylim([0,7])
@@ -6383,6 +6384,7 @@ class shap_conf():
         
         if mode == 'mse':
             if x == 'ens':
+                plt.xticks([0.02, 0.04])
                 plt.xlim([0,0.05])
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
