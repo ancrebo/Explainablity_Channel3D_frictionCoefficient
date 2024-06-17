@@ -2312,10 +2312,13 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
             plt.tight_layout()
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout() #rect=(0.02,0,1,1)
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
@@ -2509,9 +2512,12 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3.5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,4])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
@@ -2712,6 +2718,7 @@ class shap_conf():
         if mode == 'mse':
             plt.tight_layout()
             plt.xlim([0,20])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout() #rect=(0.02,0,1,1)
@@ -2909,6 +2916,7 @@ class shap_conf():
         plt.tight_layout()
         if mode == 'mse':
             plt.xlim([0,5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,95])
@@ -3111,6 +3119,7 @@ class shap_conf():
         if mode == 'mse':
             plt.tight_layout()
             plt.xlim([0,140])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout(rect=(0.02,0,1,1))
@@ -3308,6 +3317,7 @@ class shap_conf():
         plt.tight_layout()
         if mode == 'mse':
             plt.xlim([0,140])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.xlim([0,107])
@@ -3488,9 +3498,11 @@ class shap_conf():
         plt.grid()
         if mode == 'mse':
             plt.xlim([0,0.2])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.2])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3.5])
         plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
                    fontsize=fs)
@@ -3662,23 +3674,23 @@ class shap_conf():
         ytop = 4.5
         ytop2 = y1_1
         
-        if mode == 'mse':
-            plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
-                              color=cmap_fill(0.9),alpha=0.1)
-            plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
-                              [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
-            plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
-                              color=cmap_fill(0.1),alpha=0.1)
-            plt.plot([x0,x0],[y0_1,y0_2],color='k')
-            plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
-            plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
-            plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
-            plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
-            plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
-            plt.plot([x2,x3],[ytop2,ytop2],color='k')
-            plt.plot([x2,x2],[y1_2,y1_1],color='k')
-            plt.plot([x2,x2],[ytop,y1_1],color='k')
-            plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
+        # if mode == 'mse':
+        #     plt.fill_between([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],[y0_2,y0_2,y0_2,y1_2],\
+        #                       color=cmap_fill(0.9),alpha=0.1)
+        #     plt.fill_between([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],\
+        #                       [y1_1,y1_1,y1_1],color=cmap_fill(0.5),alpha=0.1)
+        #     plt.fill_between([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],[ytop2,ytop2],\
+        #                       color=cmap_fill(0.1),alpha=0.1)
+        #     plt.plot([x0,x0],[y0_1,y0_2],color='k')
+        #     plt.plot([x0,x1,x0b,x2],[y0_1,y1_1,y1_1,y1_1],color='k')
+        #     plt.plot([x0,x1,x0b,x2],[y0_2,y0_2,y0_2,y1_2],color='k')
+        #     plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,ytop,ytop],color='k')
+        #     plt.plot([x1,(ytop-y1_1)*(x1-x0)/(y1_1-y0_1)+x1,x2],[y1_1,y1_1,y1_1],color='k')
+        #     plt.plot([x2,x3],[y1_2,y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2)],color='k')
+        #     plt.plot([x2,x3],[ytop2,ytop2],color='k')
+        #     plt.plot([x2,x2],[y1_2,y1_1],color='k')
+        #     plt.plot([x2,x2],[ytop,y1_1],color='k')
+        #     plt.plot([x3,x3],[y1_2+(y1_2-y0_2)/(x2-x0b)*(x3-x2),ytop2],color='k')
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
@@ -3725,13 +3737,19 @@ class shap_conf():
         
         
         if mode == 'mse':
-            plt.text(0.5, 0.1, 'A', fontsize = 20)
-            plt.text(1.5, 2.1, 'B', fontsize = 20)   
-            plt.text(0.5, 4, 'C', fontsize = 20) 
-            plt.ylim([y0_2,ytop])
-            plt.xlim([x0,x3])
+            # plt.text(0.5, 0.1, 'A', fontsize = 20)
+            # plt.text(1.5, 2.1, 'B', fontsize = 20)   
+            # plt.text(0.5, 4, 'C', fontsize = 20) 
+            # plt.ylim([y0_2,ytop])
+            # plt.xlim([x0,x3])
+            plt.xticks([1,2,3,4,5,6,7,8,9])
+            plt.xlim([0,1.7])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
+            plt.ylim([0,4.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,1.5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,1.5])
             
         plt.grid()
@@ -3954,9 +3972,11 @@ class shap_conf():
         
         if mode == 'mse':
             plt.xlim([0,0.2])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.2])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3.5])
             
         plt.xlabel('$k_e/(k_\mathrm{tot})$',\
@@ -4198,10 +4218,14 @@ class shap_conf():
         # plt.xlim([x0,x3])
         
         if mode == 'mse':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,1.25])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,1.5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,1.5])
         plt.grid()
         plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -4422,9 +4446,11 @@ class shap_conf():
         plt.grid()
         if mode == 'mse':
             plt.xlim([0,0.05])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.xlim([0,0.05])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2.5])
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                    fontsize=fs)
@@ -4666,10 +4692,14 @@ class shap_conf():
         '''
         
         if mode == 'mse':
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,2.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,1.5])
         
         plt.grid()
@@ -5104,11 +5134,15 @@ class shap_conf():
         
         if mode =='mse':
             plt.tight_layout()
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode =='cf':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() # rect=(0.02,0,1,1)
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wall.png')
         
@@ -5203,11 +5237,15 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
             plt.tight_layout()
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() #rect=(0.02,0,1,1)
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_wallattach.png')
         
@@ -5302,12 +5340,16 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() # rect=(0.02,0,1,1)
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0.2,10])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0.02,2])
         elif mode == 'cf':
             plt.tight_layout()
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0.3,8])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0.3,6])    
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -5614,10 +5656,14 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3.5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,4])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wall.png')
         
@@ -5712,10 +5758,14 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3.5])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,4])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_wallattach.png')
         
@@ -5814,10 +5864,14 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0.1,10])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
+            plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0.3,8])
+            plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0.1,8])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -6196,20 +6250,25 @@ class shap_conf():
         if mode == 'mse':
             if x == 'ens':
                 plt.xlim([0,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7])
             else:
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7])
                 
         elif mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
             elif x == 'k':
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             
         if x == 'uv':
@@ -6320,20 +6379,25 @@ class shap_conf():
         if mode == 'mse':
             if x == 'ens':
                 plt.xlim([0,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7])
             else:
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7])
             
         elif mode == 'cf':
             if x == 'ens':
                 plt.xlim([0,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
             elif x == 'k':
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             elif x == 'uv':
                 plt.xlim([0,0.2])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             
         if x == 'uv':
@@ -6442,23 +6506,29 @@ class shap_conf():
         if mode == 'mse':
             if x == 'ens':
                 plt.xlim([0.0006,0.005])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.05,1.5])
             elif x == 'k':
                 plt.xlim([0.001,0.025])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.05,1.3])
             elif x == 'uv':
                 plt.xlim([0.0005,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.05,1.3])
                 
         elif mode == 'cf':
             if x == 'ens':
                 plt.xlim([0.0006,0.004])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.25,6])
             elif x == 'k':
                 plt.xlim([0.001,0.025])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.3,5])
             elif x == 'uv':
                 plt.xlim([0.001,0.05])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.3,5])
             
         if x == 'uv':
@@ -6873,24 +6943,36 @@ class shap_conf():
         
         if mode == 'mse':
             if x == 'ens':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,2.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,5.5])
             elif x == 'k':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.25])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4.5])
             elif x == 'uv':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.7])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4.5])
                 
         if mode == 'cf':
             if x == 'ens':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,3])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
             elif x == 'k':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
             elif x == 'uv':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
             
         plt.grid()
@@ -7027,24 +7109,36 @@ class shap_conf():
             
         if mode == 'mse':
             if x == 'ens':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,2.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,5.5])
             elif x == 'k':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.25])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4.5])
             elif x == 'uv':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.7])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4.5])
                 
         if mode == 'cf':
             if x == 'ens':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,3])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
             elif x == 'k':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
             elif x == 'uv':
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,1.5])
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,1.5])
         
         plt.grid()
@@ -7194,24 +7288,36 @@ class shap_conf():
         
         if mode == 'mse':
             if x == 'ens':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4.5])
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0.2,2.5])
             elif x == 'k':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4])
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,6])
             elif x == 'uv':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,4])
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,10])
             
         elif mode == 'cf':
             if x == 'ens':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7.5])
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0.2,2.5])
             elif x == 'k':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,7])
+                plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,6])
             elif x == 'uv':
+                plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,5])
+                plt.xticks([1,2,3,4,5,6,7,8,9,10])
                 plt.xlim([0,11])
         
         plt.grid()
