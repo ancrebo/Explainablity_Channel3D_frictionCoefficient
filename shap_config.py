@@ -1648,10 +1648,10 @@ class shap_conf():
                 self.clabel_shap = '$|\phi_{\overrightarrow{u}}|$'
                 self.clabel_shap_vol = '$|\phi_{\overrightarrow{u}} /V^+|$'
             elif mode == 'cf':
-                self.ylabel_shap = '$|\phi_{\tau_w}| \cdot 10^{-3}$'
-                self.ylabel_shap_vol = '$|\phi_{\tau_w}/V^+| \cdot 10^{-9}$'
-                self.clabel_shap = '$|\phi_{\tau_w}|$'
-                self.clabel_shap_vol = '$|\phi_{\tau_w} /V^+|$'
+                self.ylabel_shap = '$|\phi_{\tau_{w}}| \cdot 10^{-3}$'
+                self.ylabel_shap_vol = '$|\phi_{\tau_{w}}/V^+| \cdot 10^{-9}$'
+                self.clabel_shap = '$|\phi_{\tau_{w}}|$'
+                self.clabel_shap_vol = '$|\phi_{\tau_{w}} /V^+|$'
         else:
             self.ylabel_shap = '$\phi_i \cdot 10^{-3}$'
             self.ylabel_shap_vol = '$\phi_i/V^+ \cdot 10^{-9}$'
