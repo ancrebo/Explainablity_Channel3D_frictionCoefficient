@@ -2722,6 +2722,7 @@ class shap_conf():
             plt.ylim([0,7])
         elif mode == 'cf':
             plt.tight_layout() #rect=(0.02,0,1,1)
+            plt.xticks([25,50,75,100])
             plt.xlim([0,95])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5])
@@ -2919,6 +2920,7 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
+            plt.xticks([25,50,75,100])
             plt.xlim([0,95])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
@@ -3122,7 +3124,8 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
-            plt.tight_layout(rect=(0.02,0,1,1))
+            plt.tight_layout() # rect=(0.02,0,1,1)
+            plt.xticks([25,50,75,100])
             plt.xlim([0,107])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3])
@@ -3320,6 +3323,7 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
+            plt.xticks([25,50,75,100])
             plt.xlim([0,107])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2])
@@ -3502,6 +3506,7 @@ class shap_conf():
             plt.yticks([2,4,6])
             plt.ylim([0,7])
         elif mode == 'cf':
+            plt.xticks([0.05, 0.10, 0.15])
             plt.xlim([0,0.2])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3.5])
@@ -3748,9 +3753,9 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xticks([1,2,3,4,5,6,7,8,9])
+            plt.xticks([0.5,1])
             plt.xlim([0,1.5])
-            plt.yticks([1,2,3,4,5,6,7,8,9])
+            plt.yticks([0.5,1])
             plt.ylim([0,1.5])
             
         plt.grid()
@@ -3977,6 +3982,7 @@ class shap_conf():
             plt.yticks([2,4,6])
             plt.ylim([0,7])
         elif mode == 'cf':
+            plt.xticks([0.05, 0.10, 0.15])
             plt.xlim([0,0.2])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3.5])
@@ -4225,9 +4231,9 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xticks([1,2,3,4,5,6,7,8,9])
+            plt.xticks([0.5,1])
             plt.xlim([0,1.5])
-            plt.yticks([1,2,3,4,5,6,7,8,9])
+            plt.yticks([0.5,1])
             plt.ylim([0,1.5])
         plt.grid()
         plt.xlabel('$k_e/(k_\mathrm{tot}V^+)\cdot10^{-7}$',\
@@ -4452,6 +4458,7 @@ class shap_conf():
             plt.yticks([2,4,6])
             plt.ylim([0,7])
         elif mode == 'cf':
+            plt.xticks([0.02, 0.04])
             plt.xlim([0,0.05])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,2.5])
@@ -4702,7 +4709,7 @@ class shap_conf():
         elif mode == 'cf':
             plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
-            plt.yticks([1,2,3,4,5,6,7,8,9])
+            plt.yticks([0.5,1])
             plt.ylim([0,1.5])
         
         plt.grid()
@@ -5350,7 +5357,7 @@ class shap_conf():
             plt.ylim([0.02,2])
         elif mode == 'cf':
             plt.tight_layout()
-            plt.xticks([1,2,3,4,5,6,7,8,9])
+            plt.xticks([2,4,6])
             plt.xlim([0.3,8])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0.3,6])    
@@ -5872,9 +5879,9 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xticks([1,2,3,4,5,6,7,8,9])
+            plt.xticks([2,4,6,8])
             plt.xlim([0.3,8])
-            plt.yticks([1,2,3,4,5,6,7,8,9])
+            plt.yticks([2,4,6,8])
             plt.ylim([0.1,8])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+_walldetach.png')
         
@@ -6252,6 +6259,7 @@ class shap_conf():
     
         if mode == 'mse':
             if x == 'ens':
+                plt.xticks([0.02,0.04])
                 plt.xlim([0,0.05])
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
@@ -6263,6 +6271,7 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
+                plt.xticks([0.02,0.04])
                 plt.xlim([0,0.05])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
@@ -6396,6 +6405,7 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
+                plt.xticks([0.02, 0.04])
                 plt.xlim([0,0.05])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
@@ -6529,6 +6539,7 @@ class shap_conf():
                 
         elif mode == 'cf':
             if x == 'ens':
+                plt.xticks([0.001,0.002,0.003])
                 plt.xlim([0.0006,0.004])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0.25,6])
@@ -6972,17 +6983,17 @@ class shap_conf():
             if x == 'ens':
                 plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,3])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             elif x == 'k':
-                plt.xticks([1,2,3,4,5,6,7,8,9])
+                plt.xticks([0.5,1])
                 plt.xlim([0,1.5])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             elif x == 'uv':
-                plt.xticks([1,2,3,4,5,6,7,8,9])
+                plt.xticks([0.5,1])
                 plt.xlim([0,1.5])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             
         plt.grid()
@@ -7138,17 +7149,17 @@ class shap_conf():
             if x == 'ens':
                 plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,3])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             elif x == 'k':
-                plt.xticks([1,2,3,4,5,6,7,8,9])
+                plt.xticks([0.5,1])
                 plt.xlim([0,1.5])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             elif x == 'uv':
-                plt.xticks([1,2,3,4,5,6,7,8,9])
+                plt.xticks([0.5,1])
                 plt.xlim([0,1.5])
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
         
         plt.grid()
