@@ -3497,6 +3497,7 @@ class shap_conf():
         
         plt.grid()
         if mode == 'mse':
+            plt.xticks([0.05, 0.10, 0.15])
             plt.xlim([0,0.2])
             plt.yticks([2,4,6])
             plt.ylim([0,7])
@@ -3971,6 +3972,7 @@ class shap_conf():
         plt.grid()
         
         if mode == 'mse':
+            plt.xticks([0.05, 0.10, 0.15])
             plt.xlim([0,0.2])
             plt.yticks([2,4,6])
             plt.ylim([0,7])
@@ -6253,6 +6255,7 @@ class shap_conf():
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
             else:
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
@@ -6263,10 +6266,12 @@ class shap_conf():
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
             elif x == 'k':
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             elif x == 'uv':
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
@@ -6382,6 +6387,7 @@ class shap_conf():
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
             else:
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([2,4,6])
                 plt.ylim([0,7])
@@ -6392,10 +6398,12 @@ class shap_conf():
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,2.5])
             elif x == 'k':
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
             elif x == 'uv':
+                plt.xticks([0.05, 0.10, 0.15])
                 plt.xlim([0,0.2])
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,3.5])
