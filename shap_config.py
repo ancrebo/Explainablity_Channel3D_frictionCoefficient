@@ -7326,19 +7326,19 @@ class shap_conf():
             
         elif mode == 'cf':
             if x == 'ens':
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([2,4,6])
                 plt.ylim([0,7.5])
                 plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0.2,2.5])
             elif x == 'k':
-                plt.yticks([1,2,3,4,5,6,7,8,9])
+                plt.yticks([2,4,6])
                 plt.ylim([0,7])
                 plt.xticks([1,2,3,4,5,6,7,8,9])
                 plt.xlim([0,6])
             elif x == 'uv':
                 plt.yticks([1,2,3,4,5,6,7,8,9])
                 plt.ylim([0,5])
-                plt.xticks([1,2,3,4,5,6,7,8,9,10])
+                plt.xticks([2,4,6,8,10])
                 plt.xlim([0,11])
         
         plt.grid()
