@@ -1642,10 +1642,16 @@ class shap_conf():
         # self.nbars = nbars
         # self.volmin = volmin
         if absolute:
-            self.ylabel_shap = '$|\phi_i| \cdot 10^{-3}$'
-            self.ylabel_shap_vol = '$|\phi_i/V^+| \cdot 10^{-9}$'
-            self.clabel_shap = '$|\phi_i|$'
-            self.clabel_shap_vol = '$|\phi_i /V^+|$'
+            if mode == 'mse':
+                self.ylabel_shap = '$|\phi_{\overrightarrow{u}}| \cdot 10^{-3}$'
+                self.ylabel_shap_vol = '$|\phi_{\overrightarrow{u}}/V^+| \cdot 10^{-9}$'
+                self.clabel_shap = '$|\phi_{\overrightarrow{u}}|$'
+                self.clabel_shap_vol = '$|\phi_{\overrightarrow{u}} /V^+|$'
+            elif mode == 'cf':
+                self.ylabel_shap = '$|\phi_{\tau_w}| \cdot 10^{-3}$'
+                self.ylabel_shap_vol = '$|\phi_{\tau_w}/V^+| \cdot 10^{-9}$'
+                self.clabel_shap = '$|\phi_{\tau_w}|$'
+                self.clabel_shap_vol = '$|\phi_{\tau_w} /V^+|$'
         else:
             self.ylabel_shap = '$\phi_i \cdot 10^{-3}$'
             self.ylabel_shap_vol = '$\phi_i/V^+ \cdot 10^{-9}$'
