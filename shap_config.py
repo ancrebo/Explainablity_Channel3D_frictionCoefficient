@@ -1101,7 +1101,7 @@ class shap_conf():
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
                     uv = np.zeros((lenstruc,))
-                    vv = np.zeros((lenstruc,))
+                    v2 = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     ens = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
@@ -1119,7 +1119,7 @@ class shap_conf():
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
                             print(41)
-                            vv[jj] += vv[indexuv[0][kk],
+                            v2[jj] += vv[indexuv[0][kk],
                                          indexuv[1][kk],
                                          indexuv[2][kk]]**2
                             print(42)
@@ -1137,13 +1137,13 @@ class shap_conf():
                                            indexuv[2][kk]]    
                         print(5)
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
-                        vv_vol[jj] = vv[jj]/uv_struc.vol[jj]
+                        vv_vol[jj] = v2[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         ens_vol[jj] = ens[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
-                        vv_back_vol = (vvtot-np.sum(vv))/\
+                        vv_back_vol = (vvtot-np.sum(v2))/\
                         (voltot-np.sum(uv_struc.vol))
                         vv_vol_sum = np.sum(vv_vol)+vv_back_vol
                         k_back_vol = (ktot-np.sum(k))/\
@@ -1165,7 +1165,7 @@ class shap_conf():
                                 uv_Qminus_wa += uv[jj]
                                 vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
-                        vv[jj] /= vvtot
+                        v2[jj] /= vvtot
                         k[jj] /= ktot
                         ens[jj] /= enstot
                         
@@ -1233,8 +1233,8 @@ class shap_conf():
                                 self.uv_uvtot_1.append(uv[jj])
                                 self.uv_uvtot_1_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_1.append(uv_vol[jj]/uv_vol_sum)
-                                self.vv_vvtot_1.append(vv[jj])
-                                self.vv_vvtot_1_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                self.vv_vvtot_1.append(v2[jj])
+                                self.vv_vvtot_1_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_1.append(k[jj])
                                 self.k_ktot_1_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_1.append(k_vol[jj]/k_vol_sum)
@@ -1253,8 +1253,8 @@ class shap_conf():
                                     self.volume_1_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wa.append(uv[jj])
                                     self.uv_uvtot_1_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_1_wa.append(vv[jj])
-                                    self.vv_vvtot_1_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_1_wa.append(v2[jj])
+                                    self.vv_vvtot_1_vol_wa.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_1_wa.append(k[jj])
                                     self.k_ktot_1_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_1_wa.append(ens[jj])
@@ -1267,8 +1267,8 @@ class shap_conf():
                                     self.volume_1_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wd.append(uv[jj])
                                     self.uv_uvtot_1_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_1_wd.append(vv[jj])
-                                    self.vv_vvtot_1_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_1_wd.append(v2[jj])
+                                    self.vv_vvtot_1_vol_wd.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_1_wd.append(k[jj])
                                     self.k_ktot_1_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_1_wd.append(ens[jj])
@@ -1282,8 +1282,8 @@ class shap_conf():
                                 self.uv_uvtot_2.append(uv[jj])
                                 self.uv_uvtot_2_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_2.append(uv_vol[jj]/uv_vol_sum)
-                                self.vv_vvtot_2.append(vv[jj])
-                                self.vv_vvtot_2_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                self.vv_vvtot_2.append(v2[jj])
+                                self.vv_vvtot_2_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_2.append(k[jj])
                                 self.k_ktot_2_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_2.append(k_vol[jj]/k_vol_sum)
@@ -1349,8 +1349,8 @@ class shap_conf():
                                     self.volume_3_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wa.append(uv[jj])
                                     self.uv_uvtot_3_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_3_wa.append(vv[jj])
-                                    self.vv_vvtot_3_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_3_wa.append(v2[jj])
+                                    self.vv_vvtot_3_vol_wa.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_3_wa.append(k[jj])
                                     self.k_ktot_3_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_3_wa.append(ens[jj])
@@ -1363,8 +1363,8 @@ class shap_conf():
                                     self.volume_3_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wd.append(uv[jj])
                                     self.uv_uvtot_3_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_3_wd.append(vv[jj])
-                                    self.vv_vvtot_3_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_3_wd.append(v2[jj])
+                                    self.vv_vvtot_3_vol_wd.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_3_wd.append(k[jj])
                                     self.k_ktot_3_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_3_wd.append(ens[jj])
@@ -1378,8 +1378,8 @@ class shap_conf():
                                 self.uv_uvtot_4.append(uv[jj])
                                 self.uv_uvtot_4_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_4.append(uv_vol[jj]/uv_vol_sum)
-                                self.vv_vvtot_4.append(vv[jj])
-                                self.vv_vvtot_4_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                self.vv_vvtot_4.append(v2[jj])
+                                self.vv_vvtot_4_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_4.append(k[jj])
                                 self.k_ktot_4_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_4.append(k_vol[jj]/k_vol_sum)
@@ -1397,8 +1397,8 @@ class shap_conf():
                                     self.volume_4_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wa.append(uv[jj])
                                     self.uv_uvtot_4_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_4_wa.append(vv[jj])
-                                    self.vv_vvtot_4_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_4_wa.append(v2[jj])
+                                    self.vv_vvtot_4_vol_wa.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_4_wa.append(k[jj])
                                     self.k_ktot_4_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_4_wa.append(ens[jj])
@@ -1411,8 +1411,8 @@ class shap_conf():
                                     self.volume_4_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wd.append(uv[jj])
                                     self.uv_uvtot_4_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_4_wd.append(vv[jj])
-                                    self.vv_vvtot_4_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_4_wd.append(v2[jj])
+                                    self.vv_vvtot_4_vol_wd.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_4_wd.append(k[jj])
                                     self.k_ktot_4_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_4_wd.append(ens[jj])
@@ -1990,7 +1990,7 @@ class shap_conf():
                         shapmaxvol = np.max(np.array([shapminvol,shapmaxvol]))
                         shapminvol = np.min(np.array([shapminvol,shapmaxvol]))
                     uv = np.zeros((lenstruc,))
-                    vv = np.zeros((lenstruc,))
+                    v2 = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     ens = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
@@ -2004,7 +2004,7 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]]) 
-                            vv[jj] += abs(vv[indexuv[0][kk],indexuv[1][kk],\
+                            v2[jj] += abs(vv[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])                                  
                             k[jj] += 0.5*(uu[indexuv[0][kk],
@@ -2020,13 +2020,13 @@ class shap_conf():
                                            indexuv[1][kk],
                                            indexuv[2][kk]]
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
-                        vv_vol[jj] = vv[jj]/uv_struc.vol[jj]
+                        vv_vol[jj] = v2[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         ens_vol[jj] = ens[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
-                        vv_back_vol = (vvtot-np.sum(vv))/\
+                        vv_back_vol = (vvtot-np.sum(v2))/\
                         (voltot-np.sum(uv_struc.vol))
                         vv_vol_sum = np.sum(vv_vol)+vv_back_vol
                         k_back_vol = (ktot-np.sum(k))/\
@@ -2046,7 +2046,7 @@ class shap_conf():
                         #         uv_Qminus_wa += uv[jj]
                         #         vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
-                        vv[jj] /= vvtot
+                        v2[jj] /= vvtot
                         k[jj] /= ktot
                         ens[jj] /= enstot
                         
@@ -2074,8 +2074,8 @@ class shap_conf():
                                 volume_wa.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wa.append(uv[jj])
                                 uv_uvtot_wa_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                vv_vvtot_wa.append(vv[jj])
-                                vv_vvtot_wa_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                vv_vvtot_wa.append(v2[jj])
+                                vv_vvtot_wa_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 k_ktot_wa.append(k[jj])
                                 k_ktot_wa_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 ens_enstot_wa.append(ens[jj])
@@ -2089,8 +2089,8 @@ class shap_conf():
                                 volume_wd.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wd.append(uv[jj])
                                 uv_uvtot_wd_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                vv_vvtot_wd.append(vv[jj])
-                                vv_vvtot_wd_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                vv_vvtot_wd.append(v2[jj])
+                                vv_vvtot_wd_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 k_ktot_wd.append(k[jj])
                                 k_ktot_wd_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 ens_enstot_wd.append(ens[jj])
@@ -2105,8 +2105,8 @@ class shap_conf():
                             uv_uvtot.append(uv[jj])
                             uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                             uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
-                            vv_vvtot.append(vv[jj])
-                            vv_vvtot_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                            vv_vvtot.append(v2[jj])
+                            vv_vvtot_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                             vv_vol_vvtot_vol.append(vv_vol[jj]/uv_vol_sum)
                             k_ktot.append(k[jj])
                             k_ktot_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
