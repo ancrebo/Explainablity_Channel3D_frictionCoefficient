@@ -1109,9 +1109,12 @@ class shap_conf():
                     k_vol = np.zeros((lenstruc,))
                     ens_vol = np.zeros((lenstruc,))
                     print(4)
+                    print(lenstruc)
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
+                        print(400)
                         for kk in np.arange(len(indexuv[0])):
+                            print(40)
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
