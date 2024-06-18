@@ -1243,7 +1243,7 @@ class shap_conf():
                                 self.shap_vol1cum += shapvalues[jj]/uv_struc.vol[jj]
                                 self.cdg_y_1.append(uv_struc.cdg_y[jj])
                                 self.y_plus_min_1.append(yplus_min_ii)
-                            print(9)    
+                                print(9)    
                                 if yplus_min_ii < 20:
                                     self.volume_1_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wa.append(uv[jj])
