@@ -642,6 +642,10 @@ class shap_conf():
             self.k_ktot_2 = np.array(hf['k_ktot_2'])
             self.k_ktot_3 = np.array(hf['k_ktot_3'])
             self.k_ktot_4 = np.array(hf['k_ktot_4'])
+            self.vv_vvtot_1 = np.array(hf['vv_vvtot_1'])
+            self.vv_vvtot_2 = np.array(hf['vv_vvtot_2'])
+            self.vv_vvtot_3 = np.array(hf['vv_vvtot_3'])
+            self.vv_vvtot_4 = np.array(hf['vv_vvtot_4'])
             self.ens_enstot_1 = np.array(hf['ens_enstot_1'])
             self.ens_enstot_2 = np.array(hf['ens_enstot_2'])
             self.ens_enstot_3 = np.array(hf['ens_enstot_3'])
@@ -650,6 +654,10 @@ class shap_conf():
             self.uv_uvtot_2_wa = np.array(hf['uv_uvtot_2_wa'])
             self.uv_uvtot_3_wa = np.array(hf['uv_uvtot_3_wa'])
             self.uv_uvtot_4_wa = np.array(hf['uv_uvtot_4_wa'])
+            self.vv_vvtot_1_wa = np.array(hf['vv_vvtot_1_wa'])
+            self.vv_vvtot_2_wa = np.array(hf['vv_vvtot_2_wa'])
+            self.vv_vvtot_3_wa = np.array(hf['vv_vvtot_3_wa'])
+            self.vv_vvtot_4_wa = np.array(hf['vv_vvtot_4_wa'])
             self.k_ktot_1_wa = np.array(hf['k_ktot_1_wa'])
             self.k_ktot_2_wa = np.array(hf['k_ktot_2_wa'])
             self.k_ktot_3_wa = np.array(hf['k_ktot_3_wa'])
@@ -662,6 +670,10 @@ class shap_conf():
             self.uv_uvtot_2_wd = np.array(hf['uv_uvtot_2_wd'])
             self.uv_uvtot_3_wd = np.array(hf['uv_uvtot_3_wd'])
             self.uv_uvtot_4_wd = np.array(hf['uv_uvtot_4_wd'])
+            self.vv_vvtot_1_wd = np.array(hf['vv_vvtot_1_wd'])
+            self.vv_vvtot_2_wd = np.array(hf['vv_vvtot_2_wd'])
+            self.vv_vvtot_3_wd = np.array(hf['vv_vvtot_3_wd'])
+            self.vv_vvtot_4_wd = np.array(hf['vv_vvtot_4_wd'])
             self.k_ktot_1_wd = np.array(hf['k_ktot_1_wd'])
             self.k_ktot_2_wd = np.array(hf['k_ktot_2_wd'])
             self.k_ktot_3_wd = np.array(hf['k_ktot_3_wd'])
@@ -674,6 +686,10 @@ class shap_conf():
             self.uv_uvtot_2_vol = np.array(hf['uv_uvtot_2_vol'])
             self.uv_uvtot_3_vol = np.array(hf['uv_uvtot_3_vol'])
             self.uv_uvtot_4_vol = np.array(hf['uv_uvtot_4_vol'])
+            self.vv_vvtot_1_vol = np.array(hf['vv_vvtot_1_vol'])
+            self.vv_vvtot_2_vol = np.array(hf['vv_vvtot_2_vol'])
+            self.vv_vvtot_3_vol = np.array(hf['vv_vvtot_3_vol'])
+            self.vv_vvtot_4_vol = np.array(hf['vv_vvtot_4_vol'])
             self.k_ktot_1_vol = np.array(hf['k_ktot_1_vol'])
             self.k_ktot_2_vol = np.array(hf['k_ktot_2_vol'])
             self.k_ktot_3_vol = np.array(hf['k_ktot_3_vol'])
@@ -686,6 +702,10 @@ class shap_conf():
             self.uv_uvtot_2_vol_wa = np.array(hf['uv_uvtot_2_vol_wa'])
             self.uv_uvtot_3_vol_wa = np.array(hf['uv_uvtot_3_vol_wa'])
             self.uv_uvtot_4_vol_wa = np.array(hf['uv_uvtot_4_vol_wa'])
+            self.vv_vvtot_1_vol_wa = np.array(hf['vv_vvtot_1_vol_wa'])
+            self.vv_vvtot_2_vol_wa = np.array(hf['vv_vvtot_2_vol_wa'])
+            self.vv_vvtot_3_vol_wa = np.array(hf['vv_vvtot_3_vol_wa'])
+            self.vv_vvtot_4_vol_wa = np.array(hf['vv_vvtot_4_vol_wa'])
             self.k_ktot_1_vol_wa = np.array(hf['k_ktot_1_vol_wa'])
             self.k_ktot_2_vol_wa = np.array(hf['k_ktot_2_vol_wa'])
             self.k_ktot_3_vol_wa = np.array(hf['k_ktot_3_vol_wa'])
@@ -698,6 +718,10 @@ class shap_conf():
             self.uv_uvtot_2_vol_wd = np.array(hf['uv_uvtot_2_vol_wd'])
             self.uv_uvtot_3_vol_wd = np.array(hf['uv_uvtot_3_vol_wd'])
             self.uv_uvtot_4_vol_wd = np.array(hf['uv_uvtot_4_vol_wd'])
+            self.vv_vvtot_1_vol_wd = np.array(hf['vv_vvtot_1_vol_wd'])
+            self.vv_vvtot_2_vol_wd = np.array(hf['vv_vvtot_2_vol_wd'])
+            self.vv_vvtot_3_vol_wd = np.array(hf['vv_vvtot_3_vol_wd'])
+            self.vv_vvtot_4_vol_wd = np.array(hf['vv_vvtot_4_vol_wd'])
             self.k_ktot_1_vol_wd = np.array(hf['k_ktot_1_vol_wd'])
             self.k_ktot_2_vol_wd = np.array(hf['k_ktot_2_vol_wd'])
             self.k_ktot_3_vol_wd = np.array(hf['k_ktot_3_vol_wd'])
@@ -793,6 +817,10 @@ class shap_conf():
             self.uv_uvtot_wd = []
             self.uv_uvtot_wa_vol = []
             self.uv_uvtot_wd_vol = []
+            self.vv_vvtot_wa = []
+            self.vv_vvtot_wd = []
+            self.vv_vvtot_wa_vol = []
+            self.vv_vvtot_wd_vol = []
             self.uv_vol_uvtot_vol_wa = []
             self.uv_vol_uvtot_vol_wd = []
             self.cdg_y_wa = []
@@ -801,6 +829,8 @@ class shap_conf():
             self.uv_uvtot_1 = []
             self.uv_uvtot_1_vol = []
             self.uv_vol_uvtot_vol_1 = []
+            self.vv_vvtot_1 = []
+            self.vv_vvtot_1_vol = []
             self.k_ktot_1 = []
             self.k_ktot_1_vol = []
             self.k_vol_ktot_vol_1 = []
@@ -815,6 +845,8 @@ class shap_conf():
             self.uv_uvtot_1_wa = []
             self.uv_uvtot_1_vol_wa = []
             self.uv_vol_uvtot_vol_1_wa = []
+            self.vv_vvtot_1_wa = []
+            self.vv_vvtot_1_vol_wa = []
             self.k_ktot_1_wa = []
             self.k_ktot_1_vol_wa = []
             self.ens_enstot_1_wa = []
@@ -826,6 +858,8 @@ class shap_conf():
             self.uv_uvtot_1_wd = []
             self.uv_uvtot_1_vol_wd = []
             self.uv_vol_uvtot_vol_1_wd = []
+            self.vv_vvtot_1_wd = []
+            self.vv_vvtot_1_vol_wd = []
             self.k_ktot_1_wd = []
             self.k_ktot_1_vol_wd = []
             self.ens_enstot_1_wd = []
@@ -837,6 +871,8 @@ class shap_conf():
             self.uv_uvtot_2 = []
             self.uv_uvtot_2_vol = []
             self.uv_vol_uvtot_vol_2 = []
+            self.vv_vvtot_2 = []
+            self.vv_vvtot_2_vol = []
             self.k_ktot_2 = []
             self.k_ktot_2_vol = []
             self.k_vol_ktot_vol_2 = []
@@ -851,6 +887,8 @@ class shap_conf():
             self.uv_uvtot_2_wa = []
             self.uv_uvtot_2_vol_wa = []
             self.uv_vol_uvtot_vol_2_wa = []
+            self.vv_vvtot_2_wa = []
+            self.vv_vvtot_2_vol_wa = []
             self.k_ktot_2_wa = []
             self.k_ktot_2_vol_wa = []
             self.ens_enstot_2_wa = []
@@ -862,6 +900,8 @@ class shap_conf():
             self.uv_uvtot_2_wd = []
             self.uv_uvtot_2_vol_wd = []
             self.uv_vol_uvtot_vol_2_wd = []
+            self.vv_vvtot_2_wd = []
+            self.vv_vvtot_2_vol_wd = []
             self.k_ktot_2_wd = []
             self.k_ktot_2_vol_wd = []
             self.ens_enstot_2_wd = []
@@ -873,6 +913,8 @@ class shap_conf():
             self.uv_uvtot_3 = []
             self.uv_uvtot_3_vol = []
             self.uv_vol_uvtot_vol_3 = []
+            self.vv_vvtot_3 = []
+            self.vv_vvtot_3_vol = []
             self.k_ktot_3 = []
             self.k_ktot_3_vol = []
             self.k_vol_ktot_vol_3 = []
@@ -887,6 +929,8 @@ class shap_conf():
             self.uv_uvtot_3_wa = []
             self.uv_uvtot_3_vol_wa = []
             self.uv_vol_uvtot_vol_3_wa = []
+            self.vv_vvtot_3_wa = []
+            self.vv_vvtot_3_vol_wa = []
             self.k_ktot_3_wa = []
             self.k_ktot_3_vol_wa = []
             self.ens_enstot_3_wa = []
@@ -898,6 +942,8 @@ class shap_conf():
             self.uv_uvtot_3_wd = []
             self.uv_uvtot_3_vol_wd = []
             self.uv_vol_uvtot_vol_3_wd = []
+            self.vv_vvtot_3_wd = []
+            self.vv_vvtot_3_vol_wd = []
             self.k_ktot_3_wd = []
             self.k_ktot_3_vol_wd = []
             self.ens_enstot_3_wd = []
@@ -909,6 +955,8 @@ class shap_conf():
             self.uv_uvtot_4 = []
             self.uv_uvtot_4_vol = []
             self.uv_vol_uvtot_vol_4 = []
+            self.vv_vvtot_4 = []
+            self.vv_vvtot_4_vol = []
             self.k_ktot_4_wa = []
             self.k_ktot_4_vol_wa = []
             self.ens_enstot_4_wa = []
@@ -927,6 +975,8 @@ class shap_conf():
             self.uv_uvtot_4_wa = []
             self.uv_uvtot_4_vol_wa = []
             self.uv_vol_uvtot_vol_4_wa = []
+            self.vv_vvtot_4_wa = []
+            self.vv_vvtot_4_vol_wa = []
             self.shap_4_wa = []
             self.shap_4_vol_wa = []
             self.event_4_wa = []
@@ -934,6 +984,8 @@ class shap_conf():
             self.uv_uvtot_4_wd = []
             self.uv_uvtot_4_vol_wd = []
             self.uv_vol_uvtot_vol_4_wd = []
+            self.vv_vvtot_4_wd = []
+            self.vv_vvtot_4_vol_wd = []
             self.k_ktot_4_wd = []
             self.k_ktot_4_vol_wd = []
             self.ens_enstot_4_wd = []
@@ -1016,6 +1068,7 @@ class shap_conf():
                     phi = normdata.read_enstrophy(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
                     ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
+                    vvtot = np.sum(abs(np.multiply(vv,vv)))
                     enstot = np.sum(phi)
                     uv_struc = normdata.read_uvstruc(ii,
                                                      cwd=fileQ.replace('P125_21pi_vu_Q_divide/P125_21pi_vu', 
@@ -1046,15 +1099,20 @@ class shap_conf():
                         self.shapmaxvol = np.max(np.array([self.shapminvol,self.shapmaxvol]))
                         self.shapminvol = np.min(np.array([self.shapminvol,self.shapmaxvol]))
                     uv = np.zeros((lenstruc,))
+                    vv = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     ens = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
+                    vv_vol = np.zeros((lenstruc,))
                     k_vol = np.zeros((lenstruc,))
                     ens_vol = np.zeros((lenstruc,))
                     for jj in np.arange(lenstruc):
                         indexuv = np.where(uv_struc.mat_segment==jj+1)
                         for kk in np.arange(len(indexuv[0])):
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
+                                          indexuv[2][kk]]*vv[indexuv[0][kk],\
+                                                 indexuv[1][kk],indexuv[2][kk]])
+                            vv[jj] += abs(vv[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
                             k[jj] += 0.5*(uu[indexuv[0][kk],
@@ -1070,11 +1128,15 @@ class shap_conf():
                                            indexuv[1][kk],
                                            indexuv[2][kk]]       
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
+                        vv_vol[jj] = vv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         ens_vol[jj] = ens[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
+                        vv_back_vol = (vvtot-np.sum(vv))/\
+                        (voltot-np.sum(uv_struc.vol))
+                        vv_vol_sum = np.sum(vv_vol)+vv_back_vol
                         k_back_vol = (ktot-np.sum(k))/\
                         (voltot-np.sum(uv_struc.vol))
                         k_vol_sum = np.sum(k_vol)+k_back_vol
@@ -1093,6 +1155,7 @@ class shap_conf():
                                 uv_Qminus_wa += uv[jj]
                                 vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
+                        vv[jj] /= vvtot
                         k[jj] /= ktot
                         ens[jj] /= enstot
                         
@@ -1158,6 +1221,8 @@ class shap_conf():
                                 self.uv_uvtot_1.append(uv[jj])
                                 self.uv_uvtot_1_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_1.append(uv_vol[jj]/uv_vol_sum)
+                                self.vv_vvtot_1.append(vv[jj])
+                                self.vv_vvtot_1_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_1.append(k[jj])
                                 self.k_ktot_1_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_1.append(k_vol[jj]/k_vol_sum)
@@ -1175,6 +1240,8 @@ class shap_conf():
                                     self.volume_1_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wa.append(uv[jj])
                                     self.uv_uvtot_1_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_1_wa.append(vv[jj])
+                                    self.vv_vvtot_1_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_1_wa.append(k[jj])
                                     self.k_ktot_1_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_1_wa.append(ens[jj])
@@ -1187,6 +1254,8 @@ class shap_conf():
                                     self.volume_1_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_1_wd.append(uv[jj])
                                     self.uv_uvtot_1_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_1_wd.append(vv[jj])
+                                    self.vv_vvtot_1_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_1_wd.append(k[jj])
                                     self.k_ktot_1_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_1_wd.append(ens[jj])
@@ -1200,6 +1269,8 @@ class shap_conf():
                                 self.uv_uvtot_2.append(uv[jj])
                                 self.uv_uvtot_2_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_2.append(uv_vol[jj]/uv_vol_sum)
+                                self.vv_vvtot_2.append(vv[jj])
+                                self.vv_vvtot_2_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_2.append(k[jj])
                                 self.k_ktot_2_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_2.append(k_vol[jj]/k_vol_sum)
@@ -1217,6 +1288,8 @@ class shap_conf():
                                     self.volume_2_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wa.append(uv[jj])
                                     self.uv_uvtot_2_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_2_wa.append(vv[jj])
+                                    self.vv_vvtot_2_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_2_wa.append(k[jj])
                                     self.k_ktot_2_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_2_wa.append(ens[jj])
@@ -1229,6 +1302,8 @@ class shap_conf():
                                     self.volume_2_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wd.append(uv[jj])
                                     self.uv_uvtot_2_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_2_wd.append(vv[jj])
+                                    self.vv_vvtot_2_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_2_wd.append(k[jj])
                                     self.k_ktot_2_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_2_wd.append(ens[jj])
@@ -1242,6 +1317,8 @@ class shap_conf():
                                 self.uv_uvtot_3.append(uv[jj])
                                 self.uv_uvtot_3_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_3.append(uv_vol[jj]/uv_vol_sum)
+                                self.vv_vvtot_3.append(vv[jj])
+                                self.vv_vvtot_3_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_3.append(k[jj])
                                 self.k_ktot_3_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_3.append(k_vol[jj]/k_vol_sum)
@@ -1259,6 +1336,8 @@ class shap_conf():
                                     self.volume_3_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wa.append(uv[jj])
                                     self.uv_uvtot_3_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_3_wa.append(vv[jj])
+                                    self.vv_vvtot_3_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_3_wa.append(k[jj])
                                     self.k_ktot_3_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_3_wa.append(ens[jj])
@@ -1271,6 +1350,8 @@ class shap_conf():
                                     self.volume_3_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_3_wd.append(uv[jj])
                                     self.uv_uvtot_3_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_3_wd.append(vv[jj])
+                                    self.vv_vvtot_3_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_3_wd.append(k[jj])
                                     self.k_ktot_3_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_3_wd.append(ens[jj])
@@ -1284,6 +1365,8 @@ class shap_conf():
                                 self.uv_uvtot_4.append(uv[jj])
                                 self.uv_uvtot_4_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_4.append(uv_vol[jj]/uv_vol_sum)
+                                self.vv_vvtot_4.append(vv[jj])
+                                self.vv_vvtot_4_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_4.append(k[jj])
                                 self.k_ktot_4_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_4.append(k_vol[jj]/k_vol_sum)
@@ -1301,6 +1384,8 @@ class shap_conf():
                                     self.volume_4_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wa.append(uv[jj])
                                     self.uv_uvtot_4_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_4_wa.append(vv[jj])
+                                    self.vv_vvtot_4_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_4_wa.append(k[jj])
                                     self.k_ktot_4_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_4_wa.append(ens[jj])
@@ -1313,6 +1398,8 @@ class shap_conf():
                                     self.volume_4_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_4_wd.append(uv[jj])
                                     self.uv_uvtot_4_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_4_wd.append(vv[jj])
+                                    self.vv_vvtot_4_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_4_wd.append(k[jj])
                                     self.k_ktot_4_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_4_wd.append(ens[jj])
@@ -1401,6 +1488,14 @@ class shap_conf():
             hf.create_dataset('uv_vol_uvtot_vol_2', data=self.uv_vol_uvtot_vol_2)
             hf.create_dataset('uv_vol_uvtot_vol_3', data=self.uv_vol_uvtot_vol_3)
             hf.create_dataset('uv_vol_uvtot_vol_4', data=self.uv_vol_uvtot_vol_4)
+            hf.create_dataset('vv_vvtot_1', data=self.vv_vvtot_1)
+            hf.create_dataset('vv_vvtot_2', data=self.vv_vvtot_2)
+            hf.create_dataset('vv_vvtot_3', data=self.vv_vvtot_3)
+            hf.create_dataset('vv_vvtot_4', data=self.vv_vvtot_4)
+            hf.create_dataset('vv_vvtot_1_vol', data=self.vv_vvtot_1_vol)
+            hf.create_dataset('vv_vvtot_2_vol', data=self.vv_vvtot_2_vol)
+            hf.create_dataset('vv_vvtot_3_vol', data=self.vv_vvtot_3_vol)
+            hf.create_dataset('vv_vvtot_4_vol', data=self.vv_vvtot_4_vol)
             hf.create_dataset('k_ktot_1', data=self.k_ktot_1)
             hf.create_dataset('k_ktot_2', data=self.k_ktot_2)
             hf.create_dataset('k_ktot_3', data=self.k_ktot_3)
@@ -1449,6 +1544,14 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_2_vol_wa', data=self.uv_uvtot_2_vol_wa)
             hf.create_dataset('uv_uvtot_3_vol_wa', data=self.uv_uvtot_3_vol_wa)
             hf.create_dataset('uv_uvtot_4_vol_wa', data=self.uv_uvtot_4_vol_wa)
+            hf.create_dataset('vv_vvtot_1_wa', data=self.vv_vvtot_1_wa)
+            hf.create_dataset('vv_vvtot_2_wa', data=self.vv_vvtot_2_wa)
+            hf.create_dataset('vv_vvtot_3_wa', data=self.vv_vvtot_3_wa)
+            hf.create_dataset('vv_vvtot_4_wa', data=self.vv_vvtot_4_wa)
+            hf.create_dataset('vv_vvtot_1_vol_wa', data=self.vv_vvtot_1_vol_wa)
+            hf.create_dataset('vv_vvtot_2_vol_wa', data=self.vv_vvtot_2_vol_wa)
+            hf.create_dataset('vv_vvtot_3_vol_wa', data=self.vv_vvtot_3_vol_wa)
+            hf.create_dataset('vv_vvtot_4_vol_wa', data=self.vv_vvtot_4_vol_wa)
             hf.create_dataset('k_ktot_1_wa', data=self.k_ktot_1_wa)
             hf.create_dataset('k_ktot_2_wa', data=self.k_ktot_2_wa)
             hf.create_dataset('k_ktot_3_wa', data=self.k_ktot_3_wa)
@@ -1489,6 +1592,10 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_2_wd', data=self.uv_uvtot_2_wd)
             hf.create_dataset('uv_uvtot_3_wd', data=self.uv_uvtot_3_wd)
             hf.create_dataset('uv_uvtot_4_wd', data=self.uv_uvtot_4_wd)
+            hf.create_dataset('vv_vvtot_1_wd', data=self.vv_vvtot_1_wd)
+            hf.create_dataset('vv_vvtot_2_wd', data=self.vv_vvtot_2_wd)
+            hf.create_dataset('vv_vvtot_3_wd', data=self.vv_vvtot_3_wd)
+            hf.create_dataset('vv_vvtot_4_wd', data=self.vv_vvtot_4_wd)
             hf.create_dataset('k_ktot_1_wd', data=self.k_ktot_1_wd)
             hf.create_dataset('k_ktot_2_wd', data=self.k_ktot_2_wd)
             hf.create_dataset('k_ktot_3_wd', data=self.k_ktot_3_wd)
@@ -1509,6 +1616,10 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_2_vol_wd', data=self.uv_uvtot_2_vol_wd)
             hf.create_dataset('uv_uvtot_3_vol_wd', data=self.uv_uvtot_3_vol_wd)
             hf.create_dataset('uv_uvtot_4_vol_wd', data=self.uv_uvtot_4_vol_wd)
+            hf.create_dataset('vv_vvtot_1_vol_wd', data=self.vv_vvtot_1_vol_wd)
+            hf.create_dataset('vv_vvtot_2_vol_wd', data=self.vv_vvtot_2_vol_wd)
+            hf.create_dataset('vv_vvtot_3_vol_wd', data=self.vv_vvtot_3_vol_wd)
+            hf.create_dataset('vv_vvtot_4_vol_wd', data=self.vv_vvtot_4_vol_wd)
             hf.create_dataset('uv_vol_uvtot_vol_1_wd', data=self.uv_vol_uvtot_vol_1_wd)
             hf.create_dataset('uv_vol_uvtot_vol_2_wd', data=self.uv_vol_uvtot_vol_2_wd)
             hf.create_dataset('uv_vol_uvtot_vol_3_wd', data=self.uv_vol_uvtot_vol_3_wd)
@@ -1617,6 +1728,7 @@ class shap_conf():
                 'uv_vol_uvtot_vol_wa', 'uv_vol_uvtot_vol_wd', 
                 'volume', 'volume_wa', 'shap', 'shap_vol', 
                 'uv_uvtot', 'uv_uvtot_vol', 'uv_vol_uvtot_vol', 
+                'vv_vvtot', 'vv_vvtot_vol', 'vv_vol_vvtot_vol',
                 'k_ktot', 'k_ktot_vol', 'k_vol_ktot_vol',
                 'ens_enstot', 'ens_enstot_vol', 'ens_vol_enstot_vol',
                 'event', 'voltot', 'shapback_list', 
@@ -1677,6 +1789,10 @@ class shap_conf():
             self.uv_uvtot_wd[structure] = np.array(hf['uv_uvtot_wd'])
             self.uv_uvtot_wa_vol[structure] = np.array(hf['uv_uvtot_wa_vol'])
             self.uv_uvtot_wd_vol[structure] = np.array(hf['uv_uvtot_wd_vol'])
+            self.vv_vvtot_wa[structure] = np.array(hf['vv_vvtot_wa'])
+            self.vv_vvtot_wd[structure] = np.array(hf['vv_vvtot_wd'])
+            self.vv_vvtot_wa_vol[structure] = np.array(hf['vv_vvtot_wa_vol'])
+            self.vv_vvtot_wd_vol[structure] = np.array(hf['vv_vvtot_wd_vol'])
             self.k_ktot_wa[structure] = np.array(hf['k_ktot_wa'])
             self.k_ktot_wd[structure] = np.array(hf['k_ktot_wd'])
             self.k_ktot_wa_vol[structure] = np.array(hf['k_ktot_wa_vol'])
@@ -1694,6 +1810,8 @@ class shap_conf():
             self.uv_uvtot[structure] = np.array(hf['uv_uvtot'])
             self.uv_uvtot_vol[structure] = np.array(hf['uv_uvtot_vol'])
             self.uv_vol_uvtot_vol[structure] = np.array(hf['uv_vol_uvtot_vol'])
+            self.vv_vvtot[structure] = np.array(hf['vv_vvtot'])
+            self.vv_vvtot_vol[structure] = np.array(hf['vv_vvtot_vol'])
             self.k_ktot[structure] = np.array(hf['k_ktot'])
             self.k_ktot_vol[structure] = np.array(hf['k_ktot_vol'])
             self.k_vol_ktot_vol[structure] = np.array(hf['k_vol_ktot_vol'])
@@ -1735,6 +1853,10 @@ class shap_conf():
             uv_uvtot_wd = []
             uv_uvtot_wa_vol = []
             uv_uvtot_wd_vol = []
+            vv_vvtot_wa = []
+            vv_vvtot_wd = []
+            vv_vvtot_wa_vol = []
+            vv_vvtot_wd_vol = []
             k_ktot_wa = []
             k_ktot_wd = []
             k_ktot_wa_vol = []
@@ -1751,6 +1873,9 @@ class shap_conf():
             uv_uvtot = []
             uv_uvtot_vol = []
             uv_vol_uvtot_vol = []
+            vv_vvtot = []
+            vv_vvtot_vol = []
+            vv_vol_vvtot_vol = []
             k_ktot = []
             k_ktot_vol = []
             k_vol_ktot_vol = []
@@ -1820,6 +1945,7 @@ class shap_conf():
                     uu,vv,ww = normdata.read_velocity(ii)
                     phi = normdata.read_enstrophy(ii)
                     uvtot = np.sum(abs(np.multiply(uu,vv)))
+                    vvtot = np.sum(abs(np.multiply(vv,vv)))
                     ktot = 0.5*np.sum(uu**2+vv**2+ww**2)
                     enstot = np.sum(phi) 
                     uv_struc = normdata.read_uvstruc(ii,
@@ -1851,9 +1977,11 @@ class shap_conf():
                         shapmaxvol = np.max(np.array([shapminvol,shapmaxvol]))
                         shapminvol = np.min(np.array([shapminvol,shapmaxvol]))
                     uv = np.zeros((lenstruc,))
+                    vv = np.zeros((lenstruc,))
                     k = np.zeros((lenstruc,))
                     ens = np.zeros((lenstruc,))
                     uv_vol = np.zeros((lenstruc,))
+                    vv_vol = np.zeros((lenstruc,))
                     k_vol = np.zeros((lenstruc,))
                     ens_vol = np.zeros((lenstruc,))
                     
@@ -1863,6 +1991,9 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]]) 
+                            vv[jj] += abs(vv[indexuv[0][kk],indexuv[1][kk],\
+                                          indexuv[2][kk]]*vv[indexuv[0][kk],\
+                                                 indexuv[1][kk],indexuv[2][kk]])                                  
                             k[jj] += 0.5*(uu[indexuv[0][kk],
                                              indexuv[1][kk],
                                              indexuv[2][kk]]**2\
@@ -1876,11 +2007,15 @@ class shap_conf():
                                            indexuv[1][kk],
                                            indexuv[2][kk]]
                         uv_vol[jj] = uv[jj]/uv_struc.vol[jj]
+                        vv_vol[jj] = vv[jj]/uv_struc.vol[jj]
                         k_vol[jj] = k[jj]/uv_struc.vol[jj]
                         ens_vol[jj] = ens[jj]/uv_struc.vol[jj]
                         uv_back_vol = (uvtot-np.sum(uv))/\
                         (voltot-np.sum(uv_struc.vol))
                         uv_vol_sum = np.sum(uv_vol)+uv_back_vol
+                        vv_back_vol = (vvtot-np.sum(vv))/\
+                        (voltot-np.sum(uv_struc.vol))
+                        vv_vol_sum = np.sum(vv_vol)+vv_back_vol
                         k_back_vol = (ktot-np.sum(k))/\
                         (voltot-np.sum(uv_struc.vol))
                         k_vol_sum = np.sum(k_vol)+k_back_vol
@@ -1898,6 +2033,7 @@ class shap_conf():
                         #         uv_Qminus_wa += uv[jj]
                         #         vol_Qminus_wa += uv_struc.vol[jj]
                         uv[jj] /= uvtot
+                        vv[jj] /= vvtot
                         k[jj] /= ktot
                         ens[jj] /= enstot
                         
@@ -1925,6 +2061,8 @@ class shap_conf():
                                 volume_wa.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wa.append(uv[jj])
                                 uv_uvtot_wa_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                vv_vvtot_wa.append(vv[jj])
+                                vv_vvtot_wa_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 k_ktot_wa.append(k[jj])
                                 k_ktot_wa_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 ens_enstot_wa.append(ens[jj])
@@ -1938,6 +2076,8 @@ class shap_conf():
                                 volume_wd.append(uv_struc.vol[jj]/1e6)
                                 uv_uvtot_wd.append(uv[jj])
                                 uv_uvtot_wd_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
+                                vv_vvtot_wd.append(vv[jj])
+                                vv_vvtot_wd_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
                                 k_ktot_wd.append(k[jj])
                                 k_ktot_wd_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 ens_enstot_wd.append(ens[jj])
@@ -1952,6 +2092,9 @@ class shap_conf():
                             uv_uvtot.append(uv[jj])
                             uv_uvtot_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                             uv_vol_uvtot_vol.append(uv_vol[jj]/uv_vol_sum)
+                            vv_vvtot.append(vv[jj])
+                            vv_vvtot_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                            vv_vol_vvtot_vol.append(vv_vol[jj]/uv_vol_sum)
                             k_ktot.append(k[jj])
                             k_ktot_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                             k_vol_ktot_vol.append(k_vol[jj]/k_vol_sum)
@@ -2002,6 +2145,10 @@ class shap_conf():
             self.uv_uvtot_wd[structure] = uv_uvtot_wd
             self.uv_uvtot_wa_vol[structure] = uv_uvtot_wa_vol
             self.uv_uvtot_wd_vol[structure] = uv_uvtot_wd_vol
+            self.vv_vvtot_wa[structure] = vv_vvtot_wa
+            self.vv_vvtot_wd[structure] = vv_vvtot_wd
+            self.vv_vvtot_wa_vol[structure] = vv_vvtot_wa_vol
+            self.vv_vvtot_wd_vol[structure] = vv_vvtot_wd_vol
             self.k_ktot_wa[structure] = k_ktot_wa
             self.k_ktot_wd[structure] = k_ktot_wd
             self.k_ktot_wa_vol[structure] = k_ktot_wa_vol
@@ -2018,6 +2165,8 @@ class shap_conf():
             self.shap_vol[structure] = shap_vol
             self.uv_uvtot[structure] = uv_uvtot
             self.uv_uvtot_vol[structure] = uv_uvtot_vol
+            self.vv_vvtot[structure] = vv_vvtot
+            self.vv_vvtot_vol[structure] = vv_vvtot_vol
             self.uv_vol_uvtot_vol[structure] = uv_vol_uvtot_vol
             self.k_ktot[structure] = k_ktot
             self.k_ktot_vol[structure] = k_ktot_vol
@@ -2060,6 +2209,10 @@ class shap_conf():
             hf.create_dataset('uv_uvtot_wd', data=uv_uvtot_wd)
             hf.create_dataset('uv_uvtot_wa_vol', data=uv_uvtot_wa_vol)
             hf.create_dataset('uv_uvtot_wd_vol', data=uv_uvtot_wd_vol)
+            hf.create_dataset('vv_vvtot_wa', data=vv_vvtot_wa)
+            hf.create_dataset('vv_vvtot_wd', data=vv_vvtot_wd)
+            hf.create_dataset('vv_vvtot_wa_vol', data=vv_vvtot_wa_vol)
+            hf.create_dataset('vv_vvtot_wd_vol', data=vv_vvtot_wd_vol)
             hf.create_dataset('k_ktot_wa', data=k_ktot_wa)
             hf.create_dataset('k_ktot_wd', data=k_ktot_wd)
             hf.create_dataset('k_ktot_wa_vol', data=k_ktot_wa_vol)
@@ -2076,6 +2229,9 @@ class shap_conf():
             hf.create_dataset('uv_uvtot', data=uv_uvtot)
             hf.create_dataset('uv_uvtot_vol', data=uv_uvtot_vol)
             hf.create_dataset('uv_vol_uvtot_vol', data=uv_vol_uvtot_vol)
+            hf.create_dataset('vv_vvtot', data=vv_vvtot)
+            hf.create_dataset('vv_vvtot_vol', data=vv_vvtot_vol)
+            hf.create_dataset('vv_vol_vvtot_vol', data=vv_vol_vvtot_vol)
             hf.create_dataset('k_ktot', data=k_ktot)
             hf.create_dataset('k_ktot_vol', data=k_ktot_vol)
             hf.create_dataset('k_vol_ktot_vol', data=k_vol_ktot_vol)
@@ -3336,7 +3492,8 @@ class shap_conf():
                           lev_val=2.5,
                           alf=0.5,
                           structures=[],
-                          mode='mse'):
+                          mode='mse', 
+                          switch='uv'):
         """ 
         Function for plotting the results of the SHAP vs the Reynolds stress
         """
@@ -3344,19 +3501,35 @@ class shap_conf():
         import matplotlib as mpl    
         from scipy.interpolate import interp2d
         
-        xhistmin = np.min([np.min(self.uv_uvtot_1),
-                           np.min(self.uv_uvtot_2),
-                           np.min(self.uv_uvtot_3),
-                           np.min(self.uv_uvtot_4)]\
-                          +[np.min(self.uv_uvtot[struc]) for struc in structures]
-                          )/1.2
-            
-        xhistmax = np.max([np.max(self.uv_uvtot_1),
-                           np.max(self.uv_uvtot_2),
-                           np.max(self.uv_uvtot_3),
-                           np.max(self.uv_uvtot_4)]\
-                          +[np.max(self.uv_uvtot[struc]) for struc in structures]
-                          )*1.2
+        if switch == 'uv':
+            xhistmin = np.min([np.min(self.uv_uvtot_1),
+                               np.min(self.uv_uvtot_2),
+                               np.min(self.uv_uvtot_3),
+                               np.min(self.uv_uvtot_4)]\
+                              +[np.min(self.uv_uvtot[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.uv_uvtot_1),
+                               np.max(self.uv_uvtot_2),
+                               np.max(self.uv_uvtot_3),
+                               np.max(self.uv_uvtot_4)]\
+                              +[np.max(self.uv_uvtot[struc]) for struc in structures]
+                              )*1.2
+                
+        elif switch == 'vv':
+            xhistmin = np.min([np.min(self.vv_vvtot_1),
+                               np.min(self.vv_vvtot_2),
+                               np.min(self.vv_vvtot_3),
+                               np.min(self.vv_vvtot_4)]\
+                              +[np.min(self.vv_vvtot[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.vv_vvtot_1),
+                               np.max(self.vv_vvtot_2),
+                               np.max(self.vv_vvtot_3),
+                               np.max(self.vv_vvtot_4)]\
+                              +[np.max(self.vv_vvtot[struc]) for struc in structures]
+                              )*1.2
             
         yhistmin = np.min([np.min(self.shap_1),
                            np.min(self.shap_2),
@@ -3375,10 +3548,18 @@ class shap_conf():
         # xhistmax = np.max([np.max(self.uv_uvtot_1),np.max(self.uv_uvtot_2),np.max(self.uv_uvtot_3),np.max(self.uv_uvtot_4)])*1.2
         # yhistmin = np.min([np.min(self.shap_1),np.min(self.shap_2),np.min(self.shap_3),np.min(self.shap_4)])/1.2
         # yhistmax = np.max([np.max(self.shap_1),np.max(self.shap_2),np.max(self.shap_3),np.max(self.shap_4)])*1.2
-        histogram1,uv_value1,shap_value1 = np.histogram2d(self.uv_uvtot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2,uv_value2,shap_value2 = np.histogram2d(self.uv_uvtot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3,uv_value3,shap_value3 = np.histogram2d(self.uv_uvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4,uv_value4,shap_value4 = np.histogram2d(self.uv_uvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        if switch == 'uv':
+            histogram1,uv_value1,shap_value1 = np.histogram2d(self.uv_uvtot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2,uv_value2,shap_value2 = np.histogram2d(self.uv_uvtot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3,uv_value3,shap_value3 = np.histogram2d(self.uv_uvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4,uv_value4,shap_value4 = np.histogram2d(self.uv_uvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        
+        elif switch == 'vv':
+            histogram1,uv_value1,shap_value1 = np.histogram2d(self.vv_vvtot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2,uv_value2,shap_value2 = np.histogram2d(self.vv_vvtot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3,uv_value3,shap_value3 = np.histogram2d(self.vv_vvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4,uv_value4,shap_value4 = np.histogram2d(self.vv_vvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        
         uv_value1 = uv_value1[:-1]+np.diff(uv_value1)/2
         shap_value1 = shap_value1[:-1]+np.diff(shap_value1)/2
         uv_value2 = uv_value2[:-1]+np.diff(uv_value2)/2
@@ -3392,11 +3573,18 @@ class shap_conf():
         uv_values = {}
         shap_values = {}
         for structure in structures:
-            histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot[structure],
-                                                            self.shap[structure],
-                                                            bins=bin_num,
-                                                            range=[[xhistmin,xhistmax],
-                                                                   [yhistmin,yhistmax]])
+            if switch == 'uv':
+                histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot[structure],
+                                                                self.shap[structure],
+                                                                bins=bin_num,
+                                                                range=[[xhistmin,xhistmax],
+                                                                       [yhistmin,yhistmax]])
+            elif switch == 'vv':
+                histogram,uv_value,shap_value = np.histogram2d(self.vv_vvtot[structure],
+                                                                self.shap[structure],
+                                                                bins=bin_num,
+                                                                range=[[xhistmin,xhistmax],
+                                                                       [yhistmin,yhistmax]])
             uv_value = uv_value[:-1]+np.diff(uv_value)/2
             shap_value = shap_value[:-1]+np.diff(shap_value)/2
             histograms[structure] = histogram
@@ -3510,8 +3698,12 @@ class shap_conf():
             plt.xlim([0,0.2])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,3.5])
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
-                   fontsize=fs)
+        if switch == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot})$',\
+                       fontsize=fs)
+        elif switch == 'vv':
+            plt.xlabel('$\overline{v²}_e/(\overline{v²}_\mathrm{tot})$',\
+                       fontsize=fs)
         if mode == 'mse':
             plt.ylabel(self.ylabel_shap,fontsize=fs)
         elif mode == 'cf':
@@ -3553,21 +3745,39 @@ class shap_conf():
                 
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+.png')
+        if switch == 'uv':
+            plt.savefig('hist2d_interp_uvuvtot_SHAP_'+colormap+str(structures)+'_30+.png')
+        elif switch == 'vv':
+            plt.savefig('hist2d_interp_vvvvtot_SHAP_'+colormap+str(structures)+'_30+.png')
         
-        xhistmin = np.min([np.min(self.uv_uvtot_1_vol),
-                           np.min(self.uv_uvtot_2_vol),
-                           np.min(self.uv_uvtot_3_vol),
-                           np.min(self.uv_uvtot_4_vol)]\
-                          +[np.min(self.uv_uvtot_vol[struc]) for struc in structures]
-                          )/1.2
-            
-        xhistmax = np.max([np.max(self.uv_uvtot_1_vol),
-                           np.max(self.uv_uvtot_2_vol),
-                           np.max(self.uv_uvtot_3_vol),
-                           np.max(self.uv_uvtot_4_vol)]\
-                          +[np.max(self.uv_uvtot_vol[struc]) for struc in structures]
-                          )*1.2
+        if switch == 'uv':
+            xhistmin = np.min([np.min(self.uv_uvtot_1_vol),
+                               np.min(self.uv_uvtot_2_vol),
+                               np.min(self.uv_uvtot_3_vol),
+                               np.min(self.uv_uvtot_4_vol)]\
+                              +[np.min(self.uv_uvtot_vol[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.uv_uvtot_1_vol),
+                               np.max(self.uv_uvtot_2_vol),
+                               np.max(self.uv_uvtot_3_vol),
+                               np.max(self.uv_uvtot_4_vol)]\
+                              +[np.max(self.uv_uvtot_vol[struc]) for struc in structures]
+                              )*1.2
+        elif switch == 'vv':
+            xhistmin = np.min([np.min(self.vv_vvtot_1_vol),
+                               np.min(self.vv_vvtot_2_vol),
+                               np.min(self.vv_vvtot_3_vol),
+                               np.min(self.vv_vvtot_4_vol)]\
+                              +[np.min(self.vv_vvtot_vol[struc]) for struc in structures]
+                              )/1.2
+                
+            xhistmax = np.max([np.max(self.vv_vvtot_1_vol),
+                               np.max(self.vv_vvtot_2_vol),
+                               np.max(self.vv_vvtot_3_vol),
+                               np.max(self.vv_vvtot_4_vol)]\
+                              +[np.max(self.vv_vvtot_vol[struc]) for struc in structures]
+                              )*1.2
             
         yhistmin = np.min([np.min(self.shap_1_vol),
                            np.min(self.shap_2_vol),
@@ -3587,10 +3797,16 @@ class shap_conf():
         # xhistmax = np.max([np.max(self.uv_uvtot_1_vol),np.max(self.uv_uvtot_2_vol),np.max(self.uv_uvtot_3_vol),np.max(self.uv_uvtot_4_vol)])*1.2
         # yhistmin = np.min([np.min(self.shap_1_vol),np.min(self.shap_2_vol),np.min(self.shap_3_vol),np.min(self.shap_4_vol)])/1.2
         # yhistmax = np.max([np.max(self.shap_1_vol),np.max(self.shap_2_vol),np.max(self.shap_3_vol),np.max(self.shap_4_vol)])*1.2
-        histogram1_vol,uv_value1_vol,shap_value1_vol = np.histogram2d(self.uv_uvtot_1_vol,self.shap_1_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram2_vol,uv_value2_vol,shap_value2_vol = np.histogram2d(self.uv_uvtot_2_vol,self.shap_2_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram3_vol,uv_value3_vol,shap_value3_vol = np.histogram2d(self.uv_uvtot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-        histogram4_vol,uv_value4_vol,shap_value4_vol = np.histogram2d(self.uv_uvtot_4_vol,self.shap_4_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        if switch == 'uv':
+            histogram1_vol,uv_value1_vol,shap_value1_vol = np.histogram2d(self.uv_uvtot_1_vol,self.shap_1_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2_vol,uv_value2_vol,shap_value2_vol = np.histogram2d(self.uv_uvtot_2_vol,self.shap_2_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3_vol,uv_value3_vol,shap_value3_vol = np.histogram2d(self.uv_uvtot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4_vol,uv_value4_vol,shap_value4_vol = np.histogram2d(self.uv_uvtot_4_vol,self.shap_4_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+        elif switch == 'vv':
+            histogram1_vol,uv_value1_vol,shap_value1_vol = np.histogram2d(self.vv_vvtot_1_vol,self.shap_1_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram2_vol,uv_value2_vol,shap_value2_vol = np.histogram2d(self.vv_vvtot_2_vol,self.shap_2_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram3_vol,uv_value3_vol,shap_value3_vol = np.histogram2d(self.vv_vvtot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            histogram4_vol,uv_value4_vol,shap_value4_vol = np.histogram2d(self.vv_vvtot_4_vol,self.shap_4_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         uv_value1_vol = uv_value1_vol[:-1]+np.diff(uv_value1_vol)/2
         shap_value1_vol = shap_value1_vol[:-1]+np.diff(shap_value1_vol)/2
         uv_value2_vol = uv_value2_vol[:-1]+np.diff(uv_value2_vol)/2
@@ -3604,11 +3820,18 @@ class shap_conf():
         uv_values_vol = {}
         shap_values_vol = {}
         for structure in structures:
-            histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot_vol[structure],
-                                                            self.shap_vol[structure],
-                                                            bins=bin_num,
-                                                            range=[[xhistmin,xhistmax],
-                                                                   [yhistmin,yhistmax]])
+            if switch == 'uv':
+                histogram,uv_value,shap_value = np.histogram2d(self.uv_uvtot_vol[structure],
+                                                                self.shap_vol[structure],
+                                                                bins=bin_num,
+                                                                range=[[xhistmin,xhistmax],
+                                                                       [yhistmin,yhistmax]])
+            elif switch == 'vv':
+                histogram,uv_value,shap_value = np.histogram2d(self.vv_vvtot_vol[structure],
+                                                                self.shap_vol[structure],
+                                                                bins=bin_num,
+                                                                range=[[xhistmin,xhistmax],
+                                                                       [yhistmin,yhistmax]])
             uv_value = uv_value[:-1]+np.diff(uv_value)/2
             shap_value = shap_value[:-1]+np.diff(shap_value)/2
             histograms_vol[structure] = histogram
@@ -3759,7 +3982,11 @@ class shap_conf():
             plt.ylim([0,1.5])
             
         plt.grid()
-        plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+        if switch == 'uv':
+            plt.xlabel('$\overline{uv}_e/(\overline{uv}_\mathrm{tot}V^+)\cdot10^{-7}$',\
+                   fontsize=fs)
+        elif switch == 'vv':
+            plt.xlabel('$\overline{v²}_e/(\overline{v²}_\mathrm{tot}V^+)\cdot10^{-7}$',\
                    fontsize=fs)
         if mode == 'mse':
             plt.ylabel(self.ylabel_shap_vol,fontsize=fs)
@@ -3802,7 +4029,10 @@ class shap_conf():
         
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
-        plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+.png')
+        if switch == 'uv':
+            plt.savefig('hist2d_interp_uvuvtotvol_SHAPvol_'+colormap+str(structures)+'_30+.png')
+        elif switch == 'vv':
+            plt.savefig('hist2d_interp_vvvvtotvol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
         
     def plot_shaps_k_pdf(self,
