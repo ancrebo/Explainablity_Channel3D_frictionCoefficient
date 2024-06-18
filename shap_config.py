@@ -1115,9 +1115,11 @@ class shap_conf():
                             uv[jj] += abs(uu[indexuv[0][kk],indexuv[1][kk],\
                                           indexuv[2][kk]]*vv[indexuv[0][kk],\
                                                  indexuv[1][kk],indexuv[2][kk]])
-                            vv[jj] += abs(vv[indexuv[0][kk],indexuv[1][kk],\
-                                          indexuv[2][kk]]*vv[indexuv[0][kk],\
-                                                 indexuv[1][kk],indexuv[2][kk]])
+                            print(41)
+                            vv[jj] += vv[indexuv[0][kk],
+                                         indexuv[1][kk],
+                                         indexuv[2][kk]]**2
+                            print(42)
                             k[jj] += 0.5*(uu[indexuv[0][kk],
                                              indexuv[1][kk],
                                              indexuv[2][kk]]**2\
