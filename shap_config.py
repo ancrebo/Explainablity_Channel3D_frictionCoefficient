@@ -3840,7 +3840,7 @@ class shap_conf():
             
         min_uv_vol = np.min([uv_value1_vol,
                          uv_value2_vol,
-                         uv_value3_vol,
+                         # uv_value3_vol,
                          uv_value4_vol]\
                         +[uv_values_vol[struc] for struc in structures])
             
