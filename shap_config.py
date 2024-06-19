@@ -3982,10 +3982,10 @@ class shap_conf():
                 plt.yticks([0.5,1])
                 plt.ylim([0,1.5])
             elif switch == 'vv':
-                plt.xticks([0.5,1])
-                plt.xlim([0,10])
-                plt.yticks([0.5,1])
-                plt.ylim([0,10])
+                plt.xticks([1,2])
+                plt.xlim([0,4])
+                plt.yticks([0.5,1,1.5])
+                plt.ylim([0,2])
             
         plt.grid()
         if switch == 'uv':
