@@ -3805,14 +3805,14 @@ class shap_conf():
         elif switch == 'vv':
             histogram1_vol,uv_value1_vol,shap_value1_vol = np.histogram2d(self.vv_vvtot_1_vol,self.shap_1_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram2_vol,uv_value2_vol,shap_value2_vol = np.histogram2d(self.vv_vvtot_2_vol,self.shap_2_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-            histogram3_vol,uv_value3_vol,shap_value3_vol = np.histogram2d(self.vv_vvtot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            # histogram3_vol,uv_value3_vol,shap_value3_vol = np.histogram2d(self.vv_vvtot_3_vol,self.shap_3_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram4_vol,uv_value4_vol,shap_value4_vol = np.histogram2d(self.vv_vvtot_4_vol,self.shap_4_vol,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         uv_value1_vol = uv_value1_vol[:-1]+np.diff(uv_value1_vol)/2
         shap_value1_vol = shap_value1_vol[:-1]+np.diff(shap_value1_vol)/2
         uv_value2_vol = uv_value2_vol[:-1]+np.diff(uv_value2_vol)/2
         shap_value2_vol = shap_value2_vol[:-1]+np.diff(shap_value2_vol)/2
-        uv_value3_vol = uv_value3_vol[:-1]+np.diff(uv_value3_vol)/2
-        shap_value3_vol = shap_value3_vol[:-1]+np.diff(shap_value3_vol)/2
+        # uv_value3_vol = uv_value3_vol[:-1]+np.diff(uv_value3_vol)/2
+        # shap_value3_vol = shap_value3_vol[:-1]+np.diff(shap_value3_vol)/2
         uv_value4_vol = uv_value4_vol[:-1]+np.diff(uv_value4_vol)/2
         shap_value4_vol = shap_value4_vol[:-1]+np.diff(shap_value4_vol)/2
         
@@ -3846,19 +3846,19 @@ class shap_conf():
             
         max_uv_vol = np.max([uv_value1_vol,
                          uv_value2_vol,
-                         uv_value3_vol,
+                         # uv_value3_vol,
                          uv_value4_vol]\
                         +[uv_values_vol[struc] for struc in structures])
             
         min_shap_vol = np.min([shap_value1_vol,
                            shap_value2_vol,
-                           shap_value3_vol,
+                           # shap_value3_vol,
                            shap_value4_vol]\
                           +[shap_values_vol[struc] for struc in structures])
         
         max_shap_vol = np.max([shap_value1_vol,
                            shap_value2_vol,
-                           shap_value3_vol,
+                           # shap_value3_vol,
                            shap_value4_vol]\
                           +[shap_values_vol[struc] for struc in structures])
         
@@ -3868,14 +3868,14 @@ class shap_conf():
         # max_shap_vol = np.max([shap_value1_vol,shap_value2_vol,shap_value3_vol,shap_value4_vol])
         interp_h1_vol = interp2d(uv_value1_vol,shap_value1_vol,histogram1_vol)
         interp_h2_vol = interp2d(uv_value2_vol,shap_value2_vol,histogram2_vol)
-        interp_h3_vol = interp2d(uv_value3_vol,shap_value3_vol,histogram3_vol)
+        # interp_h3_vol = interp2d(uv_value3_vol,shap_value3_vol,histogram3_vol)
         interp_h4_vol = interp2d(uv_value4_vol,shap_value4_vol,histogram4_vol)
         vec_uv_vol = np.linspace(min_uv_vol,max_uv_vol,1000)
         vec_shap_vol = np.linspace(min_shap_vol,max_shap_vol,1000)
         uv_grid_vol,shap_grid_vol = np.meshgrid(vec_uv_vol,vec_shap_vol)
         histogram_Q1_vol = interp_h1_vol(vec_uv_vol,vec_shap_vol)
         histogram_Q2_vol = interp_h2_vol(vec_uv_vol,vec_shap_vol)
-        histogram_Q3_vol = interp_h3_vol(vec_uv_vol,vec_shap_vol)
+        # histogram_Q3_vol = interp_h3_vol(vec_uv_vol,vec_shap_vol)
         histogram_Q4_vol = interp_h4_vol(vec_uv_vol,vec_shap_vol)
         
         if mode == 'cf':
