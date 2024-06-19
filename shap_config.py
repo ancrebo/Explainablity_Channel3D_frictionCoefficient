@@ -3976,10 +3976,16 @@ class shap_conf():
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,4.5])
         elif mode == 'cf':
-            plt.xticks([0.5,1])
-            plt.xlim([0,1.5])
-            plt.yticks([0.5,1])
-            plt.ylim([0,1.5])
+            if switch == 'uv':
+                plt.xticks([0.5,1])
+                plt.xlim([0,1.5])
+                plt.yticks([0.5,1])
+                plt.ylim([0,1.5])
+            elif switch == 'vv':
+                plt.xticks([0.5,1])
+                plt.xlim([0,10])
+                plt.yticks([0.5,1])
+                plt.ylim([0,10])
             
         plt.grid()
         if switch == 'uv':
