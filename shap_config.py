@@ -3555,6 +3555,8 @@ class shap_conf():
             histogram4,uv_value4,shap_value4 = np.histogram2d(self.uv_uvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         
         elif switch == 'vv':
+            print(self.vv_vvtot_3.shape)
+            print(self.shap_3.shape)
             histogram1,uv_value1,shap_value1 = np.histogram2d(self.vv_vvtot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram2,uv_value2,shap_value2 = np.histogram2d(self.vv_vvtot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram3,uv_value3,shap_value3 = np.histogram2d(self.vv_vvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
