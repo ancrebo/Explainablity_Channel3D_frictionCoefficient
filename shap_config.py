@@ -1287,8 +1287,8 @@ class shap_conf():
                                     self.volume_2_wa.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wa.append(uv[jj])
                                     self.uv_uvtot_2_vol_wa.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_2_wa.append(vv[jj])
-                                    self.vv_vvtot_2_vol_wa.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_2_wa.append(v2[jj])
+                                    self.vv_vvtot_2_vol_wa.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_2_wa.append(k[jj])
                                     self.k_ktot_2_vol_wa.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_2_wa.append(ens[jj])
@@ -1301,8 +1301,8 @@ class shap_conf():
                                     self.volume_2_wd.append(uv_struc.vol[jj]/1e6)
                                     self.uv_uvtot_2_wd.append(uv[jj])
                                     self.uv_uvtot_2_vol_wd.append(uv[jj]/uv_struc.vol[jj]*1e7)
-                                    self.vv_vvtot_2_wd.append(vv[jj])
-                                    self.vv_vvtot_2_vol_wd.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                    self.vv_vvtot_2_wd.append(v2[jj])
+                                    self.vv_vvtot_2_vol_wd.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                     self.k_ktot_2_wd.append(k[jj])
                                     self.k_ktot_2_vol_wd.append(k[jj]/uv_struc.vol[jj]*1e7)
                                     self.ens_enstot_2_wd.append(ens[jj])
@@ -1316,8 +1316,8 @@ class shap_conf():
                                 self.uv_uvtot_3.append(uv[jj])
                                 self.uv_uvtot_3_vol.append(uv[jj]/uv_struc.vol[jj]*1e7)
                                 self.uv_vol_uvtot_vol_3.append(uv_vol[jj]/uv_vol_sum)
-                                self.vv_vvtot_3.append(vv[jj])
-                                self.vv_vvtot_3_vol.append(vv[jj]/uv_struc.vol[jj]*1e7)
+                                self.vv_vvtot_3.append(v2[jj])
+                                self.vv_vvtot_3_vol.append(v2[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_ktot_3.append(k[jj])
                                 self.k_ktot_3_vol.append(k[jj]/uv_struc.vol[jj]*1e7)
                                 self.k_vol_ktot_vol_3.append(k_vol[jj]/k_vol_sum)
@@ -3555,20 +3555,17 @@ class shap_conf():
             histogram4,uv_value4,shap_value4 = np.histogram2d(self.uv_uvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         
         elif switch == 'vv':
-            print(self.vv_vvtot_1.shape)
-            print(self.vv_vvtot_2.shape)
-            print(self.vv_vvtot_3.shape)
             histogram1,uv_value1,shap_value1 = np.histogram2d(self.vv_vvtot_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram2,uv_value2,shap_value2 = np.histogram2d(self.vv_vvtot_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
-            histogram3,uv_value3,shap_value3 = np.histogram2d(self.vv_vvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
+            # histogram3,uv_value3,shap_value3 = np.histogram2d(self.vv_vvtot_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
             histogram4,uv_value4,shap_value4 = np.histogram2d(self.vv_vvtot_4,self.shap_4,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         
         uv_value1 = uv_value1[:-1]+np.diff(uv_value1)/2
         shap_value1 = shap_value1[:-1]+np.diff(shap_value1)/2
         uv_value2 = uv_value2[:-1]+np.diff(uv_value2)/2
         shap_value2 = shap_value2[:-1]+np.diff(shap_value2)/2
-        uv_value3 = uv_value3[:-1]+np.diff(uv_value3)/2
-        shap_value3 = shap_value3[:-1]+np.diff(shap_value3)/2
+        # uv_value3 = uv_value3[:-1]+np.diff(uv_value3)/2
+        # shap_value3 = shap_value3[:-1]+np.diff(shap_value3)/2
         uv_value4 = uv_value4[:-1]+np.diff(uv_value4)/2
         shap_value4 = shap_value4[:-1]+np.diff(shap_value4)/2
         
@@ -3596,25 +3593,25 @@ class shap_conf():
             
         min_uv = np.min([uv_value1,
                          uv_value2,
-                         uv_value3,
+                         #uv_value3,
                          uv_value4]\
                         +[uv_values[struc] for struc in structures])
             
         max_uv = np.max([uv_value1,
                          uv_value2,
-                         uv_value3,
+                         #uv_value3,
                          uv_value4]\
                         +[uv_values[struc] for struc in structures])
             
         min_shap = np.min([shap_value1,
                            shap_value2,
-                           shap_value3,
+                           # shap_value3,
                            shap_value4]\
                           +[shap_values[struc] for struc in structures])
         
         max_shap = np.max([shap_value1,
                            shap_value2,
-                           shap_value3,
+                           # shap_value3,
                            shap_value4]\
                           +[shap_values[struc] for struc in structures])
         
@@ -3624,14 +3621,14 @@ class shap_conf():
         # max_shap = np.max([shap_value1,shap_value2,shap_value3,shap_value4])
         interp_h1 = interp2d(uv_value1,shap_value1,histogram1)
         interp_h2 = interp2d(uv_value2,shap_value2,histogram2)
-        interp_h3 = interp2d(uv_value3,shap_value3,histogram3)
+        #interp_h3 = interp2d(uv_value3,shap_value3,histogram3)
         interp_h4 = interp2d(uv_value4,shap_value4,histogram4)
         vec_uv = np.linspace(min_uv,max_uv,1000)
         vec_shap = np.linspace(min_shap,max_shap,1000)
         uv_grid,shap_grid = np.meshgrid(vec_uv,vec_shap)
         histogram_Q1 = interp_h1(vec_uv,vec_shap)
         histogram_Q2 = interp_h2(vec_uv,vec_shap)
-        histogram_Q3 = interp_h3(vec_uv,vec_shap)
+        #histogram_Q3 = interp_h3(vec_uv,vec_shap)
         histogram_Q4 = interp_h4(vec_uv,vec_shap)
         
         if mode == 'cf':
