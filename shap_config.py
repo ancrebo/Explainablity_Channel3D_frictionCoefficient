@@ -793,7 +793,7 @@ class shap_conf():
             self.shapmin = np.array(hf['shapmin'])
             self.shapmaxvol = np.array(hf['shapmaxvol'])
             self.shapminvol = np.array(hf['shapminvol'])
-            self.cdg_y_1 = (1-np.abs(np.array(hf['cdg_y_1'])))*utau/ny
+            self.cdg_y_1 = (1-np.abs(np.array(hf['cdg_y_1'])))*utau/ny # convert to y plus
             self.cdg_y_2 = (1-np.abs(np.array(hf['cdg_y_2'])))*utau/ny
             self.cdg_y_3 = (1-np.abs(np.array(hf['cdg_y_3'])))*utau/ny
             self.cdg_y_4 = (1-np.abs(np.array(hf['cdg_y_4'])))*utau/ny
@@ -1669,6 +1669,11 @@ class shap_conf():
             hf.create_dataset('y_plus_min_4', data=self.y_plus_min_4)
             hf.close()
             
+            self.cdg_y_1 = (1-np.abs(self.cdg_y_1))*utau/ny # convert to y plus
+            self.cdg_y_2 = (1-np.abs(self.cdg_y_2))*utau/ny
+            self.cdg_y_3 = (1-np.abs(self.cdg_y_3))*utau/ny
+            self.cdg_y_4 = (1-np.abs(self.cdg_y_4))*utau/ny
+            
             
 
     def read_data_simple(self,start,end,step,\
@@ -1835,7 +1840,7 @@ class shap_conf():
             self.shapmin[structure] = np.array(hf['shapmin'])
             self.shapmaxvol[structure] = np.array(hf['shapmaxvol'])
             self.shapminvol[structure] = np.array(hf['shapminvol'])
-            self.cdg_y[structure] = (1-np.abs(np.array(hf['cdg_y'])))*utau/ny
+            self.cdg_y[structure] = (1-np.abs(np.array(hf['cdg_y'])))*utau/ny # convert to y plus
             self.cdg_y_wa[structure] = np.array(hf['cdg_y_wa'])
             self.cdg_y_wd[structure] = np.array(hf['cdg_y_wd'])
             self.y_plus_min[structure] = np.array(hf['y_plus_min'])
@@ -2191,7 +2196,7 @@ class shap_conf():
             self.shapmin[structure] = shapmin
             self.shapmaxvol[structure] = shapmaxvol
             self.shapminvol[structure] = shapminvol
-            self.cdg_y[structure] = cdg_y
+            self.cdg_y[structure] = (1-np.abs(cdg_y))*utau/n # convert to y plus
             self.cdg_y_wa[structure] = cdg_y_wa
             self.cdg_y_wd[structure] = cdg_y_wd
             self.y_plus_min[structure] = y_plus_min
