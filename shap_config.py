@@ -2303,8 +2303,10 @@ class shap_conf():
                           +[np.max(self.shap[struc]) for struc in structures]
                           )*1.2
         
-        print(self.volume_3.shape)
-        print(self.shap_3.shape)
+        print(xhistmin,xhistmax)
+        print(yhistmin,yhistmax)
+        print(self.volume_2.shape)
+        print(self.shap_2.shape)
         histogram1,vol_value1,shap_value1 = np.histogram2d(self.volume_1,self.shap_1,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram2,vol_value2,shap_value2 = np.histogram2d(self.volume_2,self.shap_2,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
         histogram3,vol_value3,shap_value3 = np.histogram2d(self.volume_3,self.shap_3,bins=bin_num,range=[[xhistmin,xhistmax],[yhistmin,yhistmax]])
