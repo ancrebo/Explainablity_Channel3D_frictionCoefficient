@@ -2196,7 +2196,7 @@ class shap_conf():
             self.shapmin[structure] = shapmin
             self.shapmaxvol[structure] = shapmaxvol
             self.shapminvol[structure] = shapminvol
-            self.cdg_y[structure] = (1-np.abs(cdg_y))*utau/n # convert to y plus
+            self.cdg_y[structure] = (1-np.abs(cdg_y))*utau/ny # convert to y plus
             self.cdg_y_wa[structure] = cdg_y_wa
             self.cdg_y_wd[structure] = cdg_y_wd
             self.y_plus_min[structure] = y_plus_min
