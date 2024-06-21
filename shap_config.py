@@ -2878,7 +2878,8 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
             plt.tight_layout()
-            plt.xlim([0,20])
+            plt.xticks([25,50,75,100])
+            plt.xlim([0,95])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,7])
         elif mode == 'cf':
@@ -3077,7 +3078,8 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
-            plt.xlim([0,5])
+            plt.xticks([25,50,75,100])
+            plt.xlim([0,95])
             plt.yticks([1,2,3,4,5,6,7,8,9])
             plt.ylim([0,5.5])
         elif mode == 'cf':
@@ -3281,9 +3283,10 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
             plt.tight_layout()
-            plt.xlim([0,140])
+            plt.xticks([25,50,75,100])
+            plt.xlim([0,107])
             plt.yticks([1,2,3,4,5,6,7,8,9])
-            plt.ylim([0,7])
+            plt.ylim([0,5.5])
         elif mode == 'cf':
             plt.tight_layout() # rect=(0.02,0,1,1)
             plt.xticks([25,50,75,100])
@@ -3480,9 +3483,10 @@ class shap_conf():
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         plt.tight_layout()
         if mode == 'mse':
-            plt.xlim([0,140])
+            plt.xticks([25,50,75,100])
+            plt.xlim([0,107])
             plt.yticks([1,2,3,4,5,6,7,8,9])
-            plt.ylim([0,5.5])
+            plt.ylim([0,5])
         elif mode == 'cf':
             plt.xticks([25,50,75,100])
             plt.xlim([0,107])
