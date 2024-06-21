@@ -4379,6 +4379,8 @@ class shap_conf():
         
         if mode == 'cf':
             shap_grid_vol /= 100
+        elif mode == 'mse':
+            k_grid_vol = np.sqrt(k_grid_vol)
         
         histograms_struc_vol = {}
         for structure in structures:
