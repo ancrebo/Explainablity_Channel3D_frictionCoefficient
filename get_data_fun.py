@@ -1498,6 +1498,9 @@ class uvstruc():
         if structure == 'streak':
             path = cwd+'P125_21pi_vu_streak/P125_21pi_vu'
             fileQ_ii = path+'.'+str(ii)+'.h5.streak'
+        elif structure == 'streak_high_vel':
+            path = cwd+'P125_21pi_vu_streak_high_vel/P125_21pi_vu'
+            fileQ_ii = path+'.'+str(ii)+'.h5.streak_high_vel'
         elif structure == 'Q-structure':
             path = cwd+'P125_21pi_vu_Q_divide/P125_21pi_vu'
             fileQ_ii = path+'.'+str(ii)+'.h5.Q'
