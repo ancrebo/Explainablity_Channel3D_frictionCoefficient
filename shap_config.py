@@ -2809,6 +2809,19 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
@@ -3014,6 +3027,20 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+                
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
@@ -3206,6 +3233,19 @@ class shap_conf():
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
                 colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
                                                 marker='o',
@@ -3419,6 +3459,20 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+                
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
@@ -3618,6 +3672,20 @@ class shap_conf():
                                                 markersize=15, 
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
                 
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
@@ -4955,6 +5023,20 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                
+                
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
@@ -5206,6 +5288,20 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
+            elif structure == 'streak_high_vel':
+                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                labels.append('Streaks (High Velocity)')
+                handles.append(mpl.lines.Line2D([0],
+                                                [0],
+                                                marker='o',
+                                                markeredgecolor=(colorx1,colorx2,colorx3,1),
+                                                markersize=15, 
+                                                ls='',markeredgewidth=1,
+                                                markerfacecolor=(colorx1,colorx2,colorx3,alf)))
+                    
+            
             elif structure == 'chong':
                 colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
