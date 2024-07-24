@@ -2598,9 +2598,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],0]
+                colorx2 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],1]
+                colorx3 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -2611,9 +2611,9 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
             elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],0]
+                colorx2 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],1]
+                colorx3 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -2624,9 +2624,9 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))    
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],0]
+                colorx2 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],1]
+                colorx3 = plt.cm.get_cmap(colormap,10).colors[color_ind[ii+2],2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
