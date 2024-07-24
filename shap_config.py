@@ -2647,7 +2647,7 @@ class shap_conf():
             plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
             plt.yticks([1,2,3,4,5,6,7,8,9])
-            plt.ylim([0,3])
+            plt.ylim([0,5])
         plt.savefig('hist2d_interp_vol_SHAP_'+colormap+str(structures)+'_30+.png')
         
         
@@ -2859,7 +2859,7 @@ class shap_conf():
             plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,3])
             plt.yticks([1,2,3,4,5,6,7,8,9])
-            plt.ylim([0,2])
+            plt.ylim([0,3])
         plt.savefig('hist2d_interp_vol_SHAPvol_'+colormap+str(structures)+'_30+.png')
         
         
@@ -5007,7 +5007,7 @@ class shap_conf():
             plt.xticks([0.02, 0.04])
             plt.xlim([0,0.05])
             plt.yticks([1,2,3,4,5,6,7,8,9])
-            plt.ylim([0,2.5])
+            plt.ylim([0,5])
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot})$',\
                    fontsize=fs)
         if mode == 'mse':
@@ -5270,7 +5270,7 @@ class shap_conf():
             plt.xticks([1,2,3,4,5,6,7,8,9])
             plt.xlim([0,2.5])
             plt.yticks([0.5,1])
-            plt.ylim([0,1.5])
+            plt.ylim([0,3])
         
         plt.grid()
         plt.xlabel('$\Omega_e/(\Omega_\mathrm{tot}V^+)\cdot10^{-7}$',\
