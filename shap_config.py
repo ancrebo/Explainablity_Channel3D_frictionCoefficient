@@ -2547,9 +2547,9 @@ class shap_conf():
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,10).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,10).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,10).colors[1,2]
+        color41 = plt.cm.get_cmap(colormap,10).colors[3,0]
+        color42 = plt.cm.get_cmap(colormap,10).colors[3,1]
+        color43 = plt.cm.get_cmap(colormap,10).colors[3,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
