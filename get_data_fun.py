@@ -783,6 +783,8 @@ class get_data_norm():
         mat_struc = np.heaviside(np.sqrt(uu**2+ww**2)-alpha_perc*self.vtau,0)
         if fluc_negative:
             mat_struc[uu>=0] = 0
+        else:
+            mat_struc[uu<=0] = 0
             
         # Calculate the structure properties
         uv_str = uvstruc(mat_struc)
@@ -811,7 +813,7 @@ class get_data_norm():
             if fluc_negative:
                 hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak', 'w')
             else:
-                hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak_aug', 'w')
+                hf = h5py.File(file_streak+'.'+str(ii)+'.h5.streak_fast', 'w')
             hf.create_dataset('Qs', data=uv_str.mat_struc)
             #hf.create_dataset('Qs_event', data=uv_str.mat_event)
             hf.create_dataset('Qs_segment', data=uv_str.mat_segment)
