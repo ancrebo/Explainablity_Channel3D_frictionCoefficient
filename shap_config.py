@@ -2551,7 +2551,7 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures))[0,0]
         color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
         color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
