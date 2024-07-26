@@ -2432,7 +2432,7 @@ class shap_conf():
         import matplotlib.pyplot as plt
         import matplotlib as mpl    
         from scipy.interpolate import interp2d
-        from matplotlib.colors import ListedColormap
+        from matplotlib.colors import ListedColormap, to_rgb
         xhistmin = np.min([np.min(self.volume_1),
                            np.min(self.volume_2),
                            np.min(self.volume_3),
@@ -2538,7 +2538,11 @@ class shap_conf():
         
         fs = 20
         plt.figure()
-        cud_colors = np.array(3*['#440154', '#009E73', '#F0E442', '#0072B2', '#E69F00'], dtype=object).reshape((3,5)).transpose()
+        cud_colors = np.array([to_rgb('#440154'), 
+                               to_rgb('#009E73'), 
+                               to_rgb('#F0E442'), 
+                               to_rgb('#0072B2'), 
+                               to_rgb('#E69F00')])
         if colormap == 'custom':
             cmap = ListedColormap(cud_colors)
         else:
@@ -2556,9 +2560,9 @@ class shap_conf():
         color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
         color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[color21,color22,color23],alpha=alf)
+        plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
-        plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[color41,color42,color43],alpha=alf)
+        plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
@@ -2568,13 +2572,13 @@ class shap_conf():
                          shap_grid,
                          histograms_struc[structure].T,
                          levels=[lev_val,1e5*lev_val],
-                         colors=[colorx1,colorx2,colorx3],
+                         colors=[(colorx1,colorx2,colorx3)],
                          alpha=alf)
             
         # plt.contour(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val],colors=[(color11,color12,color13)])
-        plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[color21,color22,color23])
+        plt.contour(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val],colors=[(color21,color22,color23)])
         # plt.contour(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val],colors=[(color31,color32,color33)])
-        plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[color41,color42,color43])
+        plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
             colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
@@ -2584,7 +2588,7 @@ class shap_conf():
                         shap_grid,
                         histograms_struc[structure].T,
                         levels=[lev_val],
-                        colors=[colorx1,colorx2,colorx3])
+                        colors=[(colorx1,colorx2,colorx3)])
         
         plt.grid()
         plt.xlabel('$V^+\cdot10^6$',\
