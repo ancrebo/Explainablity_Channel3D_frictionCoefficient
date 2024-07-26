@@ -2538,7 +2538,7 @@ class shap_conf():
         
         fs = 20
         plt.figure()
-        cud_colors = ['#440154', '#009E73', '#F0E442', '#0072B2', '#E69F00']
+        cud_colors = np.array(3*['#440154', '#009E73', '#F0E442', '#0072B2', '#E69F00']).reshape((3,5)).transpose()
         if colormap == 'custom':
             cmap = ListedColormap(cud_colors)
         else:
