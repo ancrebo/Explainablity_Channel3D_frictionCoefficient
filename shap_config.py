@@ -2432,7 +2432,7 @@ class shap_conf():
         import matplotlib.pyplot as plt
         import matplotlib as mpl    
         from scipy.interpolate import interp2d
-        from matplotlib.colors import LinearSegmentedColormap
+        from matplotlib.colors import ListedColormap
         xhistmin = np.min([np.min(self.volume_1),
                            np.min(self.volume_2),
                            np.min(self.volume_3),
@@ -2538,15 +2538,9 @@ class shap_conf():
         
         fs = 20
         plt.figure()
-        cud_colors = ['#0072B2', # Blue
-                      '#E69F00', # Orange
-                      '#56B4E9', # Sky Blue
-                      '#009E73', # Green
-                      '#F0E442' # Yellow
-                      ]
+        cud_colors = ['#440154', '#009E73', '#F0E442', '#0072B2', '#E69F00']
         if colormap == 'custom':
-            LinearSegmentedColormap.from_list("CUD", cud_colors)
-            cmap = 'CUD'
+            cmap = ListedColormap(cud_colors)
         else:
             cmap = colormap
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
