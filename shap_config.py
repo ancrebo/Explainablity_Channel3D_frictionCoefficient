@@ -2542,7 +2542,7 @@ class shap_conf():
                                to_rgb('#009E73'), 
                                to_rgb('#F0E442'), 
                                to_rgb('#0072B2'), 
-                               to_rgb('#E69F00')])
+                               to_rgb('#E0115F')])
         if colormap == 'custom':
             cmap = ListedColormap(cud_colors)
         else:
