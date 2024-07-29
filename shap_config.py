@@ -2619,7 +2619,7 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
+            elif structure == 'streak_fast':
                 colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
                 colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
@@ -2832,7 +2832,7 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
+            elif structure == 'streak_fast':
                 colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
                 colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
                 colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
@@ -2981,24 +2981,24 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid,
                          shap_grid,
                          histograms_struc[structure].T,
@@ -3012,9 +3012,9 @@ class shap_conf():
         plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(vol_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -3038,9 +3038,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3050,10 +3050,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3065,9 +3065,9 @@ class shap_conf():
                 
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3195,24 +3195,24 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         # plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid_vol,
                          shap_grid_vol,
                          histograms_struc_vol[structure].T,
@@ -3226,9 +3226,9 @@ class shap_conf():
         plt.contour(vol_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(vol_grid_vol,
                         shap_grid_vol,
                         histograms_struc_vol[structure].T,
@@ -3252,9 +3252,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3264,10 +3264,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3278,9 +3278,9 @@ class shap_conf():
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3413,24 +3413,24 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(vol_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(vol_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid,
                          shap_grid,
                          histograms_struc[structure].T,
@@ -3444,9 +3444,9 @@ class shap_conf():
         plt.contour(vol_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(vol_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -3470,9 +3470,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3482,10 +3482,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3497,9 +3497,9 @@ class shap_conf():
                 
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3627,24 +3627,24 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         # plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         plt.contourf(vol_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(vol_grid_vol,
                          shap_grid_vol,
                          histograms_struc_vol[structure].T,
@@ -3658,9 +3658,9 @@ class shap_conf():
         plt.contour(vol_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(vol_grid_vol,
                         shap_grid_vol,
                         histograms_struc_vol[structure].T,
@@ -3684,9 +3684,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3696,10 +3696,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -3711,9 +3711,9 @@ class shap_conf():
                 
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -4851,6 +4851,7 @@ class shap_conf():
         import matplotlib.pyplot as plt
         import matplotlib as mpl    
         from scipy.interpolate import interp2d
+        from matplotlib.colors import ListedColormap, to_rgb
         
         xhistmin = np.min([np.min(self.ens_enstot_1),
                            np.min(self.ens_enstot_2),
@@ -4962,29 +4963,38 @@ class shap_conf():
             histograms_struc[structure] = interp_h(vec_ens,vec_shap)
         
         fs = 20
-        plt.figure()        
+        plt.figure()
+        cud_colors = np.array([to_rgb('#440154'),
+                               to_rgb('#0072B2'),
+                               to_rgb('#009E73'), 
+                               to_rgb('#F0E442'),  
+                               to_rgb('#E0115F')])
+        if colormap == 'custom':
+            cmap = ListedColormap(cud_colors)
+        else:
+            cmap = colormap        
         cmap_fill = plt.cm.get_cmap('viridis', 10)
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(ens_grid,shap_grid,histogram_Q1.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(ens_grid,shap_grid,histogram_Q2.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(ens_grid,shap_grid,histogram_Q3.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(ens_grid,shap_grid,histogram_Q4.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(ens_grid,
                          shap_grid,
                          histograms_struc[structure].T,
@@ -4998,9 +5008,9 @@ class shap_conf():
         plt.contour(ens_grid,shap_grid,histogram_Q4.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(ens_grid,
                         shap_grid,
                         histograms_struc[structure].T,
@@ -5034,9 +5044,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -5046,10 +5056,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -5061,9 +5071,9 @@ class shap_conf():
                 
                 
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -5222,24 +5232,24 @@ class shap_conf():
         # color11 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,0]
         # color12 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,1]
         # color13 = plt.cm.get_cmap(colormap,4+len(structures)).colors[0,2]
-        color21 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,0]
-        color22 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,1]
-        color23 = plt.cm.get_cmap(colormap,2+len(structures)).colors[0,2]
+        color21 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,0]
+        color22 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,1]
+        color23 = plt.cm.get_cmap(cmap,2+len(structures)).colors[0,2]
         # color31 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,0]
         # color32 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,1]
         # color33 = plt.cm.get_cmap(colormap,4+len(structures)).colors[2,2]
-        color41 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,0]
-        color42 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,1]
-        color43 = plt.cm.get_cmap(colormap,2+len(structures)).colors[1,2]
+        color41 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,0]
+        color42 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,1]
+        color43 = plt.cm.get_cmap(cmap,2+len(structures)).colors[1,2]
         # plt.contourf(ens_grid_vol,shap_grid_vol,histogram_Q1_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color11,color12,color13)],alpha=alf)
         plt.contourf(ens_grid_vol,shap_grid_vol,histogram_Q2_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color21,color22,color23)],alpha=alf)
         # plt.contourf(ens_grid_vol,shap_grid_vol,histogram_Q3_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color31,color32,color33)],alpha=alf)
         plt.contourf(ens_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val,1e5*lev_val],colors=[(color41,color42,color43)],alpha=alf)
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contourf(ens_grid_vol,
                          shap_grid_vol,
                          histograms_struc_vol[structure].T,
@@ -5253,9 +5263,9 @@ class shap_conf():
         plt.contour(ens_grid_vol,shap_grid_vol,histogram_Q4_vol.T,levels=[lev_val],colors=[(color41,color42,color43)])
         
         for ii, structure in enumerate(structures):
-            colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-            colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-            colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+            colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+            colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
             plt.contour(ens_grid_vol,
                         shap_grid_vol,
                         histograms_struc_vol[structure].T,
@@ -5299,9 +5309,9 @@ class shap_conf():
         
         for ii, structure in enumerate(structures):
             if structure == 'streak':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -5311,10 +5321,10 @@ class shap_conf():
                                                 ls='',markeredgewidth=1,
                                                 markerfacecolor=(colorx1,colorx2,colorx3,alf)))
                 
-            elif structure == 'streak_high_vel':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+            elif structure == 'streak_fast':
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Streaks\n (High Velocity)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
@@ -5326,9 +5336,9 @@ class shap_conf():
                     
             
             elif structure == 'chong':
-                colorx1 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,0]
-                colorx2 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,1]
-                colorx3 = plt.cm.get_cmap(colormap,2+len(structures)).colors[ii+2,2]
+                colorx1 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,0]
+                colorx2 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,1]
+                colorx3 = plt.cm.get_cmap(cmap,2+len(structures)).colors[ii+2,2]
                 labels.append('Vortices\n (Chong)')
                 handles.append(mpl.lines.Line2D([0],
                                                 [0],
