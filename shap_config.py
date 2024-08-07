@@ -2647,7 +2647,7 @@ class shap_conf():
                 
         plt.legend(handles,labels,fontsize=fs-4,loc='center left', bbox_to_anchor=(1, 0.5))
         if mode == 'mse':
-            plt.tight_layout(rect=(0.02,0,1,1)) #
+            plt.tight_layout(rect=(0.5,0,1,1)) #
             plt.xticks([1,2,3])
             plt.xlim([0,3.5])
             plt.yticks([2,4,6])
