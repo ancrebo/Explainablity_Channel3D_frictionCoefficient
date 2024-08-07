@@ -2652,6 +2652,7 @@ class shap_conf():
             plt.xlim([0,3.5])
             plt.yticks([2,4,6])
             plt.ylim([0,8])
+            plt.tight_layout()
         elif mode == 'cf':
             plt.tight_layout() 
             plt.xticks([1,2,3,4,5,6,7,8,9])
